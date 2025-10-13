@@ -6,7 +6,7 @@ $content = '
         <div class="row g-0">
             <!-- Main Slider Content -->
             <div class="col-lg-8">
-                <div id="modernSlider" class="carousel slide h-100" data-bs-ride="carousel">
+                <div id="modernSlider" class="carousel slide h-100 px-5" data-bs-ride="carousel">
                     <div class="carousel-inner h-100">
                         ' . (isset($sliders) && !empty($sliders) ? 
                             implode('', array_map(function($slider, $index) {
@@ -53,71 +53,111 @@ $content = '
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item h-100">
-                                <div class="slider-content d-flex align-items-center h-100">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-10">
-                                                <div class="slider-badge mb-3">
-                                                    <i class="fas fa-trophy me-2"></i>
-                                                    SEZON HABERLERİ
-                                                </div>
-                                                <h1 class="slider-title mb-4">Yeni Sezon Hazırlıkları Başladı</h1>
-                                                <p class="slider-description mb-4">2024-25 sezonunda hedefimiz daha üst seviyelere çıkmak. Takımımız yoğun antrenman programıyla sezona hazırlanıyor. Taraftarımızın desteğiyle başarıya ulaşacağız.</p>
-                                                <button class="btn btn-slider-primary">
-                                                    <i class="fas fa-arrow-right me-2"></i>
-                                                    Detayları Gör
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>'
+                            '
                         ) . '
                     </div>
                     
-                    <!-- Navigation Controls -->
+                    <!-- Slider Controls -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#modernSlider" data-bs-slide="prev">
-                        <i class="fas fa-chevron-left"></i>
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#modernSlider" data-bs-slide="next">
-                        <i class="fas fa-chevron-right"></i>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
-                    
-                    <!-- Indicators -->
-                    <div class="carousel-indicators-custom">
-                        <button type="button" data-bs-target="#modernSlider" data-bs-slide-to="0" class="active"></button>
-                        <button type="button" data-bs-target="#modernSlider" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#modernSlider" data-bs-slide-to="2"></button>
-                    </div>
                 </div>
             </div>
             
             <!-- Sidebar Content -->
             <div class="col-lg-4">
-                <div class="hero-sidebar h-100">
-                    <!-- Training Program Section -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-icon">
-                            <i class="fas fa-running"></i>
+                <div class="hero-sidebar h-100 p-4">
+                    <!-- Instagram Feed -->
+                    <div class="instagram-feed-card mb-4">
+                        <div class="card-header d-flex align-items-center mb-3">
+                            <i class="fab fa-instagram text-danger me-2 fs-4"></i>
+                            <h3 class="card-title mb-0">Instagram</h3>
+                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
                         </div>
-                        <h3 class="sidebar-title">Antrenman Programı</h3>
-                        <p class="sidebar-description">Haftalık antrenman programımız ve takım hazırlık sürecimiz hakkında detaylı bilgilere ulaşabilirsiniz.</p>
-                        <button class="btn btn-sidebar-outline">
-                            Programı Görüntüle
-                        </button>
+                        <div class="instagram-posts">
+                            <div class="instagram-post mb-3">
+                                <div class="post-header d-flex align-items-center mb-2">
+                                    <div class="profile-pic me-2">
+                                        <img src="/uploads/team-logos/fenerbahce.svg" alt="Kulüp" class="rounded-circle" width="32" height="32">
+                                    </div>
+                                    <div class="post-info">
+                                        <div class="username fw-bold">@sporkulubu</div>
+                                        <div class="post-time text-muted small">2 saat önce</div>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <p class="post-text mb-2">🔥 Antrenmanlarımız devam ediyor! Yeni sezon için hazırız 💪 #YeniSezon #Hazırlık</p>
+                                    <div class="post-image">
+                                        <img src="/uploads/default-news.jpg" alt="Antrenman" class="img-fluid rounded">
+                                    </div>
+                                    <div class="post-stats mt-2 d-flex text-muted small">
+                                        <span class="me-3"><i class="far fa-heart me-1"></i>1.2K</span>
+                                        <span><i class="far fa-comment me-1"></i>45</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="instagram-post">
+                                <div class="post-header d-flex align-items-center mb-2">
+                                    <div class="profile-pic me-2">
+                                        <img src="/uploads/team-logos/fenerbahce.svg" alt="Kulüp" class="rounded-circle" width="32" height="32">
+                                    </div>
+                                    <div class="post-info">
+                                        <div class="username fw-bold">@sporkulubu</div>
+                                        <div class="post-time text-muted small">1 gün önce</div>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <p class="post-text mb-2">🏆 Galibiyetimizi kutluyoruz! Taraftarımıza teşekkürler 🙏 #Galibiyet #Teşekkürler</p>
+                                    <div class="post-stats mt-2 d-flex text-muted small">
+                                        <span class="me-3"><i class="far fa-heart me-1"></i>2.8K</span>
+                                        <span><i class="far fa-comment me-1"></i>156</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Announcements Section -->
-                    <div class="sidebar-section">
-                        <div class="sidebar-icon">
-                            <i class="fas fa-bullhorn"></i>
+                    <!-- Announcements -->
+                    <div class="announcements-card">
+                        <div class="card-header d-flex align-items-center mb-3">
+                            <i class="fas fa-bullhorn text-warning me-2 fs-4"></i>
+                            <h3 class="card-title mb-0">Duyurular</h3>
+                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
                         </div>
-                        <h3 class="sidebar-title">Duyurular</h3>
-                        <p class="sidebar-description">Kulübümüzden önemli duyurular, etkinlik tarihleri ve taraftar bilgilendirmeleri.</p>
-                        <button class="btn btn-sidebar-outline">
-                            Tüm Duyurular
-                        </button>
+                        <div class="announcements-list">
+                            <div class="announcement-item mb-3 p-3 bg-light rounded">
+                                <div class="announcement-badge mb-2">
+                                    <span class="badge bg-danger">ÖNEMLİ</span>
+                                    <span class="text-muted small ms-2">20 Ekim 2024</span>
+                                </div>
+                                <h5 class="announcement-title mb-2">Maç Bilet Satışları</h5>
+                                <p class="announcement-text mb-0 small">Galatasaray derbisi biletleri yarın saat 10:00\'da satışa çıkacaktır. Üye önceliği uygulanacaktır.</p>
+                            </div>
+                            
+                            <div class="announcement-item mb-3 p-3 bg-light rounded">
+                                <div class="announcement-badge mb-2">
+                                    <span class="badge bg-info">BİLGİ</span>
+                                    <span class="text-muted small ms-2">18 Ekim 2024</span>
+                                </div>
+                                <h5 class="announcement-title mb-2">Antrenman Saatleri</h5>
+                                <p class="announcement-text mb-0 small">Bu hafta antrenmanlarımız saat 16:00\'da başlayacaktır. Taraftarlarımız izleyebilir.</p>
+                            </div>
+                            
+                            <div class="announcement-item p-3 bg-light rounded">
+                                <div class="announcement-badge mb-2">
+                                    <span class="badge bg-success">ETKİNLİK</span>
+                                    <span class="text-muted small ms-2">15 Ekim 2024</span>
+                                </div>
+                                <h5 class="announcement-title mb-2">Taraftar Buluşması</h5>
+                                <p class="announcement-text mb-0 small">25 Ekim Cuma günü saat 19:00\'da kulüp lokalinde taraftar buluşması düzenlenecektir.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,173 +177,164 @@ $content = '
             </div>
         </div>
         
-        <div class="row">
-            <!-- Upcoming Matches -->
-            <div class="col-lg-6 mb-4">
-                <div class="calendar-card upcoming-matches">
-                    <div class="calendar-header">
-                        <i class="fas fa-calendar-plus"></i>
-                        <h3>YAKLAŞAN MAÇLAR</h3>
-                    </div>
-                    <div class="matches-list">
-                        ' . (isset($upcoming_matches) && !empty($upcoming_matches) ? 
-                            implode('', array_map(function($match) {
-                                return '
-                                <div class="match-calendar-item">
-                                    <div class="match-date-info">
-                                        <div class="match-day">' . date('d', strtotime($match['match_date'] ?? 'now')) . '</div>
-                                        <div class="match-month">' . 
-                                            ['01' => 'OCA', '02' => 'ŞUB', '03' => 'MAR', '04' => 'NİS', 
-                                             '05' => 'MAY', '06' => 'HAZ', '07' => 'TEM', '08' => 'AĞU', 
-                                             '09' => 'EYL', '10' => 'EKİ', '11' => 'KAS', '12' => 'ARA'][date('m', strtotime($match['match_date'] ?? 'now'))] . 
-                                        '</div>
-                                        <div class="match-time">' . date('H:i', strtotime($match['match_date'] ?? 'now')) . '</div>
-                                    </div>
-                                    <div class="match-teams-info">
-                                        <div class="match-teams">
-                                            <span class="home-team">' . htmlspecialchars($match['home_team'] ?? 'Ev Sahibi') . '</span>
-                                            <span class="vs-text">VS</span>
-                                            <span class="away-team">' . htmlspecialchars($match['away_team'] ?? 'Deplasman') . '</span>
-                                        </div>
-                                        <div class="match-venue">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            ' . htmlspecialchars($match['venue'] ?? 'Stadyum') . '
-                                        </div>
-                                    </div>
-                                    <div class="match-status">
-                                        <span class="status-badge upcoming">YAKLAŞAN</span>
-                                    </div>
-                                </div>';
-                            }, $upcoming_matches)) : 
-                            '
-                            <div class="match-calendar-item">
-                                <div class="match-date-info">
-                                    <div class="match-day">' . date('d', strtotime('+7 days')) . '</div>
-                                    <div class="match-month">EKİ</div>
-                                    <div class="match-time">19:00</div>
-                                </div>
-                                <div class="match-teams-info">
-                                    <div class="match-teams">
-                                        <span class="home-team">Spor Kulübü</span>
-                                        <span class="vs-text">VS</span>
-                                        <span class="away-team">Rakip Takım</span>
-                                    </div>
-                                    <div class="match-venue">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Ev Sahası
-                                    </div>
-                                </div>
-                                <div class="match-status">
-                                    <span class="status-badge upcoming">YAKLAŞAN</span>
-                                </div>
-                            </div>
-                            <div class="match-calendar-item">
-                                <div class="match-date-info">
-                                    <div class="match-day">' . date('d', strtotime('+14 days')) . '</div>
-                                    <div class="match-month">EKİ</div>
-                                    <div class="match-time">16:00</div>
-                                </div>
-                                <div class="match-teams-info">
-                                    <div class="match-teams">
-                                        <span class="home-team">Deplasman Takımı</span>
-                                        <span class="vs-text">VS</span>
-                                        <span class="away-team">Spor Kulübü</span>
-                                    </div>
-                                    <div class="match-venue">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Deplasman Stadı
-                                    </div>
-                                </div>
-                                <div class="match-status">
-                                    <span class="status-badge upcoming">YAKLAŞAN</span>
-                                </div>
-                            </div>'
-                        ) . '
-                    </div>
+        <!-- Horizontal Match Calendar -->
+        <div class="horizontal-match-calendar">
+            <div class="match-calendar-nav">
+                <button class="nav-btn prev-btn" onclick="scrollMatches(\'left\')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="nav-filters">
+                    <button class="filter-btn active" data-filter="all">Tüm Maçlar</button>
+                    <button class="filter-btn" data-filter="upcoming">Yaklaşan</button>
+                    <button class="filter-btn" data-filter="finished">Tamamlanan</button>
                 </div>
+                <button class="nav-btn next-btn" onclick="scrollMatches(\'right\')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
             
-            <!-- Recent Results -->
-            <div class="col-lg-6 mb-4">
-                <div class="calendar-card recent-results">
-                    <div class="calendar-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <h3>SON SONUÇLAR</h3>
-                    </div>
-                    <div class="matches-list">
-                        ' . (isset($recent_results) && !empty($recent_results) ? 
-                            implode('', array_map(function($result) {
-                                return '
-                                <div class="match-calendar-item">
-                                    <div class="match-date-info">
-                                        <div class="match-day">' . date('d', strtotime($result['match_date'] ?? 'now')) . '</div>
-                                        <div class="match-month">' . 
-                                            ['01' => 'OCA', '02' => 'ŞUB', '03' => 'MAR', '04' => 'NİS', 
-                                             '05' => 'MAY', '06' => 'HAZ', '07' => 'TEM', '08' => 'AĞU', 
-                                             '09' => 'EYL', '10' => 'EKİ', '11' => 'KAS', '12' => 'ARA'][date('m', strtotime($result['match_date'] ?? 'now'))] . 
-                                        '</div>
-                                        <div class="match-time">MS</div>
-                                    </div>
-                                    <div class="match-teams-info">
-                                        <div class="match-teams">
-                                            <span class="home-team">' . htmlspecialchars($result['home_team'] ?? 'Ev') . '</span>
-                                            <span class="score-display">' . ($result['home_score'] ?? '0') . ' - ' . ($result['away_score'] ?? '0') . '</span>
-                                            <span class="away-team">' . htmlspecialchars($result['away_team'] ?? 'Deplasman') . '</span>
-                                        </div>
-                                        <div class="match-venue">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            ' . htmlspecialchars($result['venue'] ?? 'Stadyum') . '
-                                        </div>
-                                    </div>
-                                    <div class="match-status">
-                                        <span class="status-badge finished">BİTTİ</span>
-                                    </div>
-                                </div>';
-                            }, $recent_results)) : 
-                            '
-                            <div class="match-calendar-item">
-                                <div class="match-date-info">
-                                    <div class="match-day">' . date('d', strtotime('-7 days')) . '</div>
-                                    <div class="match-month">EKİ</div>
-                                    <div class="match-time">MS</div>
+            <div class="matches-horizontal-container">
+                <div class="matches-horizontal-scroll" id="matchesScroll">
+                    <!-- Sample Upcoming Matches -->
+                    <div class="horizontal-match-card upcoming" data-type="upcoming">
+                        <div class="match-status-indicator">
+                            <span class="status-dot upcoming"></span>
+                            <span class="status-text">Yaklaşan</span>
+                        </div>
+                        <div class="match-date-section">
+                            <div class="match-day">25</div>
+                            <div class="match-month">Ekim</div>
+                        </div>
+                        <div class="match-time-section">
+                            <div class="match-time">20:45</div>
+                        </div>
+                        <div class="teams-section">
+                            <div class="team home-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
                                 </div>
-                                <div class="match-teams-info">
-                                    <div class="match-teams">
-                                        <span class="home-team">Spor Kulübü</span>
-                                        <span class="score-display">2 - 1</span>
-                                        <span class="away-team">Rakip Takım</span>
-                                    </div>
-                                    <div class="match-venue">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Ev Sahası
-                                    </div>
-                                </div>
-                                <div class="match-status">
-                                    <span class="status-badge finished">BİTTİ</span>
-                                </div>
+                                <div class="team-name">Fenerbahçe</div>
                             </div>
-                            <div class="match-calendar-item">
-                                <div class="match-date-info">
-                                    <div class="match-day">' . date('d', strtotime('-14 days')) . '</div>
-                                    <div class="match-month">EYL</div>
-                                    <div class="match-time">MS</div>
+                            <div class="vs-section">
+                                <div class="vs-text">VS</div>
+                            </div>
+                            <div class="team away-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/galatasaray.svg" alt="Galatasaray" onerror="this.src=\'/uploads/team-logos/default.svg\'">
                                 </div>
-                                <div class="match-teams-info">
-                                    <div class="match-teams">
-                                        <span class="home-team">Deplasman</span>
-                                        <span class="score-display">1 - 3</span>
-                                        <span class="away-team">Spor Kulübü</span>
-                                    </div>
-                                    <div class="match-venue">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Deplasman Stadı
-                                    </div>
+                                <div class="team-name">Galatasaray</div>
+                            </div>
+                        </div>
+                        <div class="match-venue-section">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Şükrü Saraçoğlu Stadyumu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="horizontal-match-card upcoming" data-type="upcoming">
+                        <div class="match-status-indicator">
+                            <span class="status-dot upcoming"></span>
+                            <span class="status-text">Yaklaşan</span>
+                        </div>
+                        <div class="match-date-section">
+                            <div class="match-day">30</div>
+                            <div class="match-month">Ekim</div>
+                        </div>
+                        <div class="match-time-section">
+                            <div class="match-time">19:00</div>
+                        </div>
+                        <div class="teams-section">
+                            <div class="team home-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/besiktas.svg" alt="Beşiktaş" onerror="this.src=\'/uploads/team-logos/default.svg\'">
                                 </div>
-                                <div class="match-status">
-                                    <span class="status-badge finished">BİTTİ</span>
+                                <div class="team-name">Beşiktaş</div>
+                            </div>
+                            <div class="vs-section">
+                                <div class="vs-text">VS</div>
+                            </div>
+                            <div class="team away-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
                                 </div>
-                            </div>'
-                        ) . '
+                                <div class="team-name">Fenerbahçe</div>
+                            </div>
+                        </div>
+                        <div class="match-venue-section">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Vodafone Park</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Sample Finished Matches -->
+                    <div class="horizontal-match-card finished" data-type="finished">
+                        <div class="match-status-indicator">
+                            <span class="status-dot finished"></span>
+                            <span class="status-text">Tamamlandı</span>
+                        </div>
+                        <div class="match-date-section">
+                            <div class="match-day">20</div>
+                            <div class="match-month">Ekim</div>
+                        </div>
+                        <div class="match-score-section">
+                            <div class="final-score">2 - 1</div>
+                        </div>
+                        <div class="teams-section">
+                            <div class="team home-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                </div>
+                                <div class="team-name">Fenerbahçe</div>
+                            </div>
+                            <div class="vs-section">
+                                <div class="vs-text">VS</div>
+                            </div>
+                            <div class="team away-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/trabzonspor.svg" alt="Trabzonspor" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                </div>
+                                <div class="team-name">Trabzonspor</div>
+                            </div>
+                        </div>
+                        <div class="match-venue-section">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Şükrü Saraçoğlu Stadyumu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="horizontal-match-card finished" data-type="finished">
+                        <div class="match-status-indicator">
+                            <span class="status-dot finished"></span>
+                            <span class="status-text">Tamamlandı</span>
+                        </div>
+                        <div class="match-date-section">
+                            <div class="match-day">15</div>
+                            <div class="match-month">Ekim</div>
+                        </div>
+                        <div class="match-score-section">
+                            <div class="final-score">3 - 0</div>
+                        </div>
+                        <div class="teams-section">
+                            <div class="team home-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/basaksehir.svg" alt="Başakşehir" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                </div>
+                                <div class="team-name">Başakşehir</div>
+                            </div>
+                            <div class="vs-section">
+                                <div class="vs-text">VS</div>
+                            </div>
+                            <div class="team away-team">
+                                <div class="team-logo">
+                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                </div>
+                                <div class="team-name">Fenerbahçe</div>
+                            </div>
+                        </div>
+                        <div class="match-venue-section">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Başakşehir Fatih Terim Stadyumu</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -311,191 +342,96 @@ $content = '
     </div>
 </section>
 
-<!-- Quick Stats -->
-<section class="quick-stats py-5 bg-primary text-white">
+<!-- News Section -->
+<section class="news-section py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-6 text-center mb-4">
-                <div class="stat-item">
-                    <i class="fas fa-trophy fa-3x mb-3 text-warning"></i>
-                    <h3 class="fw-bold">25+</h3>
-                    <p>Şampiyonluk</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 text-center mb-4">
-                <div class="stat-item">
-                    <i class="fas fa-users fa-3x mb-3 text-warning"></i>
-                    <h3 class="fw-bold">500+</h3>
-                    <p>Aktif Sporcu</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 text-center mb-4">
-                <div class="stat-item">
-                    <i class="fas fa-calendar fa-3x mb-3 text-warning"></i>
-                    <h3 class="fw-bold">95</h3>
-                    <p>Yıllık Tecrübe</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 text-center mb-4">
-                <div class="stat-item">
-                    <i class="fas fa-medal fa-3x mb-3 text-warning"></i>
-                    <h3 class="fw-bold">150+</h3>
-                    <p>Milli Sporcu</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Latest News & Upcoming Matches -->
-<section class="news-matches py-5">
-    <div class="container">
-        <div class="row">
-            <!-- Latest News -->
-            <div class="col-lg-8 mb-5">
+            <div class="col-12">
                 <div class="section-header mb-4">
                     <h2 class="section-title">SON HABERLER</h2>
                     <a href="' . BASE_URL . '/news" class="btn btn-outline-primary">Tüm Haberler</a>
                 </div>
-                
-                <div class="row">
-                    ' . (isset($latest_news) && !empty($latest_news) ? 
-                        implode('', array_map(function($news) {
-                            return '
-                            <div class="col-md-6 mb-4">
-                                <div class="news-card">
-                                    <img src="' . BASE_URL . '/public/uploads/' . ($news['image'] ?? 'default-news.jpg') . '" 
-                                         class="news-image" alt="' . htmlspecialchars($news['title'] ?? '') . '">
-                                    <div class="news-content">
-                                        <span class="news-date">' . date('d.m.Y', strtotime($news['created_at'] ?? 'now')) . '</span>
-                                        <h4 class="news-title">' . htmlspecialchars($news['title'] ?? '') . '</h4>
-                                        <p class="news-excerpt">' . substr(strip_tags($news['content'] ?? ''), 0, 120) . '...</p>
-                                        <a href="' . BASE_URL . '/news/view/' . ($news['id'] ?? '') . '" class="btn btn-sm btn-primary">Devamını Oku</a>
-                                    </div>
-                                </div>
-                            </div>';
-                        }, $latest_news)) : 
-                        '
-                        <div class="col-md-6 mb-4">
-                            <div class="news-card">
-                                <img src="' . BASE_URL . '/public/images/default-news.jpg" class="news-image" alt="Örnek Haber">
-                                <div class="news-content">
-                                    <span class="news-date">' . date('d.m.Y') . '</span>
-                                    <h4 class="news-title">Yeni Sezon Hazırlıkları Başladı</h4>
-                                    <p class="news-excerpt">Takımımız yeni sezon hazırlıklarına başladı. Antrenmanlar her gün düzenli olarak devam ediyor...</p>
-                                    <a href="' . BASE_URL . '/news" class="btn btn-sm btn-primary">Devamını Oku</a>
+            </div>
+        </div>
+        
+        <div class="row">
+            ' . (isset($news) && !empty($news) ? 
+                implode('', array_map(function($article) {
+                    return '
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="news-card h-100">
+                            <div class="news-image">
+                                <img src="' . ($article['image'] ?? '/uploads/default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
+                                <div class="news-category">' . htmlspecialchars($article['category'] ?? 'Genel') . '</div>
+                            </div>
+                            <div class="news-content">
+                                <h3 class="news-title">' . htmlspecialchars($article['title'] ?? 'Haber Başlığı') . '</h3>
+                                <p class="news-excerpt">' . htmlspecialchars(substr($article['content'] ?? 'Haber içeriği...', 0, 120)) . '...</p>
+                                <div class="news-meta">
+                                    <span class="news-date">' . date('d.m.Y', strtotime($article['created_at'] ?? 'now')) . '</span>
+                                    <a href="' . BASE_URL . '/news/' . ($article['id'] ?? '#') . '" class="read-more">Devamını Oku</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="news-card">
-                                <img src="' . BASE_URL . '/public/images/default-news.jpg" class="news-image" alt="Örnek Haber">
-                                <div class="news-content">
-                                    <span class="news-date">' . date('d.m.Y') . '</span>
-                                    <h4 class="news-title">Yeni Transfer Haberi</h4>
-                                    <p class="news-excerpt">Kulübümüz yeni sezon için önemli transferler gerçekleştirdi. Detaylar için haberi okuyabilirsiniz...</p>
-                                    <a href="' . BASE_URL . '/news" class="btn btn-sm btn-primary">Devamını Oku</a>
-                                </div>
+                    </div>';
+                }, array_slice($news, 0, 6))) : 
+                '
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="news-card h-100">
+                        <div class="news-image">
+                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
+                            <div class="news-category">Transfer</div>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Yeni Transferimiz Takımımıza Katıldı</h3>
+                            <p class="news-excerpt">Sezonun en önemli transferlerinden biri olan yeni oyuncumuz ilk antrenmanına çıktı...</p>
+                            <div class="news-meta">
+                                <span class="news-date">20.10.2024</span>
+                                <a href="#" class="read-more">Devamını Oku</a>
                             </div>
-                        </div>'
-                    ) . '
-                </div>
-            </div>
-
-            <!-- Upcoming Matches & Results -->
-            <div class="col-lg-4">
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">YAKLAŞAN MAÇLAR</h3>
-                    <div class="matches-list">
-                        ' . (isset($upcoming_matches) && !empty($upcoming_matches) ? 
-                            implode('', array_map(function($match) {
-                                return '
-                                <div class="match-item">
-                                    <div class="match-date">' . date('d.m.Y H:i', strtotime($match['match_date'] ?? 'now')) . '</div>
-                                    <div class="match-teams">
-                                        <span class="home-team">' . htmlspecialchars($match['home_team'] ?? 'Ev Sahibi') . '</span>
-                                        <span class="vs">VS</span>
-                                        <span class="away-team">' . htmlspecialchars($match['away_team'] ?? 'Deplasman') . '</span>
-                                    </div>
-                                    <div class="match-venue">' . htmlspecialchars($match['venue'] ?? 'Stadyum') . '</div>
-                                </div>';
-                            }, $upcoming_matches)) : 
-                            '
-                            <div class="match-item">
-                                <div class="match-date">' . date('d.m.Y H:i', strtotime('+7 days')) . '</div>
-                                <div class="match-teams">
-                                    <span class="home-team">Spor Kulübü</span>
-                                    <span class="vs">VS</span>
-                                    <span class="away-team">Rakip Takım</span>
-                                </div>
-                                <div class="match-venue">Ev Sahası</div>
-                            </div>
-                            <div class="match-item">
-                                <div class="match-date">' . date('d.m.Y H:i', strtotime('+14 days')) . '</div>
-                                <div class="match-teams">
-                                    <span class="home-team">Deplasman Takımı</span>
-                                    <span class="vs">VS</span>
-                                    <span class="away-team">Spor Kulübü</span>
-                                </div>
-                                <div class="match-venue">Deplasman</div>
-                            </div>'
-                        ) . '
+                        </div>
                     </div>
                 </div>
-
-                <div class="sidebar-widget mt-4">
-                    <h3 class="widget-title">SON SONUÇLAR</h3>
-                    <div class="results-list">
-                        ' . (isset($recent_results) && !empty($recent_results) ? 
-                            implode('', array_map(function($result) {
-                                return '
-                                <div class="result-item">
-                                    <div class="result-date">' . date('d.m.Y', strtotime($result['match_date'] ?? 'now')) . '</div>
-                                    <div class="result-teams">
-                                        <span class="home-team">' . htmlspecialchars($result['home_team'] ?? 'Ev') . '</span>
-                                        <span class="score">' . ($result['home_score'] ?? '0') . ' - ' . ($result['away_score'] ?? '0') . '</span>
-                                        <span class="away-team">' . htmlspecialchars($result['away_team'] ?? 'Deplasman') . '</span>
-                                    </div>
-                                </div>';
-                            }, $recent_results)) : 
-                            '
-                            <div class="result-item">
-                                <div class="result-date">' . date('d.m.Y', strtotime('-7 days')) . '</div>
-                                <div class="result-teams">
-                                    <span class="home-team">Spor Kulübü</span>
-                                    <span class="score">2 - 1</span>
-                                    <span class="away-team">Rakip Takım</span>
-                                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="news-card h-100">
+                        <div class="news-image">
+                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
+                            <div class="news-category">Maç</div>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Galatasaray Derbisi Hazırlıkları</h3>
+                            <p class="news-excerpt">Haftanın en önemli maçı için hazırlıklarımız devam ediyor. Teknik direktörümüz açıklamalarda bulundu...</p>
+                            <div class="news-meta">
+                                <span class="news-date">19.10.2024</span>
+                                <a href="#" class="read-more">Devamını Oku</a>
                             </div>
-                            <div class="result-item">
-                                <div class="result-date">' . date('d.m.Y', strtotime('-14 days')) . '</div>
-                                <div class="result-teams">
-                                    <span class="home-team">Deplasman</span>
-                                    <span class="score">1 - 3</span>
-                                    <span class="away-team">Spor Kulübü</span>
-                                </div>
-                            </div>'
-                        ) . '
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="news-card h-100">
+                        <div class="news-image">
+                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
+                            <div class="news-category">Antrenman</div>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">Antrenman Kampı Başladı</h3>
+                            <p class="news-excerpt">Takımımız yeni sezon hazırlıkları kapsamında antrenman kampına başladı...</p>
+                            <div class="news-meta">
+                                <span class="news-date">18.10.2024</span>
+                                <a href="#" class="read-more">Devamını Oku</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                '
+            ) . '
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="cta-section py-5 bg-warning">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="fw-bold text-dark mb-3">KULÜBÜMÜZE KATILIN</h2>
-                <p class="lead text-dark mb-4">Geleceğin yıldızları olmak için bugün aramıza katılın. Profesyonel antrenörlerimiz ve modern tesislerimizle sizi bekliyoruz.</p>
-                <a href="' . BASE_URL . '/groups" class="btn btn-dark btn-lg me-3">Grupları İncele</a>
-                <a href="' . BASE_URL . '/home/contact" class="btn btn-outline-dark btn-lg">İletişime Geç</a>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Include Match Calendar JavaScript -->
+<script src="/js/match-calendar.js"></script>
 ';
 
 include BASE_PATH . '/app/views/frontend/layout.php';

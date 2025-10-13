@@ -26,7 +26,8 @@ COPY . /var/www/html/
 COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Dosya izinlerini ayarla
-RUN chown -R www-data:www-data /var/www/html \
+RUN mkdir -p /var/www/html/public/uploads \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && chmod -R 777 /var/www/html/public/uploads
 

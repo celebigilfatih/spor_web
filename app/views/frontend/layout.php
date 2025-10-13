@@ -20,8 +20,8 @@
     <!-- Header -->
     <header class="header-wrapper">
         <!-- Top Bar -->
-        <div class="top-bar bg-navy">
-            <div class="container">
+        <div class="top-bar bg-navy px-5">
+            <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="contact-info">
@@ -42,8 +42,8 @@
         </div>
 
         <!-- Main Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-5">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="<?= BASE_URL ?>">
                     <img src="<?= BASE_URL ?>/images/logo.png" alt="Logo" height="50" class="me-2">
                     <span class="fw-bold">SPOR KULÜBÜ</span>
