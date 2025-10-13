@@ -1,0 +1,71 @@
+# Docker ignore dosyası
+# Gereksiz dosyaların Docker image'ına dahil edilmemesi için
+
+# Git dosyaları
+.git
+.gitignore
+.gitattributes
+
+# IDE/Editor dosyaları
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS dosyaları
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Node modules (eğer frontend build varsa)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Composer cache
+vendor/
+composer.lock
+
+# Log dosyaları
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Upload dosyaları (development sırasında)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Cache dosyaları
+cache/
+*.cache
+
+# Environment dosyaları
+.env
+.env.local
+.env.production
+
+# Test dosyaları
+test.php
+tests/
+
+# Documentation
+*.md
+docs/
+
+# Docker dosyaları (recursive build önlemek için)
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+
+# Backup dosyaları
+*.bak
+*.backup
+*.sql.gz
+
+# IDE projesi dosyaları
+*.sublime-*
+*.code-workspace

@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # Web Sunucusu (PHP + Apache)
+  web:
+    build: .
+    container_name: spor_kulubu_web
+    ports:
+      - "8090:80"
+    volumes:
+      - .:/var/www/html
+      - ./public/uploads:/var/www/html/public/uploads
+      - ./config:/var/www/html/config
+      - ./docker/apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    environment:
+      - DB_HOST=database
+      - DB_NAME=spor_kulubu
+      - DB_USER=spor_user
+      - DB_PASS=spor_password
+    depends_on:
+      - database
+    networks:
+      - spor_network
+    restart: unless-stopped
+
+  # MySQL Veritabanı
+  database:
+    image: mysql:8.0
+    container_name: spor_kulubu_db
+    environment:
+      MYSQL_DATABASE: spor_kulubu
+      MYSQL_USER: spor_user
+      MYSQL_PASSWORD: spor_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/sample_data.sql:/docker-entrypoint-initdb.d/02-sample_data.sql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf
+    networks:
+      - spor_network
+    restart: unless-stopped
+
+  # phpMyAdmin (İsteğe bağlı - Veritabanı yönetimi için)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: spor_kulubu_phpmyadmin
+    environment:
+      PMA_HOST: database
+      PMA_USER: spor_user
+      PMA_PASSWORD: spor_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8091:80"
+    depends_on:
+      - database
+    networks:
+      - spor_network
+    restart: unless-stopped
+
+  # Redis (Önbellek için - İsteğe bağlı)
+  redis:
+    image: redis:7-alpine
+    container_name: spor_kulubu_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - spor_network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+# Ağ konfigürasyonu
+networks:
+  spor_network:
+    driver: bridge
+
+# Veri depolama
+volumes:
+  db_data:
+    driver: local
+  redis_data:
+    driver: local

@@ -1,0 +1,175 @@
+# PHP ve Web Geliştirme için Git Ignore Dosyası
+# Sports Club Website Project
+
+# Genel PHP Dosyaları
+*.log
+*.tmp
+*.temp
+*.cache
+*.bak
+*.swp
+*.swo
+*~
+
+# Composer bağımlılıkları
+/vendor/
+composer.lock
+composer.phar
+
+# Veritabanı dosyaları
+*.sql
+*.sqlite
+*.db
+
+# Konfigürasyon dosyaları (hassas bilgiler)
+/config/database.php
+/config/config.php
+.env
+.env.local
+.env.production
+
+# Upload klasörü (kullanıcı yüklemeleri)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Cache ve session dosyaları
+/cache/
+/tmp/
+/sessions/
+*.cache
+
+# IDE ve editör dosyaları
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.buildpath
+.settings/
+
+# Windows dosyaları
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS dosyaları
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Linux dosyaları
+*~
+.nfs*
+
+# Node.js (eğer frontend geliştirme yapılıyorsa)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# CSS ve JS build dosyaları
+/public/css/compiled/
+/public/js/compiled/
+/public/build/
+/dist/
+
+# Backup dosyaları
+*.backup
+backup/
+backups/
+
+# Log dosyaları
+/logs/
+*.log
+error.log
+access.log
+
+# Test dosyaları
+/tests/coverage/
+phpunit.xml
+.phpunit.result.cache
+
+# Debug dosyaları
+debug.php
+test.php
+debug_*.php
+
+# Geçici dosyalar
+*.tmp
+*.temp
+temp/
+
+# SSL sertifikaları
+*.pem
+*.key
+*.crt
+*.csr
+
+# Hata raporları
+error_log
+php_errors.log
+
+# Admin panel özel dosyaları
+/admin/debug/
+debug_admin.php
+auth_test.php
+
+# Proje özel dosyaları
+/documentation/private/
+/scripts/deployment/
+deployment.sh
+
+# Medya dosyaları (büyük dosyalar)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+
+# Arşiv dosyaları
+*.zip
+*.rar
+*.tar
+*.gz
+*.7z
+
+# Yedekleme ve migration dosyaları
+migrations_backup/
+db_backup/
+*.sql.gz
+
+# Production konfigürasyonları
+.htaccess.production
+robots.txt.production
+
+# Çevre değişkenleri
+.env.*
+!.env.example
+
+# Session storage
+/storage/sessions/
+/storage/cache/
+/storage/logs/
+
+# Temporary uploads
+/public/temp_uploads/
+
+# Error pages
+/public/errors/
+
+# Analytics ve tracking dosyaları
+google*.html
+bing*.xml
+analytics/
+
+# Git kendisi
+.git/
+.gitattributes
+
+# Yorum: Bu dosya Türkçe spor kulübü web sitesi projesi için optimize edilmiştir.
+# Gerektiğinde proje ihtiyaçlarına göre düzenlenebilir.
