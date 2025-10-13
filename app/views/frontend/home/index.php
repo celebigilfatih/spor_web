@@ -71,7 +71,7 @@ $content = '
             
             <!-- Sidebar Content -->
             <div class="col-lg-4">
-                <div class="hero-sidebar h-100 p-4">
+                <div class="hero-sidebar h-100">
                     <!-- Instagram Feed -->
                     <div class="instagram-feed-card mb-4">
                         <div class="card-header d-flex align-items-center mb-3">
@@ -92,9 +92,7 @@ $content = '
                                 </div>
                                 <div class="post-content">
                                     <p class="post-text mb-2">🔥 Antrenmanlarımız devam ediyor! Yeni sezon için hazırız 💪 #YeniSezon #Hazırlık</p>
-                                    <div class="post-image">
-                                        <img src="/uploads/default-news.jpg" alt="Antrenman" class="img-fluid rounded">
-                                    </div>
+
                                     <div class="post-stats mt-2 d-flex text-muted small">
                                         <span class="me-3"><i class="far fa-heart me-1"></i>1.2K</span>
                                         <span><i class="far fa-comment me-1"></i>45</span>
@@ -149,14 +147,6 @@ $content = '
                                 <p class="announcement-text mb-0 small">Bu hafta antrenmanlarımız saat 16:00\'da başlayacaktır. Taraftarlarımız izleyebilir.</p>
                             </div>
                             
-                            <div class="announcement-item p-3 bg-light rounded">
-                                <div class="announcement-badge mb-2">
-                                    <span class="badge bg-success">ETKİNLİK</span>
-                                    <span class="text-muted small ms-2">15 Ekim 2024</span>
-                                </div>
-                                <h5 class="announcement-title mb-2">Taraftar Buluşması</h5>
-                                <p class="announcement-text mb-0 small">25 Ekim Cuma günü saat 19:00\'da kulüp lokalinde taraftar buluşması düzenlenecektir.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,176 +157,179 @@ $content = '
 
 <!-- Match Calendar Section -->
 <section class="match-calendar-section py-5">
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row px-5">
             <div class="col-12">
+
                 <div class="section-header mb-4">
                     <h2 class="section-title">MAÇ TAKVİMİ</h2>
-                    <a href="' . BASE_URL . '/ateam/fixtures" class="btn btn-outline-primary">Tüm Maçlar</a>
+                        <div class="nav-filters">
+                            <button class="filter-btn active" data-filter="all">Tüm Maçlar</button>
+                            <button class="filter-btn" data-filter="upcoming">Yaklaşan</button>
+                            <button class="filter-btn" data-filter="finished">Tamamlanan</button>
+                        </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Horizontal Match Calendar -->
-        <div class="horizontal-match-calendar">
-            <div class="match-calendar-nav">
-                <button class="nav-btn prev-btn" onclick="scrollMatches(\'left\')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="nav-filters">
-                    <button class="filter-btn active" data-filter="all">Tüm Maçlar</button>
-                    <button class="filter-btn" data-filter="upcoming">Yaklaşan</button>
-                    <button class="filter-btn" data-filter="finished">Tamamlanan</button>
-                </div>
-                <button class="nav-btn next-btn" onclick="scrollMatches(\'right\')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            
-            <div class="matches-horizontal-container">
-                <div class="matches-horizontal-scroll" id="matchesScroll">
-                    <!-- Sample Upcoming Matches -->
-                    <div class="horizontal-match-card upcoming" data-type="upcoming">
-                        <div class="match-status-indicator">
-                            <span class="status-dot upcoming"></span>
-                            <span class="status-text">Yaklaşan</span>
-                        </div>
-                        <div class="match-date-section">
-                            <div class="match-day">25</div>
-                            <div class="match-month">Ekim</div>
-                        </div>
-                        <div class="match-time-section">
-                            <div class="match-time">20:45</div>
-                        </div>
-                        <div class="teams-section">
-                            <div class="team home-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                </div>
-                                <div class="team-name">Fenerbahçe</div>
-                            </div>
-                            <div class="vs-section">
-                                <div class="vs-text">VS</div>
-                            </div>
-                            <div class="team away-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/galatasaray.svg" alt="Galatasaray" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                </div>
-                                <div class="team-name">Galatasaray</div>
-                            </div>
-                        </div>
-                        <div class="match-venue-section">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Şükrü Saraçoğlu Stadyumu</span>
-                        </div>
+                <!-- Horizontal Match Calendar -->
+                <div class="horizontal-match-calendar">
+                    <div class="match-calendar-nav">
+
+
+
                     </div>
                     
-                    <div class="horizontal-match-card upcoming" data-type="upcoming">
-                        <div class="match-status-indicator">
-                            <span class="status-dot upcoming"></span>
-                            <span class="status-text">Yaklaşan</span>
-                        </div>
-                        <div class="match-date-section">
-                            <div class="match-day">30</div>
-                            <div class="match-month">Ekim</div>
-                        </div>
-                        <div class="match-time-section">
-                            <div class="match-time">19:00</div>
-                        </div>
-                        <div class="teams-section">
-                            <div class="team home-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/besiktas.svg" alt="Beşiktaş" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                    <div class="matches-horizontal-container">
+                        <button class="nav-btn prev-btn" onclick="scrollMatches(\'left\')">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="matches-horizontal-scroll" id="matchesScroll">
+                            <!-- Sample Upcoming Matches -->
+                            <div class="horizontal-match-card upcoming" data-type="upcoming">
+                                <div class="match-status-indicator">
+                                    <span class="status-dot upcoming"></span>
+                                    <span class="status-text">Yaklaşan</span>
                                 </div>
-                                <div class="team-name">Beşiktaş</div>
-                            </div>
-                            <div class="vs-section">
-                                <div class="vs-text">VS</div>
-                            </div>
-                            <div class="team away-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                <div class="match-date-section">
+                                    <div class="match-day">25</div>
+                                    <div class="match-month">Ekim</div>
                                 </div>
-                                <div class="team-name">Fenerbahçe</div>
-                            </div>
-                        </div>
-                        <div class="match-venue-section">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Vodafone Park</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Sample Finished Matches -->
-                    <div class="horizontal-match-card finished" data-type="finished">
-                        <div class="match-status-indicator">
-                            <span class="status-dot finished"></span>
-                            <span class="status-text">Tamamlandı</span>
-                        </div>
-                        <div class="match-date-section">
-                            <div class="match-day">20</div>
-                            <div class="match-month">Ekim</div>
-                        </div>
-                        <div class="match-score-section">
-                            <div class="final-score">2 - 1</div>
-                        </div>
-                        <div class="teams-section">
-                            <div class="team home-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                <div class="match-time-section">
+                                    <div class="match-time">20:45</div>
                                 </div>
-                                <div class="team-name">Fenerbahçe</div>
-                            </div>
-                            <div class="vs-section">
-                                <div class="vs-text">VS</div>
-                            </div>
-                            <div class="team away-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/trabzonspor.svg" alt="Trabzonspor" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                <div class="teams-section">
+                                    <div class="team home-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Fenerbahçe</div>
+                                    </div>
+                                    <div class="vs-section">
+                                        <div class="vs-text">VS</div>
+                                    </div>
+                                    <div class="team away-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/galatasaray.svg" alt="Galatasaray" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Galatasaray</div>
+                                    </div>
                                 </div>
-                                <div class="team-name">Trabzonspor</div>
-                            </div>
-                        </div>
-                        <div class="match-venue-section">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Şükrü Saraçoğlu Stadyumu</span>
-                        </div>
-                    </div>
-                    
-                    <div class="horizontal-match-card finished" data-type="finished">
-                        <div class="match-status-indicator">
-                            <span class="status-dot finished"></span>
-                            <span class="status-text">Tamamlandı</span>
-                        </div>
-                        <div class="match-date-section">
-                            <div class="match-day">15</div>
-                            <div class="match-month">Ekim</div>
-                        </div>
-                        <div class="match-score-section">
-                            <div class="final-score">3 - 0</div>
-                        </div>
-                        <div class="teams-section">
-                            <div class="team home-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/basaksehir.svg" alt="Başakşehir" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                <div class="match-venue-section">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Şükrü Saraçoğlu Stadyumu</span>
                                 </div>
-                                <div class="team-name">Başakşehir</div>
                             </div>
-                            <div class="vs-section">
-                                <div class="vs-text">VS</div>
-                            </div>
-                            <div class="team away-team">
-                                <div class="team-logo">
-                                    <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                            
+                            <div class="horizontal-match-card upcoming" data-type="upcoming">
+                                <div class="match-status-indicator">
+                                    <span class="status-dot upcoming"></span>
+                                    <span class="status-text">Yaklaşan</span>
                                 </div>
-                                <div class="team-name">Fenerbahçe</div>
+                                <div class="match-date-section">
+                                    <div class="match-day">30</div>
+                                    <div class="match-month">Ekim</div>
+                                </div>
+                                <div class="match-time-section">
+                                    <div class="match-time">19:00</div>
+                                </div>
+                                <div class="teams-section">
+                                    <div class="team home-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/besiktas.svg" alt="Beşiktaş" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Beşiktaş</div>
+                                    </div>
+                                    <div class="vs-section">
+                                        <div class="vs-text">VS</div>
+                                    </div>
+                                    <div class="team away-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Fenerbahçe</div>
+                                    </div>
+                                </div>
+                                <div class="match-venue-section">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Vodafone Park</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Sample Finished Matches -->
+                            <div class="horizontal-match-card finished" data-type="finished">
+                                <div class="match-status-indicator">
+                                    <span class="status-dot finished"></span>
+                                    <span class="status-text">Tamamlandı</span>
+                                </div>
+                                <div class="match-date-section">
+                                    <div class="match-day">20</div>
+                                    <div class="match-month">Ekim</div>
+                                </div>
+                                <div class="match-score-section">
+                                    <div class="final-score">2 - 1</div>
+                                </div>
+                                <div class="teams-section">
+                                    <div class="team home-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Fenerbahçe</div>
+                                    </div>
+                                    <div class="vs-section">
+                                        <div class="vs-text">VS</div>
+                                    </div>
+                                    <div class="team away-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/trabzonspor.svg" alt="Trabzonspor" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Trabzonspor</div>
+                                    </div>
+                                </div>
+                                <div class="match-venue-section">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Şükrü Saraçoğlu Stadyumu</span>
+                                </div>
+                            </div>
+                            
+                            <div class="horizontal-match-card finished" data-type="finished">
+                                <div class="match-status-indicator">
+                                    <span class="status-dot finished"></span>
+                                    <span class="status-text">Tamamlandı</span>
+                                </div>
+                                <div class="match-date-section">
+                                    <div class="match-day">15</div>
+                                    <div class="match-month">Ekim</div>
+                                </div>
+                                <div class="match-score-section">
+                                    <div class="final-score">3 - 0</div>
+                                </div>
+                                <div class="teams-section">
+                                    <div class="team home-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/basaksehir.svg" alt="Başakşehir" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Başakşehir</div>
+                                    </div>
+                                    <div class="vs-section">
+                                        <div class="vs-text">VS</div>
+                                    </div>
+                                    <div class="team away-team">
+                                        <div class="team-logo">
+                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                        </div>
+                                        <div class="team-name">Fenerbahçe</div>
+                                    </div>
+                                </div>
+                                <div class="match-venue-section">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Başakşehir Fatih Terim Stadyumu</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="match-venue-section">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Başakşehir Fatih Terim Stadyumu</span>
-                        </div>
+                        <button class="nav-btn next-btn" onclick="scrollMatches(\'right\')">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

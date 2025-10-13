@@ -111,7 +111,7 @@
 
     <!-- Footer -->
     <footer class="footer bg-dark text-light">
-        <div class="container">
+        <div class="container-fluid px-5">
             <div class="row py-5">
                 <div class="col-lg-4 mb-4">
                     <h5 class="text-warning mb-3">SPOR KULÜBÜ</h5>

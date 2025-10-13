@@ -1,7 +1,7 @@
 /* Fenerbahçe-inspired Spor Kulübü CSS - Live Development Test */
 
 :root {
-    --primary-color: #1e3a8a; /* Navy Blue */
+    --primary-color: #002d72; /* Navy Blue */
     --secondary-color: #fbbf24; /* Yellow/Gold */
     --accent-color: #dc2626; /* Red accent */
     --dark-color: #1f2937;
@@ -2731,6 +2731,9 @@ button:focus,
     position: relative;
     overflow: hidden;
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .matches-horizontal-scroll {
@@ -2749,7 +2752,6 @@ button:focus,
 
 .horizontal-match-card {
     background: white;
-    border-radius: 15px;
     padding: 25px;
     min-width: 320px;
     max-width: 320px;
