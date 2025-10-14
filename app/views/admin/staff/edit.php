@@ -34,7 +34,7 @@ $content .= '
                        name="name" 
                        class="form-control" 
                        required
-                       value="' . htmlspecialchars($staff['name']) . '"
+                       value="' . htmlspecialchars($staff['name'] ?? '') . '"
                        placeholder="Teknik kadro üyesinin adı ve soyadı">
             </div>
             
@@ -101,7 +101,7 @@ if (!empty($staff['photo'])) {
     $content .= '
             <div class="current-photo mb-3">
                 <img src="' . BASE_URL . '/uploads/' . $staff['photo'] . '" 
-                     alt="' . htmlspecialchars($staff['name']) . '" 
+                     alt="' . htmlspecialchars($staff['name'] ?? '') . '" 
                      class="img-thumbnail" 
                      style="max-width: 150px; max-height: 150px;">
                 <p class="text-muted mt-2">Mevcut fotoğraf</p>

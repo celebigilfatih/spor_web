@@ -59,7 +59,7 @@ if (empty($staff_members)) {
         if ($staff['photo']) {
             $content .= '
                             <img src="' . BASE_URL . '/uploads/' . $staff['photo'] . '" 
-                                 alt="' . htmlspecialchars($staff['name']) . '"
+                                 alt="' . htmlspecialchars($staff['name'] ?? '') . '"
                                  class="w-12 h-12 object-cover rounded-full border">';
         } else {
             $content .= '
@@ -73,7 +73,7 @@ if (empty($staff_members)) {
                     </td>
                     <td>
                         <div class="staff-info">
-                            <strong>' . htmlspecialchars($staff['name']) . '</strong>';
+                            <strong>' . htmlspecialchars($staff['name'] ?? '') . '</strong>';
         
         $content .= '
                         </div>
@@ -85,7 +85,7 @@ if (empty($staff_members)) {
                     <td>';
         
         if (isset($staff['experience']) && $staff['experience']) {
-            $content .= htmlspecialchars($staff['experience']);
+            $content .= htmlspecialchars((string)$staff['experience']);
         } elseif (isset($staff['experience_years']) && $staff['experience_years']) {
             $content .= $staff['experience_years'] . ' yıl';
         } else {

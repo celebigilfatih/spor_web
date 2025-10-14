@@ -7,35 +7,13 @@
     
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>/css/style.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>/css/admin.css" rel="stylesheet">
     
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Fallback CSS - Shadcn Theme -->
-    <style>
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;background:#fafafa;color:#09090b;}
-    .admin-layout{display:flex;min-height:100vh;}
-    .admin-sidebar{width:256px;background:#ffffff;border-right:1px solid #e4e4e7;position:fixed;height:100vh;overflow-y:auto;}
-    .admin-content{flex:1;margin-left:256px;background:#fafafa;}
-    .admin-header{background:#ffffff;padding:1rem 2rem;border-bottom:1px solid #e4e4e7;}
-    .admin-main-content{padding:2rem;max-width:1400px;margin:0 auto;}
-    .sidebar-header{padding:1.5rem;border-bottom:1px solid #e4e4e7;}
-    .sidebar-logo{font-size:1.125rem;font-weight:600;color:#09090b;margin-bottom:0.25rem;display:flex;align-items:center;gap:0.5rem;}
-    .sidebar-menu{list-style:none;padding:1rem;margin:0;}
-    .sidebar-menu-link{display:flex;align-items:center;padding:0.625rem 0.75rem;color:#71717a;text-decoration:none;border-radius:0.375rem;font-size:0.875rem;transition:all 0.15s;}
-    .sidebar-menu-link:hover{background:#f4f4f5;color:#18181b;}
-    .sidebar-menu-link.active{background:#f4f4f5;color:#18181b;font-weight:500;}
-    .sidebar-menu-icon{margin-right:0.75rem;width:16px;font-size:0.875rem;}
-    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:0.375rem;text-decoration:none;font-weight:500;font-size:0.875rem;border:1px solid transparent;transition:all 0.15s;}
-    .btn-outline{background:#ffffff;color:#18181b;border:1px solid #e4e4e7;}
-    .btn-outline:hover{background:#f4f4f5;}
-    .btn-admin-secondary{background:#18181b;color:#fafafa;}
-    .btn-admin-secondary:hover{background:#27272a;}
-    .btn-admin-danger{background:#ef4444;color:#ffffff;}
-    .btn-admin-danger:hover{background:#dc2626;}
-    </style>
 </head>
 <body>
     <!-- Mobile Menu Toggle -->

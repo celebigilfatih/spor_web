@@ -53,6 +53,7 @@ class AdminStaff extends Controller
                 $staffData = [
                     'name' => $this->sanitizeInput($_POST['name']),
                     'position' => $this->sanitizeInput($_POST['position']),
+                    'role' => $this->sanitizeInput($_POST['position']), // Same as position for compatibility
                     'experience' => $this->sanitizeInput($_POST['experience']),
                     'license' => $this->sanitizeInput($_POST['license']),
                     'bio' => $this->sanitizeInput($_POST['bio']),
@@ -67,10 +68,16 @@ class AdminStaff extends Controller
                     }
                 }
 
-                if ($this->staffModel->create($staffData)) {
+                $result = $this->staffModel->create($staffData);
+                if ($result) {
+                    $_SESSION['message'] = 'Teknik kadro üyesi başarıyla eklendi!';
                     $this->redirect('admin/staff');
                 } else {
+                    $dbError = $this->staffModel->getLastError();
                     $data['error'] = 'Teknik kadro üyesi eklenirken bir hata oluştu!';
+                    if ($dbError) {
+                        $data['error'] .= ' (' . $dbError . ')';
+                    }
                 }
             }
         }
@@ -111,6 +118,7 @@ class AdminStaff extends Controller
                 $staffData = [
                     'name' => $this->sanitizeInput($_POST['name']),
                     'position' => $this->sanitizeInput($_POST['position']),
+                    'role' => $this->sanitizeInput($_POST['position']), // Same as position for compatibility
                     'experience' => $this->sanitizeInput($_POST['experience']),
                     'license' => $this->sanitizeInput($_POST['license']),
                     'bio' => $this->sanitizeInput($_POST['bio']),
