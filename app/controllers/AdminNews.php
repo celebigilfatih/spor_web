@@ -179,10 +179,7 @@ class AdminNews extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
-        // Admin ID kontrolü
-        if (isset($_SESSION['admin_id'])) {
-            $data['author_id'] = $_SESSION['admin_id'];
-        }
+        // Note: author_id field is not in the database schema, so we skip it
 
         // Slug ekle (yeni haber için)
         if ($slug) {
@@ -226,14 +223,24 @@ class AdminNews extends Controller
                     return ['success' => false, 'message' => 'Slug oluşturma hatası!'];
                 }
                 $data['created_at'] = date('Y-m-d H:i:s');
+                
+                // Debug: Log the data being inserted
+                error_log('News create data: ' . print_r($data, true));
+                
                 $result = $this->newsModel->create($data);
                 $message = 'Haber başarıyla eklendi!';
+                
+                // Debug: Log the result
+                error_log('News create result: ' . ($result ? 'success' : 'failed'));
             }
 
             if ($result) {
                 return ['success' => true, 'message' => $message];
             } else {
-                return ['success' => false, 'message' => 'Veritabanı kaydetme hatası!'];
+                // Get last database error if available
+                $errorInfo = $this->newsModel->getLastError();
+                error_log('Database error: ' . ($errorInfo ?? 'Unknown error'));
+                return ['success' => false, 'message' => 'Veritabanı kaydetme hatası! ' . ($errorInfo ? 'Hata: ' . $errorInfo : '')];
             }
         } catch (Exception $e) {
             error_log('News form processing error: ' . $e->getMessage());

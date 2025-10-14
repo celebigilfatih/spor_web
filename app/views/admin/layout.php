@@ -13,24 +13,28 @@
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Fallback CSS - Navy Blue Theme -->
+    <!-- Fallback CSS - Shadcn Theme -->
     <style>
-    body{font-family:'Inter',Arial,sans-serif;margin:0;background:#f1f5f9;color:#1e293b;}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;background:#fafafa;color:#09090b;}
     .admin-layout{display:flex;min-height:100vh;}
-    .admin-sidebar{width:256px;background:#1e3c72;color:white;position:fixed;height:100vh;overflow-y:auto;}
-    .admin-content{flex:1;margin-left:256px;}
-    .admin-header{background:white;padding:1rem 2rem;border-bottom:1px solid #e2e8f0;}
-    .admin-main-content{padding:2rem;}
-    .sidebar-header{padding:1.5rem;border-bottom:1px solid #2563eb;}
-    .sidebar-logo{font-size:1.25rem;font-weight:700;color:#ffd700;margin-bottom:0.5rem;}
+    .admin-sidebar{width:256px;background:#ffffff;border-right:1px solid #e4e4e7;position:fixed;height:100vh;overflow-y:auto;}
+    .admin-content{flex:1;margin-left:256px;background:#fafafa;}
+    .admin-header{background:#ffffff;padding:1rem 2rem;border-bottom:1px solid #e4e4e7;}
+    .admin-main-content{padding:2rem;max-width:1400px;margin:0 auto;}
+    .sidebar-header{padding:1.5rem;border-bottom:1px solid #e4e4e7;}
+    .sidebar-logo{font-size:1.125rem;font-weight:600;color:#09090b;margin-bottom:0.25rem;display:flex;align-items:center;gap:0.5rem;}
     .sidebar-menu{list-style:none;padding:1rem;margin:0;}
-    .sidebar-menu-link{display:flex;align-items:center;padding:0.75rem 1rem;color:#e2e8f0;text-decoration:none;border-radius:6px;}
-    .sidebar-menu-link:hover{background:#2563eb;color:white;}
-    .sidebar-menu-icon{margin-right:0.75rem;width:18px;}
-    .btn{padding:0.5rem 1rem;border-radius:6px;text-decoration:none;font-weight:500;}
-    .btn-outline{background:transparent;color:#1e3c72;border:1px solid #e2e8f0;}
-    .btn-admin-secondary{background:#ffd700;color:#1e293b;}
-    .btn-admin-danger{background:#dc2626;color:white;}
+    .sidebar-menu-link{display:flex;align-items:center;padding:0.625rem 0.75rem;color:#71717a;text-decoration:none;border-radius:0.375rem;font-size:0.875rem;transition:all 0.15s;}
+    .sidebar-menu-link:hover{background:#f4f4f5;color:#18181b;}
+    .sidebar-menu-link.active{background:#f4f4f5;color:#18181b;font-weight:500;}
+    .sidebar-menu-icon{margin-right:0.75rem;width:16px;font-size:0.875rem;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:0.375rem;text-decoration:none;font-weight:500;font-size:0.875rem;border:1px solid transparent;transition:all 0.15s;}
+    .btn-outline{background:#ffffff;color:#18181b;border:1px solid #e4e4e7;}
+    .btn-outline:hover{background:#f4f4f5;}
+    .btn-admin-secondary{background:#18181b;color:#fafafa;}
+    .btn-admin-secondary:hover{background:#27272a;}
+    .btn-admin-danger{background:#ef4444;color:#ffffff;}
+    .btn-admin-danger:hover{background:#dc2626;}
     </style>
 </head>
 <body>
@@ -47,67 +51,70 @@
         <aside class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
-                    <i class="fas fa-futbol"></i>
-                    SPOR KULÜBÜ
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    Spor Kulübü
                 </div>
-                <p>Yönetim Paneli</p>
+                <p style="color:#71717a;font-size:0.75rem;margin:0;font-weight:500;">Yönetim Paneli</p>
             </div>
             
             <nav class="sidebar-nav">
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/dashboard" class="sidebar-menu-link">
-                            <i class="sidebar-menu-icon fas fa-tachometer-alt"></i>
-                            Dashboard
+                            <i class="sidebar-menu-icon fas fa-layout-dashboard"></i>
+                            <span>Dashboard</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/news" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-newspaper"></i>
-                            Haberler
+                            <span>Haberler</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/players" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-users"></i>
-                            Oyuncular
+                            <span>Oyuncular</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/teams" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-shield-alt"></i>
-                            Takımlar
+                            <span>Takımlar</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/staff" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-user-tie"></i>
-                            Teknik Kadro
+                            <span>Teknik Kadro</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/matches" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-calendar"></i>
-                            Maçlar
+                            <span>Maçlar</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/youth-registrations" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-user-graduate"></i>
-                            Alt Yapı Kayıtları
+                            <span>Alt Yapı Kayıtları</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/settings" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-cog"></i>
-                            Ayarlar
+                            <span>Ayarlar</span>
                         </a>
                     </li>
                 </ul>
@@ -119,26 +126,33 @@
             <!-- Header -->
             <header class="admin-header">
                 <div class="admin-breadcrumb">
-                    <h1><?php echo $title; ?></h1>
+                    <h1 style="font-size:1.5rem;font-weight:600;color:#09090b;margin:0;letter-spacing:-0.025em;"><?php echo $title; ?></h1>
                 </div>
                 
-                <div class="admin-user-menu">
-                    <div class="admin-user-info">
-                        <div class="admin-user-avatar">
+                <div class="admin-user-menu" style="display:flex;align-items:center;gap:1rem;">
+                    <div class="admin-user-info" style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;background:#fafafa;border-radius:0.375rem;border:1px solid #e4e4e7;">
+                        <div class="admin-user-avatar" style="width:32px;height:32px;border-radius:50%;background:#18181b;color:#fafafa;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.875rem;">
                             <?php echo strtoupper(substr($_SESSION['admin_username'] ?? 'A', 0, 1)); ?>
                         </div>
-                        <span>Hoş geldiniz, <?php echo $_SESSION['admin_username'] ?? 'Admin'; ?></span>
+                        <span style="color:#09090b;font-weight:500;font-size:0.875rem;">Hoş geldiniz, <?php echo $_SESSION['admin_username'] ?? 'Admin'; ?></span>
                     </div>
                     
-                    <div class="admin-actions">
+                    <div class="admin-actions" style="display:flex;gap:0.5rem;">
                         <a href="<?php echo BASE_URL; ?>" class="btn btn-outline" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Siteyi Görüntüle
-                        </a>
-                        <a href="<?php echo BASE_URL; ?>/admin/auth/profile" class="btn btn-admin-secondary">
-                            <i class="fas fa-user"></i> Profil
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            Siteyi Görüntüle
                         </a>
                         <a href="<?php echo BASE_URL; ?>/admin/auth/logout" class="btn btn-admin-danger">
-                            <i class="fas fa-sign-out-alt"></i> Çıkış
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Çıkış
                         </a>
                     </div>
                 </div>
@@ -147,15 +161,22 @@
             <!-- Content -->
             <div class="admin-main-content">
                 <?php if (isset($message) && !empty($message)): ?>
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
+                    <div class="alert alert-success" style="display:flex;align-items:center;gap:0.75rem;padding:1rem;border-radius:0.375rem;margin-bottom:1.5rem;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:0.875rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
                         <?php echo htmlspecialchars($message); ?>
                     </div>
                 <?php endif; ?>
                 
                 <?php if (isset($error) && !empty($error)): ?>
-                    <div class="alert alert-danger">
-                        <i class="fas fa-exclamation-triangle"></i>
+                    <div class="alert alert-danger" style="display:flex;align-items:center;gap:0.75rem;padding:1rem;border-radius:0.375rem;margin-bottom:1.5rem;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:0.875rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
                         <?php echo htmlspecialchars($error); ?>
                     </div>
                 <?php endif; ?>

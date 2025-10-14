@@ -120,4 +120,12 @@ class Model
         }
         return $this->db->query($sql);
     }
+
+    /**
+     * Son veritabanı hatasını getir
+     */
+    public function getLastError()
+    {
+        return $this->db->getLastError();
+    }
 }

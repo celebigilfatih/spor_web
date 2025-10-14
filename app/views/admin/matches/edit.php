@@ -78,13 +78,13 @@ $content = '
                 </label>
                 <select id="competition" name="competition" class="admin-form-control">
                     <option value="">Müsabaka Seçiniz</option>
-                    <option value="Liga"' . ($match['competition'] === 'Liga' ? ' selected' : '') . '>Liga</option>
-                    <option value="Kupa"' . ($match['competition'] === 'Kupa' ? ' selected' : '') . '>Kupa</option>
-                    <option value="Hazırlık"' . ($match['competition'] === 'Hazırlık' ? ' selected' : '') . '>Hazırlık Maçı</option>
-                    <option value="Play-off"' . ($match['competition'] === 'Play-off' ? ' selected' : '') . '>Play-off</option>
-                    <option value="Şampiyonlar Ligi"' . ($match['competition'] === 'Şampiyonlar Ligi' ? ' selected' : '') . '>Şampiyonlar Ligi</option>
-                    <option value="UEFA Kupası"' . ($match['competition'] === 'UEFA Kupası' ? ' selected' : '') . '>UEFA Kupası</option>
-                    <option value="Süper Kupa"' . ($match['competition'] === 'Süper Kupa' ? ' selected' : '') . '>Süper Kupa</option>
+                    <option value="Liga"' . (($match['competition'] ?? '') === 'Liga' ? ' selected' : '') . '>Liga</option>
+                    <option value="Kupa"' . (($match['competition'] ?? '') === 'Kupa' ? ' selected' : '') . '>Kupa</option>
+                    <option value="Hazırlık"' . (($match['competition'] ?? '') === 'Hazırlık' ? ' selected' : '') . '>Hazırlık Maçı</option>
+                    <option value="Play-off"' . (($match['competition'] ?? '') === 'Play-off' ? ' selected' : '') . '>Play-off</option>
+                    <option value="Şampiyonlar Ligi"' . (($match['competition'] ?? '') === 'Şampiyonlar Ligi' ? ' selected' : '') . '>Şampiyonlar Ligi</option>
+                    <option value="UEFA Kupası"' . (($match['competition'] ?? '') === 'UEFA Kupası' ? ' selected' : '') . '>UEFA Kupası</option>
+                    <option value="Süper Kupa"' . (($match['competition'] ?? '') === 'Süper Kupa' ? ' selected' : '') . '>Süper Kupa</option>
                 </select>
                 <small class="admin-form-text">Maçın türünü seçiniz.</small>
             </div>

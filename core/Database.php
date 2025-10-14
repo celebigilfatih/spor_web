@@ -11,6 +11,7 @@ class Database
     private $username;
     private $password;
     private $charset;
+    private $lastError = null;
 
     public function __construct()
     {
@@ -65,6 +66,7 @@ class Database
         try {
             $stmt = $this->pdo->prepare($sql);
             $result = $stmt->execute($params);
+            $this->lastError = null;
             
             // INSERT işlemi için son eklenen ID'yi döndür
             if (strpos(strtoupper($sql), 'INSERT') === 0) {
@@ -73,7 +75,10 @@ class Database
             
             return $result;
         } catch (PDOException $e) {
+            $this->lastError = $e->getMessage();
             error_log('Database execute error: ' . $e->getMessage());
+            error_log('SQL: ' . $sql);
+            error_log('Params: ' . print_r($params, true));
             return false;
         }
     }
@@ -138,5 +143,13 @@ class Database
     public function getPDO()
     {
         return $this->pdo;
+    }
+
+    /**
+     * Son hata mesajını getir
+     */
+    public function getLastError()
+    {
+        return $this->lastError;
     }
 }

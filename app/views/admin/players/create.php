@@ -144,9 +144,11 @@ $content = '
                                 <select id="team_id" name="team_id" class="modern-select" required>
                                     <option value="">Takım Seçiniz</option>';
                             
-                            foreach ($teams as $team) {
-                                $selected = ($_POST['team_id'] ?? '') == $team['id'] ? ' selected' : '';
-                                $content .= '<option value="' . $team['id'] . '"' . $selected . '>' . htmlspecialchars($team['name']) . '</option>';
+                            if (is_array($teams)) {
+                                foreach ($teams as $team) {
+                                    $selected = ($_POST['team_id'] ?? '') == $team['id'] ? ' selected' : '';
+                                    $content .= '<option value="' . $team['id'] . '"' . $selected . '>' . htmlspecialchars($team['name']) . '</option>';
+                                }
                             }
                             
                             $content .= '

@@ -2,24 +2,27 @@
 $content = '
 <div class="youth-registrations-page">
     <!-- Page Header -->
-    <div class="page-header-modern">
-        <div class="page-header-content">
-            <div class="page-title-section">
-                <div class="page-icon">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                <div>
-                    <h1 class="page-title">Alt Yapı Kayıtları</h1>
-                    <p class="page-subtitle">Genç oyuncu başvurularını yönetin ve değerlendirin</p>
-                </div>
+    <div class="page-header-shadcn">
+        <div class="page-header-content-shadcn">
+            <div>
+                <h1 class="page-title-shadcn">Alt Yapı Kayıtları</h1>
+                <p class="page-description-shadcn">Genç oyuncu başvurularını yönetin ve değerlendirin</p>
             </div>
-            <div class="page-actions">
-                <a href="' . BASE_URL . '/youth-registration" class="btn btn-outline" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
+            <div class="page-actions-shadcn">
+                <a href="' . BASE_URL . '/youth-registration" class="btn-shadcn btn-outline-shadcn" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
                     Kayıt Formu
                 </a>
-                <a href="' . BASE_URL . '/admin/youth-registrations/stats" class="btn btn-admin-secondary">
-                    <i class="fas fa-chart-bar"></i>
+                <a href="' . BASE_URL . '/admin/youth-registrations/stats" class="btn-shadcn btn-secondary-shadcn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="20" x2="12" y2="10"></line>
+                        <line x1="18" y1="20" x2="18" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="16"></line>
+                    </svg>
                     İstatistikler
                 </a>
             </div>
@@ -248,178 +251,148 @@ $content .= '
 </div>
 
 <style>
-/* Modern Youth Registrations Page Styles */
+/* Shadcn Youth Registrations Page Styles */
 .youth-registrations-page {
     max-width: 100%;
 }
 
-.page-header-modern {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* Shadcn Page Header */
+.page-header-shadcn {
+    background: white;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.page-header-content {
+.page-header-content-shadcn {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
-.page-title-section {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.page-icon {
-    width: 64px;
-    height: 64px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    backdrop-filter: blur(10px);
-}
-
-.page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    margin: 0;
+.page-title-shadcn {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #09090b;
+    margin: 0 0 0.25rem 0;
     letter-spacing: -0.025em;
 }
 
-.page-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0.5rem 0 0 0;
-    font-size: 1rem;
+.page-description-shadcn {
+    color: #71717a;
+    margin: 0;
+    font-size: 0.875rem;
 }
 
-.page-actions {
+.page-actions-shadcn {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-/* Stats Grid Modern */
+/* Shadcn Buttons */
+.btn-shadcn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn-outline-shadcn {
+    background: white;
+    color: #18181b;
+    border-color: #e4e4e7;
+}
+
+.btn-outline-shadcn:hover {
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+.btn-secondary-shadcn {
+    background: #18181b;
+    color: #fafafa;
+}
+
+.btn-secondary-shadcn:hover {
+    background: #27272a;
+}
+
+/* Shadcn Stats Grid */
 .stats-grid-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .stat-card-modern {
     background: white;
-    border-radius: 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 0.15s;
 }
 
 .stat-card-modern:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-.stat-card-primary {
-    border-color: #3b82f6;
-}
-
-.stat-card-primary:hover {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-}
-
-.stat-card-warning {
-    border-color: #f59e0b;
-}
-
-.stat-card-warning:hover {
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-}
-
-.stat-card-success {
-    border-color: #10b981;
-}
-
-.stat-card-success:hover {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-}
-
-.stat-card-danger {
-    border-color: #ef4444;
-}
-
-.stat-card-danger:hover {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-color: #d4d4d8;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
 .stat-card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1rem;
 }
 
 .stat-card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.375rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .stat-card-primary .stat-card-icon {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
+    background: #f4f4f5;
+    color: #18181b;
 }
 
 .stat-card-warning .stat-card-icon {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    color: white;
-}
-
-.stat-card-success .stat-card-icon {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-}
-
-.stat-card-danger .stat-card-icon {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    color: white;
-}
-
-.trend-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: #e2e8f0;
-    color: #475569;
-}
-
-.trend-warning {
     background: #fef3c7;
     color: #92400e;
 }
 
-.trend-success {
+.stat-card-success .stat-card-icon {
     background: #dcfce7;
     color: #166534;
 }
 
-.trend-danger {
+.stat-card-danger .stat-card-icon {
     background: #fee2e2;
     color: #991b1b;
+}
+
+.trend-badge {
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: #f4f4f5;
+    color: #71717a;
 }
 
 .stat-card-body {
@@ -428,73 +401,176 @@ $content .= '
 }
 
 .stat-number {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1e293b;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #09090b;
     line-height: 1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     letter-spacing: -0.05em;
 }
 
 .stat-label {
-    color: #64748b;
+    color: #71717a;
     font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 500;
 }
 
-/* Empty State Modern */
+/* Empty State Shadcn */
 .empty-state-modern {
     background: white;
-    border-radius: 12px;
-    padding: 4rem 2rem;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
+    padding: 3rem 2rem;
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .empty-state-icon {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background: #f4f4f5;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: #3b82f6;
+    font-size: 2.5rem;
+    color: #71717a;
 }
 
 .empty-state-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #09090b;
+    margin-bottom: 0.5rem;
 }
 
 .empty-state-text {
-    color: #64748b;
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    max-width: 500px;
+    color: #71717a;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.empty-state-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
-/* Enhanced Table Styles */
+/* Shadcn Table */
 .admin-table-wrapper {
     background: white;
-    border-radius: 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
+}
+
+.admin-table thead {
+    background: #fafafa;
+    border-bottom: 1px solid #e4e4e7;
+}
+
+.admin-table th {
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: #71717a;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.admin-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e4e4e7;
+    font-size: 0.875rem;
+    color: #09090b;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.student-info strong {
+    color: #09090b;
+    font-weight: 600;
+}
+
+.student-info .text-muted {
+    color: #71717a;
+    font-size: 0.75rem;
+}
+
+/* Shadcn Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.status-success {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #bbf7d0;
+}
+
+.status-warning {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #fde68a;
+}
+
+.status-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+/* Action Buttons */
+.admin-table-actions {
+    display: flex;
+    gap: 0.375rem;
+}
+
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.btn-admin-info {
+    background: #18181b;
+    color: white;
+    border: none;
+}
+
+.btn-admin-info:hover {
+    background: #27272a;
+}
+
+.btn-admin-warning {
+    background: white;
+    color: #18181b;
+    border: 1px solid #e4e4e7;
+}
+
+.btn-admin-warning:hover {
+    background: #f4f4f5;
+}
+
+.btn-admin-danger {
+    background: white;
+    color: #ef4444;
+    border: 1px solid #e4e4e7;
+}
+
+.btn-admin-danger:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
 }
 
 .admin-table thead {
