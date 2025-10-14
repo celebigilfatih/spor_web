@@ -98,6 +98,13 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="http://localhost:8090/admin/youth-registrations" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-user-graduate"></i>
+                            Alt Yapı Kayıtları
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
                         <a href="http://localhost:8090/admin/settings" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-cog"></i>
                             Ayarlar

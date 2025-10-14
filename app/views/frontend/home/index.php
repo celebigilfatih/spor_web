@@ -72,6 +72,34 @@ $content = '
             <!-- Sidebar Content -->
             <div class="col-lg-4">
                 <div class="hero-sidebar h-100">
+                    <!-- Announcements -->
+                    <div class="announcements-card">
+                        <div class="card-header d-flex align-items-center mb-3">
+                            <i class="fas fa-bullhorn text-warning me-2 fs-4"></i>
+                            <h3 class="card-title mb-0">Duyurular</h3>
+                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
+                        </div>
+                        <div class="announcements-list">
+                            <div class="announcement-item mb-3 p-3 bg-light rounded">
+                                <div class="announcement-badge mb-2">
+                                    <span class="badge bg-danger">ÖNEMLİ</span>
+                                    <span class="text-muted small ms-2">20 Ekim 2024</span>
+                                </div>
+                                <h5 class="announcement-title mb-2">Maç Bilet Satışları</h5>
+                                <p class="announcement-text mb-0 small">Galatasaray derbisi biletleri yarın saat 10:00\'da satışa çıkacaktır. Üye önceliği uygulanacaktır.</p>
+                            </div>
+                            
+                            <div class="announcement-item mb-3 p-3 bg-light rounded">
+                                <div class="announcement-badge mb-2">
+                                    <span class="badge bg-info">BİLGİ</span>
+                                    <span class="text-muted small ms-2">18 Ekim 2024</span>
+                                </div>
+                                <h5 class="announcement-title mb-2">Antrenman Saatleri</h5>
+                                <p class="announcement-text mb-0 small">Bu hafta antrenmanlarımız saat 16:00\'da başlayacaktır. Taraftarlarımız izleyebilir.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
                     <!-- Instagram Feed -->
                     <div class="instagram-feed-card mb-4">
                         <div class="card-header d-flex align-items-center mb-3">
@@ -121,34 +149,7 @@ $content = '
                         </div>
                     </div>
                     
-                    <!-- Announcements -->
-                    <div class="announcements-card">
-                        <div class="card-header d-flex align-items-center mb-3">
-                            <i class="fas fa-bullhorn text-warning me-2 fs-4"></i>
-                            <h3 class="card-title mb-0">Duyurular</h3>
-                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
-                        </div>
-                        <div class="announcements-list">
-                            <div class="announcement-item mb-3 p-3 bg-light rounded">
-                                <div class="announcement-badge mb-2">
-                                    <span class="badge bg-danger">ÖNEMLİ</span>
-                                    <span class="text-muted small ms-2">20 Ekim 2024</span>
-                                </div>
-                                <h5 class="announcement-title mb-2">Maç Bilet Satışları</h5>
-                                <p class="announcement-text mb-0 small">Galatasaray derbisi biletleri yarın saat 10:00\'da satışa çıkacaktır. Üye önceliği uygulanacaktır.</p>
-                            </div>
-                            
-                            <div class="announcement-item mb-3 p-3 bg-light rounded">
-                                <div class="announcement-badge mb-2">
-                                    <span class="badge bg-info">BİLGİ</span>
-                                    <span class="text-muted small ms-2">18 Ekim 2024</span>
-                                </div>
-                                <h5 class="announcement-title mb-2">Antrenman Saatleri</h5>
-                                <p class="announcement-text mb-0 small">Bu hafta antrenmanlarımız saat 16:00\'da başlayacaktır. Taraftarlarımız izleyebilir.</p>
-                            </div>
-                            
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -335,6 +336,8 @@ $content = '
     </div>
 </section>
 
+
+
 <!-- News Section -->
 <section class="news-section py-5">
     <div class="container">
@@ -422,6 +425,93 @@ $content = '
         </div>
     </div>
 </section>
+
+<!-- Youth Academy Registration Section -->
+<section class="youth-registration-section py-5 bg-light">
+    <div class="container-fluid px-5">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="youth-registration-content">
+                    <div class="section-badge mb-3">
+                        <i class="fas fa-star me-2"></i>
+                        GELECEĞE YATIRIM
+                    </div>
+                    <h2 class="section-title mb-4">Alt Yapı Kayıt Başvuruları Başladı!</h2>
+                    <p class="section-description mb-4">
+                        Geleceğin yıldızlarını arıyoruz! Kulübümüzün alt yapı takımlarına katılmak isteyen genç yetenekler için kayıt başvuruları başlamıştır. 
+                        Profesyonel antrenörlerimiz eşliğinde modern tesislerimizde eğitim alarak futbol kariyerinizi şekillendirebilirsiniz.
+                    </p>
+                    <div class="youth-features mb-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <div class="feature-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <span>Profesyonel antrenör kadrosu</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="feature-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <span>Modern antrenman tesisleri</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="feature-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <span>Eğitim desteği programları</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="feature-item d-flex align-items-center">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <span>Kariyer gelişim fırsatları</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="youth-registration-actions">
+                        <a href="' . BASE_URL . '/youth-registration" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Hemen Başvur
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Detaylı Bilgi
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="youth-registration-visual">
+                    <div class="youth-stats-card">
+                        <div class="stats-header mb-3">
+                            <h4 class="stats-title">Alt Yapı İstatistikleri</h4>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item text-center mb-3">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">Aktif Sporcu</div>
+                            </div>
+                            <div class="stat-item text-center mb-3">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Yaş Kategorisi</div>
+                            </div>
+                            <div class="stat-item text-center mb-3">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Profesyonel Antrenör</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="stat-number">8</div>
+                                <div class="stat-label">Modern Saha</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- Youth Academy Registration Section -->
+
 
 <!-- Include Match Calendar JavaScript -->
 <script src="/js/match-calendar.js"></script>

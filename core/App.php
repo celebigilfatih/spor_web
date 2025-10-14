@@ -45,7 +45,9 @@ class App
                 // URL parametrelerini ayarla
                 $this->params = array_slice($url, 2); // /admin/login/... sonrası parametreler
             } else {
-                $adminController = 'Admin' . ucfirst($url[1]);
+                // URL'deki tire işaretlerini camelCase'e çevir
+                $controllerName = str_replace('-', '', ucwords($url[1], '-'));
+                $adminController = 'Admin' . $controllerName;
                 if (file_exists(BASE_PATH . '/app/controllers/' . $adminController . '.php')) {
                     $this->controller = $adminController;
                     // Load controller file to check methods
@@ -92,6 +94,8 @@ class App
                 $controller = 'TechnicalStaff';
             } elseif ($url[0] === 'ateam') {
                 $controller = 'ATeam';
+            } elseif ($url[0] === 'youth-registration' || $url[0] === 'altyapi-kayit') {
+                $controller = 'YouthRegistration';
             }
             
             if (file_exists(BASE_PATH . '/app/controllers/' . $controller . '.php')) {

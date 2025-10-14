@@ -709,6 +709,502 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* Youth Academy Registration Section Styles */
+.youth-registration-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.youth-registration-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23dee2e6" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.youth-registration-content {
+    position: relative;
+    z-index: 2;
+}
+
+.youth-registration-section .section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.youth-registration-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.youth-registration-section .section-description {
+    font-size: 1.1rem;
+    color: #6c757d;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.youth-features .feature-item {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.youth-features .feature-item i {
+    font-size: 1.2rem;
+}
+
+.youth-registration-actions .btn {
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.youth-registration-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.youth-registration-actions .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    border: none;
+}
+
+.youth-registration-actions .btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.youth-registration-actions .btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.youth-stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    border: 1px solid #e9ecef;
+}
+
+.youth-stats-card .stats-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.youth-stats-card .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.youth-stats-card .stat-item {
+    padding: 15px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+
+.youth-stats-card .stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.youth-stats-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.youth-stats-card .stat-item:hover .stat-number {
+    color: white;
+}
+
+.youth-stats-card .stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.youth-stats-card .stat-item:hover .stat-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive Design for Youth Registration Section */
+@media (max-width: 992px) {
+    .youth-registration-section .section-title {
+        font-size: 2rem;
+    }
+    
+    .youth-stats-card {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .youth-registration-section .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .youth-registration-actions .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .youth-stats-card .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .youth-stats-card .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .youth-registration-section {
+        padding: 40px 0;
+    }
+    
+    .youth-registration-section .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .youth-registration-section .section-description {
+        font-size: 1rem;
+    }
+    
+    .youth-stats-card {
+        padding: 20px;
+    }
+}
+
+/* Youth Registration Form Styles */
+.youth-registration-page {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    color: white;
+    padding: 60px 0;
+    margin: -30px -15px 0 -15px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.2);
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+.registration-form-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin-top: 40px;
+}
+
+.form-section {
+    border: 2px solid #f1f5f9;
+    border-radius: 15px;
+    padding: 30px;
+    background: #fafbfc;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.form-section:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 5px 20px rgba(251, 191, 36, 0.1);
+}
+
+.section-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #e2e8f0;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+}
+
+.section-description {
+    color: #64748b;
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.form-label {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-label.required::after {
+    content: " *";
+    color: #dc2626;
+    font-weight: 900;
+}
+
+.form-control, .form-select {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.25);
+    background: #fffef7;
+}
+
+.form-control.is-invalid {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.25);
+}
+
+.form-text {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 3px solid #e2e8f0;
+}
+
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    border: none;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+}
+
+.btn-outline-secondary {
+    border: 2px solid #64748b;
+    color: #64748b;
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background: #64748b;
+    border-color: #64748b;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    color: #166534;
+    border-left: 5px solid #16a34a;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-left: 5px solid #dc2626;
+}
+
+.alert ul {
+    padding-left: 20px;
+}
+
+/* File Upload Styling */
+input[type="file"] {
+    padding: 10px;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: var(--secondary-color);
+    background: #fffef7;
+}
+
+input[type="file"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .registration-form-container {
+        padding: 25px;
+        margin-top: 20px;
+        border-radius: 15px;
+    }
+    
+    .form-section {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .btn-lg {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .form-actions .btn:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        padding: 40px 0;
+        margin: -15px -15px 0 -15px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .registration-form-container {
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .form-section {
+        padding: 15px;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Animation for form sections */
+.form-section {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Page Header Styles */
 .page-header {
     background: var(--primary-color) !important;
