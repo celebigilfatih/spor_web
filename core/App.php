@@ -46,8 +46,18 @@ class App
                 $this->params = array_slice($url, 2); // /admin/login/... sonrası parametreler
             } else {
                 // URL'deki tire işaretlerini camelCase'e çevir
-                $controllerName = str_replace('-', '', ucwords($url[1], '-'));
+                // youth-registrations -> YouthRegistrations
+                $parts = explode('-', $url[1]);
+                $controllerName = implode('', array_map('ucfirst', $parts));
                 $adminController = 'Admin' . $controllerName;
+                
+                // Özel durum: YouthRegistrations -> YouthRegistration
+                if ($adminController === 'AdminYouthRegistrations') {
+                    $adminController = 'AdminYouthRegistration';
+                }
+                
+                error_log("[DEBUG] Looking for admin controller: " . $adminController);
+                
                 if (file_exists(BASE_PATH . '/app/controllers/' . $adminController . '.php')) {
                     $this->controller = $adminController;
                     // Load controller file to check methods
@@ -61,6 +71,7 @@ class App
                         $this->params = array_slice($url, 2); // /admin/news/1 -> [1]
                     }
                 } else {
+                    error_log("[DEBUG] Admin controller not found: " . $adminController);
                     $this->controller = 'AdminDashboard';
                     $this->method = 'index';
                     $this->params = [];

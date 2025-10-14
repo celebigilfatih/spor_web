@@ -7,8 +7,8 @@
     
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="http://localhost:8090/css/style.css" rel="stylesheet">
-    <link href="http://localhost:8090/css/admin.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/css/style.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/css/admin.css" rel="stylesheet">
     
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -56,56 +56,56 @@
             <nav class="sidebar-nav">
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/dashboard" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/dashboard" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-tachometer-alt"></i>
                             Dashboard
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/news" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/news" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-newspaper"></i>
                             Haberler
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/players" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/players" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-users"></i>
                             Oyuncular
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/teams" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/teams" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-shield-alt"></i>
                             Takımlar
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/staff" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/staff" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-user-tie"></i>
                             Teknik Kadro
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/matches" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/matches" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-calendar"></i>
                             Maçlar
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/youth-registrations" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/youth-registrations" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-user-graduate"></i>
                             Alt Yapı Kayıtları
                         </a>
                     </li>
                     
                     <li class="sidebar-menu-item">
-                        <a href="http://localhost:8090/admin/settings" class="sidebar-menu-link">
+                        <a href="<?php echo BASE_URL; ?>/admin/settings" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-cog"></i>
                             Ayarlar
                         </a>
@@ -131,13 +131,13 @@
                     </div>
                     
                     <div class="admin-actions">
-                        <a href="http://localhost:8090" class="btn btn-outline" target="_blank">
+                        <a href="<?php echo BASE_URL; ?>" class="btn btn-outline" target="_blank">
                             <i class="fas fa-external-link-alt"></i> Siteyi Görüntüle
                         </a>
-                        <a href="http://localhost:8090/admin/auth/profile" class="btn btn-admin-secondary">
+                        <a href="<?php echo BASE_URL; ?>/admin/auth/profile" class="btn btn-admin-secondary">
                             <i class="fas fa-user"></i> Profil
                         </a>
-                        <a href="http://localhost:8090/admin/auth/logout" class="btn btn-admin-danger">
+                        <a href="<?php echo BASE_URL; ?>/admin/auth/logout" class="btn btn-admin-danger">
                             <i class="fas fa-sign-out-alt"></i> Çıkış
                         </a>
                     </div>
@@ -166,6 +166,8 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo BASE_URL; ?>/js/main.js"></script>
     <script src="<?php echo BASE_URL; ?>/js/admin.js"></script>
     <script src="<?php echo BASE_URL; ?>/js/form-enhancements.js"></script>

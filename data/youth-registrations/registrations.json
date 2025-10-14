@@ -1,5 +1,5 @@
-[
-    {
+{
+    "0": {
         "id": 1,
         "student_name": "Ahmet Yılmaz",
         "student_tc": "12345678901",
@@ -22,7 +22,7 @@
         "registration_date": "2024-01-15 14:30:00",
         "admin_notes": ""
     },
-    {
+    "1": {
         "id": 2,
         "student_name": "Zeynep Kaya",
         "student_tc": "11223344556",
@@ -45,7 +45,7 @@
         "registration_date": "2024-01-20 10:15:00",
         "admin_notes": "Başarılı değerlendirme sonrası onaylandı."
     },
-    {
+    "2": {
         "id": 3,
         "student_name": "Emre Demir",
         "student_tc": "99887766554",
@@ -68,7 +68,7 @@
         "registration_date": "2024-01-25 16:45:00",
         "admin_notes": ""
     },
-    {
+    "3": {
         "id": 4,
         "student_name": "Selin Özkan",
         "student_tc": "33445566778",
@@ -91,7 +91,7 @@
         "registration_date": "2024-01-28 11:20:00",
         "admin_notes": "Yaş grubu uygun değil."
     },
-    {
+    "4": {
         "id": 5,
         "student_name": "Burak Şahin",
         "student_tc": "66778899001",
@@ -113,5 +113,10 @@
         "status": "approved",
         "registration_date": "2024-02-02 09:30:00",
         "admin_notes": "Spor geçmişi değerlendirildi, onaylandı."
-    }
-]
+    },
+    "id": "registrations",
+    "file_path": "\/var\/www\/html\/data\/youth-registrations\/registrations.json",
+    "status": "approved",
+    "admin_notes": "",
+    "updated_at": "2025-10-14 16:33:40"
+}
