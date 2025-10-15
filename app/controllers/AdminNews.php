@@ -10,7 +10,7 @@ class AdminNews extends Controller
     public function __construct()
     {
         $this->requireAdmin();
-        $this->newsModel = $this->model('News');
+        $this->newsModel = $this->model('NewsModel');
     }
 
     /**

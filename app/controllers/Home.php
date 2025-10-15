@@ -13,7 +13,7 @@ class Home extends Controller
 
     public function __construct()
     {
-        $this->newsModel = $this->model('News');
+        $this->newsModel = $this->model('NewsModel');
         $this->sliderModel = $this->model('Slider');
         $this->matchModel = $this->model('MatchModel');
         $this->playerModel = $this->model('Player');

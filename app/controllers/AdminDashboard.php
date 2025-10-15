@@ -13,7 +13,7 @@ class AdminDashboard extends Controller
     public function __construct()
     {
         $this->requireAdmin();
-        $this->newsModel = $this->model('News');
+        $this->newsModel = $this->model('NewsModel');
         $this->playerModel = $this->model('Player');
         $this->teamModel = $this->model('Team');
         $this->matchModel = $this->model('MatchModel');

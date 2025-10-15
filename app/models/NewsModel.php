@@ -3,7 +3,7 @@
  * News Model
  * Haberler ve duyurular için model sınıfı
  */
-class News extends Model
+class NewsModel extends Model
 {
     protected $table = 'news';
 

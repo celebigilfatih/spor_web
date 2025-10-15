@@ -10,7 +10,7 @@ class News extends Controller
 
     public function __construct()
     {
-        $this->newsModel = $this->model('News');
+        $this->newsModel = $this->model('NewsModel');
         $this->settingsModel = $this->model('SiteSettings');
     }
 
