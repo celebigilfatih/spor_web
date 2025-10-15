@@ -1,320 +1,192 @@
 <?php
 $content = '
-<div class="modern-page-header">
-    <div class="page-header-content">
-        <div class="header-title-section">
-            <div class="header-icon">
-                <i class="fas fa-user-plus"></i>
+<div class="shadcn-page-container">
+    <!-- Page Header -->
+    <div class="shadcn-page-header">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="shadcn-page-title">A Takım - Yeni Oyuncu Ekle</h1>
+                <p class="shadcn-page-description">A Takıma yeni oyuncu eklemek için gerekli bilgileri giriniz</p>
             </div>
-            <div class="header-text">
-                <h1>Yeni Oyuncu Ekle</h1>
-                <p class="header-subtitle">Takıma yeni oyuncu eklemek için gerekli bilgileri giriniz</p>
-            </div>
-        </div>
-        <div class="header-actions">
-            <a href="' . BASE_URL . '/admin/players" class="btn btn-modern-secondary">
-                <i class="fas fa-arrow-left"></i> Geri Dön
+            <a href="' . BASE_URL . '/admin/players" class="shadcn-btn shadcn-btn-outline">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Geri Dön
             </a>
         </div>
     </div>
-</div>
 
-<div class="modern-form-container">
-    <form method="POST" action="' . BASE_URL . '/admin/players/create" class="modern-admin-form" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
-        
-        <!-- Unified Form Card -->
-        <div class="modern-form-card unified-form-card">
-            <div class="card-header">
-                <div class="card-icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <h3 class="card-title">Oyuncu Bilgileri</h3>
-            </div>
-            
-            <div class="unified-form-content">
-                <!-- Kişisel Bilgiler Bölümü -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <h4 class="section-title">
-                            <i class="fas fa-user"></i> Kişisel Bilgiler
-                        </h4>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Main Form -->
+        <div class="lg:col-span-2">
+            <form method="POST" action="' . BASE_URL . '/admin/players/create" class="space-y-6" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
+                <input type="hidden" name="team_id" value="1">
+                
+                <!-- Oyuncu Bilgileri -->
+                <div class="shadcn-card">
+                    <div class="shadcn-card-header">
+                        <h3 class="shadcn-card-title">Oyuncu Bilgileri</h3>
+                        <p class="shadcn-card-description">Oyuncunun temel bilgilerini girin</p>
                     </div>
-                    
-                    <div class="form-fields-grid">
-                        <div class="modern-input-group">
-                            <label for="first_name" class="modern-label">
-                                <span class="label-text">Ad</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
+                    <div class="shadcn-card-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="shadcn-form-group md:col-span-2">
+                                <label for="full_name" class="shadcn-label">
+                                    Ad Soyad <span class="text-red-500">*</span>
+                                </label>
                                 <input type="text" 
-                                       id="first_name" 
-                                       name="first_name" 
-                                       class="modern-input" 
-                                       placeholder="Oyuncunun adı"
-                                       value="' . htmlspecialchars($_POST['first_name'] ?? '') . '"
+                                       id="full_name" 
+                                       name="full_name" 
+                                       class="shadcn-input" 
+                                       placeholder="Örn: Fatih Çelebigil"
+                                       value="' . htmlspecialchars($_POST['full_name'] ?? '') . '"
                                        required>
                             </div>
-                        </div>
-
-                        <div class="modern-input-group">
-                            <label for="last_name" class="modern-label">
-                                <span class="label-text">Soyad</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <input type="text" 
-                                       id="last_name" 
-                                       name="last_name" 
-                                       class="modern-input" 
-                                       placeholder="Oyuncunun soyadı"
-                                       value="' . htmlspecialchars($_POST['last_name'] ?? '') . '"
-                                       required>
-                            </div>
-                        </div>
-                        
-                        <div class="modern-input-group">
-                            <label for="birth_date" class="modern-label">
-                                <span class="label-text">Doğum Tarihi</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">
-                                    <i class="fas fa-calendar"></i>
-                                </div>
+                            
+                            <div class="shadcn-form-group">
+                                <label for="birth_date" class="shadcn-label">
+                                    Doğum Tarihi <span class="text-red-500">*</span>
+                                </label>
                                 <input type="date" 
                                        id="birth_date" 
                                        name="birth_date" 
-                                       class="modern-input"
-                                       value="' . htmlspecialchars($_POST['birth_date'] ?? '') . '">
+                                       class="shadcn-input"
+                                       value="' . htmlspecialchars($_POST['birth_date'] ?? '') . '"
+                                       required>
                             </div>
-                        </div>
 
-                        <div class="modern-input-group file-upload-group">
-                            <label for="photo" class="modern-label">
-                                <span class="label-text">Fotoğraf</span>
-                            </label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" 
-                                       id="photo" 
-                                       name="photo" 
-                                       class="file-input"
-                                       accept="image/jpeg,image/png,image/webp"
-                                       data-max-size="5242880">
-                                <label for="photo" class="file-upload-label">
-                                    <div class="file-upload-content">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                        <span class="upload-text">Fotoğraf Yükle</span>
-                                        <small class="upload-hint">JPG, PNG, WebP (Max: 5MB)</small>
-                                        <div class="upload-progress" style="display: none;">
-                                            <div class="progress-bar"></div>
-                                        </div>
-                                    </div>
+                            <div class="shadcn-form-group">
+                                <label for="jersey_number" class="shadcn-label">
+                                    Forma Numarası <span class="text-red-500">*</span>
                                 </label>
-                                <div class="file-preview" style="display: none;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Takım Bilgileri Bölümü -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <h4 class="section-title">
-                            <i class="fas fa-shield-alt"></i> Takım Bilgileri
-                        </h4>
-                    </div>
-                    
-                    <div class="form-fields-grid">
-                        <div class="modern-input-group">
-                            <label for="team_id" class="modern-label">
-                                <span class="label-text">Takım</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="select-wrapper">
-                                <div class="select-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <select id="team_id" name="team_id" class="modern-select" required>
-                                    <option value="">Takım Seçiniz</option>';
-                            
-                            if (is_array($teams)) {
-                                foreach ($teams as $team) {
-                                    $selected = ($_POST['team_id'] ?? '') == $team['id'] ? ' selected' : '';
-                                    $content .= '<option value="' . $team['id'] . '"' . $selected . '>' . htmlspecialchars($team['name']) . '</option>';
-                                }
-                            }
-                            
-                            $content .= '
-                                </select>
-                                <div class="select-arrow">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modern-input-group">
-                            <label for="jersey_number" class="modern-label">
-                                <span class="label-text">Forma Numarası</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">
-                                    <i class="fas fa-hashtag"></i>
-                                </div>
                                 <input type="number" 
                                        id="jersey_number" 
                                        name="jersey_number" 
-                                       class="modern-input" 
+                                       class="shadcn-input" 
                                        placeholder="10"
                                        min="1" 
                                        max="99"
-                                       value="' . htmlspecialchars($_POST['jersey_number'] ?? '') . '">
+                                       value="' . htmlspecialchars($_POST['jersey_number'] ?? '') . '"
+                                       required>
+                                <p class="shadcn-form-hint">1-99 arası numara seçiniz</p>
                             </div>
-                            <small class="field-hint">1-99 arası numara seçiniz</small>
-                        </div>
 
-                        <div class="modern-input-group">
-                            <label for="position" class="modern-label">
-                                <span class="label-text">Pozisyon</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="select-wrapper">
-                                <div class="select-icon">
-                                    <i class="fas fa-map-pin"></i>
-                                </div>
-                                <select id="position" name="position" class="modern-select" required>
+                            <div class="shadcn-form-group md:col-span-2">
+                                <label for="position" class="shadcn-label">
+                                    Pozisyon Bilgisi <span class="text-red-500">*</span>
+                                </label>
+                                <select id="position" name="position" class="shadcn-select" required>
                                     <option value="">Pozisyon Seçiniz</option>
                                     <option value="Kaleci"' . (($_POST['position'] ?? '') === 'Kaleci' ? ' selected' : '') . '>Kaleci</option>
                                     <option value="Defans"' . (($_POST['position'] ?? '') === 'Defans' ? ' selected' : '') . '>Defans</option>
                                     <option value="Orta Saha"' . (($_POST['position'] ?? '') === 'Orta Saha' ? ' selected' : '') . '>Orta Saha</option>
                                     <option value="Forvet"' . (($_POST['position'] ?? '') === 'Forvet' ? ' selected' : '') . '>Forvet</option>
                                 </select>
-                                <div class="select-arrow">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modern-input-group">
-                            <label for="status" class="modern-label">
-                                <span class="label-text">Durum</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="select-wrapper">
-                                <div class="select-icon">
-                                    <i class="fas fa-toggle-on"></i>
-                                </div>
-                                <select id="status" name="status" class="modern-select" required>
-                                    <option value="active"' . (($_POST['status'] ?? 'active') === 'active' ? ' selected' : '') . '>Aktif</option>
-                                    <option value="injured"' . (($_POST['status'] ?? '') === 'injured' ? ' selected' : '') . '>Sakatlık</option>
-                                    <option value="suspended"' . (($_POST['status'] ?? '') === 'suspended' ? ' selected' : '') . '>Cezalı</option>
-                                    <option value="transfer"' . (($_POST['status'] ?? '') === 'transfer' ? ' selected' : '') . '>Transfer Listesi</option>
-                                </select>
-                                <div class="select-arrow">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modern-checkbox-group">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" 
-                                       id="is_captain" 
-                                       name="is_captain" 
-                                       value="1"
-                                       class="modern-checkbox"
-                                       ' . (isset($_POST['is_captain']) ? 'checked' : '') . '>
-                                <label for="is_captain" class="checkbox-label">
-                                    <div class="checkbox-indicator">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="checkbox-content">
-                                        <span class="checkbox-title">
-                                            <i class="fas fa-crown"></i> Takım Kaptanı
-                                        </span>
-                                        <small class="checkbox-subtitle">Bu oyuncu takım kaptanı mı?</small>
-                                    </div>
-                                </label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modern-form-actions">
-                    <button type="submit" class="btn btn-modern-primary">
-                        <i class="fas fa-save"></i>
-                        <span>Oyuncuyu Kaydet</span>
-                    </button>
-                    <a href="' . BASE_URL . '/admin/players" class="btn btn-modern-outline">
-                        <i class="fas fa-times"></i>
-                        <span>İptal</span>
+                <!-- Form Actions -->
+                <div class="flex items-center justify-end gap-3">
+                    <a href="' . BASE_URL . '/admin/players" class="shadcn-btn shadcn-btn-outline">
+                        İptal
                     </a>
+                    <button type="submit" class="shadcn-btn shadcn-btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Oyuncuyu Kaydet
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
-</div>
 
-<div class="modern-info-panel">
-    <div class="info-header">
-        <div class="info-icon">
-            <i class="fas fa-lightbulb"></i>
-        </div>
-        <h4>Yardımcı Bilgiler</h4>
-    </div>
-    <div class="info-content">
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Ad & Soyad:</strong> Oyuncunun tam adını giriniz.
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Takım:</strong> Oyuncunun hangi takımda olduğunu seçiniz.
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-hashtag"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Forma Numarası:</strong> Benzersiz olmalıdır (aynı takımda).
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-map-pin"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Pozisyon:</strong> Oyuncunun ana pozisyonunu seçiniz.
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-camera"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Fotoğraf:</strong> Tercihen 400x400 piksel, JPG, PNG veya WebP format.
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-item-icon">
-                <i class="fas fa-calendar"></i>
-            </div>
-            <div class="info-item-text">
-                <strong>Doğum Tarihi:</strong> Oyuncunun yaşını hesaplamak için kullanılır.
+        <!-- Sidebar Info -->
+        <div class="lg:col-span-1">
+            <div class="shadcn-card sticky top-6">
+                <div class="shadcn-card-header">
+                    <h3 class="shadcn-card-title flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"></path>
+                        </svg>
+                        Yardımcı Bilgiler
+                    </h3>
+                </div>
+                <div class="shadcn-card-content">
+                    <div class="space-y-4">
+                        <div class="shadcn-info-item">
+                            <div class="flex items-start gap-3">
+                                <div class="shadcn-info-icon">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="shadcn-info-title">Ad Soyad</p>
+                                    <p class="shadcn-info-text">Oyuncunun tam adını giriniz</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shadcn-info-item">
+                            <div class="flex items-start gap-3">
+                                <div class="shadcn-info-icon">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="shadcn-info-title">Doğum Tarihi</p>
+                                    <p class="shadcn-info-text">Oyuncunun doğum tarihini seçiniz</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shadcn-info-item">
+                            <div class="flex items-start gap-3">
+                                <div class="shadcn-info-icon">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="shadcn-info-title">Forma Numarası</p>
+                                    <p class="shadcn-info-text">Benzersiz olmalıdır (1-99 arası)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="shadcn-info-item">
+                            <div class="flex items-start gap-3">
+                                <div class="shadcn-info-icon">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="shadcn-info-title">Pozisyon</p>
+                                    <p class="shadcn-info-text">Oyuncunun ana pozisyonunu seçiniz</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-semibold text-blue-900 mb-1">A Takım</p>
+                                    <p class="text-xs text-blue-700">Bu form sadece A Takım oyuncuları için kullanılır. Alt yapı oyuncuları için "Alt Yapı Kayıtları" bölümünü kullanınız.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

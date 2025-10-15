@@ -51,6 +51,31 @@ $content .= '
                             <input type="text" class="form-control" id="student_name" name="student_name" required>
                         </div>
                         <div class="col-md-6 mb-3">
+                            <label for="youth_group_id" class="form-label required">Alt Yapı Grubu</label>
+                            <select class="form-select" id="youth_group_id" name="youth_group_id" required>
+                                <option value="">Grup seçiniz</option>';
+                                
+if (isset($youth_groups) && !empty($youth_groups)) {
+    foreach ($youth_groups as $group) {
+        $capacity_info = $group['current_count'] . '/' . $group['max_capacity'];
+        $is_full = $group['current_count'] >= $group['max_capacity'];
+        $disabled = $is_full ? ' disabled' : '';
+        $full_text = $is_full ? ' (Dolu)' : '';
+        
+        $content .= '<option value="' . $group['id'] . '"' . $disabled . '>' . 
+                    htmlspecialchars($group['name']) . ' (' . $group['age_group'] . ' - ' . 
+                    $group['min_age'] . '-' . $group['max_age'] . ' yaş) - ' . $capacity_info . $full_text . '</option>';
+    }
+}
+
+$content .= '
+                            </select>
+                            <div class="form-text">Yaşınıza uygun grubu seçiniz</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="first_club" class="form-label">İlk Kulübü</label>
                             <input type="text" class="form-control" id="first_club" name="first_club">
                             <div class="form-text">Daha önce başka bir kulüpte oynadıysa belirtiniz</div>

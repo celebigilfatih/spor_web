@@ -127,13 +127,20 @@ class AdminPlayers extends Controller
      */
     private function processPlayerForm($id = null)
     {
-        $firstName = $this->sanitizeInput($_POST['first_name'] ?? '');
-        $lastName = $this->sanitizeInput($_POST['last_name'] ?? '');
+        // Handle full_name field (new format) - matches database 'name' column
+        if (isset($_POST['full_name']) && !empty($_POST['full_name'])) {
+            $fullName = trim($_POST['full_name']);
+        } else {
+            // Handle separate first_name and last_name fields (old format)
+            $firstName = $this->sanitizeInput($_POST['first_name'] ?? '');
+            $lastName = $this->sanitizeInput($_POST['last_name'] ?? '');
+            $fullName = trim($firstName . ' ' . $lastName);
+        }
+        
         $jerseyNumber = (int)($_POST['jersey_number'] ?? 0);
         $position = $this->sanitizeInput($_POST['position'] ?? '');
-        $teamId = (int)($_POST['team_id'] ?? 0);
+        $teamId = (int)($_POST['team_id'] ?? 1); // Default to team ID 1 (A Team)
         $birthDate = $_POST['birth_date'] ?? '';
-        $isCaptain = isset($_POST['is_captain']) ? 1 : 0;
         $status = $this->sanitizeInput($_POST['status'] ?? 'active');
         $csrf_token = $_POST['csrf_token'] ?? '';
 
@@ -143,8 +150,8 @@ class AdminPlayers extends Controller
         }
 
         // Zorunlu alan kontrolü
-        if (empty($firstName) || empty($lastName) || empty($position) || !$teamId) {
-            return ['success' => false, 'message' => 'Ad, soyad, pozisyon ve takım alanları zorunludur!'];
+        if (empty($fullName) || empty($position)) {
+            return ['success' => false, 'message' => 'Ad Soyad ve pozisyon alanları zorunludur!'];
         }
 
         // Forma numarası kontrolü
@@ -152,20 +159,31 @@ class AdminPlayers extends Controller
             if ($this->playerModel->isJerseyNumberTaken($jerseyNumber, $teamId, $id)) {
                 return ['success' => false, 'message' => 'Bu forma numarası zaten kullanılıyor!'];
             }
+        } else {
+            return ['success' => false, 'message' => 'Forma numarası zorunludur!'];
+        }
+        
+        // Doğum tarihi kontrolü
+        if (empty($birthDate)) {
+            return ['success' => false, 'message' => 'Doğum tarihi zorunludur!'];
         }
 
-        // Veri dizisi hazırla
+        // Veri dizisi hazırla - Match database schema
         $data = [
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'jersey_number' => $jerseyNumber > 0 ? $jerseyNumber : null,
+            'name' => $fullName,  // Database uses 'name' not 'first_name'/'last_name'
+            'jersey_number' => $jerseyNumber,
             'position' => $position,
             'team_id' => $teamId,
-            'birth_date' => $birthDate ?: null,
-            'is_captain' => $isCaptain,
-            'status' => $status,
-            'updated_at' => date('Y-m-d H:i:s')
+            'birth_date' => $birthDate,
+            'status' => $status
         ];
+        
+        // Add timestamp based on operation
+        if ($id) {
+            $data['updated_at'] = date('Y-m-d H:i:s');
+        } else {
+            $data['created_at'] = date('Y-m-d H:i:s');
+        }
 
         // Fotoğraf yükleme işlemi
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -197,7 +215,8 @@ class AdminPlayers extends Controller
         if ($result) {
             return ['success' => true, 'message' => $id ? 'Oyuncu güncellendi!' : 'Oyuncu eklendi!'];
         } else {
-            return ['success' => false, 'message' => 'Veritabanı hatası!'];
+            $errorMsg = $this->playerModel->getLastError();
+            return ['success' => false, 'message' => 'Veritabanı hatası!' . ($errorMsg ? ' (' . $errorMsg . ')' : '')];
         }
     }
 }

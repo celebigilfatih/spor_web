@@ -83,6 +83,13 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/youth-groups" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-layer-group"></i>
+                            <span>Alt Yapı Grupları</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/youth-registrations" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-user-graduate"></i>
                             <span>Alt Yapı Kayıtları</span>

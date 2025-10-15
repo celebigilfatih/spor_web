@@ -120,8 +120,8 @@ class AdminNews extends Controller
         }
 
         // Varsa resmi sil
-        if ($news['featured_image']) {
-            $imagePath = UPLOAD_PATH . '/' . $news['featured_image'];
+        if ($news['image']) {
+            $imagePath = UPLOAD_PATH . '/' . $news['image'];
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -175,11 +175,17 @@ class AdminNews extends Controller
             'excerpt' => $excerpt,
             'category' => $category,
             'status' => $status,
-            'is_featured' => $is_featured,
+            'featured' => $is_featured,  // Use 'featured' to match database schema
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
-        // Note: author_id field is not in the database schema, so we skip it
+        // Admin ID kontrolü - author_id'yi varsayılan olarak ekle
+        if (isset($_SESSION['admin_id'])) {
+            $data['author_id'] = $_SESSION['admin_id'];
+        } else {
+            // Eğer session'da admin_id yoksa, NULL kullan (veritabanı izin veriyor)
+            $data['author_id'] = null;
+        }
 
         // Slug ekle (yeni haber için)
         if ($slug) {
@@ -198,14 +204,14 @@ class AdminNews extends Controller
                 // Eski resmi sil (düzenleme durumunda)
                 if ($id) {
                     $oldNews = $this->newsModel->findById($id);
-                    if ($oldNews && !empty($oldNews['featured_image'])) {
-                        $oldImagePath = (defined('UPLOAD_PATH') ? UPLOAD_PATH : BASE_PATH . '/public/uploads') . '/' . $oldNews['featured_image'];
+                    if ($oldNews && !empty($oldNews['image'])) {
+                        $oldImagePath = (defined('UPLOAD_PATH') ? UPLOAD_PATH : BASE_PATH . '/public/uploads') . '/' . $oldNews['image'];
                         if (file_exists($oldImagePath)) {
                             unlink($oldImagePath);
                         }
                     }
                 }
-                $data['featured_image'] = $uploadResult['filename'];
+                $data['image'] = $uploadResult['filename'];
             } else {
                 return ['success' => false, 'message' => 'Resim yükleme hatası: ' . $uploadResult['message']];
             }

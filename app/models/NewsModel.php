@@ -12,11 +12,9 @@ class NewsModel extends Model
      */
     public function getPublished($limit = null)
     {
-        $sql = "SELECT n.*, a.username as author_name 
-                FROM {$this->table} n 
-                LEFT JOIN admins a ON n.author_id = a.id 
-                WHERE n.status = 'published' 
-                ORDER BY n.published_at DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'published' 
+                ORDER BY published_at DESC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";
@@ -30,11 +28,9 @@ class NewsModel extends Model
      */
     public function getFeatured($limit = 3)
     {
-        $sql = "SELECT n.*, a.username as author_name 
-                FROM {$this->table} n 
-                LEFT JOIN admins a ON n.author_id = a.id 
-                WHERE n.status = 'published' AND n.is_featured = 1 
-                ORDER BY n.published_at DESC 
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'published' AND is_featured = 1 
+                ORDER BY published_at DESC 
                 LIMIT {$limit}";
         
         return $this->db->query($sql);
@@ -45,11 +41,9 @@ class NewsModel extends Model
      */
     public function getByCategory($category, $limit = null)
     {
-        $sql = "SELECT n.*, a.username as author_name 
-                FROM {$this->table} n 
-                LEFT JOIN admins a ON n.author_id = a.id 
-                WHERE n.status = 'published' AND n.category = :category 
-                ORDER BY n.published_at DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'published' AND category = :category 
+                ORDER BY published_at DESC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";
@@ -63,10 +57,8 @@ class NewsModel extends Model
      */
     public function getBySlug($slug)
     {
-        $sql = "SELECT n.*, a.username as author_name 
-                FROM {$this->table} n 
-                LEFT JOIN admins a ON n.author_id = a.id 
-                WHERE n.slug = :slug AND n.status = 'published'";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE slug = :slug AND status = 'published'";
         
         $result = $this->db->query($sql, ['slug' => $slug]);
         return $result ? $result[0] : null;
@@ -104,18 +96,16 @@ class NewsModel extends Model
     {
         $offset = ($page - 1) * $perPage;
         
-        $sql = "SELECT n.*, a.username as author_name 
-                FROM {$this->table} n 
-                LEFT JOIN admins a ON n.author_id = a.id 
-                WHERE n.status = 'published'";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'published'";
         
         $params = [];
         if ($category) {
-            $sql .= " AND n.category = :category";
+            $sql .= " AND category = :category";
             $params['category'] = $category;
         }
         
-        $sql .= " ORDER BY n.published_at DESC LIMIT {$perPage} OFFSET {$offset}";
+        $sql .= " ORDER BY published_at DESC LIMIT {$perPage} OFFSET {$offset}";
         
         return $this->db->query($sql, $params);
     }

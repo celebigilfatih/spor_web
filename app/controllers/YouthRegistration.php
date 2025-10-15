@@ -3,9 +3,14 @@
 class YouthRegistration extends Controller {
     
     public function index() {
+        // Load youth groups for selection
+        $youthGroupModel = $this->model('YouthGroup');
+        $youthGroups = $youthGroupModel->getActive();
+        
         $data = [
             'title' => 'Alt Yapı Kayıt Formu',
-            'page' => 'youth-registration'
+            'page' => 'youth-registration',
+            'youth_groups' => $youthGroups
         ];
         
         $this->view('frontend/youth-registration/index', $data);

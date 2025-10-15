@@ -709,6 +709,178 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* Enhanced News Section Styles */
+.news-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.news-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 45, 114, 0.95);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.news-image {
+    position: relative;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.news-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.1);
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.news-date {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.read-more:hover {
+    color: var(--secondary-color);
+    gap: 8px;
+}
+
+/* News Category Colors */
+.news-category[data-category="futbol"],
+.news-card:has(.news-category:contains("Futbol")) .news-category {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.news-category[data-category="basketbol"],
+.news-card:has(.news-category:contains("Basketbol")) .news-category {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+}
+
+.news-category[data-category="voleybol"],
+.news-card:has(.news-category:contains("Voleybol")) .news-category {
+    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+}
+
+.news-category[data-category="transfer"],
+.news-card:has(.news-category:contains("Transfer")) .news-category {
+    background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+}
+
+.news-category[data-category="genel"],
+.news-card:has(.news-category:contains("Genel")) .news-category {
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+}
+
+/* No News State */
+.no-news {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.no-news i {
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.no-news h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Section Header Enhancement */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* Carousel Indicators Enhancement */
+#modernSlider .carousel-indicators {
+    bottom: 30px;
+    margin-bottom: 0;
+    z-index: 10;
+}
+
+#modernSlider .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+}
+
+#modernSlider .carousel-indicators button.active {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    width: 40px;
+    border-radius: 6px;
+}
+
+#modernSlider .carousel-indicators button:hover {
+    background-color: rgba(251, 191, 36, 0.8);
+    transform: scale(1.1);
+}
+
 /* Youth Academy Registration Section Styles */
 .youth-registration-section {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);

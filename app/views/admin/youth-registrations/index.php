@@ -9,6 +9,13 @@ $content = '
                 <p class="page-description-shadcn">Genç oyuncu başvurularını yönetin ve değerlendirin</p>
             </div>
             <div class="page-actions-shadcn">
+                <a href="' . BASE_URL . '/admin/youth-registrations/create" class="btn-shadcn btn-primary-shadcn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Yeni Kayıt Ekle
+                </a>
                 <a href="' . BASE_URL . '/youth-registration" class="btn-shadcn btn-outline-shadcn" target="_blank">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -132,8 +139,8 @@ if (empty($registrations)) {
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th><i class="fas fa-user"></i> Öğrenci Adı</th>
+                    <th><i class="fas fa-users"></i> Grup</th>
                     <th><i class="fas fa-birthday-cake"></i> Yaş</th>
                     <th><i class="fas fa-phone"></i> Telefon</th>
                     <th><i class="fas fa-toggle-on"></i> Durum</th>
@@ -146,9 +153,14 @@ if (empty($registrations)) {
     foreach ($registrations as $registration) {
         // Handle both nested and flat data structures
         $studentName = '';
-        if (isset($registration['student']['first_name'])) {
+        if (isset($registration['student']['name'])) {
+            // New structure from admin create form
+            $studentName = htmlspecialchars($registration['student']['name']);
+        } elseif (isset($registration['student']['first_name'])) {
+            // Old structure with separate first/last name
             $studentName = htmlspecialchars($registration['student']['first_name'] . ' ' . $registration['student']['last_name']);
         } elseif (isset($registration['student_name'])) {
+            // Flat structure
             $studentName = htmlspecialchars($registration['student_name']);
         }
         
@@ -170,6 +182,14 @@ if (empty($registrations)) {
         $registrationDate = $registration['created_at'] ?? $registration['registration_date'] ?? '';
         if (!empty($registrationDate)) {
             $createdAt = date('d.m.Y H:i', strtotime($registrationDate));
+        }
+        
+        // Get youth group info
+        $youthGroupId = $registration['youth_group_id'] ?? 0;
+        $groupName = '-';
+        if ($youthGroupId > 0 && isset($youth_groups[$youthGroupId])) {
+            $group = $youth_groups[$youthGroupId];
+            $groupName = htmlspecialchars($group['name']) . ' (' . htmlspecialchars($group['age_group']) . ')';
         }
         
         $statusClass = '';
@@ -195,7 +215,6 @@ if (empty($registrations)) {
         
         $content .= '
                 <tr>
-                    <td>' . htmlspecialchars($registration['id']) . '</td>
                     <td>
                         <div class="student-info">
                             <strong>' . $studentName . '</strong>';
@@ -209,6 +228,7 @@ if (empty($registrations)) {
         $content .= '
                         </div>
                     </td>
+                    <td>' . $groupName . '</td>
                     <td>' . ($age ? $age . ' yaş' : '-') . '</td>
                     <td>' . $phone . '</td>
                     <td>
@@ -317,6 +337,15 @@ $content .= '
 .btn-outline-shadcn:hover {
     background: #f4f4f5;
     color: #18181b;
+}
+
+.btn-primary-shadcn {
+    background: #18181b;
+    color: #fafafa;
+}
+
+.btn-primary-shadcn:hover {
+    background: #27272a;
 }
 
 .btn-secondary-shadcn {

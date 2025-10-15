@@ -2609,3 +2609,429 @@ body {
 .border-radius-lg {
     border-radius: 20px !important;
 }
+
+/* ====================================
+   Shadcn UI Form Components
+   ==================================== */
+
+/* Page Container */
+.shadcn-page-container {
+    padding: var(--spacing-6);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Page Header */
+.shadcn-page-header {
+    margin-bottom: var(--spacing-6);
+}
+
+.shadcn-page-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    letter-spacing: -0.025em;
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.shadcn-page-description {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+}
+
+/* Grid Utilities */
+.grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-3 {
+    gap: var(--spacing-3);
+}
+
+.gap-4 {
+    gap: var(--spacing-4);
+}
+
+.gap-6 {
+    gap: var(--spacing-6);
+}
+
+.space-y-6 > * + * {
+    margin-top: var(--spacing-6);
+}
+
+.space-y-4 > * + * {
+    margin-top: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .md\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .lg\:col-span-1 {
+        grid-column: span 1 / span 1;
+    }
+    
+    .lg\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+/* Flex Utilities */
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+/* Card Component */
+.shadcn-card {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.shadcn-card-header {
+    padding: var(--spacing-6);
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.shadcn-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0 0 var(--spacing-1) 0;
+    letter-spacing: -0.025em;
+}
+
+.shadcn-card-description {
+    font-size: 0.875rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+}
+
+.shadcn-card-content {
+    padding: var(--spacing-6);
+}
+
+/* Form Group */
+.shadcn-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label */
+.shadcn-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    margin-bottom: var(--spacing-2);
+    display: block;
+}
+
+/* Input */
+.shadcn-input {
+    width: 100%;
+    height: 40px;
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: hsl(var(--background));
+    border: 1px solid hsl(var(--input));
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: hsl(var(--foreground));
+    transition: all 0.15s ease-in-out;
+    outline: none;
+}
+
+.shadcn-input:focus {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+.shadcn-input::placeholder {
+    color: hsl(var(--muted-foreground));
+}
+
+/* Select */
+.shadcn-select {
+    width: 100%;
+    height: 40px;
+    padding: var(--spacing-2) var(--spacing-3);
+    background-color: hsl(var(--background));
+    border: 1px solid hsl(var(--input));
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: hsl(var(--foreground));
+    transition: all 0.15s ease-in-out;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right var(--spacing-2) center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: var(--spacing-10);
+}
+
+.shadcn-select:focus {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+/* Form Hint */
+.shadcn-form-hint {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    margin-top: var(--spacing-1);
+}
+
+/* Checkbox */
+.shadcn-checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.shadcn-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid hsl(var(--input));
+    border-radius: var(--radius-sm);
+    margin-right: var(--spacing-3);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.shadcn-checkbox:checked {
+    background-color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+}
+
+.shadcn-checkbox-label {
+    flex: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* File Upload */
+.shadcn-file-upload {
+    position: relative;
+}
+
+.shadcn-file-input {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.shadcn-file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-8);
+    border: 2px dashed hsl(var(--border));
+    border-radius: var(--radius-lg);
+    background-color: hsl(var(--background));
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.shadcn-file-label:hover {
+    border-color: hsl(var(--ring));
+    background-color: hsl(var(--accent));
+}
+
+.shadcn-file-input:focus + .shadcn-file-label {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+/* Buttons */
+.shadcn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.shadcn-btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-color: hsl(var(--primary));
+}
+
+.shadcn-btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+.shadcn-btn-outline {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--input));
+}
+
+.shadcn-btn-outline:hover {
+    background-color: hsl(var(--accent));
+}
+
+/* Info Items */
+.shadcn-info-item {
+    padding-bottom: var(--spacing-4);
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.shadcn-info-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.shadcn-info-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(var(--accent));
+    border-radius: var(--radius-md);
+    color: hsl(var(--foreground));
+    flex-shrink: 0;
+}
+
+.shadcn-info-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0 0 var(--spacing-1) 0;
+}
+
+.shadcn-info-text {
+    font-size: 0.8125rem;
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+}
+
+/* Sticky Utilities */
+.sticky {
+    position: sticky;
+}
+
+.top-6 {
+    top: var(--spacing-6);
+}
+
+/* SVG Icons */
+.w-4 {
+    width: 1rem;
+}
+
+.h-4 {
+    height: 1rem;
+}
+
+.w-5 {
+    width: 1.25rem;
+}
+
+.h-5 {
+    height: 1.25rem;
+}
+
+.w-8 {
+    width: 2rem;
+}
+
+.h-8 {
+    height: 2rem;
+}
+
+.mr-2 {
+    margin-right: var(--spacing-2);
+}
+
+.mb-2 {
+    margin-bottom: var(--spacing-2);
+}
+
+.ml-6 {
+    margin-left: var(--spacing-6);
+}
+
+/* Text Colors */
+.text-red-500 {
+    color: #ef4444;
+}
+
+.text-zinc-400 {
+    color: #a1a1aa;
+}
+
+.text-zinc-500 {
+    color: #71717a;
+}
+
+.text-zinc-700 {
+    color: #3f3f46;
+}
+
+.text-amber-500 {
+    color: #f59e0b;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}

@@ -7,9 +7,43 @@ $content = '
             <!-- Main Slider Content -->
             <div class="col-lg-8">
                 <div id="modernSlider" class="carousel slide h-100 px-5" data-bs-ride="carousel">
+                    <!-- Carousel Indicators -->
+                    <div class="carousel-indicators">
+                        ' . (isset($latest_news) && !empty($latest_news) ? 
+                            implode('', array_map(function($news, $index) {
+                                return '<button type="button" data-bs-target="#modernSlider" data-bs-slide-to="' . $index . '" ' . ($index === 0 ? 'class="active" aria-current="true"' : '') . ' aria-label="Slide ' . ($index + 1) . '"></button>';
+                            }, array_slice($latest_news, 0, 3), array_keys(array_slice($latest_news, 0, 3)))) : 
+                            '<button type="button" data-bs-target="#modernSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>'
+                        ) . '
+                    </div>
+                    
                     <div class="carousel-inner h-100">
-                        ' . (isset($sliders) && !empty($sliders) ? 
-                            implode('', array_map(function($slider, $index) {
+                        ' . (isset($latest_news) && !empty($latest_news) ? 
+                            implode('', array_map(function($news, $index) {
+                                // Get category icon and label
+                                $categoryIcons = [
+                                    'futbol' => 'fa-futbol',
+                                    'basketbol' => 'fa-basketball-ball',
+                                    'voleybol' => 'fa-volleyball-ball',
+                                    'transfer' => 'fa-exchange-alt',
+                                    'alt-yapi' => 'fa-users',
+                                    'genel' => 'fa-newspaper'
+                                ];
+                                $categoryLabels = [
+                                    'futbol' => 'FUTBOL HABERLERİ',
+                                    'basketbol' => 'BASKETBOL HABERLERİ',
+                                    'voleybol' => 'VOLEYBOL HABERLERİ',
+                                    'transfer' => 'TRANSFER HABERLERİ',
+                                    'alt-yapi' => 'ALT YAPI HABERLERİ',
+                                    'genel' => 'GENEL HABERLER'
+                                ];
+                                
+                                $category = strtolower($news['category'] ?? 'genel');
+                                $icon = $categoryIcons[$category] ?? 'fa-newspaper';
+                                $label = $categoryLabels[$category] ?? 'HABERLER';
+                                $excerpt = strip_tags($news['excerpt'] ?? $news['content'] ?? '');
+                                $excerpt = substr($excerpt, 0, 180);
+                                
                                 return '
                                 <div class="carousel-item h-100 ' . ($index === 0 ? 'active' : '') . '">
                                     <div class="slider-content d-flex align-items-center h-100">
@@ -17,21 +51,21 @@ $content = '
                                             <div class="row">
                                                 <div class="col-lg-10">
                                                     <div class="slider-badge mb-3">
-                                                        <i class="fas fa-newspaper me-2"></i>
-                                                        TRANSFER HABERLERİ
+                                                        <i class="fas ' . $icon . ' me-2"></i>
+                                                        ' . $label . '
                                                     </div>
-                                                    <h1 class="slider-title mb-4">' . htmlspecialchars($slider['title'] ?? 'Yeni Transferlerimiz Takımımıza Katıldı') . '</h1>
-                                                    <p class="slider-description mb-4">' . htmlspecialchars($slider['description'] ?? 'Bu sezon kadromuzu güçlendiren yeni oyuncularımız ilk antrenmanlarına başladı. Teknik direktörümüz ve yönetimimizin onayladığı transferlerle hedeflerimize emin adımlarla ilerliyoruz.') . '</p>
-                                                    <button class="btn btn-slider-primary">
+                                                    <h1 class="slider-title mb-4">' . htmlspecialchars($news['title'] ?? 'Haber Başlığı') . '</h1>
+                                                    <p class="slider-description mb-4">' . htmlspecialchars($excerpt) . '...</p>
+                                                    <a href="' . BASE_URL . '/news/detail/' . ($news['slug'] ?? '#') . '" class="btn btn-slider-primary">
                                                         <i class="fas fa-arrow-right me-2"></i>
-                                                        Detayları Gör
-                                                    </button>
+                                                        Devamını Oku
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>';
-                            }, $sliders, array_keys($sliders))) : 
+                            }, array_slice($latest_news, 0, 3), array_keys(array_slice($latest_news, 0, 3)))) : 
                             '
                             <div class="carousel-item h-100 active">
                                 <div class="slider-content d-flex align-items-center h-100">
@@ -40,14 +74,14 @@ $content = '
                                             <div class="col-lg-10">
                                                 <div class="slider-badge mb-3">
                                                     <i class="fas fa-newspaper me-2"></i>
-                                                    TRANSFER HABERLERİ
+                                                    HABERLER
                                                 </div>
-                                                <h1 class="slider-title mb-4">Yeni Transferlerimiz Takımımıza Katıldı</h1>
-                                                <p class="slider-description mb-4">Bu sezon kadromuzu güçlendiren yeni oyuncularımız ilk antrenmanlarına başladı. Teknik direktörümüz ve yönetimimizin onayladığı transferlerle hedeflerimize emin adımlarla ilerliyoruz.</p>
-                                                <button class="btn btn-slider-primary">
+                                                <h1 class="slider-title mb-4">Henüz Haber Bulunmamaktadır</h1>
+                                                <p class="slider-description mb-4">Yakında yeni haberler yayınlanacaktır. Takımımızın son gelişmelerinden haberdar olmak için sitemizi takip etmeye devam edin.</p>
+                                                <a href="' . BASE_URL . '/news" class="btn btn-slider-primary">
                                                     <i class="fas fa-arrow-right me-2"></i>
-                                                    Detayları Gör
-                                                </button>
+                                                    Tüm Haberler
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -351,73 +385,42 @@ $content = '
         </div>
         
         <div class="row">
-            ' . (isset($news) && !empty($news) ? 
+            ' . (isset($latest_news) && !empty($latest_news) ? 
                 implode('', array_map(function($article) {
+                    // Clean excerpt from HTML tags
+                    $excerpt = strip_tags($article['excerpt'] ?? $article['content'] ?? '');
+                    $excerpt = substr($excerpt, 0, 120);
+                    
                     return '
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="news-card h-100">
                             <div class="news-image">
-                                <img src="' . ($article['image'] ?? '/uploads/default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
-                                <div class="news-category">' . htmlspecialchars($article['category'] ?? 'Genel') . '</div>
+                                <img src="' . BASE_URL . '/public/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
+                                <div class="news-category">' . htmlspecialchars(ucfirst($article['category'] ?? 'Genel')) . '</div>
                             </div>
                             <div class="news-content">
                                 <h3 class="news-title">' . htmlspecialchars($article['title'] ?? 'Haber Başlığı') . '</h3>
-                                <p class="news-excerpt">' . htmlspecialchars(substr($article['content'] ?? 'Haber içeriği...', 0, 120)) . '...</p>
+                                <p class="news-excerpt">' . htmlspecialchars($excerpt) . '...</p>
                                 <div class="news-meta">
-                                    <span class="news-date">' . date('d.m.Y', strtotime($article['created_at'] ?? 'now')) . '</span>
-                                    <a href="' . BASE_URL . '/news/' . ($article['id'] ?? '#') . '" class="read-more">Devamını Oku</a>
+                                    <span class="news-date">
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        ' . date('d.m.Y', strtotime($article['published_at'] ?? $article['created_at'] ?? 'now')) . '
+                                    </span>
+                                    <a href="' . BASE_URL . '/news/detail/' . ($article['slug'] ?? '#') . '" class="read-more">
+                                        Devamını Oku
+                                        <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>';
-                }, array_slice($news, 0, 6))) : 
+                }, $latest_news)) : 
                 '
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="news-card h-100">
-                        <div class="news-image">
-                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
-                            <div class="news-category">Transfer</div>
-                        </div>
-                        <div class="news-content">
-                            <h3 class="news-title">Yeni Transferimiz Takımımıza Katıldı</h3>
-                            <p class="news-excerpt">Sezonun en önemli transferlerinden biri olan yeni oyuncumuz ilk antrenmanına çıktı...</p>
-                            <div class="news-meta">
-                                <span class="news-date">20.10.2024</span>
-                                <a href="#" class="read-more">Devamını Oku</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="news-card h-100">
-                        <div class="news-image">
-                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
-                            <div class="news-category">Maç</div>
-                        </div>
-                        <div class="news-content">
-                            <h3 class="news-title">Galatasaray Derbisi Hazırlıkları</h3>
-                            <p class="news-excerpt">Haftanın en önemli maçı için hazırlıklarımız devam ediyor. Teknik direktörümüz açıklamalarda bulundu...</p>
-                            <div class="news-meta">
-                                <span class="news-date">19.10.2024</span>
-                                <a href="#" class="read-more">Devamını Oku</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="news-card h-100">
-                        <div class="news-image">
-                            <img src="/uploads/default-news.jpg" alt="Haber" class="img-fluid">
-                            <div class="news-category">Antrenman</div>
-                        </div>
-                        <div class="news-content">
-                            <h3 class="news-title">Antrenman Kampı Başladı</h3>
-                            <p class="news-excerpt">Takımımız yeni sezon hazırlıkları kapsamında antrenman kampına başladı...</p>
-                            <div class="news-meta">
-                                <span class="news-date">18.10.2024</span>
-                                <a href="#" class="read-more">Devamını Oku</a>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="no-news text-center py-5">
+                        <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                        <h3>Henüz haber bulunmamaktadır</h3>
+                        <p class="text-muted">Yakında yeni haberler yayınlanacak.</p>
                     </div>
                 </div>
                 '
