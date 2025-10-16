@@ -24,7 +24,11 @@
     },
     "youth_group_id": 8,
     "photo_path": "",
-    "status": "pending",
+    "status": "rejected",
     "created_at": "2025-10-15 16:18:11",
-    "created_by": "admin"
+    "created_by": "admin",
+    "id": "reg_68ef9f138fa83",
+    "file_path": "\/var\/www\/html\/data\/youth-registrations\/reg_68ef9f138fa83.json",
+    "admin_notes": "",
+    "updated_at": "2025-10-15 17:06:44"
 }

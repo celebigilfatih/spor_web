@@ -175,16 +175,18 @@ class AdminNews extends Controller
             'excerpt' => $excerpt,
             'category' => $category,
             'status' => $status,
-            'featured' => $is_featured,  // Use 'featured' to match database schema
+            'is_featured' => $is_featured,  // Match database column name
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
-        // Admin ID kontrolü - author_id'yi varsayılan olarak ekle
-        if (isset($_SESSION['admin_id'])) {
-            $data['author_id'] = $_SESSION['admin_id'];
+        // Admin bilgisini ekle - author alanı VARCHAR(100)
+        if (isset($_SESSION['admin_username'])) {
+            $data['author'] = $_SESSION['admin_username'];
+        } elseif (isset($_SESSION['admin_email'])) {
+            $data['author'] = $_SESSION['admin_email'];
         } else {
-            // Eğer session'da admin_id yoksa, NULL kullan (veritabanı izin veriyor)
-            $data['author_id'] = null;
+            // Varsayılan değer
+            $data['author'] = 'Admin';
         }
 
         // Slug ekle (yeni haber için)

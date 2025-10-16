@@ -11,7 +11,7 @@ class Groups extends Controller
 
     public function __construct()
     {
-        $this->groupModel = $this->model('GroupModel');
+        $this->groupModel = $this->model('YouthGroup');
         $this->playerModel = $this->model('Player');
         $this->settingsModel = $this->model('SiteSettings');
     }
@@ -23,8 +23,8 @@ class Groups extends Controller
     {
         $data = [
             'title' => 'Gruplarımız - ' . $this->settingsModel->getSetting('site_title', 'Spor Kulübü'),
-            'groups' => $this->groupModel->getActiveGroups(),
-            'academy_info' => $this->groupModel->getAcademyInfo(),
+            'groups' => $this->groupModel->getActive(),
+            'statistics' => $this->groupModel->getStatistics(),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 

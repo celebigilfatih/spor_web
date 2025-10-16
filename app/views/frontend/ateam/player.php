@@ -28,7 +28,7 @@ $content = '
             <div class="col-lg-4 mb-5">
                 <div class="player-profile-card">
                     <div class="player-photo-large">
-                        <img src="' . BASE_URL . '/public/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
+                        <img src="' . BASE_URL . '/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
                              alt="' . htmlspecialchars($player['name'] ?? '') . '" class="img-fluid">
                         <div class="jersey-number-large">' . ($player['jersey_number'] ?? 'N/A') . '</div>
                     </div>

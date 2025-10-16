@@ -35,7 +35,7 @@ $content = '
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="player-card">
                                 <div class="player-image">
-                                    <img src="' . BASE_URL . '/public/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
+                                    <img src="' . BASE_URL . '/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
                                          alt="' . htmlspecialchars($player['name'] ?? '') . '">
                                     <div class="player-number">' . ($player['jersey_number'] ?? 'N/A') . '</div>
                                 </div>
@@ -69,7 +69,7 @@ $content = '
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="player-card">
                                 <div class="player-image">
-                                    <img src="' . BASE_URL . '/public/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
+                                    <img src="' . BASE_URL . '/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
                                          alt="' . htmlspecialchars($player['name'] ?? '') . '">
                                     <div class="player-number">' . ($player['jersey_number'] ?? 'N/A') . '</div>
                                 </div>
@@ -103,7 +103,7 @@ $content = '
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="player-card">
                                 <div class="player-image">
-                                    <img src="' . BASE_URL . '/public/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
+                                    <img src="' . BASE_URL . '/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
                                          alt="' . htmlspecialchars($player['name'] ?? '') . '">
                                     <div class="player-number">' . ($player['jersey_number'] ?? 'N/A') . '</div>
                                 </div>
@@ -137,7 +137,7 @@ $content = '
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="player-card">
                                 <div class="player-image">
-                                    <img src="' . BASE_URL . '/public/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
+                                    <img src="' . BASE_URL . '/uploads/' . ($player['photo'] ?? 'default-player.jpg') . '" 
                                          alt="' . htmlspecialchars($player['name'] ?? '') . '">
                                     <div class="player-number">' . ($player['jersey_number'] ?? 'N/A') . '</div>
                                 </div>

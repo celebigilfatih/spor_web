@@ -56,7 +56,7 @@ $content = '
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="news-image">
-                                            <img src="' . BASE_URL . '/public/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
+                                            <img src="' . BASE_URL . '/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
                                                  alt="' . htmlspecialchars($article['title'] ?? '') . '" 
                                                  class="img-fluid rounded">
                                         </div>
@@ -157,7 +157,7 @@ $content = '
                                 return '
                                 <div class="featured-news-item">
                                     <div class="featured-image">
-                                        <img src="' . BASE_URL . '/public/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
+                                        <img src="' . BASE_URL . '/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
                                              alt="' . htmlspecialchars($article['title'] ?? '') . '">
                                     </div>
                                     <div class="featured-content">

@@ -6,7 +6,7 @@ $content = '
         <div class="row g-0">
             <!-- Main Slider Content -->
             <div class="col-lg-8">
-                <div id="modernSlider" class="carousel slide h-100 px-5" data-bs-ride="carousel">
+                <div id="modernSlider" class="carousel slide h-100" data-bs-ride="carousel">
                     <!-- Carousel Indicators -->
                     <div class="carousel-indicators">
                         ' . (isset($latest_news) && !empty($latest_news) ? 
@@ -45,7 +45,7 @@ $content = '
                                 $excerpt = substr($excerpt, 0, 180);
                                 
                                 return '
-                                <div class="carousel-item h-100 ' . ($index === 0 ? 'active' : '') . '">
+                                <div class="carousel-item h-100 ' . ($index === 0 ? 'active' : '') . '" style="background: linear-gradient(rgba(30, 58, 138, 0.25), rgba(30, 58, 138, 0.35)), url(' . BASE_URL . '/uploads/' . ($news['image'] ?? 'default-news.jpg') . ') center/cover no-repeat;">
                                     <div class="slider-content d-flex align-items-center h-100">
                                         <div class="container">
                                             <div class="row">
@@ -114,24 +114,50 @@ $content = '
                             <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
                         </div>
                         <div class="announcements-list">
-                            <div class="announcement-item mb-3 p-3 bg-light rounded">
-                                <div class="announcement-badge mb-2">
-                                    <span class="badge bg-danger">ÖNEMLİ</span>
-                                    <span class="text-muted small ms-2">20 Ekim 2024</span>
-                                </div>
-                                <h5 class="announcement-title mb-2">Maç Bilet Satışları</h5>
-                                <p class="announcement-text mb-0 small">Galatasaray derbisi biletleri yarın saat 10:00\'da satışa çıkacaktır. Üye önceliği uygulanacaktır.</p>
-                            </div>
-                            
-                            <div class="announcement-item mb-3 p-3 bg-light rounded">
-                                <div class="announcement-badge mb-2">
-                                    <span class="badge bg-info">BİLGİ</span>
-                                    <span class="text-muted small ms-2">18 Ekim 2024</span>
-                                </div>
-                                <h5 class="announcement-title mb-2">Antrenman Saatleri</h5>
-                                <p class="announcement-text mb-0 small">Bu hafta antrenmanlarımız saat 16:00\'da başlayacaktır. Taraftarlarımız izleyebilir.</p>
-                            </div>
-                            
+                            ' . (isset($announcements) && !empty($announcements) ? 
+                                implode('', array_map(function($announcement) {
+                                    $typeBadge = '';
+                                    $typeLabel = '';
+                                    
+                                    switch($announcement['type']) {
+                                        case 'important':
+                                            $typeBadge = 'bg-danger';
+                                            $typeLabel = 'ÖNEMLİ';
+                                            break;
+                                        case 'info':
+                                            $typeBadge = 'bg-info';
+                                            $typeLabel = 'BİLGİ';
+                                            break;
+                                        case 'warning':
+                                            $typeBadge = 'bg-warning';
+                                            $typeLabel = 'UYARI';
+                                            break;
+                                        case 'success':
+                                            $typeBadge = 'bg-success';
+                                            $typeLabel = 'BAŞARILI';
+                                            break;
+                                        default:
+                                            $typeBadge = 'bg-secondary';
+                                            $typeLabel = 'BİLGİ';
+                                    }
+                                    
+                                    $publishedDate = date('d M Y', strtotime($announcement['published_at'] ?? $announcement['created_at']));
+                                    
+                                    return '
+                                    <div class="announcement-item mb-3 p-3 bg-light rounded">
+                                        <div class="announcement-badge mb-2">
+                                            <span class="badge ' . $typeBadge . '">' . $typeLabel . '</span>
+                                            <span class="text-muted small ms-2">' . $publishedDate . '</span>
+                                        </div>
+                                        <h5 class="announcement-title mb-2">' . htmlspecialchars($announcement['title']) . '</h5>
+                                        <p class="announcement-text mb-0 small">' . htmlspecialchars($announcement['content']) . '</p>
+                                    </div>';
+                                }, $announcements)) : 
+                                '
+                                <div class="announcement-item mb-3 p-3 bg-light rounded text-center">
+                                    <p class="text-muted mb-0">Henüz duyuru bulunmamaktadır.</p>
+                                </div>'
+                            ) . '
                         </div>
                     </div>
                     <!-- Instagram Feed -->
@@ -395,7 +421,7 @@ $content = '
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="news-card h-100">
                             <div class="news-image">
-                                <img src="' . BASE_URL . '/public/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
+                                <img src="' . BASE_URL . '/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
                                 <div class="news-category">' . htmlspecialchars(ucfirst($article['category'] ?? 'Genel')) . '</div>
                             </div>
                             <div class="news-content">

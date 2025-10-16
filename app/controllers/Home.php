@@ -10,6 +10,7 @@ class Home extends Controller
     private $matchModel;
     private $playerModel;
     private $settingsModel;
+    private $announcementModel;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class Home extends Controller
         $this->matchModel = $this->model('MatchModel');
         $this->playerModel = $this->model('Player');
         $this->settingsModel = $this->model('SiteSettings');
+        $this->announcementModel = $this->model('Announcement');
     }
 
     /**
@@ -30,6 +32,7 @@ class Home extends Controller
             'sliders' => $this->sliderModel->getActiveSliders(),
             'featured_news' => $this->newsModel->getFeatured(3),
             'latest_news' => $this->newsModel->getPublished(6),
+            'announcements' => $this->announcementModel->getActive(2),
             'upcoming_matches' => $this->matchModel->getUpcomingMatches(3),
             'recent_results' => $this->matchModel->getResults(3),
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),

@@ -30,7 +30,7 @@ $content = '
                     <!-- Featured Image -->
                     ' . (!empty($news['image']) ? '
                     <div class="news-featured-image mb-4">
-                        <img src="' . BASE_URL . '/public/uploads/' . $news['image'] . '" 
+                        <img src="' . BASE_URL . '/uploads/' . $news['image'] . '" 
                              alt="' . htmlspecialchars($news['title']) . '" 
                              class="img-fluid rounded">
                     </div>
@@ -121,7 +121,7 @@ $content = '
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <div class="news-image h-100">
-                                                <img src="' . BASE_URL . '/public/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
+                                                <img src="' . BASE_URL . '/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" 
                                                      alt="' . htmlspecialchars($article['title']) . '" 
                                                      class="img-fluid h-100 w-100" style="object-fit: cover;">
                                             </div>
