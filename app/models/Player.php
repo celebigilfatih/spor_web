@@ -201,4 +201,85 @@ class Player extends Model
         
         return $this->db->query($sql, ['keyword' => "%{$keyword}%"]);
     }
+
+    /**
+     * A Takım oyuncularını getir
+     */
+    public function getATeamPlayers()
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE team_id = 1 AND status = 'active' 
+                ORDER BY position, jersey_number ASC";
+        
+        return $this->db->query($sql);
+    }
+
+    /**
+     * Takım istatistiklerini getir
+     */
+    public function getTeamStats($teamType = 'A')
+    {
+        $teamId = ($teamType === 'A') ? 1 : null;
+        
+        $sql = "SELECT 
+                    COUNT(*) as total_players,
+                    AVG(YEAR(CURDATE()) - YEAR(birth_date)) as avg_age,
+                    COUNT(CASE WHEN position = 'Kaleci' THEN 1 END) as goalkeepers,
+                    COUNT(CASE WHEN position = 'Defans' THEN 1 END) as defenders,
+                    COUNT(CASE WHEN position = 'Orta Saha' THEN 1 END) as midfielders,
+                    COUNT(CASE WHEN position = 'Forvet' THEN 1 END) as forwards
+                FROM {$this->table} 
+                WHERE team_id = :team_id AND status = 'active'";
+        
+        $result = $this->db->query($sql, ['team_id' => $teamId]);
+        return $result ? $result[0] : null;
+    }
+
+    /**
+     * Oyuncu istatistiklerini getir
+     */
+    public function getPlayerStats($playerId)
+    {
+        // Mock data for now - can be replaced with real statistics table
+        return [
+            'matches' => 15,
+            'goals' => 8,
+            'assists' => 5,
+            'yellow_cards' => 2,
+            'red_cards' => 0,
+            'minutes_played' => 1200,
+            'shots' => 32,
+            'shot_accuracy' => 65,
+            'pass_accuracy' => 78,
+            'tackles' => 18,
+            'interceptions' => 12,
+            'defensive_success' => 72
+        ];
+    }
+
+    /**
+     * Oyuncunun son performanslarını getir
+     */
+    public function getRecentPerformances($playerId, $limit = 5)
+    {
+        // Mock data for now - can be replaced with real match statistics
+        return [
+            [
+                'match_date' => date('Y-m-d', strtotime('-7 days')),
+                'opponent' => 'Rakip Takım',
+                'rating' => 8.0,
+                'goals' => 1,
+                'assists' => 1,
+                'minutes' => 90
+            ],
+            [
+                'match_date' => date('Y-m-d', strtotime('-14 days')),
+                'opponent' => 'Diğer Takım',
+                'rating' => 7.5,
+                'goals' => 0,
+                'assists' => 2,
+                'minutes' => 85
+            ]
+        ];
+    }
 }

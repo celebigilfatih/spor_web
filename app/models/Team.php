@@ -117,4 +117,75 @@ class Team extends Model
         
         return $this->db->query($sql, ['team_id' => $teamId]);
     }
+
+    /**
+     * A Takım bilgilerini getir
+     */
+    public function getATeamInfo()
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id = 1 LIMIT 1";
+        $result = $this->db->query($sql);
+        return $result ? $result[0] : null;
+    }
+
+    /**
+     * Lig sıralamasını getir
+     */
+    public function getLeagueStandings()
+    {
+        // Mock data - can be replaced with real league standings table
+        return [
+            ['position' => 1, 'team' => 'Takım A', 'played' => 10, 'won' => 7, 'drawn' => 2, 'lost' => 1, 'points' => 23],
+            ['position' => 2, 'team' => 'Kulübümüz', 'played' => 10, 'won' => 6, 'drawn' => 3, 'lost' => 1, 'points' => 21],
+            ['position' => 3, 'team' => 'Takım B', 'played' => 10, 'won' => 6, 'drawn' => 2, 'lost' => 2, 'points' => 20]
+        ];
+    }
+
+    /**
+     * Sezon istatistiklerini getir
+     */
+    public function getSeasonStats($teamType = 'A')
+    {
+        // Mock data - can be replaced with real statistics
+        return [
+            'matches_played' => 15,
+            'wins' => 9,
+            'draws' => 3,
+            'losses' => 3,
+            'goals_for' => 28,
+            'goals_against' => 15,
+            'clean_sheets' => 6,
+            'points' => 30
+        ];
+    }
+
+    /**
+     * Performans istatistiklerini getir
+     */
+    public function getPerformanceStats($teamType = 'A')
+    {
+        // Mock data - can be replaced with real statistics
+        return [
+            'home_wins' => 6,
+            'away_wins' => 3,
+            'possession_avg' => 58,
+            'pass_accuracy' => 82,
+            'shots_per_game' => 14,
+            'tackles_per_game' => 18
+        ];
+    }
+
+    /**
+     * Lig pozisyonunu getir
+     */
+    public function getLeaguePosition()
+    {
+        // Mock data
+        return [
+            'position' => 2,
+            'total_teams' => 18,
+            'points' => 30,
+            'points_to_leader' => 3
+        ];
+    }
 }

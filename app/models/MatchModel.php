@@ -160,4 +160,24 @@ class MatchModel extends Model
         $result = $this->db->query($sql, $params);
         return $result ? $result[0] : null;
     }
+
+    /**
+     * Son form durumunu getir (son X maç)
+     */
+    public function getRecentForm($limit = 5)
+    {
+        $sql = "SELECT 
+                    home_team,
+                    away_team,
+                    home_score,
+                    away_score,
+                    match_date,
+                    venue
+                FROM {$this->table} 
+                WHERE status = 'finished' 
+                ORDER BY match_date DESC 
+                LIMIT {$limit}";
+        
+        return $this->db->query($sql);
+    }
 }

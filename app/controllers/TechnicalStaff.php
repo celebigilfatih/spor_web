@@ -10,7 +10,7 @@ class TechnicalStaff extends Controller
 
     public function __construct()
     {
-        $this->staffModel = $this->model('TechnicalStaff');
+        $this->staffModel = $this->model('TechnicalStaffModel');
         $this->settingsModel = $this->model('SiteSettings');
     }
 
@@ -36,7 +36,7 @@ class TechnicalStaff extends Controller
     /**
      * Staff member details
      */
-    public function view($staffId = null)
+    public function details($staffId = null)
     {
         if (!$staffId) {
             $this->redirect('technical-staff');
@@ -55,7 +55,7 @@ class TechnicalStaff extends Controller
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 
-        $this->view('frontend/staff/view', $data);
+        $this->view('frontend/staff/details', $data);
     }
 
     /**
