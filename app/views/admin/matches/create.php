@@ -9,6 +9,13 @@ $content = '
     </div>
 </div>
 
+' . (!empty($error) ? '
+<div class="alert alert-danger mb-4">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    ' . htmlspecialchars($error) . '
+</div>
+' : '') . '
+
 <div class="admin-content-card">
     <form method="POST" action="' . BASE_URL . '/admin/matches/create" class="admin-form">
         <input type="hidden" name="csrf_token" value="' . $csrf_token . '">

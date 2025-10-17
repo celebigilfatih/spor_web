@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? $title : 'Spor Kulübü' ?></title>
-    <meta name="description" content="<?= isset($description) ? $description : 'Spor Kulübü Resmi Web Sitesi' ?>">
+    <title><?= isset($title) ? $title : ($site_settings['site_title'] ?? 'Spor Kulübü') ?></title>
+    <meta name="description" content="<?= isset($description) ? $description : ($site_settings['site_description'] ?? 'Spor Kulübü Resmi Web Sitesi') ?>">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
     <link href="<?= BASE_URL ?>/css/style.css" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="<?= !empty($site_settings['site_favicon']) ? BASE_URL . '/uploads/' . $site_settings['site_favicon'] : BASE_URL . '/images/favicon.ico' ?>">
 </head>
 <body>
     <!-- Header -->
@@ -25,16 +25,24 @@
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="contact-info">
-                            <span><i class="fas fa-phone"></i> +90 (212) 555-0123</span>
-                            <span><i class="fas fa-envelope"></i> info@sporkulubu.com</span>
+                            <span><i class="fas fa-phone"></i> <?= $site_settings['contact_phone'] ?? '+90 (212) 555-0123' ?></span>
+                            <span><i class="fas fa-envelope"></i> <?= $site_settings['contact_email'] ?? 'info@sporkulubu.com' ?></span>
                         </div>
                     </div>
                     <div class="col-md-6 text-end">
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <?php if (!empty($site_settings['facebook_url'])): ?>
+                            <a href="<?= $site_settings['facebook_url'] ?>" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <?php endif; ?>
+                            <?php if (!empty($site_settings['twitter_url'])): ?>
+                            <a href="<?= $site_settings['twitter_url'] ?>" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <?php endif; ?>
+                            <?php if (!empty($site_settings['instagram_url'])): ?>
+                            <a href="<?= $site_settings['instagram_url'] ?>" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <?php endif; ?>
+                            <?php if (!empty($site_settings['youtube_url'])): ?>
+                            <a href="<?= $site_settings['youtube_url'] ?>" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -45,8 +53,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-5">
             <div class="container-fluid">
                 <a class="navbar-brand" href="<?= BASE_URL ?>">
+                    <?php if (!empty($site_settings['site_logo'])): ?>
+                    <img src="<?= BASE_URL . '/uploads/' . $site_settings['site_logo'] ?>" alt="<?= $site_settings['site_title'] ?? 'Logo' ?>" height="50" class="me-2">
+                    <?php else: ?>
                     <img src="<?= BASE_URL ?>/images/logo.png" alt="Logo" height="50" class="me-2">
-                    <span class="fw-bold">SPOR KULÜBÜ</span>
+                    <?php endif; ?>
+                    <span class="fw-bold"><?= strtoupper($site_settings['site_title'] ?? 'SPOR KULÜBÜ') ?></span>
                 </a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -114,13 +126,21 @@
         <div class="container-fluid px-5">
             <div class="row py-5">
                 <div class="col-lg-4 mb-4">
-                    <h5 class="text-warning mb-3">SPOR KULÜBÜ</h5>
-                    <p>Türkiye'nin en köklü spor kulüplerinden biri olarak, genç yetenekleri keşfetmek ve geliştirmek misyonuyla çalışıyoruz.</p>
+                    <h5 class="text-warning mb-3"><?= strtoupper($site_settings['site_title'] ?? 'SPOR KULÜBÜ') ?></h5>
+                    <p><?= $site_settings['site_description'] ?? 'Türkiye\'nin en köklü spor kulüplerinden biri olarak, genç yetenekleri keşfetmek ve geliştirmek misyonuyla çalışıyoruz.' ?></p>
                     <div class="social-links mt-3">
-                        <a href="#" class="social-link me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" class="social-link me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="social-link me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube fa-lg"></i></a>
+                        <?php if (!empty($site_settings['facebook_url'])): ?>
+                        <a href="<?= $site_settings['facebook_url'] ?>" class="social-link me-3" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($site_settings['twitter_url'])): ?>
+                        <a href="<?= $site_settings['twitter_url'] ?>" class="social-link me-3" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($site_settings['instagram_url'])): ?>
+                        <a href="<?= $site_settings['instagram_url'] ?>" class="social-link me-3" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($site_settings['youtube_url'])): ?>
+                        <a href="<?= $site_settings['youtube_url'] ?>" class="social-link" target="_blank"><i class="fab fa-youtube fa-lg"></i></a>
+                        <?php endif; ?>
                     </div>
                 </div>
                 
@@ -138,9 +158,9 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h6 class="text-warning mb-3">İLETİŞİM</h6>
                     <ul class="list-unstyled contact-info">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Spor Caddesi No:123, İstanbul</li>
-                        <li><i class="fas fa-phone me-2"></i> +90 (212) 555-0123</li>
-                        <li><i class="fas fa-envelope me-2"></i> info@sporkulubu.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> <?= $site_settings['contact_address'] ?? 'Spor Caddesi No:123, İstanbul' ?></li>
+                        <li><i class="fas fa-phone me-2"></i> <?= $site_settings['contact_phone'] ?? '+90 (212) 555-0123' ?></li>
+                        <li><i class="fas fa-envelope me-2"></i> <?= $site_settings['contact_email'] ?? 'info@sporkulubu.com' ?></li>
                         <li><i class="fas fa-clock me-2"></i> Pazartesi-Cuma: 09:00-18:00</li>
                     </ul>
                 </div>
@@ -161,7 +181,7 @@
             
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; <?= date('Y') ?> Spor Kulübü. Tüm hakları saklıdır.</p>
+                    <p class="mb-0">&copy; <?= date('Y') ?> <?= $site_settings['site_title'] ?? 'Spor Kulübü' ?>. Tüm hakları saklıdır.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="<?= BASE_URL ?>/legal/privacy" class="footer-link me-3">Gizlilik Politikası</a>

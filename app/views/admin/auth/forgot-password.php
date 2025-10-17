@@ -25,21 +25,29 @@
             </div>
             
             <?php if (!empty($error)): ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="fas fa-exclamation-triangle"></i>
                     <?php echo htmlspecialchars($error); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
             
             <?php if (!empty($message)): ?>
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="fas fa-check-circle"></i>
                     <?php echo htmlspecialchars($message); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
             
             <form method="POST" action="<?php echo BASE_URL; ?>/admin/auth/forgot-password">
+                <!-- CSRF Token for security -->
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                
+                <!-- Honeypot field for bot protection (hidden from users) -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" value="" placeholder="Leave this field empty">
+                </div>
                 
                 <div class="form-group">
                     <label for="email" class="form-label">
@@ -61,6 +69,12 @@
                     </button>
                 </div>
             </form>
+            
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    <i class="fas fa-shield-alt"></i> Güvenli bağlantı ile korunmaktadır
+                </small>
+            </div>
             
             <div class="text-center mt-3">
                 <a href="<?php echo BASE_URL; ?>/admin/login" class="text-gray">

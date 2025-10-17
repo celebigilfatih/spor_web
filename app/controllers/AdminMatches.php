@@ -54,21 +54,28 @@ class AdminMatches extends Controller
                 'competition' => $this->sanitizeInput($_POST['competition']),
                 'home_score' => !empty($_POST['home_score']) ? (int)$_POST['home_score'] : null,
                 'away_score' => !empty($_POST['away_score']) ? (int)$_POST['away_score'] : null,
-                'status' => $this->sanitizeInput($_POST['status'])
+                'status' => $this->sanitizeInput($_POST['status']),
+                'created_at' => date('Y-m-d H:i:s')
             ];
 
             if ($this->matchModel->create($matchData)) {
                 $_SESSION['message'] = 'Maç başarıyla eklendi!';
                 $this->redirect('admin/matches');
             } else {
-                $_SESSION['error'] = 'Maç eklenirken bir hata oluştu!';
+                // Get the actual database error for debugging
+                $error = $this->matchModel->getLastError();
+                $_SESSION['error'] = 'Maç eklenirken bir hata oluştu!' . ($error ? ' Hata: ' . $error : '');
+                $this->redirect('admin/matches/create');
             }
         }
 
         $data = [
             'title' => 'Yeni Maç Ekle',
-            'csrf_token' => $this->generateCSRFToken()
+            'csrf_token' => $this->generateCSRFToken(),
+            'error' => $_SESSION['error'] ?? ''
         ];
+        
+        unset($_SESSION['error']);
 
         $this->view('admin/matches/create', $data);
     }

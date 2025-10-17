@@ -41,9 +41,23 @@ class App
                     $this->method = 'login';
                 } elseif ($url[1] === 'logout') {
                     $this->method = 'logout';
+                } elseif ($url[1] === 'auth' && isset($url[2])) {
+                    // Handle /admin/auth/forgotPassword or /admin/auth/forgot-password
+                    if ($url[2] === 'forgotPassword' || $url[2] === 'forgot-password') {
+                        $this->method = 'forgotPassword';
+                    } elseif ($url[2] === 'profile') {
+                        $this->method = 'profile';
+                    } else {
+                        $this->method = $url[2];
+                    }
+                    $this->params = array_slice($url, 3);
+                } else {
+                    $this->method = 'index';
                 }
                 // URL parametrelerini ayarla
-                $this->params = array_slice($url, 2); // /admin/login/... sonrası parametreler
+                if ($url[1] !== 'auth') {
+                    $this->params = array_slice($url, 2); // /admin/login/... sonrası parametreler
+                }
             } else {
                 // URL'deki tire işaretlerini camelCase'e çevir
                 // youth-registrations -> YouthRegistrations

@@ -13,27 +13,58 @@ $content = '
         <div class="registration-form-container">';
 
 // Başarı mesajı
+if (isset($_GET['success']) && $_GET['success'] == '1') {
+    $content .= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> Başvurunuz başarıyla alındı! En kısa sürede size dönüş yapılacaktır.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+}
+
 if (isset($_SESSION['success_message'])) {
-    $content .= '<div class="alert alert-success">
+    $content .= '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="fas fa-check-circle"></i> ' . htmlspecialchars($_SESSION['success_message']) . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
     unset($_SESSION['success_message']);
 }
 
 // Hata mesajları
-if (isset($_SESSION['error_messages'])) {
-    $content .= '<div class="alert alert-danger">
+if (isset($_SESSION['form_errors']) && !empty($_SESSION['form_errors'])) {
+    $content .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fas fa-exclamation-triangle"></i> Lütfen aşağıdaki hataları düzeltin:
-        <ul>';
+        <ul class="mb-0">';
+    foreach ($_SESSION['form_errors'] as $error) {
+        $content .= '<li>' . htmlspecialchars($error) . '</li>';
+    }
+    $content .= '</ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+    unset($_SESSION['form_errors']);
+}
+
+if (isset($_SESSION['error_messages'])) {
+    $content .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> Lütfen aşağıdaki hataları düzeltin:
+        <ul class="mb-0">';
     foreach ($_SESSION['error_messages'] as $error) {
         $content .= '<li>' . htmlspecialchars($error) . '</li>';
     }
-    $content .= '</ul></div>';
+    $content .= '</ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
     unset($_SESSION['error_messages']);
 }
 
 $content .= '
             <form id="youthRegistrationForm" method="POST" action="' . BASE_URL . '/youth-registration/submit" enctype="multipart/form-data">
+                
+                <!-- CSRF Token for security -->
+                <input type="hidden" name="csrf_token" value="' . (isset($csrf_token) ? $csrf_token : '') . '">
+                
+                <!-- Honeypot field for bot protection (hidden from users) -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" value="" placeholder="Leave this field empty">
+                </div>
                 
                 <!-- Öğrenci Bilgileri Bölümü -->
                 <div class="form-section">

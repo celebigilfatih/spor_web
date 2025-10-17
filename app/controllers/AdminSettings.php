@@ -49,11 +49,34 @@ class AdminSettings extends Controller
                     'stadium_capacity' => $this->sanitizeInput($_POST['stadium_capacity'])
                 ];
 
+                // Handle logo upload
+                if (isset($_FILES['site_logo']) && $_FILES['site_logo']['error'] === UPLOAD_ERR_OK) {
+                    $uploadResult = $this->uploadFile($_FILES['site_logo'], ['jpg', 'jpeg', 'png', 'svg']);
+                    if ($uploadResult['success']) {
+                        $settings['site_logo'] = $uploadResult['filename'];
+                    }
+                }
+
+                // Handle favicon upload
+                if (isset($_FILES['site_favicon']) && $_FILES['site_favicon']['error'] === UPLOAD_ERR_OK) {
+                    $uploadResult = $this->uploadFile($_FILES['site_favicon'], ['ico', 'png']);
+                    if ($uploadResult['success']) {
+                        $settings['site_favicon'] = $uploadResult['filename'];
+                    }
+                }
+
                 $success = true;
+                $errorMessages = [];
                 foreach ($settings as $key => $value) {
-                    if (!$this->settingsModel->updateSetting($key, $value)) {
+                    try {
+                        if (!$this->settingsModel->updateSetting($key, $value)) {
+                            $success = false;
+                            $errorMessages[] = "Failed to update: $key";
+                        }
+                    } catch (Exception $e) {
                         $success = false;
-                        break;
+                        $errorMessages[] = "Error updating $key: " . $e->getMessage();
+                        error_log("Settings update error for $key: " . $e->getMessage());
                     }
                 }
 
@@ -61,7 +84,7 @@ class AdminSettings extends Controller
                     $data['message'] = 'Ayarlar başarıyla güncellendi!';
                     $data['settings'] = $this->settingsModel->getAllSettings(); // Refresh settings
                 } else {
-                    $data['error'] = 'Ayarlar güncellenirken bir hata oluştu!';
+                    $data['error'] = 'Ayarlar güncellenirken bir hata oluştu! ' . implode(', ', $errorMessages);
                 }
             }
         }

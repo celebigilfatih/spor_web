@@ -25,14 +25,29 @@
             </div>
             
             <?php if (!empty($error)): ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="fas fa-exclamation-triangle"></i>
                     <?php echo htmlspecialchars($error); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
             
-            <form method="POST" action="<?php echo BASE_URL; ?>/admin/login">
+            <?php if (isset($_GET['expired']) && $_GET['expired'] == '1'): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fas fa-clock"></i>
+                    Oturumunuz zaman aşımına uğradı. Lütfen tekrar giriş yapınız.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+            
+            <form method="POST" action="<?php echo BASE_URL; ?>/admin/login" id="adminLoginForm">
+                <!-- CSRF Token for security -->
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                
+                <!-- Honeypot field for bot protection (hidden from users) -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" value="" placeholder="Leave this field empty">
+                </div>
                 
                 <div class="form-group">
                     <label for="email" class="form-label">
@@ -60,14 +75,20 @@
                 </div>
                 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-admin-primary w-100">
+                    <button type="submit" class="btn btn-admin-primary w-100" id="loginButton">
                         <i class="fas fa-sign-in-alt"></i> Giriş Yap
                     </button>
                 </div>
             </form>
             
             <div class="text-center mt-3">
-                <a href="<?php echo BASE_URL; ?>/admin/forgot-password" class="text-gray">
+                <small class="text-muted">
+                    <i class="fas fa-shield-alt"></i> Güvenli bağlantı ile korunmaktadır
+                </small>
+            </div>
+            
+            <div class="text-center mt-3">
+                <a href="<?php echo BASE_URL; ?>/admin/auth/forgot-password" class="text-gray">
                     Şifremi Unuttum
                 </a>
             </div>

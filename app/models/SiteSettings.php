@@ -31,16 +31,13 @@ class SiteSettings extends Model
         
         if ($existing !== null) {
             // Mevcut ayarı güncelle
-            $sql = "UPDATE {$this->table} SET setting_value = :value WHERE setting_key = :key";
+            $sql = "UPDATE {$this->table} SET setting_value = :value, updated_at = NOW() WHERE setting_key = :key";
             return $this->db->execute($sql, ['value' => $value, 'key' => $key]);
         } else {
             // Yeni ayar oluştur
-            return $this->create([
-                'setting_key' => $key,
-                'setting_value' => $value,
-                'setting_type' => $type,
-                'description' => $description
-            ]);
+            $sql = "INSERT INTO {$this->table} (setting_key, setting_value, setting_group, created_at) 
+                    VALUES (:key, :value, 'general', NOW())";
+            return $this->db->execute($sql, ['key' => $key, 'value' => $value]);
         }
     }
 

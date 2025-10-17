@@ -50,9 +50,28 @@ class Controller
      */
     public function requireAdmin()
     {
+        // Check if admin is logged in
         if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
             $this->redirect('admin/login');
         }
+        
+        // Check session timeout (30 minutes of inactivity)
+        $timeout = 1800; // 30 minutes
+        if (isset($_SESSION['last_activity'])) {
+            $elapsed = time() - $_SESSION['last_activity'];
+            
+            if ($elapsed > $timeout) {
+                // Session expired
+                session_unset();
+                session_destroy();
+                session_start();
+                $_SESSION['session_expired'] = true;
+                $this->redirect('admin/login?expired=1');
+            }
+        }
+        
+        // Update last activity time
+        $_SESSION['last_activity'] = time();
     }
 
     /**
@@ -83,6 +102,122 @@ class Controller
             return array_map([$this, 'sanitizeInput'], $input);
         }
         return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Email doğrulama
+     */
+    public function validateEmail($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
+
+    /**
+     * Telefon numarası doğrulama (Basit format)
+     */
+    public function validatePhone($phone)
+    {
+        // Türk telefon numaraları için basit validasyon
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+        return strlen($phone) >= 10 && strlen($phone) <= 11;
+    }
+
+    /**
+     * Honeypot alanı kontrolü (bot koruması)
+     */
+    public function validateHoneypot($honeypotField = 'website')
+    {
+        // Eğer honeypot alanı doldurulmuşsa, bu bir bot'tur
+        return empty($_POST[$honeypotField]);
+    }
+
+    /**
+     * Rate limiting kontrolü
+     */
+    public function checkRateLimit($action, $maxAttempts = 5, $timeWindow = 3600)
+    {
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $key = 'rate_limit_' . $action . '_' . md5($ip);
+        
+        // Oturum bazlı rate limiting
+        if (!isset($_SESSION[$key])) {
+            $_SESSION[$key] = [
+                'count' => 0,
+                'first_attempt' => time()
+            ];
+        }
+        
+        $rateData = $_SESSION[$key];
+        $timeElapsed = time() - $rateData['first_attempt'];
+        
+        // Zaman penceresi geçtiğinde sıfırla
+        if ($timeElapsed > $timeWindow) {
+            $_SESSION[$key] = [
+                'count' => 1,
+                'first_attempt' => time()
+            ];
+            return true;
+        }
+        
+        // Maksimum deneme sayısını kontrol et
+        if ($rateData['count'] >= $maxAttempts) {
+            $remainingTime = $timeWindow - $timeElapsed;
+            return [
+                'allowed' => false,
+                'remaining_time' => $remainingTime,
+                'message' => "Fazla deneme yaptınız. Lütfen " . ceil($remainingTime / 60) . " dakika sonra tekrar deneyin."
+            ];
+        }
+        
+        // Deneme sayısını artır
+        $_SESSION[$key]['count']++;
+        return true;
+    }
+
+    /**
+     * Gelişmiş input sanitizasyonu
+     */
+    public function sanitizeInputAdvanced($input, $type = 'text')
+    {
+        if (is_array($input)) {
+            return array_map(function($item) use ($type) {
+                return $this->sanitizeInputAdvanced($item, $type);
+            }, $input);
+        }
+        
+        // Trim
+        $input = trim($input);
+        
+        switch ($type) {
+            case 'email':
+                return filter_var($input, FILTER_SANITIZE_EMAIL);
+            
+            case 'phone':
+                return preg_replace('/[^0-9+\(\)\s-]/', '', $input);
+            
+            case 'number':
+                return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+            
+            case 'url':
+                return filter_var($input, FILTER_SANITIZE_URL);
+            
+            case 'alphanumeric':
+                return preg_replace('/[^a-zA-Z0-9\s]/', '', $input);
+            
+            case 'text':
+            default:
+                // XSS koruması için htmlspecialchars
+                return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+        }
+    }
+
+    /**
+     * SQL injection korumalı input
+     */
+    public function sanitizeForDatabase($input)
+    {
+        // Bu fonksiyon sadece ek bir katman, PDO prepared statements kullanılıyor
+        return $this->sanitizeInput($input);
     }
 
     /**

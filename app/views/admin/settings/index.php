@@ -22,8 +22,54 @@ if (!empty($error)) {
 
 $content .= '
 <div class="admin-content-card">
-    <form action="' . BASE_URL . '/admin/settings" method="POST" class="admin-form">
+    <form action="' . BASE_URL . '/admin/settings" method="POST" enctype="multipart/form-data" class="admin-form">
         <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
+        
+        <div class="settings-section">
+            <h3><i class="fas fa-image"></i> Logo ve Görseller</h3>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="admin-form-group">
+                        <label for="site_logo" class="admin-form-label">
+                            <i class="fas fa-file-image"></i> Site Logosu
+                        </label>
+                        <input type="file" 
+                               id="site_logo" 
+                               name="site_logo" 
+                               class="admin-form-control" 
+                               accept="image/jpeg,image/png,image/svg+xml">
+                        <small class="form-text text-muted">Önerilen boyut: 200x50px (JPG, PNG, SVG)</small>
+                        ' . (!empty($settings['site_logo']) ? '
+                        <div class="mt-2">
+                            <img src="' . BASE_URL . '/uploads/' . $settings['site_logo'] . '" alt="Mevcut Logo" style="max-height: 50px;">
+                            <p class="text-muted small mt-1">Mevcut logo</p>
+                        </div>
+                        ' : '') . '
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="admin-form-group">
+                        <label for="site_favicon" class="admin-form-label">
+                            <i class="fas fa-bookmark"></i> Favicon
+                        </label>
+                        <input type="file" 
+                               id="site_favicon" 
+                               name="site_favicon" 
+                               class="admin-form-control" 
+                               accept="image/x-icon,image/png">
+                        <small class="form-text text-muted">Favicon dosyası (ICO, PNG)</small>
+                        ' . (!empty($settings['site_favicon']) ? '
+                        <div class="mt-2">
+                            <img src="' . BASE_URL . '/uploads/' . $settings['site_favicon'] . '" alt="Mevcut Favicon" style="max-height: 32px;">
+                            <p class="text-muted small mt-1">Mevcut favicon</p>
+                        </div>
+                        ' : '') . '
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="settings-section">
             <h3><i class="fas fa-globe"></i> Genel Bilgiler</h3>
@@ -73,7 +119,7 @@ $content .= '
             </div>
             
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="admin-form-group">
                         <label for="club_colors" class="admin-form-label">
                             <i class="fas fa-palette"></i> Kulüp Renkleri
@@ -87,7 +133,7 @@ $content .= '
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="admin-form-group">
                         <label for="stadium_name" class="admin-form-label">
                             <i class="fas fa-building"></i> Stadyum Adı
@@ -101,7 +147,7 @@ $content .= '
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="admin-form-group">
                         <label for="stadium_capacity" class="admin-form-label">
                             <i class="fas fa-users"></i> Stadyum Kapasitesi
@@ -122,7 +168,7 @@ $content .= '
             <h3><i class="fas fa-phone"></i> İletişim Bilgileri</h3>
             
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="admin-form-group">
                         <label for="contact_email" class="admin-form-label">
                             <i class="fas fa-envelope"></i> E-posta
@@ -136,7 +182,7 @@ $content .= '
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="admin-form-group">
                         <label for="contact_phone" class="admin-form-label">
                             <i class="fas fa-phone"></i> Telefon
@@ -149,18 +195,21 @@ $content .= '
                                placeholder="+90 212 123 45 67">
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="admin-form-group">
+                    <label for="contact_address" class="admin-form-label">
+                        <i class="fas fa-map-marker-alt"></i> Adres
+                    </label>
+                    <textarea id="contact_address" 
+                            name="contact_address" 
+                            class="admin-form-control" 
+                            rows="2"
+                            placeholder="Tam adres bilgisi...">' . htmlspecialchars($settings['contact_address'] ?? '') . '</textarea>
+                        </div>
+                </div>
             </div>
             
-            <div class="admin-form-group">
-                <label for="contact_address" class="admin-form-label">
-                    <i class="fas fa-map-marker-alt"></i> Adres
-                </label>
-                <textarea id="contact_address" 
-                          name="contact_address" 
-                          class="admin-form-control" 
-                          rows="2"
-                          placeholder="Tam adres bilgisi...">' . htmlspecialchars($settings['contact_address'] ?? '') . '</textarea>
-            </div>
+
         </div>
         
         <div class="settings-section">
