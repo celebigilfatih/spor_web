@@ -12,10 +12,8 @@ class MatchModel extends Model
      */
     public function getAllMatches()
     {
-        $sql = "SELECT m.*, t.name as team_name 
-                FROM {$this->table} m 
-                LEFT JOIN teams t ON m.team_id = t.id 
-                ORDER BY m.match_date DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                ORDER BY match_date DESC";
         
         return $this->db->query($sql);
     }
@@ -25,17 +23,16 @@ class MatchModel extends Model
      */
     public function getUpcomingMatches($limit = 5)
     {
-        $sql = "SELECT m.*, t.name as team_name 
-                FROM {$this->table} m 
-                LEFT JOIN teams t ON m.team_id = t.id 
-                WHERE m.status = 'scheduled' AND m.match_date > NOW() 
-                ORDER BY m.match_date ASC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'scheduled' AND match_date > NOW() 
+                ORDER BY match_date ASC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";
         }
         
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return is_array($result) ? $result : [];
     }
 
     /**
@@ -43,11 +40,9 @@ class MatchModel extends Model
      */
     public function getRecentMatches($limit = 5)
     {
-        $sql = "SELECT m.*, t.name as team_name 
-                FROM {$this->table} m 
-                LEFT JOIN teams t ON m.team_id = t.id 
-                WHERE m.status = 'finished' 
-                ORDER BY m.match_date DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'finished' 
+                ORDER BY match_date DESC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";
@@ -79,11 +74,9 @@ class MatchModel extends Model
      */
     public function getBySeason($season)
     {
-        $sql = "SELECT m.*, t.name as team_name 
-                FROM {$this->table} m 
-                LEFT JOIN teams t ON m.team_id = t.id 
-                WHERE m.season = :season 
-                ORDER BY m.match_date DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE season = :season 
+                ORDER BY match_date DESC";
         
         return $this->db->query($sql, ['season' => $season]);
     }
@@ -93,17 +86,16 @@ class MatchModel extends Model
      */
     public function getResults($limit = 10)
     {
-        $sql = "SELECT m.*, t.name as team_name 
-                FROM {$this->table} m 
-                LEFT JOIN teams t ON m.team_id = t.id 
-                WHERE m.status = 'finished' AND m.home_score IS NOT NULL 
-                ORDER BY m.match_date DESC";
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE status = 'finished' AND home_score IS NOT NULL 
+                ORDER BY match_date DESC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";
         }
         
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+        return is_array($result) ? $result : [];
     }
 
     /**
