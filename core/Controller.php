@@ -10,10 +10,56 @@ class Controller
      */
     public function view($view, $data = [])
     {
+        // Bakım modu kontrolü
+        if ($this->isMaintenanceMode() && !$this->isAdminRoute()) {
+            // Bakım sayfasını göster
+            $settingsModel = $this->model('SiteSettings');
+            $maintenanceData = [
+                'maintenance_message' => $settingsModel->getSetting('maintenance_message', ''),
+                'maintenance_end_date' => $settingsModel->getSetting('maintenance_end_date', ''),
+                'contact_email' => $settingsModel->getSetting('contact_email', 'info@sporkulubu.com')
+            ];
+            
+            // Data dizisini değişkenlere çevir
+            extract($maintenanceData);
+            
+            require_once BASE_PATH . '/app/views/frontend/maintenance.php';
+            return;
+        }
+        
         // Data dizisini değişkenlere çevir
         extract($data);
         
         require_once BASE_PATH . '/app/views/' . $view . '.php';
+    }
+
+    /**
+     * Bakım modu kontrolü
+     */
+    private function isMaintenanceMode()
+    {
+        // Admin kullanıcıları bakım modundan etkilenmez
+        if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+            return false;
+        }
+        
+        // Site ayarlarını kontrol et
+        try {
+            $settingsModel = $this->model('SiteSettings');
+            $maintenanceMode = $settingsModel->getSetting('maintenance_mode', '0');
+            return $maintenanceMode === '1';
+        } catch (Exception $e) {
+            // Hata durumunda bakım modunu devre dışı bırak
+            return false;
+        }
+    }
+
+    /**
+     * Admin route kontrolü
+     */
+    private function isAdminRoute()
+    {
+        return strpos($_SERVER['REQUEST_URI'], '/admin/') !== false;
     }
 
     /**
