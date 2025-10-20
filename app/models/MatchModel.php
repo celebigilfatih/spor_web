@@ -8,6 +8,58 @@ class MatchModel extends Model
     protected $table = 'matches';
 
     /**
+     * Maç ekle
+     */
+    public function create($data)
+    {
+        // Temel sütunlar
+        $columns = [
+            'home_team',
+            'away_team',
+            'match_date',
+            'venue',
+            'status'
+        ];
+        
+        // Opsiyonel sütunlar (varsa ekle)
+        $optionalColumns = [
+            'team_id',
+            'competition',
+            'league',
+            'season',
+            'match_week',
+            'home_score',
+            'away_score',
+            'referee',
+            'attendance',
+            'weather_conditions',
+            'match_report',
+            'highlights_video'
+        ];
+        
+        // Verilen verilerdeki geçerli sütunları kontrol et
+        foreach ($optionalColumns as $column) {
+            if (isset($data[$column])) {
+                $columns[] = $column;
+            }
+        }
+        
+        // Sütunları ve yer tutucuları oluştur
+        $columnList = implode(', ', $columns);
+        $placeholders = ':' . implode(', :', $columns);
+        
+        $sql = "INSERT INTO {$this->table} ({$columnList}) VALUES ({$placeholders})";
+        
+        try {
+            $result = $this->db->execute($sql, $data);
+            return $result;
+        } catch (Exception $e) {
+            error_log("Match creation error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Tüm maçları getir (Admin panel için)
      */
     public function getAllMatches()
@@ -181,3 +233,4 @@ class MatchModel extends Model
         return $this->db->query($sql);
     }
 }
+?>
