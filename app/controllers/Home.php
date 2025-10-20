@@ -33,7 +33,7 @@ class Home extends Controller
             'featured_news' => $this->newsModel->getFeatured(3),
             'latest_news' => $this->newsModel->getPublished(6),
             'announcements' => $this->announcementModel->getActive(2),
-            'upcoming_matches' => $this->matchModel->getUpcomingMatches(3),
+            'upcoming_matches' => $this->matchModel->getUpcomingMatches(5),
             'recent_results' => $this->matchModel->getResults(3),
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),
             'site_settings' => $this->settingsModel->getAllSettings()

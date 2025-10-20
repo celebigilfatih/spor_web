@@ -243,147 +243,99 @@ $content = '
                             <i class="fas fa-chevron-left"></i>
                         </button>
                         <div class="matches-horizontal-scroll" id="matchesScroll">
-                            <!-- Sample Upcoming Matches -->
+                            ' . (
+                                (isset($upcoming_matches) && !empty($upcoming_matches) ? 
+                                    implode('', array_map(function($match) {
+                                        $months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+                                        $matchDate = strtotime($match['match_date']);
+                                        $day = date('d', $matchDate);
+                                        $month = $months[date('n', $matchDate) - 1];
+                                        $time = date('H:i', $matchDate);
+                                        return '
                             <div class="horizontal-match-card upcoming" data-type="upcoming">
                                 <div class="match-status-indicator">
                                     <span class="status-dot upcoming"></span>
                                     <span class="status-text">Yaklaşan</span>
                                 </div>
                                 <div class="match-date-section">
-                                    <div class="match-day">25</div>
-                                    <div class="match-month">Ekim</div>
+                                    <div class="match-day">' . $day . '</div>
+                                    <div class="match-month">' . $month . '</div>
                                 </div>
                                 <div class="match-time-section">
-                                    <div class="match-time">20:45</div>
+                                    <div class="match-time">' . $time . '</div>
                                 </div>
                                 <div class="teams-section">
                                     <div class="team home-team">
                                         <div class="team-logo">
-                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['home_team'])) . '.svg" alt="' . htmlspecialchars($match['home_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
                                         </div>
-                                        <div class="team-name">Fenerbahçe</div>
+                                        <div class="team-name">' . htmlspecialchars($match['home_team']) . '</div>
                                     </div>
                                     <div class="vs-section">
                                         <div class="vs-text">VS</div>
                                     </div>
                                     <div class="team away-team">
                                         <div class="team-logo">
-                                            <img src="/uploads/team-logos/galatasaray.svg" alt="Galatasaray" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['away_team'])) . '.svg" alt="' . htmlspecialchars($match['away_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
                                         </div>
-                                        <div class="team-name">Galatasaray</div>
+                                        <div class="team-name">' . htmlspecialchars($match['away_team']) . '</div>
                                     </div>
                                 </div>
                                 <div class="match-venue-section">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>Şükrü Saraçoğlu Stadyumu</span>
+                                    <span>' . htmlspecialchars($match['venue']) . '</span>
                                 </div>
-                            </div>
-                            
-                            <div class="horizontal-match-card upcoming" data-type="upcoming">
-                                <div class="match-status-indicator">
-                                    <span class="status-dot upcoming"></span>
-                                    <span class="status-text">Yaklaşan</span>
-                                </div>
-                                <div class="match-date-section">
-                                    <div class="match-day">30</div>
-                                    <div class="match-month">Ekim</div>
-                                </div>
-                                <div class="match-time-section">
-                                    <div class="match-time">19:00</div>
-                                </div>
-                                <div class="teams-section">
-                                    <div class="team home-team">
-                                        <div class="team-logo">
-                                            <img src="/uploads/team-logos/besiktas.svg" alt="Beşiktaş" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                        </div>
-                                        <div class="team-name">Beşiktaş</div>
-                                    </div>
-                                    <div class="vs-section">
-                                        <div class="vs-text">VS</div>
-                                    </div>
-                                    <div class="team away-team">
-                                        <div class="team-logo">
-                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                        </div>
-                                        <div class="team-name">Fenerbahçe</div>
-                                    </div>
-                                </div>
-                                <div class="match-venue-section">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Vodafone Park</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Sample Finished Matches -->
+                            </div>';
+                                    }, $upcoming_matches)) : '') .
+                                (isset($recent_results) && !empty($recent_results) ? 
+                                    implode('', array_map(function($match) {
+                                        $months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+                                        $matchDate = strtotime($match['match_date']);
+                                        $day = date('d', $matchDate);
+                                        $month = $months[date('n', $matchDate) - 1];
+                                        return '
                             <div class="horizontal-match-card finished" data-type="finished">
                                 <div class="match-status-indicator">
                                     <span class="status-dot finished"></span>
                                     <span class="status-text">Tamamlandı</span>
                                 </div>
                                 <div class="match-date-section">
-                                    <div class="match-day">20</div>
-                                    <div class="match-month">Ekim</div>
+                                    <div class="match-day">' . $day . '</div>
+                                    <div class="match-month">' . $month . '</div>
                                 </div>
                                 <div class="match-score-section">
-                                    <div class="final-score">2 - 1</div>
+                                    <div class="final-score">' . ($match['home_score'] ?? '0') . ' - ' . ($match['away_score'] ?? '0') . '</div>
                                 </div>
                                 <div class="teams-section">
                                     <div class="team home-team">
                                         <div class="team-logo">
-                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['home_team'])) . '.svg" alt="' . htmlspecialchars($match['home_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
                                         </div>
-                                        <div class="team-name">Fenerbahçe</div>
+                                        <div class="team-name">' . htmlspecialchars($match['home_team']) . '</div>
                                     </div>
                                     <div class="vs-section">
                                         <div class="vs-text">VS</div>
                                     </div>
                                     <div class="team away-team">
                                         <div class="team-logo">
-                                            <img src="/uploads/team-logos/trabzonspor.svg" alt="Trabzonspor" onerror="this.src=\'/uploads/team-logos/default.svg\'">
+                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['away_team'])) . '.svg" alt="' . htmlspecialchars($match['away_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
                                         </div>
-                                        <div class="team-name">Trabzonspor</div>
+                                        <div class="team-name">' . htmlspecialchars($match['away_team']) . '</div>
                                     </div>
                                 </div>
                                 <div class="match-venue-section">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>Şükrü Saraçoğlu Stadyumu</span>
+                                    <span>' . htmlspecialchars($match['venue']) . '</span>
                                 </div>
-                            </div>
-                            
-                            <div class="horizontal-match-card finished" data-type="finished">
-                                <div class="match-status-indicator">
-                                    <span class="status-dot finished"></span>
-                                    <span class="status-text">Tamamlandı</span>
-                                </div>
-                                <div class="match-date-section">
-                                    <div class="match-day">15</div>
-                                    <div class="match-month">Ekim</div>
-                                </div>
-                                <div class="match-score-section">
-                                    <div class="final-score">3 - 0</div>
-                                </div>
-                                <div class="teams-section">
-                                    <div class="team home-team">
-                                        <div class="team-logo">
-                                            <img src="/uploads/team-logos/basaksehir.svg" alt="Başakşehir" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                        </div>
-                                        <div class="team-name">Başakşehir</div>
-                                    </div>
-                                    <div class="vs-section">
-                                        <div class="vs-text">VS</div>
-                                    </div>
-                                    <div class="team away-team">
-                                        <div class="team-logo">
-                                            <img src="/uploads/team-logos/fenerbahce.svg" alt="Fenerbahçe" onerror="this.src=\'/uploads/team-logos/default.svg\'">
-                                        </div>
-                                        <div class="team-name">Fenerbahçe</div>
-                                    </div>
-                                </div>
-                                <div class="match-venue-section">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Başakşehir Fatih Terim Stadyumu</span>
-                                </div>
-                            </div>
+                            </div>';
+                                    }, $recent_results)) : '') .
+                                ((!isset($upcoming_matches) || empty($upcoming_matches)) && (!isset($recent_results) || empty($recent_results)) ? '
+                            <div class="no-matches-message text-center py-5">
+                                <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">Henüz maç bulunmamaktadır</h5>
+                                <p class="text-muted">Yeni maçlar eklendiğinde burada görüntülenecektir.</p>
+                            </div>' : '')
+                            ) . '
                         </div>
                         <button class="nav-btn next-btn" onclick="scrollMatches(\'right\')">
                             <i class="fas fa-chevron-right"></i>
