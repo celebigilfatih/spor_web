@@ -97,6 +97,13 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/users" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-users-cog"></i>
+                            <span>Kullanıcı Yönetimi</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/settings" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-cog"></i>
                             <span>Ayarlar</span>

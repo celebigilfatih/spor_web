@@ -60,7 +60,7 @@ if (empty($players)) {
         if ($player['photo']) {
             $content .= '
                             <img src="' . BASE_URL . '/uploads/' . $player['photo'] . '" 
-                                 alt="' . htmlspecialchars($player['first_name'] . ' ' . $player['last_name']) . '"
+                                 alt="' . htmlspecialchars($player['name']) . '"
                                  class="w-12 h-12 object-cover rounded-full border">';
         } else {
             $content .= '
@@ -74,9 +74,9 @@ if (empty($players)) {
                     </td>
                     <td>
                         <div class="player-info">
-                            <strong>' . htmlspecialchars($player['first_name'] . ' ' . $player['last_name']) . '</strong>';
+                            <strong>' . htmlspecialchars($player['name']) . '</strong>';
         
-        if ($player['is_captain']) {
+        if (isset($player['is_captain']) && $player['is_captain']) {
             $content .= '
                             <span class="badge badge-warning ml-2">
                                 <i class="fas fa-crown"></i> KAPTAN
@@ -159,8 +159,8 @@ if (empty($players)) {
     if (!empty($players)) {
         $totalPlayers = count($players);
         $activePlayers = count(array_filter($players, function($p) { return $p['status'] === 'active'; }));
-        $captains = count(array_filter($players, function($p) { return $p['is_captain']; }));
-        $foreigners = count(array_filter($players, function($p) { return $p['nationality'] !== 'Türkiye'; }));
+        $captains = count(array_filter($players, function($p) { return isset($p['is_captain']) && $p['is_captain']; }));
+        $foreigners = count(array_filter($players, function($p) { return isset($p['nationality']) && $p['nationality'] !== 'Türkiye'; }));
         
         $content .= '
     

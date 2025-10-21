@@ -8,7 +8,7 @@ $content = '
             </div>
             <div class="header-text">
                 <h1>Oyuncu Düzenle</h1>
-                <p class="header-subtitle">' . htmlspecialchars($player['first_name'] . ' ' . $player['last_name']) . ' oyuncusunun bilgilerini güncelleyin</p>
+                <p class="header-subtitle">' . htmlspecialchars($player['name']) . ' oyuncusunun bilgilerini güncelleyin</p>
             </div>
         </div>
         <div class="header-actions">
@@ -43,8 +43,8 @@ $content = '
                     
                     <div class="form-fields-grid">
                         <div class="modern-input-group">
-                            <label for="first_name" class="modern-label">
-                                <span class="label-text">Ad</span>
+                            <label for="full_name" class="modern-label">
+                                <span class="label-text">Ad Soyad</span>
                                 <span class="required-indicator">*</span>
                             </label>
                             <div class="input-wrapper">
@@ -52,30 +52,11 @@ $content = '
                                     <i class="fas fa-user"></i>
                                 </div>
                                 <input type="text" 
-                                       id="first_name" 
-                                       name="first_name" 
+                                       id="full_name" 
+                                       name="full_name" 
                                        class="modern-input" 
-                                       placeholder="Oyuncunun adı"
-                                       value="' . htmlspecialchars($player['first_name']) . '"
-                                       required>
-                            </div>
-                        </div>
-
-                        <div class="modern-input-group">
-                            <label for="last_name" class="modern-label">
-                                <span class="label-text">Soyad</span>
-                                <span class="required-indicator">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <input type="text" 
-                                       id="last_name" 
-                                       name="last_name" 
-                                       class="modern-input" 
-                                       placeholder="Oyuncunun soyadı"
-                                       value="' . htmlspecialchars($player['last_name']) . '"
+                                       placeholder="Oyuncunun tam adı"
+                                       value="' . htmlspecialchars($player['name']) . '"
                                        required>
                             </div>
                         </div>

@@ -12,10 +12,10 @@ if (getenv('DB_HOST') || isset($_ENV['DB_HOST'])) {
 
 require_once 'core/Database.php';
 require_once 'core/Model.php';
-require_once 'app/models/TechnicalStaff.php';
+require_once 'app/models/TechnicalStaffModel.php';
 
 try {
-    $staffModel = new TechnicalStaff();
+    $staffModel = new TechnicalStaffModel();
     
     echo "Testing staff insertion...\n";
     

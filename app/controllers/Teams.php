@@ -101,7 +101,7 @@ class Teams extends Controller
         }
 
         $data = [
-            'title' => $player['first_name'] . ' ' . $player['last_name'],
+            'title' => $player['name'],
             'player' => $player,
             'related_players' => $this->playerModel->getByPosition($player['position'], $player['team_id']),
             'site_settings' => $this->settingsModel->getAllSettings()

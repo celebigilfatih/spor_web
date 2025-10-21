@@ -94,16 +94,11 @@ class News extends Controller
     public function search()
     {
         $keyword = $_GET['q'] ?? '';
+        $keyword = trim($keyword);
         $results = [];
         
         if (!empty($keyword)) {
-            $sql = "SELECT * FROM news 
-                    WHERE (title LIKE :keyword OR content LIKE :keyword) 
-                    AND status = 'published' 
-                    ORDER BY published_at DESC 
-                    LIMIT 20";
-            
-            $results = $this->newsModel->db->query($sql, ['keyword' => "%{$keyword}%"]);
+            $results = $this->newsModel->search($keyword, 20);
         }
 
         $data = [

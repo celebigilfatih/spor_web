@@ -10,7 +10,7 @@ class AdminStaff extends Controller
     public function __construct()
     {
         $this->requireAdmin();
-        $this->staffModel = $this->model('TechnicalStaff');
+        $this->staffModel = $this->model('TechnicalStaffModel');
     }
 
     /**

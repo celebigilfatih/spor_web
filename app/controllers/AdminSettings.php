@@ -101,6 +101,15 @@ class AdminSettings extends Controller
     public function media()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $csrf_token = $_POST['csrf_token'] ?? '';
+            
+            // CSRF token kontrolü
+            if (!$this->validateCSRFToken($csrf_token)) {
+                $_SESSION['error'] = 'Güvenlik hatası! Lütfen sayfayı yenileyip tekrar deneyin.';
+                $this->redirect('admin/settings/media');
+                return;
+            }
+            
             $updates = [];
 
             // Handle logo upload
@@ -139,6 +148,7 @@ class AdminSettings extends Controller
         $data = [
             'title' => 'Medya Ayarları',
             'settings' => $this->settingsModel->getAllSettings(),
+            'csrf_token' => $this->generateCSRFToken(),
             'message' => $_SESSION['message'] ?? '',
             'error' => $_SESSION['error'] ?? ''
         ];
@@ -155,6 +165,15 @@ class AdminSettings extends Controller
     public function seo()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $csrf_token = $_POST['csrf_token'] ?? '';
+            
+            // CSRF token kontrolü
+            if (!$this->validateCSRFToken($csrf_token)) {
+                $_SESSION['error'] = 'Güvenlik hatası! Lütfen sayfayı yenileyip tekrar deneyin.';
+                $this->redirect('admin/settings/seo');
+                return;
+            }
+            
             $seoSettings = [
                 'meta_keywords' => $this->sanitizeInput($_POST['meta_keywords']),
                 'meta_description' => $this->sanitizeInput($_POST['meta_description']),
@@ -181,6 +200,7 @@ class AdminSettings extends Controller
         $data = [
             'title' => 'SEO Ayarları',
             'settings' => $this->settingsModel->getAllSettings(),
+            'csrf_token' => $this->generateCSRFToken(),
             'message' => $_SESSION['message'] ?? '',
             'error' => $_SESSION['error'] ?? ''
         ];
@@ -197,6 +217,15 @@ class AdminSettings extends Controller
     public function maintenance()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $csrf_token = $_POST['csrf_token'] ?? '';
+            
+            // CSRF token kontrolü
+            if (!$this->validateCSRFToken($csrf_token)) {
+                $_SESSION['error'] = 'Güvenlik hatası! Lütfen sayfayı yenileyip tekrar deneyin.';
+                $this->redirect('admin/settings/maintenance');
+                return;
+            }
+            
             $maintenanceSettings = [
                 'maintenance_mode' => isset($_POST['maintenance_mode']) ? '1' : '0',
                 'maintenance_message' => $this->sanitizeInput($_POST['maintenance_message']),
@@ -221,6 +250,7 @@ class AdminSettings extends Controller
         $data = [
             'title' => 'Bakım Modu',
             'settings' => $this->settingsModel->getAllSettings(),
+            'csrf_token' => $this->generateCSRFToken(),
             'message' => $_SESSION['message'] ?? '',
             'error' => $_SESSION['error'] ?? ''
         ];

@@ -15,7 +15,7 @@ class Player extends Model
         $sql = "SELECT p.*, t.name as team_name 
                 FROM {$this->table} p 
                 LEFT JOIN teams t ON p.team_id = t.id 
-                ORDER BY p.last_name ASC, p.first_name ASC";
+                ORDER BY p.name ASC";
         
         return $this->db->query($sql);
     }
@@ -106,7 +106,7 @@ class Player extends Model
      */
     public function getTopScorers($season = null, $limit = 10)
     {
-        $sql = "SELECT p.first_name, p.last_name, p.jersey_number, p.photo, t.name as team_name,
+        $sql = "SELECT p.name, p.jersey_number, p.photo, t.name as team_name,
                        SUM(s.goals) as total_goals
                 FROM {$this->table} p
                 LEFT JOIN teams t ON p.team_id = t.id
@@ -172,7 +172,7 @@ class Player extends Model
                 FROM {$this->table} p 
                 LEFT JOIN teams t ON p.team_id = t.id 
                 WHERE p.status = 'injured' 
-                ORDER BY p.last_name ASC";
+                ORDER BY p.name ASC";
         
         return $this->db->query($sql);
     }
@@ -195,9 +195,9 @@ class Player extends Model
         $sql = "SELECT p.*, t.name as team_name 
                 FROM {$this->table} p 
                 LEFT JOIN teams t ON p.team_id = t.id 
-                WHERE (p.first_name LIKE :keyword OR p.last_name LIKE :keyword) 
+                WHERE p.name LIKE :keyword 
                 AND p.status = 'active' 
-                ORDER BY p.last_name ASC";
+                ORDER BY p.name ASC";
         
         return $this->db->query($sql, ['keyword' => "%{$keyword}%"]);
     }

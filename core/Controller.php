@@ -141,13 +141,17 @@ class Controller
 
     /**
      * Input temizleme
+     * NOT to use htmlspecialchars here - we store raw UTF-8 in database
+     * Only encode when displaying in views for XSS protection
      */
     public function sanitizeInput($input)
     {
         if (is_array($input)) {
             return array_map([$this, 'sanitizeInput'], $input);
         }
-        return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+        // Just trim, don't encode - preserve Turkish characters
+        // XSS protection will be applied in views with htmlspecialchars()
+        return trim($input);
     }
 
     /**

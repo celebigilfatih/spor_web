@@ -8,6 +8,129 @@ class TechnicalStaffModel extends Model
     protected $table = 'technical_staff';
 
     /**
+     * Get staff member by ID
+     */
+    public function findById($id)
+    {
+        $sql = "SELECT ts.*, t.name as team_name 
+                FROM {$this->table} ts 
+                LEFT JOIN teams t ON ts.team_id = t.id 
+                WHERE ts.id = :id";
+        
+        $result = $this->db->query($sql, ['id' => $id]);
+        
+        if (is_array($result) && !empty($result)) {
+            return $result[0];
+        }
+        
+        return null;
+    }
+
+    /**
+     * Create new staff member
+     */
+    public function create($data)
+    {
+        $sql = "INSERT INTO {$this->table} 
+                (name, role, experience_years, license, bio, photo, team_id, status, sort_order, created_at) 
+                VALUES 
+                (:name, :role, :experience_years, :license, :bio, :photo, :team_id, :status, :sort_order, NOW())";
+        
+        return $this->db->execute($sql, [
+            'name' => $data['name'] ?? '',
+            'role' => $data['role'] ?? '',
+            'experience_years' => $data['experience'] ?? 0,
+            'license' => $data['license'] ?? '',
+            'bio' => $data['bio'] ?? '',
+            'photo' => $data['photo'] ?? null,
+            'team_id' => $data['team_id'] ?? null,
+            'status' => $data['status'] ?? 'active',
+            'sort_order' => $data['sort_order'] ?? 0
+        ]);
+    }
+
+    /**
+     * Update staff member
+     */
+    public function update($id, $data)
+    {
+        $fields = [];
+        $params = ['id' => $id];
+
+        if (isset($data['name'])) {
+            $fields[] = 'name = :name';
+            $params['name'] = $data['name'];
+        }
+
+        if (isset($data['role'])) {
+            $fields[] = 'role = :role';
+            $params['role'] = $data['role'];
+        }
+
+        if (isset($data['experience'])) {
+            $fields[] = 'experience_years = :experience_years';
+            $params['experience_years'] = $data['experience'];
+        }
+
+        if (isset($data['license'])) {
+            $fields[] = 'license = :license';
+            $params['license'] = $data['license'];
+        }
+
+        if (isset($data['bio'])) {
+            $fields[] = 'bio = :bio';
+            $params['bio'] = $data['bio'];
+        }
+
+        if (isset($data['photo'])) {
+            $fields[] = 'photo = :photo';
+            $params['photo'] = $data['photo'];
+        }
+
+        if (isset($data['team_id'])) {
+            $fields[] = 'team_id = :team_id';
+            $params['team_id'] = $data['team_id'];
+        }
+
+        if (isset($data['status'])) {
+            $fields[] = 'status = :status';
+            $params['status'] = $data['status'];
+        }
+
+        if (isset($data['sort_order'])) {
+            $fields[] = 'sort_order = :sort_order';
+            $params['sort_order'] = $data['sort_order'];
+        }
+
+        if (empty($fields)) {
+            return false;
+        }
+
+        $fields[] = 'updated_at = NOW()';
+
+        $sql = "UPDATE {$this->table} SET " . implode(', ', $fields) . " WHERE id = :id";
+        
+        return $this->db->execute($sql, $params);
+    }
+
+    /**
+     * Delete staff member
+     */
+    public function delete($id)
+    {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        return $this->db->execute($sql, ['id' => $id]);
+    }
+
+    /**
+     * Get last database error
+     */
+    public function getLastError()
+    {
+        return $this->db->getLastError();
+    }
+
+    /**
      * Tüm teknik kadroyu getir (admin paneli için)
      */
     public function getAllStaff()
