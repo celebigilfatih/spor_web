@@ -1,0 +1,326 @@
+/**
+ * Technical Staff Page Styles
+ */
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.03)"/></svg>') repeat;
+    opacity: 0.1;
+}
+
+.page-header .breadcrumb {
+    background: transparent;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.page-header .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #002d72 0%, #00408e 100%);
+    border-radius: 2px;
+}
+
+/* Head Coach Profile */
+.head-coach-profile {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.head-coach-profile:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+}
+
+.coach-photo img {
+    border: 5px solid #f8fafc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.coach-photo img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.coach-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #002d72;
+    margin-bottom: 0.5rem;
+}
+
+.coach-title {
+    font-size: 1.125rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.coach-details {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.coach-details .detail-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.coach-details .detail-item:last-child {
+    border-bottom: none;
+}
+
+.coach-details .detail-item strong {
+    color: #002d72;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.coach-bio {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #475569;
+}
+
+/* Staff Category */
+.staff-category {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.category-title i {
+    font-size: 1.75rem;
+}
+
+/* Staff Cards */
+.staff-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+}
+
+.staff-photo {
+    position: relative;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.staff-photo img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.staff-card:hover .staff-photo img {
+    transform: scale(1.1);
+}
+
+.staff-info {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #002d72;
+    margin-bottom: 0.5rem;
+}
+
+.staff-position {
+    font-size: 1rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.staff-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.staff-details span {
+    font-size: 0.875rem;
+    color: #475569;
+    padding: 0.5rem 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.staff-details span i {
+    color: #002d72;
+}
+
+.staff-details .experience {
+    border-left: 3px solid #10b981;
+}
+
+.staff-details .license {
+    border-left: 3px solid #f59e0b;
+}
+
+/* Philosophy Section */
+.philosophy-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.philosophy-points {
+    margin-top: 2rem;
+}
+
+.philosophy-item {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.philosophy-item:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.philosophy-item i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.philosophy-item h5 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.philosophy-item p {
+    font-size: 0.9375rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Empty State */
+.text-center p.text-muted {
+    font-size: 1.125rem;
+    color: #94a3b8 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .coach-name {
+        font-size: 1.5rem;
+    }
+
+    .category-title {
+        font-size: 1.25rem;
+    }
+
+    .staff-photo img {
+        height: 200px;
+    }
+
+    .philosophy-item {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.staff-card,
+.head-coach-profile,
+.philosophy-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.staff-card:nth-child(1) { animation-delay: 0.1s; }
+.staff-card:nth-child(2) { animation-delay: 0.2s; }
+.staff-card:nth-child(3) { animation-delay: 0.3s; }
+.staff-card:nth-child(4) { animation-delay: 0.4s; }
+.staff-card:nth-child(5) { animation-delay: 0.5s; }
+.staff-card:nth-child(6) { animation-delay: 0.6s; }

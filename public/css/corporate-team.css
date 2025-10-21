@@ -1,0 +1,788 @@
+/* Corporate Team Pages - Unified Stylesheet */
+/* For: index, fixtures, stats, squad, and player pages */
+
+/* ========================================
+   ABOUT TEAM SECTION
+   ======================================== */
+.about-team-section {
+    padding: 5rem 0;
+    background: #fff;
+}
+
+.about-content {
+    padding-right: 2rem;
+}
+
+.about-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.about-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #002d72 0%, #00408e 100%);
+    border-radius: 2px;
+}
+
+.about-text p {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 1.5rem;
+}
+
+.team-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 3px solid #002d72;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    background: #f1f5f9;
+    transform: translateX(5px);
+}
+
+.value-item i {
+    font-size: 1.25rem;
+    color: #002d72;
+}
+
+.value-item span {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.about-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.about-stat-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.about-stat-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+}
+
+.stat-icon-large {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.stat-icon-large.primary {
+    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+}
+
+.stat-icon-large.success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.stat-icon-large.warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.stat-icon-large.info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.stat-number-large {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label-large {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   TEAM SECTIONS NAV
+   ======================================== */
+.team-sections-nav {
+    padding: 4rem 0;
+    background: #f8fafc;
+}
+
+/* ========================================
+   CORPORATE PAGE HEADER
+   ======================================== */
+.corporate-page-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: 3rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.corporate-page-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+.corporate-breadcrumb {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.corporate-breadcrumb a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.corporate-breadcrumb a:hover {
+    color: #fff;
+}
+
+.corporate-breadcrumb .separator {
+    margin: 0 0.75rem;
+    color: #475569;
+}
+
+.corporate-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.corporate-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.corporate-subtitle {
+    font-size: 1.125rem;
+    color: #cbd5e1;
+    max-width: 600px;
+    font-weight: 400;
+}
+
+/* ========================================
+   STATS DASHBOARD
+   ======================================== */
+.corporate-stats-section {
+    padding: 3rem 0;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.corporate-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.corporate-stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.corporate-stat-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+    border-color: #cbd5e1;
+}
+
+.corporate-stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.corporate-stat-icon.primary {
+    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+}
+
+.corporate-stat-icon.success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.corporate-stat-icon.warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.corporate-stat-icon.info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.corporate-stat-icon.danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.corporate-stat-content {
+    flex: 1;
+}
+
+.corporate-stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.corporate-stat-label {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   NAVIGATION CARDS
+   ======================================== */
+.corporate-nav-section {
+    padding: 4rem 0;
+    background: #fff;
+}
+
+.corporate-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.corporate-nav-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.corporate-nav-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-color: #002d72;
+}
+
+.corporate-nav-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.75rem;
+    color: #fff;
+}
+
+.corporate-nav-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.corporate-nav-card p {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.corporate-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 45, 114, 0.2);
+}
+
+.corporate-nav-btn:hover {
+    background: linear-gradient(135deg, #00408e 0%, #002d72 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 45, 114, 0.3);
+    color: #fff;
+    text-decoration: none;
+}
+
+.corporate-nav-btn i {
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   MATCH CARDS
+   ======================================== */
+.corporate-matches-section {
+    padding: 4rem 0;
+    background: #f8fafc;
+}
+
+.corporate-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.corporate-match-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.corporate-match-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.corporate-match-date {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.corporate-match-date i {
+    color: #94a3b8;
+}
+
+.corporate-match-teams {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.corporate-team-name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.corporate-match-score {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #002d72;
+    text-align: center;
+}
+
+.corporate-match-venue {
+    font-size: 0.875rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.corporate-match-venue i {
+    color: #94a3b8;
+}
+
+.corporate-match-status {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.corporate-match-status.upcoming {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.corporate-match-status.finished {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+/* ========================================
+   FIXTURES PAGE
+   ======================================== */
+.corporate-fixture-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.corporate-fixture-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.corporate-fixture-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.corporate-fixture-date {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.corporate-fixture-body {
+    padding: 1.5rem;
+}
+
+.corporate-fixture-teams {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.corporate-fixture-vs {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+/* ========================================
+   STATISTICS TABLES
+   ======================================== */
+.corporate-stats-table {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.corporate-stats-table-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #fff;
+    padding: 1.5rem;
+}
+
+.corporate-stats-table-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.corporate-stats-table-body {
+    padding: 1.5rem;
+}
+
+.corporate-stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.corporate-stat-row:last-child {
+    border-bottom: none;
+}
+
+.corporate-stat-row-label {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.corporate-stat-row-value {
+    font-size: 1.125rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+/* ========================================
+   LEAGUE TABLE
+   ======================================== */
+.corporate-league-table {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.corporate-league-table table {
+    width: 100%;
+    margin: 0;
+}
+
+.corporate-league-table th {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #fff;
+    padding: 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.corporate-league-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.875rem;
+}
+
+.corporate-league-table tr:last-child td {
+    border-bottom: none;
+}
+
+.corporate-league-table tr:hover {
+    background: #f8fafc;
+}
+
+.corporate-league-table .our-team {
+    background: linear-gradient(90deg, rgba(0, 45, 114, 0.05) 0%, rgba(0, 45, 114, 0.02) 100%);
+    border-left: 3px solid #002d72;
+}
+
+.corporate-league-table .our-team td {
+    font-weight: 700;
+    color: #002d72;
+}
+
+/* ========================================
+   FORM DISPLAY
+   ======================================== */
+.corporate-form-display {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.corporate-form-matches {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.corporate-match-result {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.corporate-match-result.win {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.corporate-match-result.draw {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.corporate-match-result.loss {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.corporate-form-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.corporate-form-stat {
+    text-align: center;
+}
+
+.corporate-form-stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.corporate-form-stat-value {
+    display: block;
+    font-size: 1.5rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .corporate-title {
+        font-size: 2rem;
+    }
+    
+    .corporate-subtitle {
+        font-size: 1rem;
+    }
+    
+    .corporate-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .corporate-nav-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .corporate-match-teams {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .corporate-fixture-teams {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .corporate-form-matches {
+        gap: 0.5rem;
+    }
+    
+    .corporate-match-result {
+        width: 40px;
+        height: 40px;
+        font-size: 0.875rem;
+    }
+    
+    /* About section responsive */
+    .about-content {
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .about-title {
+        font-size: 1.75rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .team-values {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .about-stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-icon-large {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+    
+    .stat-number-large {
+        font-size: 2rem;
+    }
+}

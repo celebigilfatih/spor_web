@@ -32,20 +32,19 @@ class TechnicalStaffModel extends Model
     public function create($data)
     {
         $sql = "INSERT INTO {$this->table} 
-                (name, role, experience_years, license, bio, photo, team_id, status, sort_order, created_at) 
+                (name, position, experience_years, license_type, bio, photo, team_id, status, created_at) 
                 VALUES 
-                (:name, :role, :experience_years, :license, :bio, :photo, :team_id, :status, :sort_order, NOW())";
+                (:name, :position, :experience_years, :license_type, :bio, :photo, :team_id, :status, NOW())";
         
         return $this->db->execute($sql, [
             'name' => $data['name'] ?? '',
-            'role' => $data['role'] ?? '',
-            'experience_years' => $data['experience'] ?? 0,
-            'license' => $data['license'] ?? '',
+            'position' => $data['role'] ?? $data['position'] ?? '',
+            'experience_years' => $data['experience'] ?? $data['experience_years'] ?? 0,
+            'license_type' => $data['license'] ?? $data['license_type'] ?? '',
             'bio' => $data['bio'] ?? '',
             'photo' => $data['photo'] ?? null,
             'team_id' => $data['team_id'] ?? null,
-            'status' => $data['status'] ?? 'active',
-            'sort_order' => $data['sort_order'] ?? 0
+            'status' => $data['status'] ?? 'active'
         ]);
     }
 
@@ -62,19 +61,19 @@ class TechnicalStaffModel extends Model
             $params['name'] = $data['name'];
         }
 
-        if (isset($data['role'])) {
-            $fields[] = 'role = :role';
-            $params['role'] = $data['role'];
+        if (isset($data['role']) || isset($data['position'])) {
+            $fields[] = 'position = :position';
+            $params['position'] = $data['role'] ?? $data['position'];
         }
 
-        if (isset($data['experience'])) {
+        if (isset($data['experience']) || isset($data['experience_years'])) {
             $fields[] = 'experience_years = :experience_years';
-            $params['experience_years'] = $data['experience'];
+            $params['experience_years'] = $data['experience'] ?? $data['experience_years'];
         }
 
-        if (isset($data['license'])) {
-            $fields[] = 'license = :license';
-            $params['license'] = $data['license'];
+        if (isset($data['license']) || isset($data['license_type'])) {
+            $fields[] = 'license_type = :license_type';
+            $params['license_type'] = $data['license'] ?? $data['license_type'];
         }
 
         if (isset($data['bio'])) {
@@ -95,11 +94,6 @@ class TechnicalStaffModel extends Model
         if (isset($data['status'])) {
             $fields[] = 'status = :status';
             $params['status'] = $data['status'];
-        }
-
-        if (isset($data['sort_order'])) {
-            $fields[] = 'sort_order = :sort_order';
-            $params['sort_order'] = $data['sort_order'];
         }
 
         if (empty($fields)) {
@@ -138,7 +132,7 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                ORDER BY ts.role ASC, ts.name ASC";
+                ORDER BY ts.position ASC, ts.name ASC";
         
         return $this->db->query($sql);
     }
@@ -152,7 +146,7 @@ class TechnicalStaffModel extends Model
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
                 WHERE ts.status = 'active' 
-                ORDER BY ts.sort_order ASC, ts.role ASC";
+                ORDER BY ts.id ASC, ts.position ASC";
         
         return $this->db->query($sql);
     }
@@ -164,7 +158,7 @@ class TechnicalStaffModel extends Model
     {
         $sql = "SELECT * FROM {$this->table} 
                 WHERE (team_id = :team_id OR team_id IS NULL) AND status = 'active' 
-                ORDER BY sort_order ASC";
+                ORDER BY id ASC";
         
         return $this->db->query($sql, ['team_id' => $teamId]);
     }
@@ -177,10 +171,10 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                WHERE ts.role = :role AND ts.status = 'active' 
-                ORDER BY ts.sort_order ASC";
+                WHERE ts.position = :position AND ts.status = 'active' 
+                ORDER BY ts.id ASC";
         
-        return $this->db->query($sql, ['role' => $role]);
+        return $this->db->query($sql, ['position' => $role]);
     }
 
     /**
@@ -199,9 +193,9 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                WHERE ts.role IN ('Baş Antrenör', 'Antrenör', 'Antrenör Yardımcısı') 
+                WHERE position LIKE '%Antrenör%' 
                 AND ts.status = 'active' 
-                ORDER BY ts.sort_order ASC";
+                ORDER BY ts.id ASC";
         
         return $this->db->query($sql);
     }
@@ -214,9 +208,9 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                WHERE ts.role NOT IN ('Baş Antrenör', 'Antrenör', 'Antrenör Yardımcısı') 
+                WHERE position NOT LIKE '%Antrenör%' 
                 AND ts.status = 'active' 
-                ORDER BY ts.sort_order ASC";
+                ORDER BY ts.id ASC";
         
         return $this->db->query($sql);
     }
@@ -228,7 +222,7 @@ class TechnicalStaffModel extends Model
     {
         $sql = "SELECT * FROM {$this->table} 
                 WHERE team_id IS NULL AND status = 'active' 
-                ORDER BY sort_order ASC";
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }
@@ -246,9 +240,10 @@ class TechnicalStaffModel extends Model
         ];
 
         foreach ($staff as $member) {
-            if (in_array($member['role'], ['Baş Antrenör', 'Antrenör', 'Antrenör Yardımcısı'])) {
+            $position = $member['position'] ?? '';
+            if (stripos($position, 'Antrenör') !== false) {
                 $grouped['coaches'][] = $member;
-            } elseif (in_array($member['role'], ['Takım Doktoru', 'Fizyoterapist', 'Masör'])) {
+            } elseif (stripos($position, 'Doktor') !== false || stripos($position, 'Fizyoterapist') !== false || stripos($position, 'Masör') !== false) {
                 $grouped['medical'][] = $member;
             } else {
                 $grouped['support'][] = $member;
@@ -265,8 +260,8 @@ class TechnicalStaffModel extends Model
     {
         $sql = "SELECT 
                     COUNT(*) as total_staff,
-                    COUNT(CASE WHEN role IN ('Baş Antrenör', 'Antrenör', 'Antrenör Yardımcısı') THEN 1 END) as coaches,
-                    COUNT(CASE WHEN role IN ('Takım Doktoru', 'Fizyoterapist') THEN 1 END) as medical_staff,
+                    COUNT(CASE WHEN position LIKE '%Antrenör%' THEN 1 END) as coaches,
+                    COUNT(CASE WHEN position LIKE '%Doktor%' OR position LIKE '%Fizyoterapist%' THEN 1 END) as medical_staff,
                     AVG(experience_years) as avg_experience
                 FROM {$this->table} 
                 WHERE status = 'active'";
@@ -281,8 +276,8 @@ class TechnicalStaffModel extends Model
     public function getHeadCoach()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role = 'Baş Antrenör' AND status = 'active' 
-                ORDER BY sort_order ASC 
+                WHERE position LIKE '%Baş Antrenör%' AND status = 'active' 
+                ORDER BY id ASC 
                 LIMIT 1";
         
         $result = $this->db->query($sql);
@@ -295,8 +290,12 @@ class TechnicalStaffModel extends Model
     public function getAssistantCoaches()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role LIKE '%Antrenör Yardımcısı%' AND status = 'active' 
-                ORDER BY sort_order ASC";
+                WHERE position LIKE '%Antrenör%' 
+                AND position NOT LIKE '%Baş Antrenör%' 
+                AND position NOT LIKE '%Kaleci%' 
+                AND position NOT LIKE '%Kondisyon%' 
+                AND status = 'active' 
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }
@@ -307,8 +306,8 @@ class TechnicalStaffModel extends Model
     public function getGoalkeepingCoaches()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role LIKE '%Kaleci%' AND status = 'active' 
-                ORDER BY sort_order ASC";
+                WHERE position LIKE '%Kaleci%' AND status = 'active' 
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }
@@ -319,8 +318,8 @@ class TechnicalStaffModel extends Model
     public function getFitnessCoaches()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role LIKE '%Kondisyon%' AND status = 'active' 
-                ORDER BY sort_order ASC";
+                WHERE position LIKE '%Kondisyon%' AND status = 'active' 
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }
@@ -331,8 +330,9 @@ class TechnicalStaffModel extends Model
     public function getMedicalStaff()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role IN ('Takım Doktoru', 'Fizyoterapist', 'Masör') AND status = 'active' 
-                ORDER BY sort_order ASC";
+                WHERE (position LIKE '%Doktor%' OR position LIKE '%Fizyoterapist%' OR position LIKE '%Masör%') 
+                AND status = 'active' 
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }
@@ -343,11 +343,14 @@ class TechnicalStaffModel extends Model
     public function getOtherStaff()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE role NOT IN ('Baş Antrenör', 'Antrenör Yardımcısı', 'Takım Doktoru', 'Fizyoterapist', 'Masör') 
-                AND role NOT LIKE '%Kaleci%' 
-                AND role NOT LIKE '%Kondisyon%' 
+                WHERE position NOT LIKE '%Antrenör%' 
+                AND position NOT LIKE '%Kaleci%' 
+                AND position NOT LIKE '%Kondisyon%' 
+                AND position NOT LIKE '%Doktor%' 
+                AND position NOT LIKE '%Fizyoterapist%' 
+                AND position NOT LIKE '%Masör%' 
                 AND status = 'active' 
-                ORDER BY sort_order ASC";
+                ORDER BY id ASC";
         
         return $this->db->query($sql);
     }

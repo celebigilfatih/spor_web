@@ -1,127 +1,161 @@
 <?php
 $content = '
-<!-- Page Header -->
-<section class="page-header bg-primary text-white py-5">
+<!-- Corporate Team Stylesheet -->
+<link rel="stylesheet" href="' . BASE_URL . '/css/corporate-team.css">
+
+<!-- Corporate Page Header -->
+<section class="corporate-page-header">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-4 fw-bold mb-2">A TAKIMI</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . '" class="text-warning">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">A Takımı</li>
-                    </ol>
-                </nav>
+        <div class="corporate-breadcrumb">
+            <a href="' . BASE_URL . '">Ana Sayfa</a>
+            <span class="separator">/</span>
+            <span>A Takımı</span>
+        </div>
+        <div class="corporate-header-content">
+            <h1 class="corporate-title">A Takımı</h1>
+            <p class="corporate-subtitle">En üst düzeyde mücadele eden, özveri, yetenek ve mükemmellik arayışıyla dolu ilk takımımız</p>
+        </div>
+    </div>
+</section>
+
+<!-- About A Team Section -->
+<section class="about-team-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="about-content">
+                    <h2 class="about-title">A Takımımız Hakkında</h2>
+                    <div class="about-text">
+                        <p>A Takımımız, kulübümüzün sportif mükemmeliyetinin zirvesini temsil eder. Elit sporcular ve deneyimli profesyonellerden oluşan ilk takımımız, en yüksek seviyede rekabet eder ve tüm organizasyonumuzun değerlerini, geleneklerini ve hedeflerini temsil eder.</p>
+                        
+                        <p>Zengin bir başarı geçmişine ve sürekli gelişim taahhüdüne sahip olan A Takımımız, olağanüstü beceri, taktik farkındalık ve takım çalışması sergiler. Her oyuncu benzersiz yetenekler ve özveri getirir, her maçta zafer için çabalayan uyumlu bir ekibe katkıda bulunur.</p>
+                        
+                        <p>Deneyimli teknik kadromuzun rehberliğinde takım, teknik mükemmellik, fiziksel kondisyon ve zihinsel hazırlığı vurgulayan profesyonel bir antrenman rejimine uyar. Yaklaşımımız, oyuncu gelişimini ve takım performansını en üst düzeye çıkarmak için modern spor bilimini zamana meydan okuyan yöntemlerle birleştirir.</p>
+                        
+                        <div class="team-values">
+                            <div class="value-item">
+                                <i class="fas fa-trophy"></i>
+                                <span>Rekabette Mükemmellik</span>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-users"></i>
+                                <span>Takım Ruhu ve Birlik</span>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Tutku ve Özveri</span>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-star"></i>
+                                <span>Profesyonel Standartlar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-stats-grid">
+                    <div class="about-stat-card">
+                        <div class="stat-icon-large success">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-number-large">15</div>
+                        <div class="stat-label-large">Şampiyonluk</div>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="stat-icon-large primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number-large">25</div>
+                        <div class="stat-label-large">Oyuncu</div>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="stat-icon-large warning">
+                            <i class="fas fa-futbol"></i>
+                        </div>
+                        <div class="stat-number-large">45</div>
+                        <div class="stat-label-large">Bu Sezon Gol</div>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="stat-icon-large info">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="stat-number-large">85</div>
+                        <div class="stat-label-large">Yıllık Tarih</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Team Stats -->
-<section class="team-stats-section py-5 bg-light">
+<!-- Team Sections Navigation -->
+<section class="team-sections-nav">
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-6 mb-4">
-                <div class="stat-card text-center">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy text-warning"></i>
-                    </div>
-                    <h3 class="stat-number">15</h3>
-                    <p class="stat-label">Şampiyonluk</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 mb-4">
-                <div class="stat-card text-center">
-                    <div class="stat-icon">
-                        <i class="fas fa-users text-primary"></i>
-                    </div>
-                    <h3 class="stat-number">25</h3>
-                    <p class="stat-label">Oyuncu</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 mb-4">
-                <div class="stat-card text-center">
-                    <div class="stat-icon">
-                        <i class="fas fa-futbol text-success"></i>
-                    </div>
-                    <h3 class="stat-number">45</h3>
-                    <p class="stat-label">Gol</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6 mb-4">
-                <div class="stat-card text-center">
-                    <div class="stat-icon">
-                        <i class="fas fa-medal text-info"></i>
-                    </div>
-                    <h3 class="stat-number">85</h3>
-                    <p class="stat-label">Yıllık Tecrübe</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        <h2 class="corporate-section-title">Takım Bilgileri</h2>
 
-<!-- Quick Navigation -->
-<section class="team-navigation py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="nav-card">
-                    <div class="nav-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Kadro</h3>
-                    <p>A Takımı oyuncularımızın detaylı bilgileri</p>
-                    <a href="' . BASE_URL . '/ateam/squad" class="btn btn-primary">Kadroyu Gör</a>
+        <div class="corporate-nav-grid">
+            <div class="corporate-nav-card">
+                <div class="corporate-nav-icon">
+                    <i class="fas fa-users"></i>
                 </div>
+                <h3>Takım Kadrosu</h3>
+                <p>Profesyonel sporcularımızla tanışın. Detaylı oyuncu profilleri, istatistikler ve kariyer bilgilerini görüntüleyin.</p>
+                <a href="' . BASE_URL . '/ateam/squad" class="corporate-nav-btn">
+                    Kadroyu Görüntüle
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            <div class="col-lg-4 mb-4">
-                <div class="nav-card">
-                    <div class="nav-icon">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <h3>Maç Programı</h3>
-                    <p>Yaklaşan maçlar ve geçmiş sonuçlar</p>
-                    <a href="' . BASE_URL . '/ateam/fixtures" class="btn btn-primary">Programı Gör</a>
+            <div class="corporate-nav-card">
+                <div class="corporate-nav-icon">
+                    <i class="fas fa-calendar"></i>
                 </div>
+                <h3>Maç Programı ve Sonuçlar</h3>
+                <p>Yaklaşan maçlarımızı kontrol edin ve detaylı istatistiklerle geçmiş performans sonuçlarını inceleyin.</p>
+                <a href="' . BASE_URL . '/ateam/fixtures" class="corporate-nav-btn">
+                    Programı Görüntüle
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            <div class="col-lg-4 mb-4">
-                <div class="nav-card">
-                    <div class="nav-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3>İstatistikler</h3>
-                    <p>Takım ve oyuncu istatistikleri</p>
-                    <a href="' . BASE_URL . '/ateam/stats" class="btn btn-primary">İstatistikleri Gör</a>
+            <div class="corporate-nav-card">
+                <div class="corporate-nav-icon">
+                    <i class="fas fa-chart-bar"></i>
                 </div>
+                <h3>Takım İstatistikleri</h3>
+                <p>Kapsamlı takım ve oyuncu performans verilerini, analizleri ve içgörüleri keşfedin.</p>
+                <a href="' . BASE_URL . '/ateam/stats" class="corporate-nav-btn">
+                    İstatistikleri Görüntüle
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Recent Matches -->
-<section class="recent-matches py-5 bg-light">
+<section class="corporate-matches-section">
     <div class="container">
-        <h2 class="section-title text-center mb-5">SON MAÇLAR</h2>
+        <h2 class="corporate-section-title">Son Maçlar</h2>
         <div class="row">
             ' . (isset($recent_matches) && !empty($recent_matches) ? 
                 implode('', array_map(function($match) {
                     return '
                     <div class="col-lg-6 mb-4">
-                        <div class="match-result-card">
-                            <div class="match-date">' . date('d.m.Y', strtotime($match['match_date'] ?? 'now')) . '</div>
-                            <div class="match-teams">
-                                <div class="team home">
-                                    <span class="team-name">' . htmlspecialchars($match['home_team'] ?? 'Ev Sahibi') . '</span>
-                                </div>
-                                <div class="match-score">
-                                    <span class="score">' . ($match['home_score'] ?? '0') . ' - ' . ($match['away_score'] ?? '0') . '</span>
-                                </div>
-                                <div class="team away">
-                                    <span class="team-name">' . htmlspecialchars($match['away_team'] ?? 'Deplasman') . '</span>
-                                </div>
+                        <div class="corporate-match-card">
+                            <div class="corporate-match-date">
+                                <i class="fas fa-calendar"></i>
+                                ' . date('d', strtotime($match['match_date'] ?? 'now')) . ' ' . 
+                                    ['01' => 'Ocak', '02' => 'Şubat', '03' => 'Mart', '04' => 'Nisan', 
+                                     '05' => 'Mayıs', '06' => 'Haziran', '07' => 'Temmuz', '08' => 'Ağustos', 
+                                     '09' => 'Eylül', '10' => 'Ekim', '11' => 'Kasım', '12' => 'Aralık'][date('m', strtotime($match['match_date'] ?? 'now'))] . ' ' . 
+                                    date('Y', strtotime($match['match_date'] ?? 'now')) . '
                             </div>
-                            <div class="match-venue">
+                            <div class="corporate-match-teams">
+                                <div class="corporate-team-name">' . htmlspecialchars($match['home_team'] ?? 'Ev Sahibi') . '</div>
+                                <div class="corporate-match-score">' . ($match['home_score'] ?? '0') . ' - ' . ($match['away_score'] ?? '0') . '</div>
+                                <div class="corporate-team-name">' . htmlspecialchars($match['away_team'] ?? 'Deplasman') . '</div>
+                            </div>
+                            <div class="corporate-match-venue">
                                 <i class="fas fa-map-marker-alt"></i>
                                 ' . htmlspecialchars($match['venue'] ?? 'Stadyum') . '
                             </div>
@@ -130,8 +164,9 @@ $content = '
                 }, $recent_matches)) : 
                 '
                 <div class="col-12">
-                    <div class="text-center">
-                        <p class="text-muted">Henüz maç sonucu bulunmamaktadır.</p>
+                    <div class="text-center py-5">
+                        <i class="fas fa-calendar-times" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+                        <p class="text-muted" style="font-size: 1.125rem;">Şu anda gösterilecek son maç bulunmamaktadır.</p>
                     </div>
                 </div>'
             ) . '
