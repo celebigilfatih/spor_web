@@ -24,10 +24,30 @@ function calculateYearsAtClub($joinedDate) {
 
 // Helper function to get default image
 function getStaffImage($photo, $position) {
-    if ($photo && file_exists(BASE_PATH . '/public/' . $photo)) {
-        return BASE_URL . '/public/' . $photo;
+    // Default placeholder
+    $defaultImage = BASE_URL . '/images/default-staff.svg';
+    
+    // If no photo provided, return default
+    if (empty($photo) || $photo === 'NULL' || $photo === null) {
+        return $defaultImage;
     }
-    return BASE_URL . '/images/default-staff.svg';
+    
+    // If photo starts with http:// or https://, return as is (external URL)
+    if (preg_match('/^https?:\/\//', $photo)) {
+        return $photo;
+    }
+    
+    // Clean the photo path
+    $photo = trim($photo);
+    $photo = ltrim($photo, '/');
+    
+    // If photo starts with 'uploads/', return it directly
+    if (strpos($photo, 'uploads/') === 0) {
+        return BASE_URL . '/' . $photo;
+    }
+    
+    // If photo doesn't have uploads/ prefix, add it
+    return BASE_URL . '/uploads/' . $photo;
 }
 
 $content = '

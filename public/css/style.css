@@ -1101,8 +1101,6 @@ body {
     color: white;
     padding: 60px 0;
     margin: -30px -15px 0 -15px;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.2);
 }
 
 .page-title {

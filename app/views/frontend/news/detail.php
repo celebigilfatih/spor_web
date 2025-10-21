@@ -24,7 +24,7 @@ $content = '
         <div class="row">
             
             <!-- Main Content -->
-            <div class="col-lg-8 mb-5">
+            <div class="col-lg-10 mb-5">
                 <article class="news-detail-article">
                     
                     <!-- Featured Image -->
@@ -150,77 +150,6 @@ $content = '
                 ' : '') . '
             </div>
             
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                
-                <!-- Latest News -->
-                <div class="sidebar-widget mb-4">
-                    <h4 class="widget-title">
-                        <i class="fas fa-clock me-2"></i>
-                        Son Haberler
-                    </h4>
-                    <div class="latest-news-list">
-                        <div class="latest-news-item mb-3 pb-3 border-bottom">
-                            <h6 class="mb-2">
-                                <a href="#">Yeni transfer açıklaması yapıldı</a>
-                            </h6>
-                            <small class="text-muted">
-                                <i class="fas fa-calendar me-1"></i>
-                                ' . date('d.m.Y') . '
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Categories -->
-                <div class="sidebar-widget mb-4">
-                    <h4 class="widget-title">
-                        <i class="fas fa-folder me-2"></i>
-                        Kategoriler
-                    </h4>
-                    <div class="categories-list">
-                        <a href="' . BASE_URL . '/news/category/futbol" class="category-item d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                            <span><i class="fas fa-futbol me-2"></i>Futbol</span>
-                            <span class="badge bg-primary">12</span>
-                        </a>
-                        <a href="' . BASE_URL . '/news/category/basketbol" class="category-item d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                            <span><i class="fas fa-basketball-ball me-2"></i>Basketbol</span>
-                            <span class="badge bg-primary">8</span>
-                        </a>
-                        <a href="' . BASE_URL . '/news/category/voleybol" class="category-item d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                            <span><i class="fas fa-volleyball-ball me-2"></i>Voleybol</span>
-                            <span class="badge bg-primary">5</span>
-                        </a>
-                        <a href="' . BASE_URL . '/news/category/transfer" class="category-item d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                            <span><i class="fas fa-exchange-alt me-2"></i>Transfer</span>
-                            <span class="badge bg-primary">15</span>
-                        </a>
-                        <a href="' . BASE_URL . '/news/category/genel" class="category-item d-flex justify-content-between align-items-center mb-2 p-2 rounded">
-                            <span><i class="fas fa-newspaper me-2"></i>Genel</span>
-                            <span class="badge bg-primary">20</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Newsletter -->
-                <div class="sidebar-widget newsletter-widget">
-                    <h4 class="widget-title">
-                        <i class="fas fa-envelope me-2"></i>
-                        Haber Bülteni
-                    </h4>
-                    <p class="mb-3">Son haberleri e-posta ile almak için kayıt olun.</p>
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="E-posta adresiniz" required>
-                        </div>
-                        <button type="submit" class="btn btn-warning w-100">
-                            <i class="fas fa-paper-plane me-2"></i>
-                            Kayıt Ol
-                        </button>
-                    </form>
-                </div>
-                
-            </div>
         </div>
     </div>
 </section>

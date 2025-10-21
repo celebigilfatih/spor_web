@@ -177,20 +177,6 @@ $content = '
                     </div>
                 </div>
 
-                <!-- Newsletter -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">HABER BÜLTENİ</h3>
-                    <p>Son haberleri e-posta ile almak için kayıt olun.</p>
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="E-posta adresiniz">
-                        </div>
-                        <button type="submit" class="btn btn-warning w-100">
-                            <i class="fas fa-envelope me-2"></i>
-                            Kayıt Ol
-                        </button>
-                    </form>
-                </div>
 
             </div>
         </div>

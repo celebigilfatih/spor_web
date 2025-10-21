@@ -266,18 +266,12 @@ $content = '
                                 </div>
                                 <div class="teams-section">
                                     <div class="team home-team">
-                                        <div class="team-logo">
-                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['home_team'])) . '.svg" alt="' . htmlspecialchars($match['home_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
-                                        </div>
                                         <div class="team-name">' . htmlspecialchars($match['home_team']) . '</div>
                                     </div>
                                     <div class="vs-section">
                                         <div class="vs-text">VS</div>
                                     </div>
                                     <div class="team away-team">
-                                        <div class="team-logo">
-                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['away_team'])) . '.svg" alt="' . htmlspecialchars($match['away_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
-                                        </div>
                                         <div class="team-name">' . htmlspecialchars($match['away_team']) . '</div>
                                     </div>
                                 </div>
@@ -308,18 +302,14 @@ $content = '
                                 </div>
                                 <div class="teams-section">
                                     <div class="team home-team">
-                                        <div class="team-logo">
-                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['home_team'])) . '.svg" alt="' . htmlspecialchars($match['home_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
-                                        </div>
+
                                         <div class="team-name">' . htmlspecialchars($match['home_team']) . '</div>
                                     </div>
                                     <div class="vs-section">
                                         <div class="vs-text">VS</div>
                                     </div>
                                     <div class="team away-team">
-                                        <div class="team-logo">
-                                            <img src="' . BASE_URL . '/uploads/team-logos/' . strtolower(str_replace(' ', '-', $match['away_team'])) . '.svg" alt="' . htmlspecialchars($match['away_team']) . '" onerror="this.src=\'' . BASE_URL . '/uploads/team-logos/default.svg\'">
-                                        </div>
+
                                         <div class="team-name">' . htmlspecialchars($match['away_team']) . '</div>
                                     </div>
                                 </div>
