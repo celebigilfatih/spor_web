@@ -59,7 +59,11 @@ class AdminYouthGroups extends Controller
                 'max_age' => (int)($_POST['max_age'] ?? 0),
                 'coach_name' => $this->sanitizeInput($_POST['coach_name'] ?? ''),
                 'assistant_coach' => $this->sanitizeInput($_POST['assistant_coach'] ?? ''),
-                'training_days' => $this->formatTrainingSchedule($_POST['training_days'] ?? [], $_POST['training_times'] ?? []),
+                'training_days' => $this->formatTrainingSchedule(
+                    $_POST['training_days'] ?? [], 
+                    $_POST['training_times'] ?? [],
+                    $_POST['training_locations'] ?? []
+                ),
                 'training_time' => '', // Will be included in training_days
                 'max_capacity' => (int)($_POST['max_capacity'] ?? 25),
                 'season' => $this->sanitizeInput($_POST['season'] ?? '2024-25'),
@@ -119,7 +123,11 @@ class AdminYouthGroups extends Controller
                 'max_age' => (int)($_POST['max_age'] ?? 0),
                 'coach_name' => $this->sanitizeInput($_POST['coach_name'] ?? ''),
                 'assistant_coach' => $this->sanitizeInput($_POST['assistant_coach'] ?? ''),
-                'training_days' => $this->formatTrainingSchedule($_POST['training_days'] ?? [], $_POST['training_times'] ?? []),
+                'training_days' => $this->formatTrainingSchedule(
+                    $_POST['training_days'] ?? [], 
+                    $_POST['training_times'] ?? [],
+                    $_POST['training_locations'] ?? []
+                ),
                 'training_time' => '', // Will be included in training_days
                 'max_capacity' => (int)($_POST['max_capacity'] ?? 25),
                 'season' => $this->sanitizeInput($_POST['season'] ?? '2024-25'),
@@ -203,9 +211,9 @@ class AdminYouthGroups extends Controller
     }
 
     /**
-     * Format training schedule from checkboxes and times
+     * Format training schedule from checkboxes, times and locations
      */
-    private function formatTrainingSchedule($days, $times)
+    private function formatTrainingSchedule($days, $times, $locations = [])
     {
         if (empty($days) || !is_array($days)) {
             return '';
@@ -214,11 +222,19 @@ class AdminYouthGroups extends Controller
         $schedule = [];
         foreach ($days as $day) {
             $time = $times[$day] ?? '';
+            $location = $locations[$day] ?? '';
+            
+            $parts = [$day];
+            
             if (!empty($time)) {
-                $schedule[] = $day . ' ' . $time;
-            } else {
-                $schedule[] = $day;
+                $parts[] = $time;
             }
+            
+            if (!empty($location)) {
+                $parts[] = $location;
+            }
+            
+            $schedule[] = implode(' ', $parts);
         }
 
         return implode(', ', $schedule);

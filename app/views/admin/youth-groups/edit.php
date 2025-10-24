@@ -148,56 +148,218 @@ $content = '
                     </div>
                 </div>
 
-                <!-- Antrenman Bilgileri -->
+                <!--Antrenman Bilgileri -->
                 <div class="shadcn-card">
                     <div class="shadcn-card-header">
                         <h3 class="shadcn-card-title">Antrenman Programı</h3>
-                        <p class="shadcn-card-description">Antrenman günleri ve saatleri</p>
+                        <p class="shadcn-card-description">Antrenman günleri, saatleri ve saha bilgileri</p>
                     </div>
                     <div class="shadcn-card-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="shadcn-form-group">
-                                <label for="training_days" class="shadcn-label">
-                                    Antrenman Günleri
+                        <div id="training-sessions-container">
+                            <!-- Haftalık Antrenman Programı -->
+                            <div class="mb-6">
+                                <label class="shadcn-label mb-3 block">
+                                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Haftalık Antrenman Programı
                                 </label>
-                                <input type="text" 
-                                       id="training_days" 
-                                       name="training_days" 
-                                       class="shadcn-input" 
-                                       placeholder="Pazartesi, Çarşamba, Cuma"
-                                       value="' . htmlspecialchars($_POST['training_days'] ?? $group['training_days'] ?? '') . '">
-                                <p class="shadcn-form-hint">Virgülle ayırarak yazınız</p>
+                                <div class="space-y-3">
+                                    <!-- Pazartesi -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_monday" 
+                                                   name="training_days[]" 
+                                                   value="Pazartesi"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_monday\')">
+                                            <label for="day_monday" class="text-sm font-medium">Pazartesi</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_monday" 
+                                               name="training_times[Pazartesi]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_monday" 
+                                               name="training_locations[Pazartesi]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Salı -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_tuesday" 
+                                                   name="training_days[]" 
+                                                   value="Salı"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_tuesday\')">
+                                            <label for="day_tuesday" class="text-sm font-medium">Salı</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_tuesday" 
+                                               name="training_times[Salı]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_tuesday" 
+                                               name="training_locations[Salı]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Çarşamba -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_wednesday" 
+                                                   name="training_days[]" 
+                                                   value="Çarşamba"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_wednesday\')">
+                                            <label for="day_wednesday" class="text-sm font-medium">Çarşamba</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_wednesday" 
+                                               name="training_times[Çarşamba]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_wednesday" 
+                                               name="training_locations[Çarşamba]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Perşembe -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_thursday" 
+                                                   name="training_days[]" 
+                                                   value="Perşembe"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_thursday\')">
+                                            <label for="day_thursday" class="text-sm font-medium">Perşembe</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_thursday" 
+                                               name="training_times[Perşembe]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_thursday" 
+                                               name="training_locations[Perşembe]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Cuma -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_friday" 
+                                                   name="training_days[]" 
+                                                   value="Cuma"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_friday\')">
+                                            <label for="day_friday" class="text-sm font-medium">Cuma</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_friday" 
+                                               name="training_times[Cuma]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_friday" 
+                                               name="training_locations[Cuma]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Cumartesi -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_saturday" 
+                                                   name="training_days[]" 
+                                                   value="Cumartesi"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_saturday\')">
+                                            <label for="day_saturday" class="text-sm font-medium">Cumartesi</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_saturday" 
+                                               name="training_times[Cumartesi]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_saturday" 
+                                               name="training_locations[Cumartesi]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                    
+                                    <!-- Pazar -->
+                                    <div class="flex items-center gap-4 p-3 border rounded-lg">
+                                        <div class="flex items-center" style="min-width: 120px;">
+                                            <input type="checkbox" 
+                                                   id="day_sunday" 
+                                                   name="training_days[]" 
+                                                   value="Pazar"
+                                                   class="shadcn-checkbox mr-2"
+                                                   onchange="toggleTimeField(this, \'time_sunday\')">
+                                            <label for="day_sunday" class="text-sm font-medium">Pazar</label>
+                                        </div>
+                                        <input type="time" 
+                                               id="time_sunday" 
+                                               name="training_times[Pazar]" 
+                                               class="shadcn-input" 
+                                               style="max-width: 120px;"
+                                               disabled>
+                                        <input type="text" 
+                                               id="location_sunday" 
+                                               name="training_locations[Pazar]" 
+                                               class="shadcn-input flex-1" 
+                                               placeholder="Saha / Lokasyon"
+                                               disabled>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="shadcn-form-group">
-                                <label for="training_time" class="shadcn-label">
-                                    Antrenman Saati
-                                </label>
-                                <input type="text" 
-                                       id="training_time" 
-                                       name="training_time" 
-                                       class="shadcn-input" 
-                                       placeholder="16:00-18:00"
-                                       value="' . htmlspecialchars($_POST['training_time'] ?? $group['training_time'] ?? '') . '">
-                            </div>
+                            <div class="grid grid-cols-1 gap-4">
+                                <div class="shadcn-form-group">
+                                    <label for="max_capacity" class="shadcn-label">
+                                        Maksimum Kapasite
+                                    </label>
+                                    <input type="number" 
+                                           id="max_capacity" 
+                                           name="max_capacity" 
+                                           class="shadcn-input" 
+                                           placeholder="25"
+                                           min="10"
+                                           max="50"
+                                           value="' . htmlspecialchars($_POST['max_capacity'] ?? $group['max_capacity'] ?? '25') . '">
+                                </div>
 
-                            <div class="shadcn-form-group">
-                                <label for="max_capacity" class="shadcn-label">
-                                    Maksimum Kapasite
-                                </label>
-                                <input type="number" 
-                                       id="max_capacity" 
-                                       name="max_capacity" 
-                                       class="shadcn-input" 
-                                       placeholder="25"
-                                       min="10"
-                                       max="50"
-                                       value="' . htmlspecialchars($_POST['max_capacity'] ?? $group['max_capacity'] ?? '25') . '">
-                            </div>
-
-                            <div class="shadcn-form-group">
-                                <label for="status" class="shadcn-label">
-                                    Durum
+                                <div class="shadcn-form-group">
+                                    <label for="status" class="shadcn-label">
+                                        Durum
                                 </label>
                                 <select id="status" name="status" class="shadcn-select">
                                     <option value="active"' . ((($_POST['status'] ?? $group['status'] ?? 'active') === 'active') ? ' selected' : '') . '>Aktif</option>
@@ -303,6 +465,84 @@ $content = '
         </div>
     </form>
 </div>
+
+<script>
+// Toggle time and location fields when day is selected
+function toggleTimeField(checkbox, timeId) {
+    const timeInput = document.getElementById(timeId);
+    const locationInput = document.getElementById(timeId.replace("time_", "location_"));
+    
+    if (checkbox.checked) {
+        timeInput.disabled = false;
+        locationInput.disabled = false;
+        timeInput.required = true;
+    } else {
+        timeInput.disabled = true;
+        locationInput.disabled = true;
+        timeInput.required = false;
+        timeInput.value = "";
+        locationInput.value = "";
+    }
+}
+
+// Parse existing training days and pre-fill form
+function parseTrainingSchedule() {
+    const trainingDays = `' . ($group['training_days'] ?? '') . '`;
+    if (!trainingDays) return;
+    
+    // Parse format: "Pazartesi 10:00, Perşembe 20:00" or "Pazartesi, Çarşamba, Cuma"
+    const days = trainingDays.split(",").map(d => d.trim());
+    
+    const dayMapping = {
+        "Pazartesi": "monday",
+        "Salı": "tuesday",
+        "Çarşamba": "wednesday",
+        "Perşembe": "thursday",
+        "Cuma": "friday",
+        "Cumartesi": "saturday",
+        "Pazar": "sunday"
+    };
+    
+    days.forEach(dayStr => {
+        // Try to extract day, time and location
+        const parts = dayStr.split(" ");
+        const dayName = parts[0];
+        const dayKey = dayMapping[dayName];
+        
+        if (dayKey) {
+            const checkbox = document.getElementById(`day_${dayKey}`);
+            const timeInput = document.getElementById(`time_${dayKey}`);
+            const locationInput = document.getElementById(`location_${dayKey}`);
+            
+            if (checkbox) {
+                checkbox.checked = true;
+                timeInput.disabled = false;
+                locationInput.disabled = false;
+                timeInput.required = true;
+                
+                // Extract time if present (format: "10:00" or "16:00-18:00")
+                if (parts.length > 1) {
+                    const timeStr = parts[1];
+                    if (timeStr.includes("-")) {
+                        // Extract start time from range
+                        timeInput.value = timeStr.split("-")[0];
+                    } else if (timeStr.match(/\d{1,2}:\d{2}/)) {
+                        timeInput.value = timeStr;
+                    }
+                }
+                
+                // Extract location if present (after time)
+                if (parts.length > 2) {
+                    locationInput.value = parts.slice(2).join(" ");
+                }
+            }
+        }
+    });
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", parseTrainingSchedule);
+</script>
 ';
 
 include BASE_PATH . '/app/views/admin/layout.php';

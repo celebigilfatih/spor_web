@@ -13,6 +13,11 @@
     <!-- Custom CSS inspired by Fenerbahçe -->
     <link href="<?= BASE_URL ?>/css/style.css" rel="stylesheet">
     
+    <!-- Additional page styles -->
+    <?php if (isset($additional_css)): ?>
+        <?= $additional_css ?>
+    <?php endif; ?>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= !empty($site_settings['site_favicon']) ? BASE_URL . '/uploads/' . $site_settings['site_favicon'] : BASE_URL . '/images/favicon.ico' ?>">
 </head>

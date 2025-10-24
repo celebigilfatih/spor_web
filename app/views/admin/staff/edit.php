@@ -59,14 +59,15 @@ $content .= '
             
             <div class="form-group">
                 <label for="experience" class="form-label">
-                    <i class="fas fa-clock"></i> Deneyim
+                    <i class="fas fa-clock"></i> Deneyim (Yıl)
                 </label>
-                <input type="text" 
+                <input type="number" 
                        id="experience" 
                        name="experience" 
                        class="form-control" 
-                       value="' . htmlspecialchars($staff['experience'] ?? '') . '"
-                       placeholder="Örn: 15 yıl">
+                       value="' . htmlspecialchars($staff['experience_years'] ?? '') . '"
+                       placeholder="Örn: 15"
+                       min="0">
             </div>
             
             <div class="form-group">
@@ -77,7 +78,7 @@ $content .= '
                        id="license" 
                        name="license" 
                        class="form-control" 
-                       value="' . htmlspecialchars($staff['license'] ?? '') . '"
+                       value="' . htmlspecialchars($staff['license_type'] ?? '') . '"
                        placeholder="Örn: UEFA PRO Lisansı">
             </div>
         </div>

@@ -1,4 +1,10 @@
 <?php
+// Add custom CSS for FAQ Chatbot
+$additional_css = '<link href="' . BASE_URL . '/css/faq-chatbot.css" rel="stylesheet">';
+
+// Add custom JS for FAQ Chatbot
+$scripts = ['faq-chatbot.js'];
+
 $content = '
 <!-- Page Header -->
 <section class="page-header bg-primary text-white py-5">
@@ -21,41 +27,82 @@ $content = '
 <section class="contact-section py-5">
     <div class="container">
         <div class="row">
-            <!-- Contact Form -->
+            <!-- FAQ Chatbot -->
             <div class="col-lg-8 mb-5">
-                <div class="contact-form-card">
-                    <h2 class="section-title mb-4">BİZE ULAŞIN</h2>
-                    
-                    ' . (!empty($message) ? '<div class="alert alert-success">' . $message . '</div>' : '') . '
-                    ' . (!empty($error) ? '<div class="alert alert-danger">' . $error . '</div>' : '') . '
-                    
-                    <form method="POST" action="' . BASE_URL . '/home/contact">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="name" class="form-label">Adınız Soyadınız *</label>
-                                <input type="text" class="form-control" id="name" name="name" 
-                                       value="' . ($_POST['name'] ?? '') . '" required>
+                <div class="faq-chatbot-card">
+                    <div class="chatbot-header">
+                        <div class="d-flex align-items-center">
+                            <div class="chatbot-avatar me-3">
+                                <i class="fas fa-comments"></i>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">E-posta Adresiniz *</label>
-                                <input type="email" class="form-control" id="email" name="email" 
-                                       value="' . ($_POST['email'] ?? '') . '" required>
+                            <div>
+                                <h2 class="section-title mb-1">SORU & CEVAP</h2>
+                                <p class="text-muted mb-0">Sıkça sorulan soruları görüntüleyin veya soru arayın</p>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">Konu *</label>
-                            <input type="text" class="form-control" id="subject" name="subject" 
-                                   value="' . ($_POST['subject'] ?? '') . '" required>
+                    </div>
+                    
+                    <!-- Search Box -->
+                    <div class="chatbot-search mb-4">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" 
+                                   id="faqSearch" 
+                                   class="form-control search-input" 
+                                   placeholder="Sorunuzu yazın veya anahtar kelime girin...">
+                            <button class="clear-search" id="clearSearch" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Mesajınız *</label>
-                            <textarea class="form-control" id="message" name="message" rows="6" required>' . ($_POST['message'] ?? '') . '</textarea>
+                    </div>
+                    
+                    <!-- Chat Messages Container -->
+                    <div class="chatbot-messages" id="chatbotMessages">
+                        <!-- Welcome Message -->
+                        <div class="message-bubble bot-message">
+                            <div class="message-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Merhaba! Size nasıl yardımcı olabilirim? Aşağıdaki kategorilerden birini seçebilir veya yukarıdaki arama kutusunu kullanabilirsiniz.</p>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-paper-plane me-2"></i>
-                            Mesajı Gönder
+                        
+                        <!-- FAQ Categories -->
+                        <div class="faq-categories" id="faqCategories">
+                            <button class="category-btn" data-category="kayit">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Kayıt & Üyelik</span>
+                            </button>
+                            <button class="category-btn" data-category="antrenman">
+                                <i class="fas fa-running"></i>
+                                <span>Antrenman</span>
+                            </button>
+                            <button class="category-btn" data-category="ucret">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Ücretler</span>
+                            </button>
+                            <button class="category-btn" data-category="genel">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Genel Bilgiler</span>
+                            </button>
+                        </div>
+                        
+                        <!-- FAQ Items Container -->
+                        <div class="faq-items" id="faqItems"></div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="chatbot-actions mt-4">
+                        <button class="btn btn-outline-primary btn-sm" id="resetChat">
+                            <i class="fas fa-redo me-2"></i>
+                            Başa Dön
                         </button>
-                    </form>
+                        <div class="text-muted small mt-2">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            İhtiyacınız olan bilgiyi bulamadınız mı? İletişim bilgilerimizden bize ulaşabilirsiniz.
+                        </div>
+                    </div>
                 </div>
             </div>
             
