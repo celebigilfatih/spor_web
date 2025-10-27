@@ -78,13 +78,13 @@ $content = '
                 </label>
                 <select id="competition" name="competition" class="admin-form-control">
                     <option value="">Müsabaka Seçiniz</option>
-                    <option value="Liga"' . (($match['competition'] ?? '') === 'Liga' ? ' selected' : '') . '>Liga</option>
-                    <option value="Kupa"' . (($match['competition'] ?? '') === 'Kupa' ? ' selected' : '') . '>Kupa</option>
-                    <option value="Hazırlık"' . (($match['competition'] ?? '') === 'Hazırlık' ? ' selected' : '') . '>Hazırlık Maçı</option>
-                    <option value="Play-off"' . (($match['competition'] ?? '') === 'Play-off' ? ' selected' : '') . '>Play-off</option>
-                    <option value="Şampiyonlar Ligi"' . (($match['competition'] ?? '') === 'Şampiyonlar Ligi' ? ' selected' : '') . '>Şampiyonlar Ligi</option>
-                    <option value="UEFA Kupası"' . (($match['competition'] ?? '') === 'UEFA Kupası' ? ' selected' : '') . '>UEFA Kupası</option>
-                    <option value="Süper Kupa"' . (($match['competition'] ?? '') === 'Süper Kupa' ? ' selected' : '') . '>Süper Kupa</option>
+                    <option value="Hazırlık Maçı"' . (($match['competition'] ?? '') === 'Hazırlık Maçı' ? ' selected' : '') . '>Hazırlık Maçı</option>
+                    <option value="U16 Ligi"' . (($match['competition'] ?? '') === 'U16 Ligi' ? ' selected' : '') . '>U16 Ligi</option>
+                    <option value="U15 Ligi"' . (($match['competition'] ?? '') === 'U15 Ligi' ? ' selected' : '') . '>U15 Ligi</option>
+                    <option value="U14 Ligi"' . (($match['competition'] ?? '') === 'U14 Ligi' ? ' selected' : '') . '>U14 Ligi</option>
+                    <option value="U13 Ligi"' . (($match['competition'] ?? '') === 'U13 Ligi' ? ' selected' : '') . '>U13 Ligi</option>
+                    <option value="U12 Ligi"' . (($match['competition'] ?? '') === 'U12 Ligi' ? ' selected' : '') . '>U12 Ligi</option>
+                    <option value="U11 Ligi"' . (($match['competition'] ?? '') === 'U11 Ligi' ? ' selected' : '') . '>U11 Ligi</option>
                 </select>
                 <small class="admin-form-text">Maçın türünü seçiniz.</small>
             </div>

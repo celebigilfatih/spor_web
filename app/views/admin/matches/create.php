@@ -81,13 +81,13 @@ $content = '
                 </label>
                 <select id="competition" name="competition" class="admin-form-control">
                     <option value="">Müsabaka Seçiniz</option>
-                    <option value="Liga">Liga</option>
-                    <option value="Kupa">Kupa</option>
-                    <option value="Hazırlık">Hazırlık Maçı</option>
-                    <option value="Play-off">Play-off</option>
-                    <option value="Şampiyonlar Ligi">Şampiyonlar Ligi</option>
-                    <option value="UEFA Kupası">UEFA Kupası</option>
-                    <option value="Süper Kupa">Süper Kupa</option>
+                    <option value="Hazırlık Maçı">Hazırlık Maçı</option>
+                    <option value="U16 Ligi">U16 Ligi</option>
+                    <option value="U15 Ligi">U15 Ligi</option>
+                    <option value="U14 Ligi">U14 Ligi</option>
+                    <option value="U13 Ligi">U13 Ligi</option>
+                    <option value="U12 Ligi">U12 Ligi</option>
+                    <option value="U11 Ligi">U11 Ligi</option>
                 </select>
                 <small class="admin-form-text">Maçın türünü seçiniz.</small>
             </div>
