@@ -34,13 +34,23 @@ class MatchModel extends Model
             'attendance',
             'weather_conditions',
             'match_report',
-            'highlights_video'
+            'highlights_video',
+            'created_at',
+            'updated_at'
         ];
         
         // Verilen verilerdeki geçerli sütunları kontrol et
         foreach ($optionalColumns as $column) {
-            if (isset($data[$column])) {
+            if (isset($data[$column]) && $data[$column] !== '') {
                 $columns[] = $column;
+            }
+        }
+        
+        // Sadece columns dizisindeki anahtarları içeren params dizisi oluştur
+        $params = [];
+        foreach ($columns as $column) {
+            if (isset($data[$column])) {
+                $params[$column] = $data[$column];
             }
         }
         
@@ -51,10 +61,12 @@ class MatchModel extends Model
         $sql = "INSERT INTO {$this->table} ({$columnList}) VALUES ({$placeholders})";
         
         try {
-            $result = $this->db->execute($sql, $data);
+            $result = $this->db->execute($sql, $params);
             return $result;
         } catch (Exception $e) {
             error_log("Match creation error: " . $e->getMessage());
+            error_log("SQL: " . $sql);
+            error_log("Params: " . print_r($params, true));
             return false;
         }
     }
