@@ -1,0 +1,30 @@
+{
+    "student": {
+        "name": "Ali Çelebigil",
+        "birth_date": "2018-04-24",
+        "birth_place": "Bursa",
+        "tc_number": "12345678900",
+        "father_name": "Fatih",
+        "mother_name": "Handan",
+        "school_info": "Bademli Sınav Koleji",
+        "first_club": "Mustafa Gönden"
+    },
+    "parent": {
+        "name": "Fatih Çelebigil",
+        "phone": "5305758377",
+        "address": "Ataevler Mh. Ulaşım Sk. Dimora City Sitesi H Blok K:9 No:34",
+        "email": "fatihcelebigil@gmail.com",
+        "father_job": "Yazılımcı",
+        "mother_job": "Finans"
+    },
+    "emergency": {
+        "contact": "Fatih Çelebigil",
+        "relation": "baba",
+        "phone": "5305758377"
+    },
+    "youth_group_id": null,
+    "photo_path": "\/uploads\/youth-photos\/68fdd6422dfae.jpg",
+    "status": "pending",
+    "created_at": "2025-10-26 11:05:22",
+    "created_by": "web_form"
+}

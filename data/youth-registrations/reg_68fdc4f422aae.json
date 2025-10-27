@@ -1,0 +1,30 @@
+{
+    "student": {
+        "name": "Fatih Çelebigil",
+        "birth_date": "2015-02-26",
+        "birth_place": "Bursa",
+        "tc_number": "12345678901",
+        "father_name": "Fatih",
+        "mother_name": "Handan",
+        "school_info": "Bademli Sınav Koleji",
+        "first_club": "Mudanya Spor"
+    },
+    "parent": {
+        "name": "Fatih Çelebigil",
+        "phone": "5305758377",
+        "address": "Ataevler Mh. Ulaşım Sk. Dimora City Sitesi H Blok K:9 No:34",
+        "email": "fatihcelebigil@gmail.com",
+        "father_job": "Yazılımcı",
+        "mother_job": "Finans"
+    },
+    "emergency": {
+        "contact": "Ali Yılmaz",
+        "relation": "hala",
+        "phone": "5530575847"
+    },
+    "youth_group_id": null,
+    "photo_path": "\/uploads\/youth-photos\/68fdc4f417e45_rdad.jpg",
+    "status": "pending",
+    "created_at": "2025-10-26 09:51:32",
+    "created_by": "web_form"
+}

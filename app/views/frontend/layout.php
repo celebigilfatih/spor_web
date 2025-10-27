@@ -57,11 +57,15 @@
         <!-- Main Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-5">
             <div class="container-fluid">
-                <a class="navbar-brand" href="<?= BASE_URL ?>">
-                    <?php if (!empty($site_settings['site_logo'])): ?>
+                <a class="navbar-brand d-flex align-items-center" href="<?= BASE_URL ?>">
+                    <?php if (!empty($site_settings['site_logo']) && file_exists(BASE_PATH . '/public/uploads/' . $site_settings['site_logo'])): ?>
                     <img src="<?= BASE_URL . '/uploads/' . $site_settings['site_logo'] ?>" alt="<?= $site_settings['site_title'] ?? 'Logo' ?>" height="50" class="me-2">
-                    <?php else: ?>
+                    <?php elseif (file_exists(BASE_PATH . '/public/images/logo.png')): ?>
                     <img src="<?= BASE_URL ?>/images/logo.png" alt="Logo" height="50" class="me-2">
+                    <?php else: ?>
+                    <div class="logo-placeholder bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 50px; height: 50px; font-weight: bold; font-size: 1.5em;">
+                        <?= strtoupper(substr($site_settings['site_title'] ?? 'SK', 0, 2)) ?>
+                    </div>
                     <?php endif; ?>
                     <span class="fw-bold"><?= strtoupper($site_settings['site_title'] ?? 'SPOR KULÜBÜ') ?></span>
                 </a>
@@ -87,9 +91,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/groups">GRUPLAR</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/ateam">A TAKIMI</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/technical-staff">TEKNİK KADRO</a>

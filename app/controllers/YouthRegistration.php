@@ -6,17 +6,16 @@ class YouthRegistration extends Controller {
         // Generate CSRF token
         $csrfToken = $this->generateCSRFToken();
         
-        // Load youth groups for selection
-        $youthGroupModel = $this->model('YouthGroup');
-        $youthGroups = $youthGroupModel->getActive();
+        // Load site settings for layout
+        $settingsModel = $this->model('SiteSettings');
         
         $data = [
             'title' => 'Alt Yapı Kayıt Formu',
             'page' => 'youth-registration',
-            'youth_groups' => $youthGroups,
             'csrf_token' => $csrfToken,
             'success' => isset($_GET['success']) ? true : false,
-            'errors' => $_SESSION['form_errors'] ?? []
+            'errors' => $_SESSION['form_errors'] ?? [],
+            'site_settings' => $settingsModel->getAllSettings()
         ];
         
         // Clear session errors after displaying
@@ -26,25 +25,59 @@ class YouthRegistration extends Controller {
     }
     
     public function submit() {
+        // CRITICAL DEBUG - Write to a test file to see if this method is called
+        file_put_contents('/var/www/html/public/SUBMIT_CALLED.txt', 'Submit method was called at ' . date('Y-m-d H:i:s') . "\n" . print_r($_POST, true) . "\n" . print_r($_FILES, true), FILE_APPEND);
+        
+        // Enable error logging
+        error_log('=== YOUTH REGISTRATION SUBMIT STARTED ===');
+        error_log('REQUEST_METHOD: ' . $_SERVER['REQUEST_METHOD']);
+        error_log('POST DATA: ' . print_r($_POST, true));
+        error_log('FILES DATA: ' . print_r($_FILES, true));
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
             
             // 1. CSRF Token Validation
             $csrfToken = $_POST['csrf_token'] ?? '';
+            error_log('CSRF Token Check - Received: ' . substr($csrfToken, 0, 20) . '...');
+            error_log('CSRF Token Check - Session: ' . substr($_SESSION['csrf_token'] ?? '', 0, 20) . '...');
+            
             if (!$this->validateCSRFToken($csrfToken)) {
+                error_log('CSRF VALIDATION FAILED!');
                 $errors[] = 'Güvenlik hatası! Lütfen sayfayı yenileyip tekrar deneyin.';
                 $_SESSION['form_errors'] = $errors;
                 $this->redirect('youth-registration');
                 return;
             }
+            error_log('CSRF Token validated successfully');
             
             // 2. Honeypot Validation (Bot Protection)
+            error_log('Checking honeypot field: website = ' . ($_POST['website'] ?? 'empty'));
             if (!$this->validateHoneypot('website')) {
                 // Bot detected - silently reject
+                error_log('BOT DETECTED - Honeypot filled!');
                 error_log('Bot detected in youth registration form from IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
                 $this->redirect('youth-registration?success=1'); // Fake success to confuse bots
                 return;
             }
+            error_log('Honeypot check passed');
+            
+            // 2.5. Math CAPTCHA Validation
+            $userAnswer = (int)($_POST['captcha_answer'] ?? -1);
+            $correctAnswer = (int)($_SESSION['captcha_answer'] ?? -999);
+            
+            error_log('CAPTCHA Check - User: ' . $userAnswer . ', Correct: ' . $correctAnswer);
+            
+            if ($userAnswer !== $correctAnswer) {
+                error_log('CAPTCHA VALIDATION FAILED!');
+                $errors[] = 'Güvenlik doğrulaması yanlış! Lütfen matematik sorusunu doğru cevaplayın.';
+                $_SESSION['form_errors'] = $errors;
+                $this->redirect('youth-registration');
+                return;
+            }
+            error_log('CAPTCHA validation passed');
+            // Clear used CAPTCHA
+            unset($_SESSION['captcha_answer']);
             
             // 3. Rate Limiting
             $rateLimitCheck = $this->checkRateLimit('youth_registration', 3, 1800); // 3 attempts per 30 minutes
@@ -57,56 +90,76 @@ class YouthRegistration extends Controller {
             
             // 4. Sanitize and collect form data
             $studentData = [
-                'full_name' => $this->sanitizeInputAdvanced($_POST['student_name'] ?? '', 'text'),
-                'youth_group_id' => $this->sanitizeInputAdvanced($_POST['youth_group_id'] ?? '', 'number'),
-                'first_club' => $this->sanitizeInputAdvanced($_POST['first_club'] ?? '', 'text'),
-                'birth_date' => $this->sanitizeInputAdvanced($_POST['birth_date'] ?? '', 'text'),
-                'birth_place' => $this->sanitizeInputAdvanced($_POST['birth_place'] ?? '', 'text'),
-                'tc_number' => $this->sanitizeInputAdvanced($_POST['tc_number'] ?? '', 'number'),
-                'father_name' => $this->sanitizeInputAdvanced($_POST['father_name'] ?? '', 'text'),
-                'mother_name' => $this->sanitizeInputAdvanced($_POST['mother_name'] ?? '', 'text'),
-                'school_info' => $this->sanitizeInputAdvanced($_POST['school_info'] ?? '', 'text'),
+                'full_name' => $this->sanitizeInput($_POST['student_name'] ?? ''),
+                'first_club' => $this->sanitizeInput($_POST['first_club'] ?? ''),
+                'birth_date' => $this->sanitizeInput($_POST['birth_date'] ?? ''),
+                'birth_place' => $this->sanitizeInput($_POST['birth_place'] ?? ''),
+                'tc_number' => preg_replace('/[^0-9]/', '', $_POST['tc_number'] ?? ''),
+                'father_name' => $this->sanitizeInput($_POST['father_name'] ?? ''),
+                'mother_name' => $this->sanitizeInput($_POST['mother_name'] ?? ''),
+                'school_info' => $this->sanitizeInput($_POST['school_info'] ?? ''),
                 'student_photo' => $_FILES['student_photo'] ?? null
             ];
             
             $parentData = [
-                'parent_name' => $this->sanitizeInputAdvanced($_POST['parent_name'] ?? '', 'text'),
-                'parent_phone' => $this->sanitizeInputAdvanced($_POST['parent_phone'] ?? '', 'phone'),
-                'address' => $this->sanitizeInputAdvanced($_POST['address'] ?? '', 'text'),
-                'email' => $this->sanitizeInputAdvanced($_POST['email'] ?? '', 'email'),
-                'father_job' => $this->sanitizeInputAdvanced($_POST['father_job'] ?? '', 'text'),
-                'mother_job' => $this->sanitizeInputAdvanced($_POST['mother_job'] ?? '', 'text'),
-                'emergency_contact_name' => $this->sanitizeInputAdvanced($_POST['emergency_contact'] ?? '', 'text'),
-                'emergency_contact_relation' => $this->sanitizeInputAdvanced($_POST['emergency_relation'] ?? '', 'text'),
-                'emergency_contact_phone' => $this->sanitizeInputAdvanced($_POST['emergency_phone'] ?? '', 'phone')
+                'parent_name' => $this->sanitizeInput($_POST['parent_name'] ?? ''),
+                'parent_phone' => preg_replace('/[^0-9]/', '', $_POST['parent_phone'] ?? ''),
+                'address' => $this->sanitizeInput($_POST['address'] ?? ''),
+                'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
+                'father_job' => $this->sanitizeInput($_POST['father_job'] ?? ''),
+                'mother_job' => $this->sanitizeInput($_POST['mother_job'] ?? ''),
+                'emergency_contact_name' => $this->sanitizeInput($_POST['emergency_contact'] ?? ''),
+                'emergency_contact_relation' => $this->sanitizeInput($_POST['emergency_relation'] ?? ''),
+                'emergency_contact_phone' => preg_replace('/[^0-9]/', '', $_POST['emergency_phone'] ?? '')
             ];
             
             // 5. Validation
+            error_log('Starting form validation...');
+            file_put_contents('/var/www/html/public/SUBMIT_CALLED.txt', "\n=== VALIDATION STARTED ===\n", FILE_APPEND);
+            
             $validationErrors = $this->validateForm($studentData, $parentData);
             
+            file_put_contents('/var/www/html/public/SUBMIT_CALLED.txt', "Validation errors count: " . count($validationErrors) . "\n", FILE_APPEND);
             if (!empty($validationErrors)) {
+                file_put_contents('/var/www/html/public/SUBMIT_CALLED.txt', "VALIDATION FAILED:\n" . print_r($validationErrors, true) . "\n", FILE_APPEND);
+                error_log('VALIDATION FAILED: ' . print_r($validationErrors, true));
                 $_SESSION['form_errors'] = $validationErrors;
                 $_SESSION['form_data'] = array_merge($studentData, $parentData);
                 $this->redirect('youth-registration');
                 return;
             }
+            file_put_contents('/var/www/html/public/SUBMIT_CALLED.txt', "Validation passed!\n", FILE_APPEND);
+            error_log('Validation passed successfully');
             
             // 6. Process photo upload
+            error_log('Starting photo upload...');
             $photoPath = $this->uploadPhoto($studentData['student_photo']);
             
             if ($photoPath) {
+                error_log('Photo uploaded successfully: ' . $photoPath);
                 $studentData['photo_path'] = $photoPath;
                 
                 // 7. Save registration
-                $this->saveRegistration($studentData, $parentData);
-                
-                // Clear form data from session
-                unset($_SESSION['form_data']);
-                
-                // Success redirect
-                $this->redirect('youth-registration?success=1');
+                error_log('Attempting to save registration...');
+                if ($this->saveRegistration($studentData, $parentData)) {
+                    error_log('Registration saved successfully!');
+                    // Clear form data from session
+                    unset($_SESSION['form_data']);
+                    
+                    // Success redirect
+                    $_SESSION['success_message'] = 'Başvurunuz başarıyla alındı! En kısa sürede size dönüş yapılacaktır.';
+                    error_log('Redirecting to success page...');
+                    $this->redirect('youth-registration?success=1');
+                } else {
+                    error_log('SAVE REGISTRATION FAILED!');
+                    $errors[] = 'Kayıt kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.';
+                    $_SESSION['form_errors'] = $errors;
+                    $_SESSION['form_data'] = array_merge($studentData, $parentData);
+                    $this->redirect('youth-registration');
+                }
             } else {
-                $errors[] = 'Fotoğraf yüklenirken bir hata oluştu.';
+                error_log('PHOTO UPLOAD FAILED!');
+                $errors[] = 'Fotoğraf yüklenirken bir hata oluştu. Lütfen geçerli bir fotoğraf seçin (JPG, PNG).';
                 $_SESSION['form_errors'] = $errors;
                 $_SESSION['form_data'] = array_merge($studentData, $parentData);
                 $this->redirect('youth-registration');
@@ -126,16 +179,8 @@ class YouthRegistration extends Controller {
         
         if (empty($studentData['birth_date'])) {
             $errors[] = 'Doğum tarihi zorunludur.';
-        } else {
-            // Yaş kontrolü (6-21 yaş aralığı)
-            $birthDate = new DateTime($studentData['birth_date']);
-            $today = new DateTime();
-            $age = $today->diff($birthDate)->y;
-            
-            if ($age < 6 || $age > 21) {
-                $errors[] = 'Yaş 6-21 aralığında olmalıdır.';
-            }
         }
+        // Age validation removed - admin will verify age when approving registration
         
         if (empty($studentData['birth_place']) || strlen($studentData['birth_place']) < 2) {
             $errors[] = 'Doğum yeri zorunludur.';
@@ -143,8 +188,8 @@ class YouthRegistration extends Controller {
         
         // TC Kimlik No validasyonu
         $tcNumber = preg_replace('/[^0-9]/', '', $studentData['tc_number']);
-        if (strlen($tcNumber) !== 11 || !$this->validateTCKN($tcNumber)) {
-            $errors[] = 'Geçerli bir TC Kimlik No giriniz (11 haneli).';
+        if (strlen($tcNumber) !== 11) {
+            $errors[] = 'TC Kimlik No 11 haneli olmalıdır.';
         }
         
         if (empty($studentData['father_name']) || strlen($studentData['father_name']) < 3) {
@@ -172,8 +217,8 @@ class YouthRegistration extends Controller {
             $errors[] = 'Geçerli bir GSM numarası giriniz (10-11 hane).';
         }
         
-        if (empty($parentData['address']) || strlen($parentData['address']) < 10) {
-            $errors[] = 'İkametgah adresi en az 10 karakter olmalıdır.';
+        if (empty($parentData['address']) || strlen($parentData['address']) < 5) {
+            $errors[] = 'İkametgah adresi en az 5 karakter olmalıdır.';
         }
         
         if (!$this->validateEmail($parentData['email'])) {
@@ -220,47 +265,134 @@ class YouthRegistration extends Controller {
     }
     
     private function uploadPhoto($photo) {
+        // Write debug to file
+        $debugFile = BASE_PATH . '/public/PHOTO_UPLOAD_DEBUG.txt';
+        file_put_contents($debugFile, "Upload started at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+        
         if (!$photo || $photo['error'] !== UPLOAD_ERR_OK) {
+            file_put_contents($debugFile, "Photo error: " . ($photo['error'] ?? 'No file') . "\n", FILE_APPEND);
+            error_log('Photo upload error: ' . ($photo['error'] ?? 'No file'));
+            return false;
+        }
+        
+        // File size validation (5MB max)
+        $maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
+        if ($photo['size'] > $maxFileSize) {
+            file_put_contents($debugFile, "File too large: " . $photo['size'] . " bytes\n", FILE_APPEND);
+            error_log('Photo upload error: File size exceeds 5MB limit');
             return false;
         }
         
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
         if (!in_array($photo['type'], $allowedTypes)) {
+            file_put_contents($debugFile, "Invalid type: " . $photo['type'] . "\n", FILE_APPEND);
+            error_log('Photo upload error: Invalid file type - ' . $photo['type']);
             return false;
         }
         
-        $uploadDir = 'uploads/youth-photos/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+        // Additional MIME type check using finfo
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $photo['tmp_name']);
+        finfo_close($finfo);
+        
+        if (!in_array($mimeType, $allowedTypes)) {
+            file_put_contents($debugFile, "Invalid MIME type: " . $mimeType . "\n", FILE_APPEND);
+            error_log('Photo upload error: Invalid MIME type - ' . $mimeType);
+            return false;
         }
         
-        $fileName = uniqid() . '_' . $photo['name'];
+        // Use absolute path
+        $uploadDir = BASE_PATH . '/public/uploads/youth-photos/';
+        file_put_contents($debugFile, "Upload dir: $uploadDir\n", FILE_APPEND);
+        file_put_contents($debugFile, "Dir exists: " . (is_dir($uploadDir) ? 'YES' : 'NO') . "\n", FILE_APPEND);
+        
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+            file_put_contents($debugFile, "Created directory\n", FILE_APPEND);
+        }
+        
+        file_put_contents($debugFile, "Dir writable: " . (is_writable($uploadDir) ? 'YES' : 'NO') . "\n", FILE_APPEND);
+        
+        // Sanitize filename and use safe extension
+        $fileExtension = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            $fileExtension = 'jpg'; // Default to jpg
+        }
+        
+        $fileName = uniqid() . '.' . $fileExtension;
         $uploadPath = $uploadDir . $fileName;
         
+        file_put_contents($debugFile, "Upload path: $uploadPath\n", FILE_APPEND);
+        file_put_contents($debugFile, "Temp file: " . $photo['tmp_name'] . "\n", FILE_APPEND);
+        file_put_contents($debugFile, "Temp file exists: " . (file_exists($photo['tmp_name']) ? 'YES' : 'NO') . "\n", FILE_APPEND);
+        
         if (move_uploaded_file($photo['tmp_name'], $uploadPath)) {
-            return $uploadPath;
+            // Return relative path for web access
+            $relativePath = '/uploads/youth-photos/' . $fileName;
+            file_put_contents($debugFile, "SUCCESS! Relative path: $relativePath\n", FILE_APPEND);
+            error_log('Photo uploaded successfully: ' . $relativePath);
+            return $relativePath;
         }
         
+        file_put_contents($debugFile, "MOVE FAILED!\n", FILE_APPEND);
+        error_log('Photo upload error: Failed to move uploaded file');
         return false;
     }
     
     private function saveRegistration($studentData, $parentData) {
-        // Şimdilik JSON dosyasına kaydet (gerçek uygulamada veritabanına kaydedilecek)
+        // Save to database-compatible JSON file structure
         $registrationData = [
-            'id' => uniqid(),
-            'registration_date' => date('Y-m-d H:i:s'),
-            'student' => $studentData,
-            'parent' => $parentData
+            'student' => [
+                'name' => $studentData['full_name'],
+                'birth_date' => $studentData['birth_date'],
+                'birth_place' => $studentData['birth_place'],
+                'tc_number' => $studentData['tc_number'],
+                'father_name' => $studentData['father_name'],
+                'mother_name' => $studentData['mother_name'],
+                'school_info' => $studentData['school_info'],
+                'first_club' => $studentData['first_club'] ?? '',
+            ],
+            'parent' => [
+                'name' => $parentData['parent_name'],
+                'phone' => $parentData['parent_phone'],
+                'address' => $parentData['address'],
+                'email' => $parentData['email'],
+                'father_job' => $parentData['father_job'],
+                'mother_job' => $parentData['mother_job'],
+            ],
+            'emergency' => [
+                'contact' => $parentData['emergency_contact_name'],
+                'relation' => $parentData['emergency_contact_relation'],
+                'phone' => $parentData['emergency_contact_phone'],
+            ],
+            'youth_group_id' => null,  // Will be assigned by admin later
+            'photo_path' => $studentData['photo_path'] ?? '',
+            'status' => 'pending',
+            'created_at' => date('Y-m-d H:i:s'),
+            'created_by' => 'web_form'
         ];
         
-        $dataFile = 'uploads/youth-registrations.json';
-        $existingData = [];
-        
-        if (file_exists($dataFile)) {
-            $existingData = json_decode(file_get_contents($dataFile), true) ?: [];
+        // Ensure directory exists
+        $registrationsDir = BASE_PATH . '/data/youth-registrations';
+        if (!is_dir($registrationsDir)) {
+            mkdir($registrationsDir, 0755, true);
         }
         
-        $existingData[] = $registrationData;
-        file_put_contents($dataFile, json_encode($existingData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        // Save to unique JSON file
+        $filename = uniqid('reg_') . '.json';
+        $filePath = $registrationsDir . '/' . $filename;
+        
+        $result = file_put_contents($filePath, json_encode($registrationData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        
+        // Log for debugging
+        if ($result === false) {
+            error_log('Failed to save youth registration to: ' . $filePath);
+            return false;
+        }
+        
+        error_log('Youth registration saved successfully to: ' . $filePath);
+        return true;
     }
 }

@@ -12,22 +12,6 @@ $content = '
     <div class="container">
         <div class="registration-form-container">';
 
-// Başarı mesajı
-if (isset($_GET['success']) && $_GET['success'] == '1') {
-    $content .= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fas fa-check-circle"></i> Başvurunuz başarıyla alındı! En kısa sürede size dönüş yapılacaktır.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-}
-
-if (isset($_SESSION['success_message'])) {
-    $content .= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fas fa-check-circle"></i> ' . htmlspecialchars($_SESSION['success_message']) . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-    unset($_SESSION['success_message']);
-}
-
 // Hata mesajları
 if (isset($_SESSION['form_errors']) && !empty($_SESSION['form_errors'])) {
     $content .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -81,31 +65,6 @@ $content .= '
                             <label for="student_name" class="form-label required">Adı Soyadı</label>
                             <input type="text" class="form-control" id="student_name" name="student_name" required>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="youth_group_id" class="form-label required">Alt Yapı Grubu</label>
-                            <select class="form-select" id="youth_group_id" name="youth_group_id" required>
-                                <option value="">Grup seçiniz</option>';
-                                
-if (isset($youth_groups) && !empty($youth_groups)) {
-    foreach ($youth_groups as $group) {
-        $capacity_info = $group['current_count'] . '/' . $group['max_capacity'];
-        $is_full = $group['current_count'] >= $group['max_capacity'];
-        $disabled = $is_full ? ' disabled' : '';
-        $full_text = $is_full ? ' (Dolu)' : '';
-        
-        $content .= '<option value="' . $group['id'] . '"' . $disabled . '>' . 
-                    htmlspecialchars($group['name']) . ' (' . $group['age_group'] . ' - ' . 
-                    $group['min_age'] . '-' . $group['max_age'] . ' yaş) - ' . $capacity_info . $full_text . '</option>';
-    }
-}
-
-$content .= '
-                            </select>
-                            <div class="form-text">Yaşınıza uygun grubu seçiniz</div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="first_club" class="form-label">İlk Kulübü</label>
                             <input type="text" class="form-control" id="first_club" name="first_club">
@@ -237,6 +196,47 @@ $content .= '
                     </div>
                 </div>
 
+                <!-- Math CAPTCHA for additional security -->
+                <div class="form-section" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Güvenlik Doğrulaması
+                        </h3>
+                        <p class="section-description">Lütfen aşağıdaki matematik sorusunu cevaplayın</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">';
+
+// Generate random math question
+$num1 = rand(1, 10);
+$num2 = rand(1, 10);
+$operations = ['+', '-'];
+$operation = $operations[array_rand($operations)];
+
+if ($operation === '-' && $num1 < $num2) {
+    // Ensure no negative results
+    $temp = $num1;
+    $num1 = $num2;
+    $num2 = $temp;
+}
+
+$answer = ($operation === '+') ? ($num1 + $num2) : ($num1 - $num2);
+
+// Store answer in session
+$_SESSION['captcha_answer'] = $answer;
+
+$content .= '
+                            <label for="captcha_answer" class="form-label required">
+                                <strong style="font-size: 1.2em;">' . $num1 . ' ' . $operation . ' ' . $num2 . ' = ?</strong>
+                            </label>
+                            <input type="number" class="form-control" id="captcha_answer" name="captcha_answer" required 
+                                   placeholder="Cevabı giriniz" min="0" max="20" style="max-width: 150px; font-size: 1.1em;">
+                            <div class="form-text"><i class="fas fa-info-circle"></i> Robot olmadığınızı doğrulayın</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Form Butonları -->
                 <div class="form-actions text-center">
                     <button type="submit" class="btn btn-primary btn-lg me-3">
@@ -251,9 +251,57 @@ $content .= '
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="successModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Başvuru Başarılı!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="mb-4">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                </div>
+                <h4 class="mb-3">Teşekkür Ederiz!</h4>
+                <p class="lead mb-2">Başvurunuz başarıyla alındı.</p>
+                <p class="text-muted">En kısa sürede sizinle iletişime geçilecektir.</p>
+                <hr class="my-4">
+                <p class="small text-muted mb-0">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Başvuru durumunuzu takip etmek için size e-posta gönderilecektir.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Kapat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>';
+
+include BASE_PATH . '/app/views/frontend/layout.php';
+?>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("youthRegistrationForm");
+    
+    // Show success modal if redirected with success parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+        
+        // Remove success parameter from URL after showing modal
+        setTimeout(function() {
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }, 500);
+    }
     
     // TC Kimlik No validation
     const tcInput = document.getElementById("tc_number");
@@ -306,7 +354,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-';
-
-include BASE_PATH . '/app/views/frontend/layout.php';
-?>

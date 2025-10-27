@@ -68,9 +68,6 @@
                             <a href="<?php echo BASE_URL; ?>/teams" class="nav-link">Takımlar</a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL; ?>/teams/first" class="nav-link">A Takım</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?php echo BASE_URL; ?>/teams/staff" class="nav-link">Teknik Kadro</a>
                         </li>
                         <li class="nav-item">

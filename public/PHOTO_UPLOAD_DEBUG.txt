@@ -1,0 +1,16 @@
+Upload started at 2025-10-26 09:51:32
+Upload dir: /var/www/html/public/uploads/youth-photos/
+Dir exists: YES
+Dir writable: YES
+Upload path: /var/www/html/public/uploads/youth-photos/68fdc4f417e45_rdad.jpg
+Temp file: /tmp/phpe88d9F
+Temp file exists: YES
+SUCCESS! Relative path: /uploads/youth-photos/68fdc4f417e45_rdad.jpg
+Upload started at 2025-10-26 11:05:22
+Upload dir: /var/www/html/public/uploads/youth-photos/
+Dir exists: YES
+Dir writable: YES
+Upload path: /var/www/html/public/uploads/youth-photos/68fdd6422dfae.jpg
+Temp file: /tmp/phpI6t5SO
+Temp file exists: YES
+SUCCESS! Relative path: /uploads/youth-photos/68fdd6422dfae.jpg

@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Subdomain - no base path
+RewriteBase /
+
 # Statik dosyaları direkt serve et
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*)$ $1 [L]

@@ -20,6 +20,7 @@ composer.phar
 *.sql
 *.sqlite
 *.db
+*.md
 
 # Konfigürasyon dosyaları (hassas bilgiler)
 /config/database.php
