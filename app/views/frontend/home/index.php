@@ -78,7 +78,7 @@ $content = '
                                                 </div>
                                                 <h1 class="slider-title mb-4">Henüz Haber Bulunmamaktadır</h1>
                                                 <p class="slider-description mb-4">Yakında yeni haberler yayınlanacaktır. Takımımızın son gelişmelerinden haberdar olmak için sitemizi takip etmeye devam edin.</p>
-                                                <a href="' . BASE_URL . '/news" class="btn btn-slider-primary">
+                                                <a href="' . BASE_URL . '/haberler" class="btn btn-slider-primary">
                                                     <i class="fas fa-arrow-right me-2"></i>
                                                     Tüm Haberler
                                                 </a>
@@ -290,7 +290,7 @@ $content = '
             <div class="col-12">
                 <div class="section-header mb-4">
                     <h2 class="section-title">SON HABERLER</h2>
-                    <a href="' . BASE_URL . '/news" class="btn btn-outline-primary">Tüm Haberler</a>
+                    <a href="' . BASE_URL . '/haberler" class="btn btn-outline-primary">Tüm Haberler</a>
                 </div>
             </div>
         </div>
@@ -341,7 +341,7 @@ $content = '
 </section>
 
 <!-- Youth Academy Registration Section -->
-<section class="youth-registration-section py-5 bg-light">
+<section class="youth-registration-section py-5">
     <div class="container-fluid px-5">
         <div class="row align-items-center">
             <div class="col-lg-8">
@@ -384,7 +384,7 @@ $content = '
                         </div>
                     </div>
                     <div class="youth-registration-actions">
-                        <a href="' . BASE_URL . '/youth-registration" class="btn btn-primary btn-lg me-3">
+                        <a href="' . BASE_URL . '/altyapi-kayit" class="btn btn-primary btn-lg me-3">
                             <i class="fas fa-user-plus me-2"></i>
                             Hemen Başvur
                         </a>

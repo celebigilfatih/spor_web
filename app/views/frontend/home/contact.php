@@ -28,7 +28,7 @@ $content = '
     <div class="container">
         <div class="row">
             <!-- FAQ Chatbot -->
-            <div class="col-lg-8 mb-5">
+            <div class="col-lg-12 mb-5">
                 <div class="faq-chatbot-card">
                     <div class="chatbot-header">
                         <div class="d-flex align-items-center">
@@ -105,9 +105,9 @@ $content = '
                     </div>
                 </div>
             </div>
-            
-            <!-- Contact Info -->
-            <div class="col-lg-4">
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
                 <div class="contact-info-card">
                     <h3 class="widget-title mb-4">İLETİŞİM BİLGİLERİ</h3>
                     
@@ -122,7 +122,7 @@ $content = '
                         </div>
                     </div>
                     
-                    <div class="contact-item mb-4">
+                    <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
@@ -156,9 +156,9 @@ $content = '
                         </div>
                     </div>
                 </div>
-                
-                <!-- Social Media -->
-                <div class="social-media-card mt-4">
+            </div>
+            <div class="col-lg-6">
+                <div class="social-media-card">
                     <h3 class="widget-title mb-4">SOSYAL MEDYA</h3>
                     <div class="social-links-large">
                         <a href="#" class="social-link-large facebook">

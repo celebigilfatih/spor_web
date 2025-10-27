@@ -9,7 +9,7 @@ $content = '
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="' . BASE_URL . '" class="text-warning">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/news" class="text-warning">Haberler</a></li>
+                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/haberler" class="text-warning">Haberler</a></li>
                         <li class="breadcrumb-item active text-white" aria-current="page">' . ($category_name ?? 'Kategori') . '</li>
                     </ol>
                 </nav>
@@ -24,16 +24,16 @@ $content = '
         <div class="row">
             <div class="col-12">
                 <div class="categories-nav">
-                    <a href="' . BASE_URL . '/news" class="btn btn-outline-primary">
+                    <a href="' . BASE_URL . '/haberler" class="btn btn-outline-primary">
                         Tüm Haberler
                     </a>
-                    <a href="' . BASE_URL . '/news/category/haber" class="btn btn-outline-primary ' . ($category === 'haber' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/haber" class="btn btn-outline-primary ' . ($category === 'haber' ? 'active' : '') . '">
                         Genel Haberler
                     </a>
-                    <a href="' . BASE_URL . '/news/category/duyuru" class="btn btn-outline-primary ' . ($category === 'duyuru' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/duyuru" class="btn btn-outline-primary ' . ($category === 'duyuru' ? 'active' : '') . '">
                         Duyurular
                     </a>
-                    <a href="' . BASE_URL . '/news/category/mac_sonucu" class="btn btn-outline-primary ' . ($category === 'mac_sonucu' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/mac_sonucu" class="btn btn-outline-primary ' . ($category === 'mac_sonucu' ? 'active' : '') . '">
                         Maç Sonuçları
                     </a>
                 </div>
@@ -105,7 +105,7 @@ $content = '
                                 <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
                                 <h3>Bu kategoride henüz haber bulunmamaktadır</h3>
                                 <p class="text-muted">Yakında yeni haberler yayınlanacak.</p>
-                                <a href="' . BASE_URL . '/news" class="btn btn-primary mt-3">
+                                <a href="' . BASE_URL . '/haberler" class="btn btn-primary mt-3">
                                     <i class="fas fa-arrow-left me-2"></i>
                                     Tüm Haberlere Dön
                                 </a>
@@ -135,7 +135,7 @@ $content = '
                 <!-- Search Widget -->
                 <div class="sidebar-widget">
                     <h3 class="widget-title">HABER ARAMA</h3>
-                    <form action="' . BASE_URL . '/news/search" method="GET">
+                    <form action="' . BASE_URL . '/haberler/search" method="GET">
                         <div class="search-form">
                             <div class="input-group">
                                 <input type="text" name="q" class="form-control" 
@@ -152,19 +152,19 @@ $content = '
                 <div class="sidebar-widget">
                     <h3 class="widget-title">KATEGORİLER</h3>
                     <div class="list-group">
-                        <a href="' . BASE_URL . '/news" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="' . BASE_URL . '/haberler" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             Tüm Haberler
                             <i class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="' . BASE_URL . '/news/category/haber" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'haber' ? 'active' : '') . '">
+                        <a href="' . BASE_URL . '/haberler/category/haber" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'haber' ? 'active' : '') . '">
                             Genel Haberler
                             <i class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="' . BASE_URL . '/news/category/duyuru" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'duyuru' ? 'active' : '') . '">
+                        <a href="' . BASE_URL . '/haberler/category/duyuru" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'duyuru' ? 'active' : '') . '">
                             Duyurular
                             <i class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="' . BASE_URL . '/news/category/mac_sonucu" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'mac_sonucu' ? 'active' : '') . '">
+                        <a href="' . BASE_URL . '/haberler/category/mac_sonucu" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ' . ($category === 'mac_sonucu' ? 'active' : '') . '">
                             Maç Sonuçları
                             <i class="fas fa-chevron-right"></i>
                         </a>

@@ -430,7 +430,7 @@ function performSearch(query) {
     
     // Mock search results
     const mockResults = [
-        { title: 'Örnek Haber 1', type: 'news', url: '/news/1' },
+        { title: 'Örnek Haber 1', type: 'news', url: '/haberler/1' },
         { title: 'Örnek Oyuncu', type: 'player', url: '/players/1' },
         { title: 'Örnek Maç', type: 'match', url: '/matches/1' }
     ];

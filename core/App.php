@@ -114,8 +114,34 @@ class App
         if (isset($url[0])) {
             $controller = ucfirst($url[0]);
             
+            // Turkish URL aliases (Türkçe URL takma adları)
+            $turkishAliases = [
+                'hakkimizda' => 'About',
+                'hakkımızda' => 'About',
+                'haberler' => 'News',
+                'gruplar' => 'Groups',
+                'a-takimi' => 'ATeam',
+                'teknik-kadro' => 'TechnicalStaff',
+                'altyapi-kayit' => 'YouthRegistration',
+            ];
+            
+            // Special handling for contact page (iletisim)
+            if (strtolower($url[0]) === 'iletisim') {
+                $this->controller = 'Home';
+                require_once BASE_PATH . '/app/controllers/Home.php';
+                $this->method = 'contact';
+                $this->params = [];
+                $controllerInstance = new $this->controller;
+                call_user_func_array([$controllerInstance, $this->method], $this->params);
+                return;
+            }
+            
+            // Check if it's a Turkish alias
+            if (isset($turkishAliases[strtolower($url[0])])) {
+                $controller = $turkishAliases[strtolower($url[0])];
+            }
             // Special routing for specific URLs
-            if ($url[0] === 'technical-staff') {
+            elseif ($url[0] === 'technical-staff') {
                 $controller = 'TechnicalStaff';
             } elseif ($url[0] === 'ateam') {
                 $controller = 'ATeam';

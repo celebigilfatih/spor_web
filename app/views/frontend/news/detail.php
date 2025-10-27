@@ -9,7 +9,7 @@ $content = '
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="' . BASE_URL . '" class="text-warning">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/news" class="text-warning">Haberler</a></li>
+                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/haberler" class="text-warning">Haberler</a></li>
                         <li class="breadcrumb-item active text-white" aria-current="page">' . htmlspecialchars(substr($news['title'] ?? '', 0, 50)) . '...</li>
                     </ol>
                 </nav>

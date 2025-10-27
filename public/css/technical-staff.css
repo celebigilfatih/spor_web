@@ -4,7 +4,7 @@
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(135deg, #1671fe 0%, #00408e 100%);
     position: relative;
     overflow: hidden;
 }
@@ -50,7 +50,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(90deg, #1671fe 0%, #00408e 100%);
     border-radius: 2px;
 }
 
@@ -82,7 +82,7 @@
 .coach-name {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #002d72;
+    color: #1671fe;
     margin-bottom: 0.5rem;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .coach-details .detail-item strong {
-    color: #002d72;
+    color: #1671fe;
     font-weight: 600;
     margin-right: 0.5rem;
 }
@@ -186,7 +186,7 @@
 .staff-name {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #002d72;
+    color: #1671fe;
     margin-bottom: 0.5rem;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .staff-details span i {
-    color: #002d72;
+    color: #1671fe;
 }
 
 .staff-details .experience {

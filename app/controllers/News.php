@@ -7,11 +7,13 @@ class News extends Controller
 {
     private $newsModel;
     private $settingsModel;
+    private $matchModel;
 
     public function __construct()
     {
         $this->newsModel = $this->model('NewsModel');
         $this->settingsModel = $this->model('SiteSettings');
+        $this->matchModel = $this->model('MatchModel');
     }
 
     /**
@@ -26,6 +28,7 @@ class News extends Controller
             'title' => 'Haberler',
             'news' => $this->newsModel->getPaginated($page, $perPage, $category),
             'featured_news' => $this->newsModel->getFeatured(3),
+            'recent_results' => $this->matchModel->getResults(5),
             'current_page' => $page,
             'category' => $category,
             'site_settings' => $this->settingsModel->getAllSettings()
@@ -76,6 +79,20 @@ class News extends Controller
             'duyuru' => 'Duyurular',
             'mac_sonucu' => 'Maç Sonuçları'
         ];
+
+        // Special handling for match results category
+        if ($category === 'mac_sonucu') {
+            $data = [
+                'title' => 'Maç Sonuçları',
+                'matches' => $this->matchModel->getResults(50),
+                'category' => $category,
+                'category_name' => 'Maç Sonuçları',
+                'site_settings' => $this->settingsModel->getAllSettings()
+            ];
+
+            $this->view('frontend/news/match-results', $data);
+            return;
+        }
 
         $data = [
             'title' => $categoryNames[$category] ?? 'Haberler',

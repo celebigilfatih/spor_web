@@ -30,7 +30,7 @@
     left: 0;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(90deg, #1671fe 0%, #00408e 100%);
     border-radius: 2px;
 }
 
@@ -55,7 +55,7 @@
     padding: 1rem;
     background: #f8fafc;
     border-radius: 8px;
-    border-left: 3px solid #002d72;
+    border-left: 3px solid #1671fe;
     transition: all 0.3s ease;
 }
 
@@ -66,7 +66,7 @@
 
 .value-item i {
     font-size: 1.25rem;
-    color: #002d72;
+    color: #1671fe;
 }
 
 .value-item span {
@@ -109,7 +109,7 @@
 }
 
 .stat-icon-large.primary {
-    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(135deg, #1671fe 0%, #00408e 100%);
 }
 
 .stat-icon-large.success {
@@ -258,7 +258,7 @@
 }
 
 .corporate-stat-icon.primary {
-    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(135deg, #1671fe 0%, #00408e 100%);
 }
 
 .corporate-stat-icon.success {
@@ -324,13 +324,13 @@
 .corporate-nav-card:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
-    border-color: #002d72;
+    border-color: #1671fe;
 }
 
 .corporate-nav-icon {
     width: 72px;
     height: 72px;
-    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(135deg, #1671fe 0%, #00408e 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -359,7 +359,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, #002d72 0%, #00408e 100%);
+    background: linear-gradient(135deg, #1671fe 0%, #00408e 100%);
     color: #fff;
     border-radius: 8px;
     font-weight: 600;
@@ -369,7 +369,7 @@
 }
 
 .corporate-nav-btn:hover {
-    background: linear-gradient(135deg, #00408e 0%, #002d72 100%);
+    background: linear-gradient(135deg, #00408e 0%, #1671fe 100%);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 45, 114, 0.3);
     color: #fff;
@@ -443,7 +443,7 @@
 .corporate-match-score {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #002d72;
+    color: #1671fe;
     text-align: center;
 }
 
@@ -628,12 +628,12 @@
 
 .corporate-league-table .our-team {
     background: linear-gradient(90deg, rgba(0, 45, 114, 0.05) 0%, rgba(0, 45, 114, 0.02) 100%);
-    border-left: 3px solid #002d72;
+    border-left: 3px solid #1671fe;
 }
 
 .corporate-league-table .our-team td {
     font-weight: 700;
-    color: #002d72;
+    color: #1671fe;
 }
 
 /* ========================================

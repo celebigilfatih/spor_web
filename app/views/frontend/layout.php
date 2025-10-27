@@ -25,7 +25,7 @@
     <!-- Header -->
     <header class="header-wrapper">
         <!-- Top Bar -->
-        <div class="top-bar bg-navy px-5">
+        <div class="top-bar px-5">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -84,22 +84,22 @@
                                 HAKKIMIZDA
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/about">Kulüp Hakkında</a></li>
-                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/about/history">Tarihçe</a></li>
-                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/about/achievements">Başarılar</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda">Kulüp Hakkında</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda/history">Tarihçe</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda/achievements">Başarılar</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/groups">GRUPLAR</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>/gruplar">GRUPLAR</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/technical-staff">TEKNİK KADRO</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>/teknik-kadro">TEKNİK KADRO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/news">HABERLER</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>/haberler">HABERLER</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/home/contact">İLETİŞİM</a>
+                            <a class="nav-link" href="<?= BASE_URL ?>/iletisim">İLETİŞİM</a>
                         </li>
                     </ul>
                 </div>
@@ -154,10 +154,10 @@
                     <h6 class="text-warning mb-3">HIZLI BAĞLANTILAR</h6>
                     <ul class="list-unstyled">
                         <li><a href="<?= BASE_URL ?>" class="footer-link">Ana Sayfa</a></li>
-                        <li><a href="<?= BASE_URL ?>/about" class="footer-link">Hakkımızda</a></li>
-                        <li><a href="<?= BASE_URL ?>/groups" class="footer-link">Gruplar</a></li>
-                        <li><a href="<?= BASE_URL ?>/ateam" class="footer-link">A Takımı</a></li>
-                        <li><a href="<?= BASE_URL ?>/news" class="footer-link">Haberler</a></li>
+                        <li><a href="<?= BASE_URL ?>/hakkimizda" class="footer-link">Hakkımızda</a></li>
+                        <li><a href="<?= BASE_URL ?>/gruplar" class="footer-link">Gruplar</a></li>
+                        <li><a href="<?= BASE_URL ?>/a-takimi" class="footer-link">A Takımı</a></li>
+                        <li><a href="<?= BASE_URL ?>/haberler" class="footer-link">Haberler</a></li>
                     </ul>
                 </div>
                 

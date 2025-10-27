@@ -1,8 +1,9 @@
 /* Fenerbahçe-inspired Spor Kulübü CSS - Live Development Test */
 
 :root {
-    --primary-color: #002d72; /* Navy Blue */
-    --secondary-color: #fbbf24; /* Yellow/Gold */
+    --primary-color: #1671fe; /* Navy Blue */
+    --primary-dark-color: #0052d0;
+    --secondary-color: #005be7; /* Yellow/Gold */
     --accent-color: #dc2626; /* Red accent */
     --dark-color: #1f2937;
     --light-color: #f8fafc;
@@ -61,6 +62,7 @@ body {
 .top-bar {
     padding: 8px 0;
     font-size: 14px;
+    background-color: var(--primary-dark-color);
 }
 
 .contact-info span {
@@ -883,7 +885,6 @@ body {
 
 /* Youth Academy Registration Section Styles */
 .youth-registration-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
     overflow: hidden;
 }

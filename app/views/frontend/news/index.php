@@ -23,16 +23,16 @@ $content = '
         <div class="row">
             <div class="col-12">
                 <div class="categories-nav">
-                    <a href="' . BASE_URL . '/news" class="btn btn-outline-primary ' . (!isset($category) ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler" class="btn btn-outline-primary ' . (!isset($category) ? 'active' : '') . '">
                         Tüm Haberler
                     </a>
-                    <a href="' . BASE_URL . '/news/category/haber" class="btn btn-outline-primary ' . (isset($category) && $category === 'haber' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/haber" class="btn btn-outline-primary ' . (isset($category) && $category === 'haber' ? 'active' : '') . '">
                         Genel Haberler
                     </a>
-                    <a href="' . BASE_URL . '/news/category/duyuru" class="btn btn-outline-primary ' . (isset($category) && $category === 'duyuru' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/duyuru" class="btn btn-outline-primary ' . (isset($category) && $category === 'duyuru' ? 'active' : '') . '">
                         Duyurular
                     </a>
-                    <a href="' . BASE_URL . '/news/category/mac_sonucu" class="btn btn-outline-primary ' . (isset($category) && $category === 'mac_sonucu' ? 'active' : '') . '">
+                    <a href="' . BASE_URL . '/haberler/category/mac_sonucu" class="btn btn-outline-primary ' . (isset($category) && $category === 'mac_sonucu' ? 'active' : '') . '">
                         Maç Sonuçları
                     </a>
                 </div>
@@ -135,7 +135,7 @@ $content = '
                 <!-- Search Widget -->
                 <div class="sidebar-widget">
                     <h3 class="widget-title">HABER ARAMA</h3>
-                    <form action="' . BASE_URL . '/news/search" method="GET">
+                    <form action="' . BASE_URL . '/haberler/search" method="GET">
                         <div class="search-form">
                             <div class="input-group">
                                 <input type="text" name="q" class="form-control" 
@@ -177,11 +177,118 @@ $content = '
                     </div>
                 </div>
 
+                <!-- Match Results -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">SON MAÇ SONUÇLARI</h3>
+                    <div class="match-results-list">
+                        ' . (isset($recent_results) && !empty($recent_results) ? 
+                            implode('', array_map(function($match) {
+                                $matchDate = date('d.m.Y', strtotime($match['match_date']));
+                                $homeScore = $match['home_score'] ?? '-';
+                                $awayScore = $match['away_score'] ?? '-';
+                                
+                                return '
+                                <div class="match-result-item">
+                                    <div class="match-date-small">
+                                        <i class="fas fa-calendar"></i> ' . $matchDate . '
+                                    </div>
+                                    <div class="match-teams-score">
+                                        <div class="team-row">
+                                            <span class="team-name">' . htmlspecialchars($match['home_team']) . '</span>
+                                            <span class="score">' . $homeScore . '</span>
+                                        </div>
+                                        <div class="team-row">
+                                            <span class="team-name">' . htmlspecialchars($match['away_team']) . '</span>
+                                            <span class="score">' . $awayScore . '</span>
+                                        </div>
+                                    </div>
+                                    ' . (!empty($match['venue']) ? '<div class="match-venue-small"><i class="fas fa-map-marker-alt"></i> ' . htmlspecialchars($match['venue']) . '</div>' : '') . '
+                                </div>';
+                            }, $recent_results)) : 
+                            '<p class="text-muted">Henüz maç sonucu bulunmamaktadır.</p>'
+                        ) . '
+                    </div>
+                </div>
+
 
             </div>
         </div>
     </div>
 </section>
+
+<style>
+.match-results-list {
+    margin-top: 1rem;
+}
+
+.match-result-item {
+    background: #f8f9fa;
+    border-left: 3px solid #1e3a8a;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.match-result-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.match-date-small {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.match-date-small i {
+    margin-right: 0.25rem;
+}
+
+.match-teams-score {
+    margin: 0.5rem 0;
+}
+
+.team-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.team-row:last-child {
+    border-bottom: none;
+}
+
+.team-name {
+    font-weight: 600;
+    color: #1e3a8a;
+    font-size: 0.9rem;
+}
+
+.score {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #dc3545;
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.match-venue-small {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.match-venue-small i {
+    margin-right: 0.25rem;
+}
+</style>
 ';
 
 include BASE_PATH . '/app/views/frontend/layout.php';

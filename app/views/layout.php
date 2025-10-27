@@ -26,7 +26,7 @@
                     <div class="col-6">
                         <div class="contact-info">
                             <span><i class="fas fa-phone"></i> <?php echo $site_settings['contact_phone'] ?? '+90 212 123 45 67'; ?></span>
-                            <span class="ms-3"><i class="fas fa-envelope"></i> <?php echo $site_settings['contact_email'] ?? 'info@sporkulubu.com'; ?></span>
+                            <span class="ms-3"><i class="fas fa-envelope"></i> <?php echo $site_settings['contact_email'] ?? 'info@kulturspor.com'; ?></span>
                         </div>
                     </div>
                     <div class="col-6 text-right">

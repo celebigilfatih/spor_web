@@ -9,7 +9,7 @@ $content = '
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="' . BASE_URL . '" class="text-warning">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/ateam" class="text-warning">A Takımı</a></li>
+                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/a-takimi" class="text-warning">A Takımı</a></li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Kadro</li>
                     </ol>
                 </nav>

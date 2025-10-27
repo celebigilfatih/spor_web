@@ -21,7 +21,7 @@ $content = '
 <section class="academy-info py-5">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-12 mb-4">
                 <h2 class="section-title">GENÇLİK AKADEMİSİ</h2>
                 <p class="lead">Geleceğin yıldızlarını yetiştiren akademimizde, profesyonel futbol eğitimi veriyoruz.</p>
                 <p>Deneyimli antrenörlerimiz ve modern tesislerimizle, genç oyuncularımızın hem fiziksel hem de mental gelişimlerine odaklanıyoruz. Futbol becerilerinin yanı sıra disiplin, takım çalışması ve spor ahlakı değerlerini de öğretiyoruz.</p>
@@ -38,12 +38,6 @@ $content = '
                         <i class="fas fa-check-circle text-success"></i>
                         <span>Bireysel gelişim programları</span>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="academy-image">
-                    <img src="' . BASE_URL . '/public/images/academy-training.jpg" 
-                         alt="Akademi Antrenmanı" class="img-fluid rounded">
                 </div>
             </div>
         </div>
@@ -129,17 +123,10 @@ $content = '
                         ' . (!empty($group['training_time']) ? '<p><strong>Saat:</strong> ' . htmlspecialchars($group['training_time']) . '</p>' : '') . '
                     </div>
                     ' . (!empty($group['coach_name']) ? '<p class="coach-info"><i class="fas fa-user-tie me-2"></i><strong>Antrenör:</strong> ' . htmlspecialchars($group['coach_name']) . '</p>' : '') . '
-                    <div class="capacity-info mt-3">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Doluluk</span>
-                            <span><strong>' . $group['current_count'] . ' / ' . $group['max_capacity'] . '</strong></span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-' . $capacityClass . '" role="progressbar" style="width: ' . $capacityPercent . '%" aria-valuenow="' . $capacityPercent . '" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+                    ' . (!empty($group['assistant_coach']) ? '<p class="assistant-coach-info"><i class="fas fa-user-friends me-2"></i><strong>Yardımcı Antrenör:</strong> ' . htmlspecialchars($group['assistant_coach']) . '</p>' : '') . '
+
                     ' . (!empty($group['description']) ? '<p class="group-description mt-3">' . htmlspecialchars($group['description']) . '</p>' : '') . '
-                    <a href="' . BASE_URL . '/youth-registration" class="btn btn-outline-primary mt-3">Kayit Ol</a>
+                    <a href="' . BASE_URL . '/altyapi-kayit" class="btn btn-outline-primary mt-3">Kayit Ol</a>
                 </div>
             </div>';
                 }, $groups)) : 
@@ -154,37 +141,13 @@ $content = '
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-title mb-4">KAYIT BİLGİLERİ</h2>
+                <h2 class="section-title mb-4 justify-content-center">KAYIT BİLGİLERİ</h2>
                 <p class="lead mb-4">
                     Akademimize katılmak ve futbol yolculuğuna başlamak için bizimle iletişime geçin.
                 </p>
-                <div class="enrollment-info">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="info-item">
-                                <i class="fas fa-calendar-alt text-primary"></i>
-                                <h5>Kayıt Dönemi</h5>
-                                <p>Haziran - Ağustos</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="info-item">
-                                <i class="fas fa-file-alt text-warning"></i>
-                                <h5>Gerekli Belgeler</h5>
-                                <p>Sağlık raporu, Doğum belgesi</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="info-item">
-                                <i class="fas fa-phone text-success"></i>
-                                <h5>İletişim</h5>
-                                <p>+90 (212) 123 45 67</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="mt-4">
-                    <a href="' . BASE_URL . '/home/contact" class="btn btn-primary btn-lg">
+                    <a href="' . BASE_URL . '/iletisim" class="btn btn-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>
                         İletişime Geç
                     </a>
@@ -294,6 +257,14 @@ $content = '
     border-radius: 6px;
     font-size: 0.9rem;
     margin-top: 1rem;
+}
+
+.assistant-coach-info {
+    background: #f0f9ff;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .capacity-info {

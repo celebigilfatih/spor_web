@@ -15,16 +15,14 @@ $content = '
 <!-- Main Content -->
 <section class="about-content py-5">
     <div class="container">
+
         <div class="row">
-            <div class="col-lg-8 mb-5">
+            <div class="col-lg-12 mb-5">
                 <!-- Club Introduction -->
                 <div class="content-section mb-5">
                     <h2 class="section-title mb-4">Kulübümüz</h2>
                     <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <img src="' . BASE_URL . '/public/images/club-building.jpg" class="img-fluid rounded shadow" alt="Kulüp Binası">
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <p class="lead">1929 yılında kurulan spor kulübümüz, Türkiye\'nin en köklü ve başarılı spor kuruluşlarından biridir.</p>
                             <p>95 yıllık geçmişimizde, binlerce gencin spor hayatına başlamasına vesile olmuş, çok sayıda milli sporcu yetiştirmiş ve ulusal ile uluslararası arenada önemli başarılara imza atmışız.</p>
                             <p>Modern tesislerimiz, deneyimli teknik kadromuz ve güçlü altyapımızla geleceğin yıldızlarını yetiştirmeye devam ediyoruz.</p>
@@ -32,27 +30,7 @@ $content = '
                     </div>
                 </div>
 
-                <!-- Mission & Vision -->
-                <div class="row mb-5">
-                    <div class="col-md-6">
-                        <div class="mission-vision-card">
-                            <div class="card-icon">
-                                <i class="fas fa-bullseye fa-3x text-warning"></i>
-                            </div>
-                            <h3 class="card-title">MİSYONUMUZ</h3>
-                            <p>Gençleri spora yönlendirmek, yeteneklerini geliştirmek ve sporun evrensel değerlerini benimseyen, başarılı sporcular yetiştirmek.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mission-vision-card">
-                            <div class="card-icon">
-                                <i class="fas fa-eye fa-3x text-warning"></i>
-                            </div>
-                            <h3 class="card-title">VİZYONUMUZ</h3>
-                            <p>Türkiye\'nin önde gelen spor kulüplerinden biri olarak, uluslararası arenada ülkemizi en iyi şekilde temsil etmek.</p>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- Values -->
                 <div class="content-section mb-5">
@@ -127,9 +105,9 @@ $content = '
                     </div>'
                 ) . '
             </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
+        </div>
+        <div class="row">
+         <div class="col-lg-4">
                 <!-- Quick Facts -->
                 <div class="sidebar-widget">
                     <h3 class="widget-title">Hızlı Bilgiler</h3>
@@ -141,9 +119,9 @@ $content = '
                         <li><i class="fas fa-graduation-cap text-warning me-2"></i><strong>Mezun Sporcu:</strong> 2000+</li>
                     </ul>
                 </div>
-
-                <!-- Contact Info -->
-                <div class="sidebar-widget">
+         </div>
+         <div class="col-lg-4">
+            <div class="sidebar-widget">
                     <h3 class="widget-title">İletişim Bilgileri</h3>
                     <div class="contact-details">
                         <div class="contact-item">
@@ -168,18 +146,11 @@ $content = '
                                 info@sporkulubu.com
                             </div>
                         </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock text-warning"></i>
-                            <div>
-                                <strong>Çalışma Saatleri:</strong><br>
-                                Pazartesi-Cuma: 09:00-18:00<br>
-                                Cumartesi: 09:00-15:00
-                            </div>
-                        </div>
+3
                     </div>
                 </div>
-
-                <!-- Leadership -->
+         </div>
+         <div class="col-lg-4">
                 <div class="sidebar-widget">
                     <h3 class="widget-title">Yönetim</h3>
                     <div class="leadership-list">
@@ -199,7 +170,7 @@ $content = '
                         </div>
                     </div>
                 </div>
-            </div>
+         </div>
         </div>
     </div>
 </section>

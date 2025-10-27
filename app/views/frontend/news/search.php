@@ -9,7 +9,7 @@ $content = '
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="' . BASE_URL . '" class="text-warning">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/news" class="text-warning">Haberler</a></li>
+                        <li class="breadcrumb-item"><a href="' . BASE_URL . '/haberler" class="text-warning">Haberler</a></li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Arama</li>
                     </ol>
                 </nav>
@@ -98,7 +98,7 @@ $content = '
                             <i class="fas fa-search fa-3x text-muted mb-3"></i>
                             <h3>Aradığınız kriterlere uygun sonuç bulunamadı</h3>
                             <p class="text-muted mb-4">Farklı kelimeler kullanarak tekrar deneyebilirsiniz.</p>
-                            <a href="' . BASE_URL . '/news" class="btn btn-primary">
+                            <a href="' . BASE_URL . '/haberler" class="btn btn-primary">
                                 <i class="fas fa-arrow-left me-2"></i>
                                 Tüm Haberlere Dön
                             </a>
@@ -162,7 +162,7 @@ $content = '
                 <div class="sidebar-widget">
                     <h3 class="widget-title">KATEGORİLER</h3>
                     <div class="list-group">
-                        <a href="' . BASE_URL . '/news" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="' . BASE_URL . '/haberler" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             Tüm Haberler
                             <i class="fas fa-chevron-right"></i>
                         </a>
