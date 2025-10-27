@@ -32,7 +32,7 @@ class Home extends Controller
             'sliders' => $this->sliderModel->getActiveSliders(),
             'featured_news' => $this->newsModel->getFeatured(3),
             'latest_news' => $this->newsModel->getPublished(6),
-            'announcements' => $this->announcementModel->getActive(2),
+            'announcements' => $this->newsModel->getByCategory('duyuru', 3), // Get announcements from news with 'duyuru' category
             'upcoming_matches' => $this->matchModel->getUpcomingMatches(5),
             'recent_results' => $this->matchModel->getResults(3),
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),

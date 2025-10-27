@@ -164,7 +164,7 @@ body {
 .slider-content {
     background: transparent;
     color: white;
-    padding: 80px 0;
+    padding: 40px 0;
     min-height: 600px;
     display: flex;
     align-items: center;
@@ -3252,7 +3252,6 @@ button:focus,
 }
 
 .announcements-list {
-    max-height: 400px;
     overflow-y: auto;
 }
 
@@ -3295,7 +3294,7 @@ button:focus,
 
 /* Sidebar Styles */
 .hero-sidebar {
-    background: var(--dark-color);
+    background: #fff;
 
 }
 
@@ -3327,10 +3326,9 @@ button:focus,
     }
 }
 .horizontal-match-calendar {
-    background: #f8fafc;
+
     padding: 40px 0;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+
 }
 
 .match-calendar-nav {

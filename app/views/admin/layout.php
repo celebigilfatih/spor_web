@@ -33,7 +33,7 @@
                         <circle cx="12" cy="12" r="10"></circle>
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
-                    Spor Kulübü
+                    Kültür Spor
                 </div>
                 <p style="color:#71717a;font-size:0.75rem;margin:0;font-weight:500;">Yönetim Paneli</p>
             </div>
@@ -42,7 +42,7 @@
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/dashboard" class="sidebar-menu-link">
-                            <i class="sidebar-menu-icon fas fa-layout-dashboard"></i>
+                            <i class="sidebar-menu-icon fa-brands fa-hornbill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>

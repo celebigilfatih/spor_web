@@ -173,13 +173,7 @@
                 
                 <div class="col-lg-3 mb-4">
                     <h6 class="text-warning mb-3">HABERLER</h6>
-                    <p>En son haberleri ve gelişmeleri e-posta ile takip edin.</p>
-                    <form class="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="E-posta adresiniz">
-                            <button class="btn btn-warning" type="submit">Abone Ol</button>
-                        </div>
-                    </form>
+                    <p>En son haberleri ve gelişmeleri takip edin.</p>
                 </div>
             </div>
             

@@ -60,57 +60,56 @@ $content .= '
                         <p class="section-description">Öğrenciye ait temel bilgileri doldurunuz</p>
                     </div>
                     
+                    <!-- İlk Satır: Ad Soyad, Doğum Yeri, Doğum Tarihi -->
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="student_name" class="form-label required">Adı Soyadı</label>
                             <input type="text" class="form-control" id="student_name" name="student_name" required>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="first_club" class="form-label">İlk Kulübü</label>
-                            <input type="text" class="form-control" id="first_club" name="first_club">
-                            <div class="form-text">Daha önce başka bir kulüpte oynadıysa belirtiniz</div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="birth_date" class="form-label required">Doğum Tarihi</label>
-                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="birth_place" class="form-label required">Doğum Yeri</label>
                             <input type="text" class="form-control" id="birth_place" name="birth_place" required>
                         </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="birth_date" class="form-label required">Doğum Tarihi</label>
+                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                        </div>
                     </div>
                     
+                    <!-- İkinci Satır: TC Kimlik No, Okul Bilgisi, Öğrenci Fotoğrafı -->
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="tc_number" class="form-label required">TC Kimlik No</label>
                             <input type="text" class="form-control" id="tc_number" name="tc_number" maxlength="11" required>
                             <div class="form-text">11 haneli TC kimlik numaranızı giriniz</div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
+                            <label for="school_info" class="form-label required">Okul Bilgisi</label>
+                            <input type="text" class="form-control" id="school_info" name="school_info" required>
+                            <div class="form-text">Okuduğu okul ve sınıf bilgisi</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <label for="student_photo" class="form-label required">Öğrenci Fotoğrafı</label>
                             <input type="file" class="form-control" id="student_photo" name="student_photo" accept="image/*" required>
                             <div class="form-text">Maksimum 5MB boyutunda olmalıdır</div>
                         </div>
                     </div>
                     
+                    <!-- Üçüncü Satır: Baba Adı, Anne Adı, İlk Kulübü -->
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="father_name" class="form-label required">Baba Adı</label>
                             <input type="text" class="form-control" id="father_name" name="father_name" required>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="mother_name" class="form-label required">Anne Adı</label>
                             <input type="text" class="form-control" id="mother_name" name="mother_name" required>
                         </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="school_info" class="form-label required">Okul Bilgisi</label>
-                        <input type="text" class="form-control" id="school_info" name="school_info" required>
-                        <div class="form-text">Okuduğu okul ve sınıf bilgisi</div>
+                        <div class="col-md-4 mb-3">
+                            <label for="first_club" class="form-label">İlk Kulübü</label>
+                            <input type="text" class="form-control" id="first_club" name="first_club">
+                            <div class="form-text">Daha önce başka bir kulüpte oynadıysa belirtiniz</div>
+                        </div>
                     </div>
                 </div>
 
@@ -124,6 +123,7 @@ $content .= '
                         <p class="section-description">Veli/vasi bilgilerini doldurunuz</p>
                     </div>
                     
+                    <!-- İlk Satır: Veli Adı Soyadı, GSM Numarası, E-posta -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="parent_name" class="form-label required">Veli Adı Soyadı</label>
@@ -136,25 +136,22 @@ $content .= '
                         </div>
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="address" class="form-label required">İkametgah Adresi</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
-                    </div>
-                    
+                    <!-- İkinci Satır: Baba Mesleği, Anne Mesleği -->
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label required">E-posta Adresi</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
                         <div class="col-md-6 mb-3">
                             <label for="father_job" class="form-label required">Baba Mesleği</label>
                             <input type="text" class="form-control" id="father_job" name="father_job" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="mother_job" class="form-label required">Anne Mesleği</label>
+                            <input type="text" class="form-control" id="mother_job" name="mother_job" required>
+                        </div>
                     </div>
                     
+                    <!-- Üçüncü Satır: İkametgah Adresi -->
                     <div class="mb-3">
-                        <label for="mother_job" class="form-label required">Anne Mesleği</label>
-                        <input type="text" class="form-control" id="mother_job" name="mother_job" required>
+                        <label for="address" class="form-label required">İkametgah Adresi</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
                     </div>
                 </div>
 
@@ -271,7 +268,7 @@ $content .= '
                 <hr class="my-4">
                 <p class="small text-muted mb-0">
                     <i class="fas fa-info-circle me-1"></i>
-                    Başvuru durumunuzu takip etmek için size e-posta gönderilecektir.
+                    Başvuru durumunuzu takip etmek için size telefon ile ulaşılacaktır.
                 </p>
             </div>
             <div class="modal-footer">

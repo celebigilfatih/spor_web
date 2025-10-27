@@ -250,3 +250,45 @@ Array
 === VALIDATION STARTED ===
 Validation errors count: 0
 Validation passed!
+Submit method was called at 2025-10-27 08:46:09
+Array
+(
+    [csrf_token] => bcaca3b67c4ef7ec6bed6e9f7ac3d969b61e19bacf8c79e1cc56e4abcbf639de
+    [website] => 
+    [student_name] => Yigitcan YILDIZ
+    [first_club] => Mudanya
+    [birth_date] => 2013-03-27
+    [birth_place] => Bursa
+    [tc_number] => 12345678900
+    [father_name] => Mehmet Yılmaz
+    [mother_name] => Ayşe Yılmaz
+    [school_info] => Atatürk İlkokulu 4. Sınıf
+    [parent_name] => Fatih Çelebigil
+    [parent_phone] => 05305758377
+    [address] => Ataevler Mh. Ulaşım Sk. Dimora City Sitesi H Blok K:9 No:34
+    [email] => fatihcelebigil@gmail.com
+    [father_job] => Mühendis
+    [mother_job] => Finans
+    [emergency_contact] => Ali Yılmaz
+    [emergency_relation] => kardes
+    [emergency_phone] => 05305758377
+    [captcha_answer] => 8
+)
+
+Array
+(
+    [student_photo] => Array
+        (
+            [name] => detay1731772260959467.jpg
+            [full_path] => detay1731772260959467.jpg
+            [type] => image/jpeg
+            [tmp_name] => /tmp/phpQBTEwg
+            [error] => 0
+            [size] => 303137
+        )
+
+)
+
+=== VALIDATION STARTED ===
+Validation errors count: 0
+Validation passed!

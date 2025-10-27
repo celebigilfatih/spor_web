@@ -105,7 +105,6 @@ class YouthRegistration extends Controller {
                 'parent_name' => $this->sanitizeInput($_POST['parent_name'] ?? ''),
                 'parent_phone' => preg_replace('/[^0-9]/', '', $_POST['parent_phone'] ?? ''),
                 'address' => $this->sanitizeInput($_POST['address'] ?? ''),
-                'email' => filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL),
                 'father_job' => $this->sanitizeInput($_POST['father_job'] ?? ''),
                 'mother_job' => $this->sanitizeInput($_POST['mother_job'] ?? ''),
                 'emergency_contact_name' => $this->sanitizeInput($_POST['emergency_contact'] ?? ''),
@@ -219,10 +218,6 @@ class YouthRegistration extends Controller {
         
         if (empty($parentData['address']) || strlen($parentData['address']) < 5) {
             $errors[] = 'İkametgah adresi en az 5 karakter olmalıdır.';
-        }
-        
-        if (!$this->validateEmail($parentData['email'])) {
-            $errors[] = 'Geçerli bir e-posta adresi giriniz.';
         }
         
         if (empty($parentData['father_job']) || strlen($parentData['father_job']) < 2) {
@@ -358,7 +353,6 @@ class YouthRegistration extends Controller {
                 'name' => $parentData['parent_name'],
                 'phone' => $parentData['parent_phone'],
                 'address' => $parentData['address'],
-                'email' => $parentData['email'],
                 'father_job' => $parentData['father_job'],
                 'mother_job' => $parentData['mother_job'],
             ],

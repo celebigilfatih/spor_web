@@ -111,101 +111,44 @@ $content = '
                         <div class="card-header d-flex align-items-center mb-3">
                             <i class="fas fa-bullhorn text-warning me-2 fs-4"></i>
                             <h3 class="card-title mb-0">Duyurular</h3>
-                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
+                            <a href="' . BASE_URL . '/news/category/duyuru" class="ms-auto text-primary small">Tümünü Gör</a>
                         </div>
                         <div class="announcements-list">
                             ' . (isset($announcements) && !empty($announcements) ? 
                                 implode('', array_map(function($announcement) {
-                                    $typeBadge = '';
-                                    $typeLabel = '';
-                                    
-                                    switch($announcement['type']) {
-                                        case 'important':
-                                            $typeBadge = 'bg-danger';
-                                            $typeLabel = 'ÖNEMLİ';
-                                            break;
-                                        case 'info':
-                                            $typeBadge = 'bg-info';
-                                            $typeLabel = 'BİLGİ';
-                                            break;
-                                        case 'warning':
-                                            $typeBadge = 'bg-warning';
-                                            $typeLabel = 'UYARI';
-                                            break;
-                                        case 'success':
-                                            $typeBadge = 'bg-success';
-                                            $typeLabel = 'BAŞARILI';
-                                            break;
-                                        default:
-                                            $typeBadge = 'bg-secondary';
-                                            $typeLabel = 'BİLGİ';
-                                    }
+                                    // News tablosundan geldiği için duyuru badge'ı kullanıyoruz
+                                    $typeBadge = 'bg-warning';
+                                    $typeLabel = 'DUYURU';
                                     
                                     $publishedDate = date('d M Y', strtotime($announcement['published_at'] ?? $announcement['created_at']));
                                     
+                                    // Excerpt varsa onu kullan, yoksa content'ten kısa bir metin al
+                                    $content = '';
+                                    if (!empty($announcement['excerpt'])) {
+                                        $content = $announcement['excerpt'];
+                                    } else {
+                                        // HTML etiketlerini kaldır ve ilk 150 karakteri al
+                                        $content = strip_tags($announcement['content']);
+                                        $content = mb_substr($content, 0, 150) . (mb_strlen($content) > 150 ? '...' : '');
+                                    }
+                                    
                                     return '
-                                    <div class="announcement-item mb-3 p-3 bg-light rounded">
-                                        <div class="announcement-badge mb-2">
-                                            <span class="badge ' . $typeBadge . '">' . $typeLabel . '</span>
-                                            <span class="text-muted small ms-2">' . $publishedDate . '</span>
+                                    <a href="' . BASE_URL . '/news/' . $announcement['slug'] . '" class="text-decoration-none">
+                                        <div class="announcement-item mb-3 p-3 bg-light rounded" style="cursor: pointer; transition: all 0.3s;" onmouseover="this.style.backgroundColor=\'#e9ecef\'" onmouseout="this.style.backgroundColor=\'#f8f9fa\'">
+                                            <div class="announcement-badge mb-2">
+                                                <span class="badge ' . $typeBadge . '">' . $typeLabel . '</span>
+                                                <span class="text-muted small ms-2">' . $publishedDate . '</span>
+                                            </div>
+                                            <h5 class="announcement-title mb-2 text-dark">' . htmlspecialchars($announcement['title']) . '</h5>
+                                            <p class="announcement-text mb-0 small text-muted">' . htmlspecialchars($content) . '</p>
                                         </div>
-                                        <h5 class="announcement-title mb-2">' . htmlspecialchars($announcement['title']) . '</h5>
-                                        <p class="announcement-text mb-0 small">' . htmlspecialchars($announcement['content']) . '</p>
-                                    </div>';
+                                    </a>';
                                 }, $announcements)) : 
                                 '
                                 <div class="announcement-item mb-3 p-3 bg-light rounded text-center">
                                     <p class="text-muted mb-0">Henüz duyuru bulunmamaktadır.</p>
                                 </div>'
                             ) . '
-                        </div>
-                    </div>
-                    <!-- Instagram Feed -->
-                    <div class="instagram-feed-card mb-4">
-                        <div class="card-header d-flex align-items-center mb-3">
-                            <i class="fab fa-instagram text-danger me-2 fs-4"></i>
-                            <h3 class="card-title mb-0">Instagram</h3>
-                            <a href="#" class="ms-auto text-primary small">Tümünü Gör</a>
-                        </div>
-                        <div class="instagram-posts">
-                            <div class="instagram-post mb-3">
-                                <div class="post-header d-flex align-items-center mb-2">
-                                    <div class="profile-pic me-2">
-                                        <img src="/uploads/team-logos/fenerbahce.svg" alt="Kulüp" class="rounded-circle" width="32" height="32">
-                                    </div>
-                                    <div class="post-info">
-                                        <div class="username fw-bold">@sporkulubu</div>
-                                        <div class="post-time text-muted small">2 saat önce</div>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <p class="post-text mb-2">🔥 Antrenmanlarımız devam ediyor! Yeni sezon için hazırız 💪 #YeniSezon #Hazırlık</p>
-
-                                    <div class="post-stats mt-2 d-flex text-muted small">
-                                        <span class="me-3"><i class="far fa-heart me-1"></i>1.2K</span>
-                                        <span><i class="far fa-comment me-1"></i>45</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="instagram-post">
-                                <div class="post-header d-flex align-items-center mb-2">
-                                    <div class="profile-pic me-2">
-                                        <img src="/uploads/team-logos/fenerbahce.svg" alt="Kulüp" class="rounded-circle" width="32" height="32">
-                                    </div>
-                                    <div class="post-info">
-                                        <div class="username fw-bold">@sporkulubu</div>
-                                        <div class="post-time text-muted small">1 gün önce</div>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <p class="post-text mb-2">🏆 Galibiyetimizi kutluyoruz! Taraftarımıza teşekkürler 🙏 #Galibiyet #Teşekkürler</p>
-                                    <div class="post-stats mt-2 d-flex text-muted small">
-                                        <span class="me-3"><i class="far fa-heart me-1"></i>2.8K</span>
-                                        <span><i class="far fa-comment me-1"></i>156</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
