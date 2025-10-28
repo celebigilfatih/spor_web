@@ -5,7 +5,7 @@
     --primary-dark-color: #0052d0;
     --secondary-color: #005be7; /* Yellow/Gold */
     --accent-color: #dc2626; /* Red accent */
-    --dark-color: #1f2937;
+    --dark-color: #001B45;
     --light-color: #f8fafc;
     --text-color: #374151;
     --border-color: #e5e7eb;
@@ -3348,7 +3348,7 @@ button:focus,
 .match-calendar-section .section-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1f2937;
+    color:var(--primary-dark-color);
     margin: 0;
     letter-spacing: 0.5px;
 }
@@ -3399,7 +3399,7 @@ button:focus,
     border-radius: 10px;
     font-weight: 600;
     font-size: 13px;
-    color: #6b7280;
+    color: var(--primary-dark-color);
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
