@@ -83,12 +83,12 @@ $content = '
                     <div class="article-content">
                         ' . (!empty($news['excerpt']) ? '
                         <div class="article-excerpt mb-4 p-3 bg-light rounded">
-                            <p class="lead mb-0">' . htmlspecialchars($news['excerpt']) . '</p>
+                            <p class="lead mb-0">' . nl2br(htmlspecialchars($news['excerpt'])) . '</p>
                         </div>
                         ' : '') . '
                         
                         <div class="article-body">
-                            ' . $news['content'] . '
+                            ' . nl2br(htmlspecialchars($news['content'])) . '
                         </div>
                     </div>
                     

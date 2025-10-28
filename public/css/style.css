@@ -3334,7 +3334,7 @@ button:focus,
 
 /* Match Calendar Section */
 .match-calendar-section {
-    background: #f8fafc;
+    background: #ffffff;
     padding: 60px 0;
 }
 
@@ -3346,11 +3346,11 @@ button:focus,
 }
 
 .match-calendar-section .section-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
     margin: 0;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .match-calendar-nav {
@@ -3395,11 +3395,11 @@ button:focus,
 .filter-btn {
     background: transparent;
     border: none;
-    padding: 12px 20px;
-    border-radius: 20px;
+    padding: 10px 18px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 14px;
-    color: var(--text-color);
+    font-size: 13px;
+    color: #6b7280;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
@@ -3408,9 +3408,8 @@ button:focus,
 
 .filter-btn.active,
 .filter-btn:hover {
-    background: var(--primary-color);
+    background: #1f2937;
     color: white;
-    transform: translateY(-1px);
 }
 
 .matches-horizontal-container {
@@ -3438,15 +3437,15 @@ button:focus,
 
 .horizontal-match-card {
     background: white;
-    padding: 25px;
+    padding: 20px;
     min-width: 320px;
     max-width: 320px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.4s ease;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     flex-shrink: 0;
 }
 
@@ -3456,75 +3455,76 @@ button:focus,
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-dark-color), var(--primary-color));
+    border-radius: 16px 16px 0 0;
 }
 
 .horizontal-match-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    border-color: var(--secondary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: #d1d5db;
 }
 
 .horizontal-match-card.upcoming::before {
-    background: linear-gradient(90deg, #16a34a, #22c55e);
+    background: linear-gradient(90deg, var(--primary-dark-color), var(--primary-color));
 }
 
 .horizontal-match-card.finished::before {
-    background: linear-gradient(90deg, #64748b, #94a3b8);
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
 }
 
 .match-status-indicator {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .match-competition-badge {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark-color));
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
+    background: #f3f4f6;
+    color: #374151;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    box-shadow: 0 2px 8px rgba(22, 103, 254, 0.3);
+    border: 1px solid #e5e7eb;
 }
 
 .match-competition-badge i {
     font-size: 10px;
+    color: var(--primary-dark-color);
 }
 
 .status-dot {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    animation: pulse 2s infinite;
 }
 
 .status-dot.upcoming {
-    background: #16a34a;
+    background: var(--primary-dark-color);
 }
 
 .status-dot.finished {
-    background: #64748b;
+    background: #9ca3af;
     animation: none;
 }
 
 .status-text {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #64748b;
+    letter-spacing: 0.5px;
+    color: #6b7280;
 }
 
 .match-date-section {
@@ -3536,46 +3536,47 @@ button:focus,
 }
 
 .match-datetime-section {
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 16px;
     text-align: center;
+    border: 1px solid #e5e7eb;
 }
 
 .match-datetime-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--primary-color);
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
 }
 
 .match-datetime-info i {
-    color: var(--secondary-color);
-    font-size: 16px;
+    color: var(--primary-dark-color);
+    font-size: 14px;
 }
 
 .match-time-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    background: var(--primary-color);
+    gap: 6px;
+    background: #1f2937;
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 15px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
     display: inline-flex;
     margin: 0 auto;
 }
 
 .match-time-info i {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .match-day {
@@ -3611,26 +3612,29 @@ button:focus,
 
 .match-score-section {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .final-score {
-    background: var(--accent-color);
+    background: #1f2937;
     color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 900;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: 700;
     font-size: 18px;
     display: inline-block;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .teams-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 15px;
+    margin-bottom: 16px;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
 }
 
 .team {
@@ -3667,11 +3671,11 @@ button:focus,
 }
 
 .team-name {
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 13px;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .vs-section {
@@ -3682,13 +3686,9 @@ button:focus,
 }
 
 .vs-text {
-    background: var(--secondary-color);
-    color: var(--light-color);
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-weight: 900;
-    font-size: 12px;
-    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 11px;
+    color: #9ca3af;
     letter-spacing: 1px;
 }
 
@@ -3706,18 +3706,18 @@ button:focus,
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    color: #64748b;
-    font-size: 13px;
-    font-weight: 600;
-    background: #f8fafc;
-    padding: 10px 15px;
-    border-radius: 20px;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
 }
 
 .match-venue-section i {
-    color: var(--secondary-color);
-    font-size: 12px;
+    color: var(--primary-dark-color);
+    font-size: 11px;
 }
 
 @keyframes pulse {
