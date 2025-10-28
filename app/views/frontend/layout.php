@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS inspired by Fenerbahçe -->
-    <link href="<?= BASE_URL ?>/css/style.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/css/style.css?v=<?= time() ?>" rel="stylesheet">
     
     <!-- Additional page styles -->
     <?php if (isset($additional_css)): ?>

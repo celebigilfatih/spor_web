@@ -834,7 +834,7 @@ body {
 }
 
 .section-title {
-    color: var(--primary-color);
+    color: var(--primary-dark-color);
     font-weight: 800;
     font-size: 2rem;
     letter-spacing: -0.02em;
@@ -2974,7 +2974,7 @@ button:focus,
 }
 
 .section-title {
-    color: var(--primary-color);
+    color: var(--primary-dark-3color);
     font-weight: 800;
     font-size: 2.2rem;
     position: relative;
@@ -3332,6 +3332,27 @@ button:focus,
 
 }
 
+/* Match Calendar Section */
+.match-calendar-section {
+    background: #f8fafc;
+    padding: 60px 0;
+}
+
+.match-calendar-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.match-calendar-section .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 0;
+    letter-spacing: 1px;
+}
+
 .match-calendar-nav {
     display: flex;
     justify-content: space-between;
@@ -3420,6 +3441,7 @@ button:focus,
     padding: 25px;
     min-width: 320px;
     max-width: 320px;
+    border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border: 2px solid transparent;
     transition: all 0.4s ease;
@@ -3459,6 +3481,28 @@ button:focus,
     margin-bottom: 15px;
 }
 
+.match-competition-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark-color));
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(22, 103, 254, 0.3);
+}
+
+.match-competition-badge i {
+    font-size: 10px;
+}
+
 .status-dot {
     width: 12px;
     height: 12px;
@@ -3491,10 +3535,53 @@ button:focus,
     border-radius: 12px;
 }
 
+.match-datetime-section {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.match-datetime-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.match-datetime-info i {
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
+.match-time-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+.match-time-info i {
+    font-size: 14px;
+}
+
 .match-day {
     font-size: 2.5rem;
     font-weight: 900;
-    color: var(--primary-color);
+    color: var(--primary-dark-color);
     line-height: 1;
     margin-bottom: 5px;
 }
@@ -3596,7 +3683,7 @@ button:focus,
 
 .vs-text {
     background: var(--secondary-color);
-    color: var(--dark-color);
+    color: var(--light-color);
     padding: 8px 12px;
     border-radius: 20px;
     font-weight: 900;

@@ -166,7 +166,7 @@ $content = '
             <div class="col-12">
 
                 <div class="section-header mb-4">
-                    <h2 class="section-title">MAÇ TAKVİMİ</h2>
+                    <h2 class="section-title">MÜSABAKA</h2>
                         <div class="nav-filters">
                             <button class="filter-btn active" data-filter="all">Tüm Maçlar</button>
                             <button class="filter-btn" data-filter="upcoming">Yaklaşan</button>
@@ -190,9 +190,11 @@ $content = '
                                 (isset($upcoming_matches) && !empty($upcoming_matches) ? 
                                     implode('', array_map(function($match) {
                                         $months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+                                        $days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
                                         $matchDate = strtotime($match['match_date']);
                                         $day = date('d', $matchDate);
                                         $month = $months[date('n', $matchDate) - 1];
+                                        $dayName = $days[date('w', $matchDate)];
                                         $time = date('H:i', $matchDate);
                                         return '
                             <div class="horizontal-match-card upcoming" data-type="upcoming">
@@ -200,12 +202,19 @@ $content = '
                                     <span class="status-dot upcoming"></span>
                                     <span class="status-text">Yaklaşan</span>
                                 </div>
-                                <div class="match-date-section">
-                                    <div class="match-day">' . $day . '</div>
-                                    <div class="match-month">' . $month . '</div>
+                                <div class="match-competition-badge">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>' . htmlspecialchars($match['competition'] ?? $match['league'] ?? 'Müsabaka') . '</span>
                                 </div>
-                                <div class="match-time-section">
-                                    <div class="match-time">' . $time . '</div>
+                                <div class="match-datetime-section">
+                                    <div class="match-datetime-info">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <span>' . $day . ' ' . $month . ' ' . $dayName . '</span>
+                                    </div>
+                                    <div class="match-time-info">
+                                        <i class="fas fa-clock"></i>
+                                        <span>' . $time . '</span>
+                                    </div>
                                 </div>
                                 <div class="teams-section">
                                     <div class="team home-team">
@@ -227,18 +236,26 @@ $content = '
                                 (isset($recent_results) && !empty($recent_results) ? 
                                     implode('', array_map(function($match) {
                                         $months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+                                        $days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
                                         $matchDate = strtotime($match['match_date']);
                                         $day = date('d', $matchDate);
                                         $month = $months[date('n', $matchDate) - 1];
+                                        $dayName = $days[date('w', $matchDate)];
                                         return '
                             <div class="horizontal-match-card finished" data-type="finished">
                                 <div class="match-status-indicator">
                                     <span class="status-dot finished"></span>
                                     <span class="status-text">Tamamlandı</span>
                                 </div>
-                                <div class="match-date-section">
-                                    <div class="match-day">' . $day . '</div>
-                                    <div class="match-month">' . $month . '</div>
+                                <div class="match-competition-badge">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>' . htmlspecialchars($match['competition'] ?? $match['league'] ?? 'Müsabaka') . '</span>
+                                </div>
+                                <div class="match-datetime-section">
+                                    <div class="match-datetime-info">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <span>' . $day . ' ' . $month . ' ' . $dayName . '</span>
+                                    </div>
                                 </div>
                                 <div class="match-score-section">
                                     <div class="final-score">' . ($match['home_score'] ?? '0') . ' - ' . ($match['away_score'] ?? '0') . '</div>

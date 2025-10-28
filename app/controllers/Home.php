@@ -27,14 +27,21 @@ class Home extends Controller
      */
     public function index()
     {
+        $upcoming = $this->matchModel->getUpcomingMatches(5);
+        $results = $this->matchModel->getResults(3);
+        
+        // Debug: Log match data
+        error_log("Upcoming matches count: " . (is_array($upcoming) ? count($upcoming) : 0));
+        error_log("Recent results count: " . (is_array($results) ? count($results) : 0));
+        
         $data = [
             'title' => 'Ana Sayfa - ' . $this->settingsModel->getSetting('site_title', 'Spor Kulübü'),
             'sliders' => $this->sliderModel->getActiveSliders(),
             'featured_news' => $this->newsModel->getFeatured(3),
             'latest_news' => $this->newsModel->getPublished(6),
             'announcements' => $this->newsModel->getByCategory('duyuru', 3), // Get announcements from news with 'duyuru' category
-            'upcoming_matches' => $this->matchModel->getUpcomingMatches(5),
-            'recent_results' => $this->matchModel->getResults(3),
+            'upcoming_matches' => $upcoming,
+            'recent_results' => $results,
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
