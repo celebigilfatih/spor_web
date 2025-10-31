@@ -12,12 +12,29 @@ class Player extends Model
      */
     public function getAllPlayers()
     {
-        $sql = "SELECT p.*, t.name as team_name 
+        $sql = "SELECT p.*, t.name as team_name, yg.name as group_name
                 FROM {$this->table} p 
                 LEFT JOIN teams t ON p.team_id = t.id 
+                LEFT JOIN youth_groups yg ON p.youth_group_id = yg.id
                 ORDER BY p.name ASC";
         
         return $this->db->query($sql);
+    }
+
+    /**
+     * Tüm gençlik oyuncularını getir
+     */
+    public function getYouthPlayers()
+    {
+        $sql = "SELECT p.*, yg.name as group_name
+                FROM {$this->table} p 
+                LEFT JOIN youth_groups yg ON p.youth_group_id = yg.id
+                WHERE p.youth_group_id IS NOT NULL
+                ORDER BY yg.name ASC, p.name ASC";
+        
+        $result = $this->db->query($sql);
+        error_log("Youth players query result: " . (is_array($result) ? count($result) : 'not an array'));
+        return $result;
     }
 
     /**
@@ -44,6 +61,20 @@ class Player extends Model
                 ORDER BY jersey_number ASC";
         
         return $this->db->query($sql, ['team_id' => $teamId]);
+    }
+
+    /**
+     * Gruba göre oyuncuları getir
+     */
+    public function getByGroup($groupId)
+    {
+        $sql = "SELECT p.*, yg.name as group_name 
+                FROM {$this->table} p 
+                LEFT JOIN youth_groups yg ON p.youth_group_id = yg.id
+                WHERE p.youth_group_id = :group_id AND p.status = 'active' 
+                ORDER BY p.name ASC";
+        
+        return $this->db->query($sql, ['group_id' => $groupId]);
     }
 
     /**

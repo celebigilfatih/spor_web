@@ -41,6 +41,7 @@ if (empty($news)) {
                     <th>ID</th>
                     <th><i class="fas fa-heading"></i> Başlık</th>
                     <th><i class="fas fa-folder"></i> Kategori</th>
+                    <th><i class="fas fa-sort-numeric-up"></i> Öncelik</th>
                     <th><i class="fas fa-toggle-on"></i> Durum</th>
                     <th><i class="fas fa-star"></i> Öne Çıkan</th>
                     <th><i class="fas fa-eye"></i> Görüntülenme</th>
@@ -51,27 +52,33 @@ if (empty($news)) {
             </thead>
             <tbody>';
             
-    foreach ($news as $item) {
-        $content .= '
+    if (isset($news) && is_array($news)) {
+        foreach ($news as $item) {
+            $content .= '
                 <tr>
                     <td>' . $item['id'] . '</td>
                     <td>
                         <div class="news-title">
                             <strong>' . htmlspecialchars($item['title']) . '</strong>';
         
-        if (!empty($item['featured_image'])) {
-            $content .= '
+            if (!empty($item['featured_image'])) {
+                $content .= '
                             <span class="badge badge-info ml-2">
                                 <i class="fas fa-image"></i> Resim
                             </span>';
-        }
+            }
         
-        $content .= '
+            $content .= '
                         </div>
                     </td>
                     <td>
                         <span class="badge badge-' . ($item['category'] === 'haber' ? 'info' : ($item['category'] === 'duyuru' ? 'warning' : 'success')) . '">
                             ' . strtoupper($item['category']) . '
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-primary">
+                            ' . ($item['priority'] ?? 0) . '
                         </span>
                     </td>
                     <td>
@@ -83,15 +90,15 @@ if (empty($news)) {
                     <td>
                         <div class="text-center">';
         
-        if (!empty($item['is_featured'])) {
-            $content .= '
+            if (!empty($item['is_featured'])) {
+                $content .= '
                             <i class="fas fa-star text-warning" title="Öne çıkan"></i>';
-        } else {
-            $content .= '
+            } else {
+                $content .= '
                             <i class="far fa-star text-muted"></i>';
-        }
+            }
         
-        $content .= '
+            $content .= '
                         </div>
                     </td>
                     <td>' . number_format($item['views'] ?? 0) . '</td>
@@ -104,17 +111,17 @@ if (empty($news)) {
                     <td>
                         <div class="admin-action-buttons">';
         
-        if ($item['status'] === 'published') {
-            $content .= '
+            if ($item['status'] === 'published') {
+                $content .= '
                             <a href="' . BASE_URL . '/news/detail/' . ($item['slug'] ?? $item['id']) . '" 
                                class="btn btn-admin-secondary btn-sm" 
                                target="_blank" 
                                title="Görüntüle">
                                 <i class="fas fa-eye"></i>
                             </a>';
-        }
+            }
         
-        $content .= '
+            $content .= '
                             <a href="' . BASE_URL . '/admin/news/edit/' . $item['id'] . '" 
                                class="btn btn-admin-primary btn-sm" 
                                title="Düzenle">
@@ -128,6 +135,7 @@ if (empty($news)) {
                         </div>
                     </td>
                 </tr>';
+        }
     }
 
     $content .= '
@@ -138,7 +146,7 @@ if (empty($news)) {
     <div class="admin-table-footer">
         <div class="admin-table-info">
             <i class="fas fa-info-circle"></i>
-            Toplam ' . count($news) . ' haber listeleniyor.
+            Toplam ' . (isset($news) && is_array($news) ? count($news) : 0) . ' haber listeleniyor.
         </div>
     </div>';
 }

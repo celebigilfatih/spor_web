@@ -85,6 +85,34 @@ $content = '
                                     <option value="Forvet"' . (($_POST['position'] ?? '') === 'Forvet' ? ' selected' : '') . '>Forvet</option>
                                 </select>
                             </div>
+
+                            <!-- Youth Group Selection -->
+                            <div class="shadcn-form-group md:col-span-2">
+                                <label class="shadcn-label">
+                                    Grup Atama
+                                </label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="team_id" class="block text-sm font-medium text-gray-700 mb-1">A Takımı</label>
+                                        <select id="team_id" name="team_id" class="shadcn-select">
+                                            <option value="">Takım Seçiniz</option>
+                                            ' . (isset($teams) && is_array($teams) ? implode('', array_map(function($team) {
+                                                return '<option value="' . $team['id'] . '"' . ((($_POST['team_id'] ?? '') == $team['id']) ? ' selected' : '') . '>' . htmlspecialchars($team['name']) . '</option>';
+                                            }, $teams)) : '') . '
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="youth_group_id" class="block text-sm font-medium text-gray-700 mb-1">Gençlik Akademisi</label>
+                                        <select id="youth_group_id" name="youth_group_id" class="shadcn-select">
+                                            <option value="">Grup Seçiniz</option>
+                                            ' . (isset($youth_groups) && is_array($youth_groups) ? implode('', array_map(function($group) {
+                                                return '<option value="' . $group['id'] . '"' . ((($_POST['youth_group_id'] ?? '') == $group['id']) ? ' selected' : '') . '>' . htmlspecialchars($group['name']) . '</option>';
+                                            }, $youth_groups)) : '') . '
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class="shadcn-form-hint">Oyuncunun ait olduğu takımı veya gençlik grubunu seçiniz. En az birini seçmelisiniz.</p>
+                            </div>
                         </div>
                     </div>
                 </div>

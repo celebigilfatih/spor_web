@@ -128,18 +128,19 @@ $content = '
                         <div class="modern-input-group">
                             <label for="team_id" class="modern-label">
                                 <span class="label-text">Takım</span>
-                                <span class="required-indicator">*</span>
                             </label>
                             <div class="select-wrapper">
                                 <div class="select-icon">
                                     <i class="fas fa-shield-alt"></i>
                                 </div>
-                                <select id="team_id" name="team_id" class="modern-select" required>
+                                <select id="team_id" name="team_id" class="modern-select">
                                     <option value="">Takım Seçiniz</option>';
                             
-                            foreach ($teams as $team) {
-                                $selected = $player['team_id'] == $team['id'] ? ' selected' : '';
-                                $content .= '<option value="' . $team['id'] . '"' . $selected . '>' . htmlspecialchars($team['name']) . '</option>';
+                            if (isset($teams) && is_array($teams)) {
+                                foreach ($teams as $team) {
+                                    $selected = $player['team_id'] == $team['id'] ? ' selected' : '';
+                                    $content .= '<option value="' . $team['id'] . '"' . $selected . '>' . htmlspecialchars($team['name']) . '</option>';
+                                }
                             }
                             
                             $content .= '
@@ -148,6 +149,33 @@ $content = '
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="modern-input-group">
+                            <label for="youth_group_id" class="modern-label">
+                                <span class="label-text">Gençlik Akademisi Grubu</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <div class="select-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <select id="youth_group_id" name="youth_group_id" class="modern-select">
+                                    <option value="">Grup Seçiniz</option>';
+                            
+                            if (isset($youth_groups) && is_array($youth_groups)) {
+                                foreach ($youth_groups as $group) {
+                                    $selected = $player['youth_group_id'] == $group['id'] ? ' selected' : '';
+                                    $content .= '<option value="' . $group['id'] . '"' . $selected . '>' . htmlspecialchars($group['name']) . '</option>';
+                                }
+                            }
+                            
+                            $content .= '
+                                </select>
+                                <div class="select-arrow">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            <small class="field-hint">Oyuncunun ait olduğu gençlik grubu (varsa)</small>
                         </div>
 
                         <div class="modern-input-group">

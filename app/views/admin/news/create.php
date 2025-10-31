@@ -102,7 +102,25 @@ $content = '
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="admin-form-group">
+                    <label for="priority" class="admin-form-label">
+                        <i class="fas fa-sort-numeric-up"></i> Öncelik
+                    </label>
+                    <input type="number" 
+                           id="priority" 
+                           name="priority" 
+                           class="admin-form-control" 
+                           min="0" 
+                           max="999" 
+                           value="' . htmlspecialchars($_POST['priority'] ?? '0') . '">
+                    <small class="admin-form-help">
+                        <i class="fas fa-info-circle"></i> Daha yüksek değer daha öncelikli
+                    </small>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
                 <div class="admin-form-group">
                     <label class="admin-form-label">
                         <i class="fas fa-star"></i> Özellikler

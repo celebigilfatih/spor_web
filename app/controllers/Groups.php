@@ -58,6 +58,42 @@ class Groups extends Controller
     }
 
     /**
+     * Youth academy players page
+     */
+    public function players()
+    {
+        $data = [
+            'title' => 'Gençlik Akademisi Oyuncuları - ' . $this->settingsModel->getSetting('site_title', 'Spor Kulübü'),
+            'groups' => $this->groupModel->getActive(),
+            'players_by_group' => $this->getPlayerByGroups(),
+            'site_settings' => $this->settingsModel->getAllSettings()
+        ];
+
+        $this->view('frontend/groups/players', $data);
+    }
+
+    /**
+     * Get players grouped by their youth groups
+     */
+    private function getPlayerByGroups()
+    {
+        $groups = $this->groupModel->getActive();
+        $playersByGroup = [];
+        
+        foreach ($groups as $group) {
+            $players = $this->playerModel->getByGroup($group['id']);
+            if (!empty($players)) {
+                $playersByGroup[$group['id']] = [
+                    'group' => $group,
+                    'players' => $players
+                ];
+            }
+        }
+        
+        return $playersByGroup;
+    }
+
+    /**
      * Academy information
      */
     public function academy()

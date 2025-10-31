@@ -53,8 +53,9 @@ if (empty($matches)) {
             </thead>
             <tbody>';
             
-    foreach ($matches as $match) {
-        $content .= '
+    if (isset($matches) && is_array($matches)) {
+        foreach ($matches as $match) {
+            $content .= '
                 <tr>
                     <td>
                         <div class="team-info">
@@ -78,27 +79,27 @@ if (empty($matches)) {
                     </td>
                     <td>';
         
-        if ($match['status'] === 'finished' && !is_null($match['home_score']) && !is_null($match['away_score'])) {
-            $content .= '
+            if ($match['status'] === 'finished' && !is_null($match['home_score']) && !is_null($match['away_score'])) {
+                $content .= '
                         <span class="badge badge-success">
                             <i class="fas fa-futbol"></i>
                             ' . $match['home_score'] . ' - ' . $match['away_score'] . '
                         </span>';
-        } elseif ($match['status'] === 'scheduled') {
-            $content .= '
+            } elseif ($match['status'] === 'scheduled') {
+                $content .= '
                         <span class="badge badge-warning">
                             <i class="fas fa-clock"></i>
                             Oynanacak
                         </span>';
-        } else {
-            $content .= '
+            } else {
+                $content .= '
                         <span class="badge badge-secondary">
                             <i class="fas fa-minus"></i>
                             -
                         </span>';
-        }
+            }
         
-        $content .= '
+            $content .= '
                     </td>
                     <td>
                         <span class="status-badge status-' . ($match['status'] === 'scheduled' ? 'active' : ($match['status'] === 'finished' ? 'success' : 'inactive')) . '">
@@ -121,6 +122,7 @@ if (empty($matches)) {
                         </div>
                     </td>
                 </tr>';
+        }
     }
 
     $content .= '
@@ -131,7 +133,7 @@ if (empty($matches)) {
     <div class="admin-table-footer">
         <div class="admin-table-info">
             <i class="fas fa-info-circle"></i>
-            Toplam ' . count($matches) . ' maç listeleniyor.
+            Toplam ' . (isset($matches) && is_array($matches) ? count($matches) : 0) . ' maç listeleniyor.
         </div>
     </div>';
 }

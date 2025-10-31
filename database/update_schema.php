@@ -459,6 +459,22 @@ try {
     $db->execute($createYouthGroupsTable);
     echo "Youth Groups tablosu oluşturuldu veya zaten mevcut!\n";
     
+    // 15. Players tablosuna youth_group_id alanı ekle
+    try {
+        $db->execute("ALTER TABLE players ADD COLUMN youth_group_id INT DEFAULT NULL AFTER team_id");
+        echo "Players tablosuna youth_group_id alanı eklendi!\n";
+    } catch (Exception $e) {
+        echo "Players tablosunda youth_group_id alanı zaten mevcut!\n";
+    }
+    
+    // 16. Players tablosuna youth_group_id için foreign key constraint ekle
+    try {
+        $db->execute("ALTER TABLE players ADD CONSTRAINT players_ibfk_2 FOREIGN KEY (youth_group_id) REFERENCES youth_groups (id) ON DELETE SET NULL");
+        echo "Players tablosuna youth_group_id için foreign key constraint eklendi!\n";
+    } catch (Exception $e) {
+        echo "Players tablosunda youth_group_id için foreign key constraint zaten mevcut!\n";
+    }
+    
     // Youth Groups örnek verileri ekle
     $youthGroupsCount = $db->query("SELECT COUNT(*) as count FROM youth_groups")[0]['count'];
     if ($youthGroupsCount == 0) {

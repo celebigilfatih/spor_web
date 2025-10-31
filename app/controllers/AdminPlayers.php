@@ -7,12 +7,14 @@ class AdminPlayers extends Controller
 {
     private $playerModel;
     private $teamModel;
+    private $youthGroupModel;
 
     public function __construct()
     {
         $this->requireAdmin();
         $this->playerModel = $this->model('Player');
         $this->teamModel = $this->model('Team');
+        $this->youthGroupModel = $this->model('YouthGroup');
     }
 
     /**
@@ -22,10 +24,31 @@ class AdminPlayers extends Controller
     {
         $data = [
             'title' => 'Oyuncu Yönetimi',
-            'players' => $this->playerModel->getAllPlayers()
+            'players' => $this->playerModel->getAllPlayers(),
+            'youth_groups' => $this->youthGroupModel->getActive()
         ];
 
         $this->view('admin/players/index', $data);
+    }
+
+    /**
+     * Gençlik oyuncuları listesi
+     */
+    public function youth()
+    {
+        error_log("Youth players method called");
+        $players = $this->playerModel->getYouthPlayers();
+        error_log("Players count: " . (is_array($players) ? count($players) : 'not an array'));
+        $youth_groups = $this->youthGroupModel->getActive();
+        error_log("Youth groups count: " . (is_array($youth_groups) ? count($youth_groups) : 'not an array'));
+        
+        $data = [
+            'title' => 'Gençlik Oyuncuları',
+            'players' => $players,
+            'youth_groups' => $youth_groups
+        ];
+
+        $this->view('admin/players/youth', $data);
     }
 
     /**
@@ -36,6 +59,7 @@ class AdminPlayers extends Controller
         $data = [
             'title' => 'Yeni Oyuncu Ekle',
             'teams' => $this->teamModel->getActiveTeams(),
+            'youth_groups' => $this->youthGroupModel->getActive(),
             'csrf_token' => $this->generateCSRFToken(),
             'message' => '',
             'error' => ''
@@ -71,6 +95,7 @@ class AdminPlayers extends Controller
             'title' => 'Oyuncu Düzenle',
             'player' => $player,
             'teams' => $this->teamModel->getActiveTeams(),
+            'youth_groups' => $this->youthGroupModel->getActive(),
             'csrf_token' => $this->generateCSRFToken(),
             'message' => '',
             'error' => ''
@@ -139,7 +164,8 @@ class AdminPlayers extends Controller
         
         $jerseyNumber = (int)($_POST['jersey_number'] ?? 0);
         $position = $this->sanitizeInput($_POST['position'] ?? '');
-        $teamId = (int)($_POST['team_id'] ?? 1); // Default to team ID 1 (A Team)
+        $teamId = !empty($_POST['team_id']) ? (int)($_POST['team_id']) : null; // Can be null for youth players
+        $youthGroupId = !empty($_POST['youth_group_id']) ? (int)($_POST['youth_group_id']) : null;
         $birthDate = $_POST['birth_date'] ?? '';
         $status = $this->sanitizeInput($_POST['status'] ?? 'active');
         $csrf_token = $_POST['csrf_token'] ?? '';
@@ -154,18 +180,21 @@ class AdminPlayers extends Controller
             return ['success' => false, 'message' => 'Ad Soyad ve pozisyon alanları zorunludur!'];
         }
 
-        // Forma numarası kontrolü
-        if ($jerseyNumber > 0) {
+        // Forma numarası kontrolü (sadece takım oyuncuları için)
+        if ($teamId && $jerseyNumber > 0) {
             if ($this->playerModel->isJerseyNumberTaken($jerseyNumber, $teamId, $id)) {
                 return ['success' => false, 'message' => 'Bu forma numarası zaten kullanılıyor!'];
             }
-        } else {
-            return ['success' => false, 'message' => 'Forma numarası zorunludur!'];
         }
         
         // Doğum tarihi kontrolü
         if (empty($birthDate)) {
             return ['success' => false, 'message' => 'Doğum tarihi zorunludur!'];
+        }
+
+        // En az bir grup seçilmeli (takım veya gençlik)
+        if (!$teamId && !$youthGroupId) {
+            return ['success' => false, 'message' => 'Lütfen oyuncunun ait olduğu bir takım veya gençlik grubu seçin!'];
         }
 
         // Veri dizisi hazırla - Match database schema
@@ -174,6 +203,7 @@ class AdminPlayers extends Controller
             'jersey_number' => $jerseyNumber,
             'position' => $position,
             'team_id' => $teamId,
+            'youth_group_id' => $youthGroupId,
             'birth_date' => $birthDate,
             'status' => $status
         ];

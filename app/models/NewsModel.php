@@ -14,7 +14,7 @@ class NewsModel extends Model
     {
         $sql = "SELECT * FROM {$this->table} 
                 WHERE status = 'published' 
-                ORDER BY published_at DESC";
+                ORDER BY priority DESC, published_at DESC";
         
         if ($limit) {
             $sql .= " LIMIT {$limit}";

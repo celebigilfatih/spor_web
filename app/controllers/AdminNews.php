@@ -146,6 +146,7 @@ class AdminNews extends Controller
         $category = $this->sanitizeInput($_POST['category'] ?? 'haber');
         $status = $this->sanitizeInput($_POST['status'] ?? 'draft');
         $is_featured = isset($_POST['is_featured']) ? 1 : 0;
+        $priority = (int)($_POST['priority'] ?? 0);
         $csrf_token = $_POST['csrf_token'] ?? '';
 
         // CSRF token kontrolü
@@ -176,6 +177,7 @@ class AdminNews extends Controller
             'category' => $category,
             'status' => $status,
             'is_featured' => $is_featured,  // Match database column name
+            'priority' => $priority,
             'updated_at' => date('Y-m-d H:i:s')
         ];
 

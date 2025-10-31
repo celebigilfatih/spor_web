@@ -1,7 +1,7 @@
 <?php
 $content = '
 <div class="admin-page-header">
-    <h1><i class="fas fa-users"></i> Oyuncu Yönetimi</h1>
+    <h1><i class="fas fa-user-graduate"></i> Gençlik Oyuncuları</h1>
     <div class="admin-page-actions">
         <a href="' . BASE_URL . '/admin/players/create" class="btn btn-admin-primary">
             <i class="fas fa-plus"></i> Yeni Oyuncu Ekle
@@ -25,9 +25,9 @@ $content .= '
 if (empty($players) || !is_array($players)) {
     $content .= '
     <div class="admin-empty-state">
-        <i class="fas fa-users fa-4x text-muted mb-3"></i>
-        <h3>Henüz oyuncu bulunmuyor</h3>
-        <p class="text-muted">Başlamak için ilk oyuncunuzu ekleyin.</p>
+        <i class="fas fa-user-graduate fa-4x text-muted mb-3"></i>
+        <h3>Henüz gençlik oyuncusu bulunmuyor</h3>
+        <p class="text-muted">Başlamak için ilk gençlik oyuncunuzu ekleyin.</p>
         <a href="' . BASE_URL . '/admin/players/create" class="btn btn-admin-primary mt-3">
             <i class="fas fa-plus"></i> İlk Oyuncuyu Ekle
         </a>
@@ -42,7 +42,6 @@ if (empty($players) || !is_array($players)) {
                     <th><i class="fas fa-user"></i> Ad Soyad</th>
                     <th><i class="fas fa-hashtag"></i> Forma No</th>
                     <th><i class="fas fa-map-pin"></i> Pozisyon</th>
-                    <th><i class="fas fa-shield-alt"></i> Takım</th>
                     <th><i class="fas fa-users"></i> Gençlik Grubu</th>
                     <th><i class="fas fa-calendar"></i> Yaş</th>
                     <th><i class="fas fa-flag"></i> Uyruk</th>
@@ -101,7 +100,6 @@ if (empty($players) || !is_array($players)) {
             $content .= '
                     </td>
                     <td>' . htmlspecialchars($player['position']) . '</td>
-                    <td>' . htmlspecialchars($player['team_name'] ?? 'Takımsız') . '</td>
                     <td>' . htmlspecialchars($player['group_name'] ?? '-') . '</td>
                     <td>';
         
@@ -155,7 +153,7 @@ if (empty($players) || !is_array($players)) {
     <div class="admin-table-footer">
         <div class="admin-table-info">
             <i class="fas fa-info-circle"></i>
-            Toplam ' . (isset($players) && is_array($players) ? count($players) : 0) . ' oyuncu listeleniyor.
+            Toplam ' . (isset($players) && is_array($players) ? count($players) : 0) . ' gençlik oyuncusu listeleniyor.
         </div>
     </div>';
     
@@ -173,7 +171,7 @@ if (empty($players) || !is_array($players)) {
         <div class="dashboard-card">
             <div class="dashboard-card-header">
                 <div class="dashboard-card-icon">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-user-graduate"></i>
                 </div>
             </div>
             <div class="dashboard-card-number">' . $totalPlayers . '</div>
@@ -220,14 +218,14 @@ $content .= '
 function deletePlayer(id) {
     const playerRow = document.querySelector("button[onclick=\'deletePlayer(" + id + ")\']").closest("tr");
     const playerName = playerRow ? (playerRow.querySelector("td:nth-child(2)") ? playerRow.querySelector("td:nth-child(2)").textContent.trim() : "Bu oyuncu") : "Bu oyuncu";
-    const playerTeam = playerRow ? (playerRow.querySelector("td:nth-child(3)") ? playerRow.querySelector("td:nth-child(3)").textContent.trim() : "") : "";
+    const playerGroup = playerRow ? (playerRow.querySelector("td:nth-child(5)") ? playerRow.querySelector("td:nth-child(5)").textContent.trim() : "") : "";
     
     showDeleteConfirmation({
         title: "Oyuncu Silme Onayı",
         message: "Bu oyuncuyu kalıcı olarak silmek istediğinizden emin misiniz?",
         submessage: "Bu işlem geri alınamaz ve oyuncuya ait tüm veriler silinecektir.",
         itemName: playerName,
-        itemDetails: playerTeam ? "Takım: " + playerTeam : "",
+        itemDetails: playerGroup ? "Grup: " + playerGroup : "",
         confirmText: "Oyuncuyu Sil",
         cancelText: "İptal",
         onConfirm: function(closeModal) {

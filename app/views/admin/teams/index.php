@@ -48,18 +48,19 @@ if (empty($teams)) {
             </thead>
             <tbody>';
             
-    foreach ($teams as $team) {
-        $content .= '
+    if (isset($teams) && is_array($teams)) {
+        foreach ($teams as $team) {
+            $content .= '
                 <tr>
                     <td>
                         <div class="team-info">
                             <strong>' . htmlspecialchars($team['name']) . '</strong>';
         
-        if (!empty($team['description'])) {
-            $content .= '<br><small class="text-muted">' . htmlspecialchars(substr($team['description'], 0, 50)) . '...</small>';
-        }
+            if (!empty($team['description'])) {
+                $content .= '<br><small class="text-muted">' . htmlspecialchars(substr($team['description'], 0, 50)) . '...</small>';
+            }
         
-        $content .= '
+            $content .= '
                         </div>
                     </td>
                     <td>
@@ -93,6 +94,7 @@ if (empty($teams)) {
                         </div>
                     </td>
                 </tr>';
+        }
     }
 
     $content .= '
@@ -103,7 +105,7 @@ if (empty($teams)) {
     <div class="admin-table-footer">
         <div class="admin-table-info">
             <i class="fas fa-info-circle"></i>
-            Toplam ' . count($teams) . ' takım listeleniyor.
+            Toplam ' . (isset($teams) && is_array($teams) ? count($teams) : 0) . ' takım listeleniyor.
         </div>
     </div>';
 }

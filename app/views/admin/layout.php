@@ -62,6 +62,13 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/players/youth" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-user-graduate"></i>
+                            <span>Gençlik Oyuncuları</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/teams" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-shield-alt"></i>
                             <span>Takımlar</span>

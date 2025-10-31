@@ -126,7 +126,6 @@ $content = '
                     ' . (!empty($group['assistant_coach']) ? '<p class="assistant-coach-info"><i class="fas fa-user-friends me-2"></i><strong>Yardımcı Antrenör:</strong> ' . htmlspecialchars($group['assistant_coach']) . '</p>' : '') . '
 
                     ' . (!empty($group['description']) ? '<p class="group-description mt-3">' . htmlspecialchars($group['description']) . '</p>' : '') . '
-                    <a href="' . BASE_URL . '/altyapi-kayit" class="btn btn-outline-primary mt-3">Kayit Ol</a>
                 </div>
             </div>';
                 }, $groups)) : 
