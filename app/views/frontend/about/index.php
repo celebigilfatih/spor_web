@@ -18,7 +18,45 @@ $content = '
 
         <div class="row">
             <div class="col-lg-12 mb-5">
-                <!-- Club Introduction -->
+                <!-- Dynamic Sections from Database -->
+                ';
+                
+                if (isset($sections) && is_array($sections) && count($sections) > 0) {
+                    foreach ($sections as $index => $section) {
+                        $content .= '
+                <div class="content-section mb-5">
+                    <h2 class="section-title mb-4">' . htmlspecialchars($section['title']) . '</h2>
+                    <div class="row align-items-center">';
+                        
+                        // If section has an image, show it on the left
+                        if (!empty($section['image'])) {
+                            $content .= '
+                        <div class="col-md-5 mb-4 mb-md-0">
+                            <img src="' . BASE_URL . htmlspecialchars($section['image']) . '" 
+                                 alt="' . htmlspecialchars($section['title']) . '" 
+                                 class="img-fluid rounded shadow">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="section-content">
+                                ' . $section['content'] . '
+                            </div>
+                        </div>';
+                        } else {
+                            $content .= '
+                        <div class="col-md-12">
+                            <div class="section-content">
+                                ' . $section['content'] . '
+                            </div>
+                        </div>';
+                        }
+                        
+                        $content .= '
+                    </div>
+                </div>';
+                    }
+                } else {
+                    // Fallback content if no sections in database
+                    $content .= '
                 <div class="content-section mb-5">
                     <h2 class="section-title mb-4">Kulübümüz</h2>
                     <div class="row align-items-center">
@@ -28,9 +66,10 @@ $content = '
                             <p>Modern tesislerimiz, deneyimli teknik kadromuz ve güçlü altyapımızla geleceğin yıldızlarını yetiştirmeye devam ediyoruz.</p>
                         </div>
                     </div>
-                </div>
-
-
+                </div>';
+                }
+                
+                $content .= '
 
                 <!-- Values -->
                 <div class="content-section mb-5">
@@ -176,6 +215,47 @@ $content = '
 </section>
 
 <style>
+.section-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #4b5563;
+}
+
+.section-content p {
+    margin-bottom: 1rem;
+}
+
+.section-content strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.section-content h3,
+.section-content h4 {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-content ul,
+.section-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-content li {
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
 .mission-vision-card {
     text-align: center;
     padding: 30px 20px;

@@ -224,4 +224,13 @@ class NewsModel extends Model
         $result = $this->db->query($sql, [$newsId]);
         return is_array($result) ? $result : [];
     }
+    
+    /**
+     * Galeri resmi ekle
+     */
+    public function addGalleryImage($newsId, $imagePath, $sortOrder = 0)
+    {
+        $sql = "INSERT INTO news_gallery (news_id, image_path, sort_order) VALUES (?, ?, ?)";
+        return $this->db->execute($sql, [$newsId, $imagePath, $sortOrder]);
+    }
 }

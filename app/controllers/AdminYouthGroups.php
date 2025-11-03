@@ -6,6 +6,7 @@
 class AdminYouthGroups extends Controller
 {
     private $youthGroupModel;
+    private $technicalStaffModel;
 
     public function __construct()
     {
@@ -15,6 +16,7 @@ class AdminYouthGroups extends Controller
         }
 
         $this->youthGroupModel = $this->model('YouthGroup');
+        $this->technicalStaffModel = $this->model('TechnicalStaffModel');
     }
 
     /**
@@ -40,9 +42,13 @@ class AdminYouthGroups extends Controller
      */
     public function create()
     {
+        // Get all active coaches for dropdown
+        $coaches = $this->technicalStaffModel->getCoaches();
+        
         $data = [
             'title' => 'Yeni Alt Yapı Grubu Ekle',
-            'csrf_token' => $this->generateCSRFToken()
+            'csrf_token' => $this->generateCSRFToken(),
+            'coaches' => $coaches
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -124,10 +130,14 @@ class AdminYouthGroups extends Controller
             $this->redirect('admin/youth-groups');
         }
 
+        // Get all active coaches for dropdown
+        $coaches = $this->technicalStaffModel->getCoaches();
+        
         $data = [
             'title' => 'Alt Yapı Grubu Düzenle',
             'group' => $group,
-            'csrf_token' => $this->generateCSRFToken()
+            'csrf_token' => $this->generateCSRFToken(),
+            'coaches' => $coaches
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -193,7 +193,7 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                WHERE position LIKE '%Antrenör%' 
+                WHERE position LIKE '%Antren%' 
                 AND ts.status = 'active' 
                 ORDER BY ts.id ASC";
         
@@ -208,7 +208,7 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                WHERE position NOT LIKE '%Antrenör%' 
+                WHERE position NOT LIKE '%Antren%' 
                 AND ts.status = 'active' 
                 ORDER BY ts.id ASC";
         
@@ -276,7 +276,7 @@ class TechnicalStaffModel extends Model
     public function getHeadCoach()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE position LIKE '%Baş Antrenör%' AND status = 'active' 
+                WHERE position LIKE '%Baş Antren%' AND status = 'active' 
                 ORDER BY id ASC 
                 LIMIT 1";
         
@@ -290,8 +290,8 @@ class TechnicalStaffModel extends Model
     public function getAssistantCoaches()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE position LIKE '%Antrenör%' 
-                AND position NOT LIKE '%Baş Antrenör%' 
+                WHERE position LIKE '%Antren%' 
+                AND position NOT LIKE '%Baş Antren%' 
                 AND position NOT LIKE '%Kaleci%' 
                 AND position NOT LIKE '%Kondisyon%' 
                 AND status = 'active' 
@@ -343,7 +343,7 @@ class TechnicalStaffModel extends Model
     public function getOtherStaff()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE position NOT LIKE '%Antrenör%' 
+                WHERE position NOT LIKE '%Antren%' 
                 AND position NOT LIKE '%Kaleci%' 
                 AND position NOT LIKE '%Kondisyon%' 
                 AND position NOT LIKE '%Doktor%' 

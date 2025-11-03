@@ -19,9 +19,12 @@ class About extends Controller
      */
     public function index()
     {
+        // Get all active sections from database
+        $sections = $this->aboutModel->getActiveSections();
+        
         $data = [
             'title' => 'Hakkımızda - ' . $this->settingsModel->getSetting('site_title', 'Spor Kulübü'),
-            'sections' => $this->aboutModel->getMainSections(),
+            'sections' => $sections,
             'history' => $this->aboutModel->getHistory(),
             'achievements' => $this->aboutModel->getAchievements(),
             'site_settings' => $this->settingsModel->getAllSettings()

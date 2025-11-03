@@ -105,6 +105,20 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/about" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-info-circle"></i>
+                            <span>Hakkımızda</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/achievements" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-trophy"></i>
+                            <span>Başarılar</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/users" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-users-cog"></i>
                             <span>Kullanıcı Yönetimi</span>

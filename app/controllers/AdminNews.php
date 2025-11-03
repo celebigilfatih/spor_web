@@ -263,6 +263,10 @@ class AdminNews extends Controller
      */
     private function processGalleryImages($newsId)
     {
+        if (!isset($_FILES['gallery_images'])) {
+            return;
+        }
+        
         $files = $_FILES['gallery_images'];
         
         for ($i = 0; $i < count($files['name']); $i++) {
@@ -279,9 +283,8 @@ class AdminNews extends Controller
                 $uploadResult = $this->uploadFile($tempFile, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
                 
                 if ($uploadResult['success']) {
-                    // Use model's executeCommand method to insert gallery image
-                    $sql = "INSERT INTO news_gallery (news_id, image_path, sort_order) VALUES (?, ?, ?)";
-                    $this->newsModel->executeCommand($sql, [$newsId, $uploadResult['filename'], $i]);
+                    // Use model's addGalleryImage method to insert gallery image
+                    $this->newsModel->addGalleryImage($newsId, $uploadResult['filename'], $i);
                 }
             }
         }

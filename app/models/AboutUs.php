@@ -8,6 +8,99 @@ class AboutUs extends Model
     protected $table = 'about_us';
 
     /**
+     * Tüm kayıtları getir
+     */
+    public function getAll()
+    {
+        $sql = "SELECT * FROM {$this->table} ORDER BY sort_order ASC, id ASC";
+        return $this->db->query($sql);
+    }
+
+    /**
+     * ID'ye göre kayıt getir
+     */
+    public function findById($id)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $result = $this->db->query($sql, ['id' => $id]);
+        return $result ? $result[0] : null;
+    }
+
+    /**
+     * Yeni kayıt oluştur
+     */
+    public function create($data)
+    {
+        $sql = "INSERT INTO {$this->table} (section_name, title, content, image, sort_order, status) 
+                VALUES (:section_name, :title, :content, :image, :sort_order, :status)";
+        
+        return $this->db->execute($sql, [
+            'section_name' => $data['section_name'],
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'image' => $data['image'],
+            'sort_order' => $data['sort_order'],
+            'status' => $data['status']
+        ]);
+    }
+
+    /**
+     * Kayıt güncelle
+     */
+    public function update($id, $data)
+    {
+        $sql = "UPDATE {$this->table} SET 
+                section_name = :section_name,
+                title = :title,
+                content = :content,
+                image = :image,
+                sort_order = :sort_order,
+                status = :status
+                WHERE id = :id";
+        
+        return $this->db->execute($sql, [
+            'id' => $id,
+            'section_name' => $data['section_name'] ?? '',
+            'title' => $data['title'] ?? '',
+            'content' => $data['content'] ?? '',
+            'image' => $data['image'] ?? null,
+            'sort_order' => $data['sort_order'] ?? 0,
+            'status' => $data['status'] ?? 'active'
+        ]);
+    }
+
+    /**
+     * Kayıt sil
+     */
+    public function delete($id)
+    {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        return $this->db->execute($sql, ['id' => $id]);
+    }
+
+    /**
+     * Form validasyonu
+     */
+    public function validate($data)
+    {
+        $errors = [];
+
+        if (empty($data['section_name'])) {
+            $errors[] = 'Bölüm adı gereklidir!';
+        }
+
+        if (empty($data['title'])) {
+            $errors[] = 'Başlık gereklidir!';
+        }
+
+        if (empty($data['content'])) {
+            $errors[] = 'İçerik gereklidir!';
+        }
+
+        return $errors;
+    }
+
+    /**
      * Aktif bölümleri getir
      */
     public function getActiveSections()

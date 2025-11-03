@@ -117,7 +117,7 @@ $content = '
                 <div class="shadcn-card">
                     <div class="shadcn-card-header">
                         <h3 class="shadcn-card-title">Antrenör Bilgileri</h3>
-                        <p class="shadcn-card-description">Grup antrenörlerinin bilgileri</p>
+                        <p class="shadcn-card-description">Grup antrenörlerini teknik kadrodan seçin</p>
                     </div>
                     <div class="shadcn-card-content">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,24 +125,40 @@ $content = '
                                 <label for="coach_name" class="shadcn-label">
                                     Baş Antrenör
                                 </label>
-                                <input type="text" 
-                                       id="coach_name" 
-                                       name="coach_name" 
-                                       class="shadcn-input" 
-                                       placeholder="Antrenör adı"
-                                       value="' . htmlspecialchars($_POST['coach_name'] ?? '') . '">
+                                <select id="coach_name" 
+                                        name="coach_name" 
+                                        class="shadcn-select">
+                                    <option value="">Seçiniz</option>
+                                    ' . (isset($coaches) && is_array($coaches) ? implode('', array_map(function($coach) {
+                                        $selected = (($_POST['coach_name'] ?? '') === $coach['name']) ? ' selected' : '';
+                                        $teamInfo = !empty($coach['team_name']) ? ' (' . htmlspecialchars($coach['team_name']) . ')' : '';
+                                        return '<option value="' . htmlspecialchars($coach['name']) . '"' . $selected . '>' . 
+                                               htmlspecialchars($coach['name']) . $teamInfo . '</option>';
+                                    }, $coaches)) : '') . '
+                                </select>
+                                <p class="text-xs text-zinc-500" style="margin-top: 0.5rem;">
+                                    Aktif antrenörler listeden seçilir
+                                </p>
                             </div>
 
                             <div class="shadcn-form-group">
                                 <label for="assistant_coach" class="shadcn-label">
                                     Yardımcı Antrenör
                                 </label>
-                                <input type="text" 
-                                       id="assistant_coach" 
-                                       name="assistant_coach" 
-                                       class="shadcn-input" 
-                                       placeholder="Yardımcı antrenör adı"
-                                       value="' . htmlspecialchars($_POST['assistant_coach'] ?? '') . '">
+                                <select id="assistant_coach" 
+                                        name="assistant_coach" 
+                                        class="shadcn-select">
+                                    <option value="">Seçiniz</option>
+                                    ' . (isset($coaches) && is_array($coaches) ? implode('', array_map(function($coach) {
+                                        $selected = (($_POST['assistant_coach'] ?? '') === $coach['name']) ? ' selected' : '';
+                                        $teamInfo = !empty($coach['team_name']) ? ' (' . htmlspecialchars($coach['team_name']) . ')' : '';
+                                        return '<option value="' . htmlspecialchars($coach['name']) . '"' . $selected . '>' . 
+                                               htmlspecialchars($coach['name']) . $teamInfo . '</option>';
+                                    }, $coaches)) : '') . '
+                                </select>
+                                <p class="text-xs text-zinc-500" style="margin-top: 0.5rem;">
+                                    Aktif antrenörler listeden seçilir
+                                </p>
                             </div>
                         </div>
                     </div>
