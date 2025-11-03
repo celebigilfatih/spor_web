@@ -149,6 +149,10 @@ class Controller
         if (is_array($input)) {
             return array_map([$this, 'sanitizeInput'], $input);
         }
+        // Return empty string for null values to prevent trim() warning
+        if ($input === null) {
+            return '';
+        }
         // Just trim, don't encode - preserve Turkish characters
         // XSS protection will be applied in views with htmlspecialchars()
         return trim($input);
@@ -279,11 +283,24 @@ class Controller
             return ['success' => false, 'message' => 'Dosya yükleme hatası'];
         }
 
+        // Get file extension
         $fileInfo = pathinfo($file['name']);
-        $extension = strtolower($fileInfo['extension']);
+        $extension = strtolower($fileInfo['extension'] ?? '');
+        
+        // If no extension, try to detect from MIME type
+        if (empty($extension) && isset($file['type'])) {
+            $mimeToExt = [
+                'image/jpeg' => 'jpg',
+                'image/jpg' => 'jpg',
+                'image/png' => 'png',
+                'image/gif' => 'gif',
+                'image/webp' => 'webp'
+            ];
+            $extension = $mimeToExt[$file['type']] ?? '';
+        }
 
-        if (!in_array($extension, $allowedTypes)) {
-            return ['success' => false, 'message' => 'Geçersiz dosya türü'];
+        if (empty($extension) || !in_array($extension, $allowedTypes)) {
+            return ['success' => false, 'message' => 'Geçersiz dosya türü. İzin verilen: ' . implode(', ', $allowedTypes)];
         }
 
         $fileName = uniqid() . '.' . $extension;

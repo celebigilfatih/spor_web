@@ -17,7 +17,7 @@ $content = '
         </div>
     </div>
 
-    <form method="POST" action="' . BASE_URL . '/admin/youth-groups/edit/' . ($group['id'] ?? '') . '" class="space-y-6">
+    <form method="POST" action="' . BASE_URL . '/admin/youth-groups/edit/' . ($group['id'] ?? '') . '" enctype="multipart/form-data" class="space-y-6">
         <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
         
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -406,6 +406,45 @@ $content = '
 
             <!-- Sidebar -->
             <div class="lg:col-span-1">
+                <!-- Photo Upload -->
+                <div class="shadcn-card" style="margin-bottom: 1.5rem;">
+                    <div class="shadcn-card-header">
+                        <h3 class="shadcn-card-title">Grup Fotoğrafı</h3>
+                        <p class="shadcn-card-description">Grup fotoğrafını yükleyin veya değiştirin</p>
+                    </div>
+                    <div class="shadcn-card-content">';
+                    
+                    if (!empty($group['photo'])) {
+                        $content .= '
+                        <div style="margin-bottom: 1rem;">
+                            <img src="' . BASE_URL . htmlspecialchars($group['photo']) . '" alt="Mevcut fotoğraf" style="width: 100%; border-radius: 0.5rem; border: 1px solid #e4e4e7;">
+                            <p class="text-xs text-zinc-500" style="margin-top: 0.5rem;">Mevcut fotoğraf</p>
+                        </div>';
+                    }
+                    
+                    $content .= '
+                        <div class="shadcn-form-group">
+                            <label for="photo" class="shadcn-label">
+                                ' . (!empty($group['photo']) ? 'Yeni Fotoğraf Seçin' : 'Fotoğraf Seçin') . '
+                            </label>
+                            <input type="file" 
+                                   id="photo" 
+                                   name="photo" 
+                                   class="shadcn-input" 
+                                   accept="image/*"
+                                   onchange="previewImage(event)">
+                            <p class="text-xs text-zinc-500" style="margin-top: 0.5rem;">
+                                JPG, PNG, GIF veya WebP (Max 5MB)
+                            </p>
+                        </div>
+                        <div id="photo-preview" style="margin-top: 1rem; display: none;">
+                            <p class="text-xs font-medium text-zinc-700" style="margin-bottom: 0.5rem;">Yeni fotoğraf önizlemesi:</p>
+                            <img id="preview-image" src="" alt="Preview" style="width: 100%; border-radius: 0.5rem; border: 1px solid #e4e4e7;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Helper Info -->
                 <div class="shadcn-card sticky top-6">
                     <div class="shadcn-card-header">
                         <h3 class="shadcn-card-title flex items-center">
@@ -465,8 +504,25 @@ $content = '
         </div>
     </form>
 </div>
+';
+
+include BASE_PATH . '/app/views/admin/layout.php';
+?>
 
 <script>
+// Preview image function
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-image').src = e.target.result;
+            document.getElementById('photo-preview').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
 // Toggle time and location fields when day is selected
 function toggleTimeField(checkbox, timeId) {
     const timeInput = document.getElementById(timeId);
@@ -487,7 +543,7 @@ function toggleTimeField(checkbox, timeId) {
 
 // Parse existing training days and pre-fill form
 function parseTrainingSchedule() {
-    const trainingDays = `' . ($group['training_days'] ?? '') . '`;
+    const trainingDays = `<?php echo $group['training_days'] ?? ''; ?>`;
     if (!trainingDays) return;
     
     // Parse format: "Pazartesi 10:00, Perşembe 20:00" or "Pazartesi, Çarşamba, Cuma"
@@ -543,7 +599,3 @@ function parseTrainingSchedule() {
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", parseTrainingSchedule);
 </script>
-';
-
-include BASE_PATH . '/app/views/admin/layout.php';
-?>

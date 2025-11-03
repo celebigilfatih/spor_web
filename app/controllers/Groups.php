@@ -49,8 +49,6 @@ class Groups extends Controller
             'title' => $group['name'] . ' - Gruplarımız',
             'group' => $group,
             'players' => $this->playerModel->getByGroup($groupId),
-            'coaches' => $this->groupModel->getGroupCoaches($groupId),
-            'training_schedule' => $this->groupModel->getTrainingSchedule($groupId),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 

@@ -155,16 +155,97 @@ class AdminYouthRegistration extends Controller
     }
 
     /**
+     * Kayıt düzenleme
+     */
+    public function edit($id = null)
+    {
+        if (!$id) {
+            $_SESSION['error'] = 'Geçersiz kayıt ID\'si.';
+            $this->redirect('admin/youth-registrations');
+            return;
+        }
+
+        $registration = $this->getRegistrationById($id);
+        
+        if (!$registration) {
+            $_SESSION['error'] = 'Kayıt bulunamadı.';
+            $this->redirect('admin/youth-registrations');
+            return;
+        }
+
+        // Load youth groups for selection
+        $youthGroupModel = $this->model('YouthGroup');
+        $youthGroups = $youthGroupModel->getActive();
+        
+        $data = [
+            'title' => 'Kayıt Düzenle',
+            'registration' => $registration,
+            'youth_groups' => $youthGroups,
+            'csrf_token' => $this->generateCSRFToken(),
+            'message' => '',
+            'error' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!$this->validateCSRFToken($_POST['csrf_token'] ?? '')) {
+                $data['error'] = 'Güvenlik hatası. Lütfen tekrar deneyin.';
+                $this->view('admin/youth-registrations/edit', $data);
+                return;
+            }
+
+            // Update registration data
+            $registration['student']['name'] = $this->sanitizeInput($_POST['student_name'] ?? '');
+            $registration['student']['birth_date'] = $this->sanitizeInput($_POST['birth_date'] ?? '');
+            $registration['student']['birth_place'] = $this->sanitizeInput($_POST['birth_place'] ?? '');
+            $registration['student']['tc_number'] = $this->sanitizeInput($_POST['tc_number'] ?? '');
+            $registration['student']['father_name'] = $this->sanitizeInput($_POST['father_name'] ?? '');
+            $registration['student']['mother_name'] = $this->sanitizeInput($_POST['mother_name'] ?? '');
+            $registration['student']['school_info'] = $this->sanitizeInput($_POST['school_info'] ?? '');
+            $registration['student']['first_club'] = $this->sanitizeInput($_POST['first_club'] ?? '');
+            
+            $registration['parent']['name'] = $this->sanitizeInput($_POST['parent_name'] ?? '');
+            $registration['parent']['phone'] = $this->sanitizeInput($_POST['parent_phone'] ?? '');
+            $registration['parent']['address'] = $this->sanitizeInput($_POST['address'] ?? '');
+            $registration['parent']['email'] = $this->sanitizeInput($_POST['email'] ?? '');
+            $registration['parent']['father_job'] = $this->sanitizeInput($_POST['father_job'] ?? '');
+            $registration['parent']['mother_job'] = $this->sanitizeInput($_POST['mother_job'] ?? '');
+            
+            $registration['emergency']['contact'] = $this->sanitizeInput($_POST['emergency_contact'] ?? '');
+            $registration['emergency']['relation'] = $this->sanitizeInput($_POST['emergency_relation'] ?? '');
+            $registration['emergency']['phone'] = $this->sanitizeInput($_POST['emergency_phone'] ?? '');
+            
+            $registration['youth_group_id'] = (int)($_POST['youth_group_id'] ?? 0);
+            $registration['updated_at'] = date('Y-m-d H:i:s');
+
+            $filePath = BASE_PATH . '/data/youth-registrations/' . $id . '.json';
+            
+            if (file_put_contents($filePath, json_encode($registration, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false) {
+                $_SESSION['message'] = 'Kayıt başarıyla güncellendi!';
+                $this->redirect('admin/youth-registrations');
+                return;
+            } else {
+                $data['error'] = 'Kayıt güncellenirken bir hata oluştu.';
+            }
+        }
+
+        $this->view('admin/youth-registrations/edit', $data);
+    }
+
+    /**
      * Kayıt durumunu güncelle
      */
     public function updateStatus()
     {
+        error_log("===== UPDATE STATUS CALLED =====");
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            error_log("Not a POST request");
             $this->redirect('admin/youth-registrations');
             return;
         }
 
         if (!$this->validateCSRFToken($_POST['csrf_token'] ?? '')) {
+            error_log("CSRF validation failed");
             $_SESSION['error'] = 'Güvenlik hatası. Lütfen tekrar deneyin.';
             $this->redirect('admin/youth-registrations');
             return;
@@ -173,16 +254,21 @@ class AdminYouthRegistration extends Controller
         $id = $_POST['id'] ?? '';
         $status = $_POST['status'] ?? '';
         $notes = $_POST['notes'] ?? '';
+        
+        error_log("Update status - ID: $id, Status: $status");
 
         if (empty($id) || empty($status)) {
+            error_log("Missing ID or status");
             $_SESSION['error'] = 'Gerekli alanlar eksik.';
             $this->redirect('admin/youth-registrations');
             return;
         }
 
         if ($this->updateRegistrationStatus($id, $status, $notes)) {
+            error_log("Registration status updated successfully");
             $_SESSION['message'] = 'Kayıt durumu başarıyla güncellendi.';
         } else {
+            error_log("Failed to update registration status");
             $_SESSION['error'] = 'Kayıt durumu güncellenirken bir hata oluştu.';
         }
 
@@ -280,19 +366,122 @@ class AdminYouthRegistration extends Controller
      */
     private function updateRegistrationStatus($id, $status, $notes = '')
     {
+        error_log("===== UPDATE REGISTRATION STATUS =====");
+        error_log("ID: $id, New Status: $status");
+        
         $registration = $this->getRegistrationById($id);
         
         if (!$registration) {
+            error_log("Registration not found: $id");
             return false;
         }
 
+        $oldStatus = $registration['status'] ?? 'pending';
+        error_log("Old Status: $oldStatus");
+        
         $registration['status'] = $status;
         $registration['admin_notes'] = $notes;
         $registration['updated_at'] = date('Y-m-d H:i:s');
 
         $filePath = BASE_PATH . '/data/youth-registrations/' . $id . '.json';
         
-        return file_put_contents($filePath, json_encode($registration, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
+        // Save the updated registration
+        $result = file_put_contents($filePath, json_encode($registration, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
+        error_log("File write result: " . ($result ? 'SUCCESS' : 'FAILED'));
+        
+        // If approved and not previously approved, create player record
+        if ($result && $status === 'approved' && $oldStatus !== 'approved') {
+            error_log("Status changed to approved - creating player record");
+            $this->createPlayerFromRegistration($registration);
+        } else {
+            error_log("Not creating player: result=$result, status=$status, oldStatus=$oldStatus");
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * Create a player record from an approved registration
+     */
+    private function createPlayerFromRegistration($registration)
+    {
+        error_log("===== CREATE PLAYER FROM REGISTRATION =====");
+        
+        $playerModel = $this->model('Player');
+        
+        // Extract student name
+        $studentName = '';
+        if (isset($registration['student']['name'])) {
+            $studentName = $registration['student']['name'];
+        } elseif (isset($registration['student']['first_name'])) {
+            $studentName = $registration['student']['first_name'] . ' ' . $registration['student']['last_name'];
+        } elseif (isset($registration['student_name'])) {
+            $studentName = $registration['student_name'];
+        }
+        
+        error_log("Student name: " . $studentName);
+        
+        // Extract birth date
+        $birthDate = $registration['student']['birth_date'] ?? $registration['student_birth_date'] ?? null;
+        error_log("Birth date: " . ($birthDate ?? 'NULL'));
+        
+        // Extract youth group
+        $youthGroupId = $registration['youth_group_id'] ?? null;
+        error_log("Youth group ID: " . ($youthGroupId ?? 'NULL'));
+        
+        // Get photo path
+        $photoPath = '';
+        if (!empty($registration['photo_path'])) {
+            // Extract just the filename from the path
+            $photoPath = basename($registration['photo_path']);
+        }
+        error_log("Photo path: " . ($photoPath ?: 'NONE'));
+        
+        // Check if player already exists for this registration
+        $existingPlayer = $playerModel->findBy('name', $studentName);
+        if (!empty($existingPlayer)) {
+            error_log("Found " . count($existingPlayer) . " existing player(s) with name: " . $studentName);
+            // Player might already exist - check if same birth date and youth group
+            foreach ($existingPlayer as $player) {
+                if ($player['birth_date'] === $birthDate && $player['youth_group_id'] == $youthGroupId) {
+                    error_log("Player already exists with same birth_date and youth_group_id - SKIPPING");
+                    return; // Don't create duplicate
+                }
+            }
+        }
+        
+        // Prepare player data
+        $playerData = [
+            'name' => $studentName,
+            'jersey_number' => null, // Youth players don't need jersey number initially
+            'position' => 'Orta Saha', // Default position
+            'team_id' => null,
+            'youth_group_id' => $youthGroupId,
+            'birth_date' => $birthDate,
+            'nationality' => 'Türkiye',
+            'photo' => $photoPath ?: null,
+            'status' => 'active',
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        
+        error_log("Player data prepared: " . json_encode($playerData));
+        
+        // Create the player record
+        try {
+            $playerId = $playerModel->create($playerData);
+            if ($playerId) {
+                error_log("✓ Player created successfully! ID: " . $playerId . ", Name: " . $studentName);
+            } else {
+                error_log("✗ Failed to create player: " . $studentName);
+                $error = $playerModel->getLastError();
+                if ($error) {
+                    error_log("Database error: " . $error);
+                }
+            }
+        } catch (Exception $e) {
+            error_log("✗ Exception creating player: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+        }
     }
 
     /**

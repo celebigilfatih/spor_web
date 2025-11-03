@@ -43,9 +43,7 @@ if (empty($players) || !is_array($players)) {
                     <th><i class="fas fa-hashtag"></i> Forma No</th>
                     <th><i class="fas fa-map-pin"></i> Pozisyon</th>
                     <th><i class="fas fa-shield-alt"></i> Takım</th>
-                    <th><i class="fas fa-users"></i> Gençlik Grubu</th>
                     <th><i class="fas fa-calendar"></i> Yaş</th>
-                    <th><i class="fas fa-flag"></i> Uyruk</th>
                     <th><i class="fas fa-toggle-on"></i> Durum</th>
                     <th><i class="fas fa-cogs"></i> İşlemler</th>
                 </tr>
@@ -102,7 +100,6 @@ if (empty($players) || !is_array($players)) {
                     </td>
                     <td>' . htmlspecialchars($player['position']) . '</td>
                     <td>' . htmlspecialchars($player['team_name'] ?? 'Takımsız') . '</td>
-                    <td>' . htmlspecialchars($player['group_name'] ?? '-') . '</td>
                     <td>';
         
             if ($player['birth_date']) {
@@ -116,7 +113,6 @@ if (empty($players) || !is_array($players)) {
         
             $content .= '
                     </td>
-                    <td>' . htmlspecialchars($player['nationality']) . '</td>
                     <td>
                         <span class="status-badge status-' . ($player['status'] === 'active' ? 'active' : 'inactive') . '">
                             <i class="fas fa-' . ($player['status'] === 'active' ? 'check-circle' : ($player['status'] === 'injured' ? 'heart-broken' : ($player['status'] === 'suspended' ? 'ban' : 'exchange-alt'))) . '"></i>
@@ -164,7 +160,6 @@ if (empty($players) || !is_array($players)) {
         $totalPlayers = count($players);
         $activePlayers = count(array_filter($players, function($p) { return $p['status'] === 'active'; }));
         $captains = count(array_filter($players, function($p) { return isset($p['is_captain']) && $p['is_captain']; }));
-        $foreigners = count(array_filter($players, function($p) { return isset($p['nationality']) && $p['nationality'] !== 'Türkiye'; }));
         
         $content .= '
     
@@ -198,16 +193,6 @@ if (empty($players) || !is_array($players)) {
             </div>
             <div class="dashboard-card-number">' . $captains . '</div>
             <div class="dashboard-card-label">Kaptan</div>
-        </div>
-        
-        <div class="dashboard-card">
-            <div class="dashboard-card-header">
-                <div class="dashboard-card-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-            </div>
-            <div class="dashboard-card-number">' . $foreigners . '</div>
-            <div class="dashboard-card-label">Yabancı Oyuncu</div>
         </div>
     </div>';
     }

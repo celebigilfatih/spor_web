@@ -292,3 +292,44 @@ Array
 === VALIDATION STARTED ===
 Validation errors count: 0
 Validation passed!
+Submit method was called at 2025-11-01 15:13:58
+Array
+(
+    [csrf_token] => 8a546ee6b74032878ad45892a96fb60ed3bf3667ab297f07824c9a11bb376ebf
+    [website] => 
+    [student_name] => Necdet Karayağız
+    [birth_place] => Bursa
+    [birth_date] => 2010-10-10
+    [tc_number] => 12345678900
+    [school_info] => Bademli Sınav Koleji
+    [father_name] => Fatih
+    [mother_name] => Handan
+    [first_club] => Mudanya Spor
+    [parent_name] => Fatih Çelebigil
+    [parent_phone] => 05305758377
+    [father_job] => Yazılımcı
+    [mother_job] => Finans
+    [address] => Ataevler Mh. Ulaşım Sk. Dimora City Sitesi H Blok K:9 No:34
+    [emergency_contact] => Fatih Çelebigil
+    [emergency_relation] => anne
+    [emergency_phone] => 05305758377
+    [captcha_answer] => 4
+)
+
+Array
+(
+    [student_photo] => Array
+        (
+            [name] => rdad.jpg
+            [full_path] => rdad.jpg
+            [type] => image/jpeg
+            [tmp_name] => /tmp/phpu5pcZk
+            [error] => 0
+            [size] => 4154
+        )
+
+)
+
+=== VALIDATION STARTED ===
+Validation errors count: 0
+Validation passed!

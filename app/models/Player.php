@@ -16,6 +16,7 @@ class Player extends Model
                 FROM {$this->table} p 
                 LEFT JOIN teams t ON p.team_id = t.id 
                 LEFT JOIN youth_groups yg ON p.youth_group_id = yg.id
+                WHERE p.team_id IS NOT NULL AND p.youth_group_id IS NULL
                 ORDER BY p.name ASC";
         
         return $this->db->query($sql);

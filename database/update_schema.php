@@ -229,7 +229,9 @@ try {
         "red_cards INT DEFAULT '0' AFTER yellow_cards",
         "matches_played INT DEFAULT '0' AFTER red_cards",
         "market_value DECIMAL(12,2) DEFAULT NULL AFTER matches_played",
-        "contract_end DATE DEFAULT NULL AFTER market_value"
+        "contract_end DATE DEFAULT NULL AFTER market_value",
+        "is_captain TINYINT(1) DEFAULT '0' AFTER status",
+        "youth_group_id INT DEFAULT NULL AFTER team_id"
     ];
     
     foreach ($playerColumns as $column) {

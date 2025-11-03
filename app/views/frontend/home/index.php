@@ -204,7 +204,7 @@ $content = '
                                 </div>
                                 <div class="match-competition-badge">
                                     <i class="fas fa-trophy"></i>
-                                    <span>' . htmlspecialchars($match['competition'] ?? $match['league'] ?? 'Müsabaka') . '</span>
+                                    <span>' . htmlspecialchars($match['match_type'] ?? 'Müsabaka') . (!empty($match['team_category']) ? ' - ' . $match['team_category'] : '') . '</span>
                                 </div>
                                 <div class="match-datetime-section">
                                     <div class="match-datetime-info">
@@ -249,7 +249,7 @@ $content = '
                                 </div>
                                 <div class="match-competition-badge">
                                     <i class="fas fa-trophy"></i>
-                                    <span>' . htmlspecialchars($match['competition'] ?? $match['league'] ?? 'Müsabaka') . '</span>
+                                    <span>' . htmlspecialchars($match['match_type'] ?? 'Müsabaka') . (!empty($match['team_category']) ? ' - ' . $match['team_category'] : '') . '</span>
                                 </div>
                                 <div class="match-datetime-section">
                                     <div class="match-datetime-info">

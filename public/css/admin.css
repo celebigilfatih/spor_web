@@ -519,6 +519,18 @@ body {
     border-color: hsl(var(--primary) / 0.3);
 }
 
+.alert-link {
+    color: hsl(var(--primary));
+    font-weight: 600;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.alert-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
 /* Shadcn-style Badges */
 .badge {
     display: inline-flex;

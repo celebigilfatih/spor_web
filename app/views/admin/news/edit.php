@@ -63,9 +63,12 @@ $content .= '
             <textarea id="content" 
                       name="content" 
                       class="admin-form-control" 
-                      rows="12"
+                      rows="20"
                       placeholder="Haber içeriğini giriniz..."
                       required>' . htmlspecialchars($_POST['content'] ?? $news['content']) . '</textarea>
+            <small class="admin-form-help">
+                <i class="fas fa-info-circle"></i> Metin biçimlendirme, bağlantı ekleme ve resim yükleme için editör araçlarını kullanın
+            </small>
         </div>
         
         <!-- Ayarlar -->
@@ -245,3 +248,83 @@ $content .= '
 
 include BASE_PATH . '/app/views/admin/layout.php';
 ?>
+
+<!-- TinyMCE Rich Text Editor -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.2/tinymce.min.js"></script>
+<script>
+(function() {
+    // Wait for TinyMCE to load
+    setTimeout(function() {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.init({
+                selector: '#content',
+                height: 500,
+                menubar: 'file edit view insert format tools table help',
+                plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+                toolbar: 'undo redo | blocks | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor removeformat | code help',
+                content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; }',
+                branding: false,
+                promotion: false,
+                images_upload_url: '<?php echo BASE_URL; ?>/admin/news/upload-image',
+                automatic_uploads: true,
+                images_upload_handler: function (blobInfo, success, failure) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.withCredentials = false;
+                    xhr.open('POST', '<?php echo BASE_URL; ?>/admin/news/upload-image');
+                    
+                    xhr.onload = function() {
+                        if (xhr.status != 200) {
+                            failure('HTTP Error: ' + xhr.status);
+                            return;
+                        }
+                        
+                        var json;
+                        try {
+                            json = JSON.parse(xhr.responseText);
+                        } catch (e) {
+                            failure('Invalid JSON: ' + xhr.responseText);
+                            return;
+                        }
+                        
+                        if (!json || typeof json.location != 'string') {
+                            failure('Invalid JSON: ' + xhr.responseText);
+                            return;
+                        }
+                        
+                        success(json.location);
+                    };
+                    
+                    xhr.onerror = function () {
+                        failure('Image upload failed');
+                    };
+                    
+                    var formData = new FormData();
+                    formData.append('file', blobInfo.blob(), blobInfo.filename());
+                    formData.append('csrf_token', '<?php echo $csrf_token ?? ""; ?>');
+                    xhr.send(formData);
+                },
+                setup: function(editor) {
+                    // Add custom validation on form submit
+                    editor.on('init', function() {
+                        var form = document.querySelector('form');
+                        if (form) {
+                            form.addEventListener('submit', function(e) {
+                                var content = tinymce.get('content').getContent();
+                                if (!content || content.trim() === '') {
+                                    e.preventDefault();
+                                    alert('Haber içeriği zorunludur!');
+                                    tinymce.get('content').focus();
+                                    return false;
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+            console.log('✅ TinyMCE başarıyla yüklendi!');
+        } else {
+            console.error('❌ TinyMCE yüklenemedi');
+        }
+    }, 200);
+})();
+</script>

@@ -203,7 +203,7 @@ class AdminNews extends Controller
 
         // Resim yükleme işlemi
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
-            $uploadResult = $this->uploadFile($_FILES['featured_image'], ['jpg', 'jpeg', 'png', 'gif']);
+            $uploadResult = $this->uploadFile($_FILES['featured_image'], ['jpg', 'jpeg', 'png', 'gif', 'webp']);
             if ($uploadResult['success']) {
                 // Eski resmi sil (düzenleme durumunda)
                 if ($id) {
@@ -227,6 +227,7 @@ class AdminNews extends Controller
                 // Güncelleme
                 $result = $this->newsModel->update($id, $data);
                 $message = 'Haber başarıyla güncellendi!';
+                $newsId = $id;
             } else {
                 // Yeni kayit ekleme
                 if (!isset($data['slug'])) {
@@ -234,20 +235,19 @@ class AdminNews extends Controller
                 }
                 $data['created_at'] = date('Y-m-d H:i:s');
                 
-                // Debug: Log the data being inserted
-                error_log('News create data: ' . print_r($data, true));
-                
                 $result = $this->newsModel->create($data);
+                $newsId = $result;
                 $message = 'Haber başarıyla eklendi!';
-                
-                // Debug: Log the result
-                error_log('News create result: ' . ($result ? 'success' : 'failed'));
             }
 
             if ($result) {
+                // Galeri resimlerini kaydet
+                if (isset($_FILES['gallery_images']) && !empty($_FILES['gallery_images']['name'][0])) {
+                    $this->processGalleryImages($newsId);
+                }
+                
                 return ['success' => true, 'message' => $message];
             } else {
-                // Get last database error if available
                 $errorInfo = $this->newsModel->getLastError();
                 error_log('Database error: ' . ($errorInfo ?? 'Unknown error'));
                 return ['success' => false, 'message' => 'Veritabanı kaydetme hatası! ' . ($errorInfo ? 'Hata: ' . $errorInfo : '')];
@@ -256,5 +256,73 @@ class AdminNews extends Controller
             error_log('News form processing error: ' . $e->getMessage());
             return ['success' => false, 'message' => 'Bir hata oluştu: ' . $e->getMessage()];
         }
+    }
+    
+    /**
+     * Process gallery images
+     */
+    private function processGalleryImages($newsId)
+    {
+        $files = $_FILES['gallery_images'];
+        
+        for ($i = 0; $i < count($files['name']); $i++) {
+            if ($files['error'][$i] === UPLOAD_ERR_OK) {
+                // Create temporary file array for uploadFile function
+                $tempFile = [
+                    'name' => $files['name'][$i],
+                    'type' => $files['type'][$i],
+                    'tmp_name' => $files['tmp_name'][$i],
+                    'error' => $files['error'][$i],
+                    'size' => $files['size'][$i]
+                ];
+                
+                $uploadResult = $this->uploadFile($tempFile, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                
+                if ($uploadResult['success']) {
+                    // Use model's executeCommand method to insert gallery image
+                    $sql = "INSERT INTO news_gallery (news_id, image_path, sort_order) VALUES (?, ?, ?)";
+                    $this->newsModel->executeCommand($sql, [$newsId, $uploadResult['filename'], $i]);
+                }
+            }
+        }
+    }
+
+    /**
+     * Upload image for TinyMCE editor
+     */
+    public function uploadImage()
+    {
+        header('Content-Type: application/json');
+        
+        // Check if it's a POST request
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['error' => 'Invalid request method']);
+            exit;
+        }
+
+        // Validate CSRF token
+        if (!$this->validateCSRFToken($_POST['csrf_token'] ?? '')) {
+            echo json_encode(['error' => 'Security error']);
+            exit;
+        }
+
+        // Check if file was uploaded
+        if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['error' => 'File upload error']);
+            exit;
+        }
+
+        // Upload the file
+        $uploadResult = $this->uploadFile($_FILES['file'], ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+        
+        if ($uploadResult['success']) {
+            // Return the URL to the uploaded image
+            $imageUrl = BASE_URL . '/uploads/' . $uploadResult['filename'];
+            echo json_encode(['location' => $imageUrl]);
+        } else {
+            echo json_encode(['error' => $uploadResult['message']]);
+        }
+        
+        exit;
     }
 }

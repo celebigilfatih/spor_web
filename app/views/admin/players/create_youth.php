@@ -5,10 +5,10 @@ $content = '
     <div class="shadcn-page-header">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="shadcn-page-title">A Takım - Yeni Oyuncu Ekle</h1>
-                <p class="shadcn-page-description">A Takıma yeni oyuncu eklemek için gerekli bilgileri giriniz</p>
+                <h1 class="shadcn-page-title">Alt Yapı - Yeni Oyuncu Ekle</h1>
+                <p class="shadcn-page-description">Alt yapıya yeni oyuncu eklemek için gerekli bilgileri giriniz</p>
             </div>
-            <a href="' . BASE_URL . '/admin/players" class="shadcn-btn shadcn-btn-outline">
+            <a href="' . BASE_URL . '/admin/players/youth" class="shadcn-btn shadcn-btn-outline">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
@@ -20,9 +20,8 @@ $content = '
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Main Form -->
         <div class="lg:col-span-2">
-            <form method="POST" action="' . BASE_URL . '/admin/players/create" class="space-y-6" enctype="multipart/form-data">
+            <form method="POST" action="' . BASE_URL . '/admin/players/create-youth" class="space-y-6" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
-                <input type="hidden" name="team_id" value="1">
                 
                 <!-- Oyuncu Bilgileri -->
                 <div class="shadcn-card">
@@ -59,7 +58,7 @@ $content = '
 
                             <div class="shadcn-form-group">
                                 <label for="jersey_number" class="shadcn-label">
-                                    Forma Numarası <span class="text-red-500">*</span>
+                                    Forma Numarası
                                 </label>
                                 <input type="number" 
                                        id="jersey_number" 
@@ -68,9 +67,8 @@ $content = '
                                        placeholder="10"
                                        min="1" 
                                        max="99"
-                                       value="' . htmlspecialchars($_POST['jersey_number'] ?? '') . '"
-                                       required>
-                                <p class="shadcn-form-hint">1-99 arası numara seçiniz</p>
+                                       value="' . htmlspecialchars($_POST['jersey_number'] ?? '') . '">
+                                <p class="shadcn-form-hint">1-99 arası numara seçiniz (isteğe bağlı)</p>
                             </div>
 
                             <div class="shadcn-form-group md:col-span-2">
@@ -86,17 +84,23 @@ $content = '
                                 </select>
                             </div>
 
-                            <!-- Captain Status -->
+                            <!-- Youth Group Selection -->
                             <div class="shadcn-form-group md:col-span-2">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="checkbox" 
-                                           id="is_captain" 
-                                           name="is_captain" 
-                                           class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500"
-                                           ' . (isset($_POST['is_captain']) && $_POST['is_captain'] ? 'checked' : '') . '>
-                                    <span class="ml-2 text-sm font-medium text-gray-900">Takım Kaptanı</span>
+                                <label class="shadcn-label">
+                                    Gençlik Grubu Atama <span class="text-red-500">*</span>
                                 </label>
-                                <p class="shadcn-form-hint">Bu oyuncunun takım kaptanı olup olmadığını belirtiniz</p>
+                                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                                    <div>
+                                        <label for="youth_group_id" class="block text-sm font-medium text-gray-700 mb-1">Gençlik Akademisi</label>
+                                        <select id="youth_group_id" name="youth_group_id" class="shadcn-select" required>
+                                            <option value="">Grup Seçiniz</option>
+                                            ' . (isset($youth_groups) && is_array($youth_groups) ? implode('', array_map(function($group) {
+                                                return '<option value="' . $group['id'] . '"' . ((($_POST['youth_group_id'] ?? '') == $group['id']) ? ' selected' : '') . '>' . htmlspecialchars($group['name']) . '</option>';
+                                            }, $youth_groups)) : '') . '
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class="shadcn-form-hint">Oyuncunun ait olduğu gençlik grubunu seçiniz.</p>
                             </div>
                         </div>
                     </div>
@@ -104,7 +108,7 @@ $content = '
 
                 <!-- Form Actions -->
                 <div class="flex items-center justify-end gap-3">
-                    <a href="' . BASE_URL . '/admin/players" class="shadcn-btn shadcn-btn-outline">
+                    <a href="' . BASE_URL . '/admin/players/youth" class="shadcn-btn shadcn-btn-outline">
                         İptal
                     </a>
                     <button type="submit" class="shadcn-btn shadcn-btn-primary">
@@ -167,7 +171,7 @@ $content = '
                                 </div>
                                 <div>
                                     <p class="shadcn-info-title">Forma Numarası</p>
-                                    <p class="shadcn-info-text">Benzersiz olmalıdır (1-99 arası)</p>
+                                    <p class="shadcn-info-text">Benzersiz olmalıdır (1-99 arası) - Opsiyonel</p>
                                 </div>
                             </div>
                         </div>
@@ -193,8 +197,8 @@ $content = '
                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                 </svg>
                                 <div>
-                                    <p class="text-sm font-semibold text-blue-900 mb-1">A Takım</p>
-                                    <p class="text-xs text-blue-700">Bu form sadece A Takım oyuncuları için kullanılır. Alt yapı oyuncuları için "Alt Yapı Kayıtları" bölümünü kullanınız.</p>
+                                    <p class="text-sm font-semibold text-blue-900 mb-1">Alt Yapı Oyuncusu</p>
+                                    <p class="text-xs text-blue-700">Bu form sadece alt yapı oyuncuları için kullanılır. A Takım oyuncuları için "Oyuncular" bölümünü kullanınız.</p>
                                 </div>
                             </div>
                         </div>

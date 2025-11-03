@@ -97,6 +97,7 @@ $content = '
                 <table class="shadcn-table">
                     <thead>
                         <tr>
+                            <th>Fotoğraf</th>
                             <th>Grup Adı</th>
                             <th>Yaş Grubu</th>
                             <th>Yaş Aralığı</th>
@@ -115,7 +116,21 @@ if (isset($groups) && !empty($groups)) {
         $fillColor = $fillPercentage >= 90 ? '#ef4444' : ($fillPercentage >= 70 ? '#f59e0b' : '#10b981');
         
         $content .= '
-                        <tr>
+                        <tr style="cursor: pointer;" onclick="window.location.href=\'' . BASE_URL . '/admin/youth-groups/details/' . $group['id'] . '\';">
+                            <td>
+                                <div style="width: 60px; height: 60px; border-radius: 0.375rem; overflow: hidden; background: #f4f4f5; display: flex; align-items: center; justify-content: center;">';
+                            
+                            if (!empty($group['photo'])) {
+                                $content .= '<img src="' . BASE_URL . htmlspecialchars($group['photo']) . '" alt="' . htmlspecialchars($group['name']) . '" style="width: 100%; height: 100%; object-fit: cover;">';
+                            } else {
+                                $content .= '<svg class="w-6 h-6 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>';
+                            }
+                            
+                            $content .= '
+                                </div>
+                            </td>
                             <td>
                                 <div class="font-medium">' . htmlspecialchars($group['name']) . '</div>
                                 <div class="text-xs text-zinc-500">' . htmlspecialchars($group['season'] ?? '2024-25') . '</div>
@@ -175,7 +190,7 @@ if (isset($groups) && !empty($groups)) {
 } else {
     $content .= '
                         <tr>
-                            <td colspan="8" class="text-center" style="padding: var(--spacing-8);">
+                            <td colspan="9" class="text-center" style="padding: var(--spacing-8);">
                                 <div class="text-zinc-500">
                                     <svg class="w-12 h-12 mx-auto mb-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>

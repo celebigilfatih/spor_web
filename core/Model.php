@@ -128,4 +128,20 @@ class Model
     {
         return $this->db->getLastError();
     }
+    
+    /**
+     * Custom SQL sorgusu çalıştır
+     */
+    public function executeQuery($sql, $params = [])
+    {
+        return $this->db->query($sql, $params);
+    }
+    
+    /**
+     * Custom SQL komutu çalıştır (INSERT, UPDATE, DELETE)
+     */
+    public function executeCommand($sql, $params = [])
+    {
+        return $this->db->execute($sql, $params);
+    }
 }

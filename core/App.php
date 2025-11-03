@@ -77,9 +77,30 @@ class App
                     // Load controller file to check methods
                     require_once BASE_PATH . '/app/controllers/' . $adminController . '.php';
                     // Method kontrolü
-                    if (isset($url[2]) && method_exists($adminController, $url[2])) {
-                        $this->method = $url[2];
-                        $this->params = array_slice($url, 3); // /admin/news/edit/1 -> [1]
+                    if (isset($url[2])) {
+                        // Convert hyphens to camelCase for method names
+                        $methodParts = explode('-', $url[2]);
+                        $methodName = $methodParts[0];
+                        for ($i = 1; $i < count($methodParts); $i++) {
+                            $methodName .= ucfirst($methodParts[$i]);
+                        }
+                        
+                        error_log("[DEBUG] Checking for method: " . $methodName);
+                        
+                        // Special handling for edit-youth and delete-youth
+                        if ($url[2] === 'edit-youth') {
+                            $methodName = 'editYouth';
+                        } elseif ($url[2] === 'delete-youth') {
+                            $methodName = 'deleteYouth';
+                        }
+                        
+                        if (method_exists($adminController, $methodName)) {
+                            $this->method = $methodName;
+                            $this->params = array_slice($url, 3); // /admin/news/edit/1 -> [1]
+                        } else {
+                            $this->method = 'index';
+                            $this->params = array_slice($url, 2); // /admin/news/1 -> [1]
+                        }
                     } else {
                         $this->method = 'index';
                         $this->params = array_slice($url, 2); // /admin/news/1 -> [1]

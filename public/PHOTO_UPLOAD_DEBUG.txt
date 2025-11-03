@@ -23,3 +23,11 @@ Upload path: /var/www/html/public/uploads/youth-photos/68ff07210b77d.jpg
 Temp file: /tmp/phpQBTEwg
 Temp file exists: YES
 SUCCESS! Relative path: /uploads/youth-photos/68ff07210b77d.jpg
+Upload started at 2025-11-01 15:13:58
+Upload dir: /var/www/html/public/uploads/youth-photos/
+Dir exists: YES
+Dir writable: YES
+Upload path: /var/www/html/public/uploads/youth-photos/6905f9863ffa9.jpg
+Temp file: /tmp/phpu5pcZk
+Temp file exists: YES
+SUCCESS! Relative path: /uploads/youth-photos/6905f9863ffa9.jpg

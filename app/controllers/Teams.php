@@ -14,7 +14,7 @@ class Teams extends Controller
     {
         $this->teamModel = $this->model('Team');
         $this->playerModel = $this->model('Player');
-        $this->technicalStaffModel = $this->model('TechnicalStaff');
+        $this->technicalStaffModel = $this->model('TechnicalStaffModel');
         $this->settingsModel = $this->model('SiteSettings');
     }
 

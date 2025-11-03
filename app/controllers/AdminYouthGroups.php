@@ -68,8 +68,29 @@ class AdminYouthGroups extends Controller
                 'max_capacity' => (int)($_POST['max_capacity'] ?? 25),
                 'season' => $this->sanitizeInput($_POST['season'] ?? '2024-25'),
                 'status' => $this->sanitizeInput($_POST['status'] ?? 'active'),
-                'description' => $this->sanitizeInput($_POST['description'] ?? '')
+                'description' => $this->sanitizeInput($_POST['description'] ?? ''),
+                'photo' => null
             ];
+
+            // Handle photo upload
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = BASE_PATH . '/public/uploads/youth-groups/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                
+                if (in_array($extension, $allowedExtensions)) {
+                    $fileName = uniqid('yg_') . '.' . $extension;
+                    $filePath = $uploadDir . $fileName;
+                    
+                    if (move_uploaded_file($_FILES['photo']['tmp_name'], $filePath)) {
+                        $formData['photo'] = '/uploads/youth-groups/' . $fileName;
+                    }
+                }
+            }
 
             $errors = $this->youthGroupModel->validate($formData);
 
@@ -132,8 +153,33 @@ class AdminYouthGroups extends Controller
                 'max_capacity' => (int)($_POST['max_capacity'] ?? 25),
                 'season' => $this->sanitizeInput($_POST['season'] ?? '2024-25'),
                 'status' => $this->sanitizeInput($_POST['status'] ?? 'active'),
-                'description' => $this->sanitizeInput($_POST['description'] ?? '')
+                'description' => $this->sanitizeInput($_POST['description'] ?? ''),
+                'photo' => $group['photo'] // Keep existing photo
             ];
+
+            // Handle photo upload
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = BASE_PATH . '/public/uploads/youth-groups/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                
+                if (in_array($extension, $allowedExtensions)) {
+                    $fileName = uniqid('yg_') . '.' . $extension;
+                    $filePath = $uploadDir . $fileName;
+                    
+                    if (move_uploaded_file($_FILES['photo']['tmp_name'], $filePath)) {
+                        // Delete old photo if exists
+                        if (!empty($group['photo']) && file_exists(BASE_PATH . '/public' . $group['photo'])) {
+                            unlink(BASE_PATH . '/public' . $group['photo']);
+                        }
+                        $formData['photo'] = '/uploads/youth-groups/' . $fileName;
+                    }
+                }
+            }
 
             $errors = $this->youthGroupModel->validate($formData);
 
@@ -188,7 +234,7 @@ class AdminYouthGroups extends Controller
     }
 
     /**
-     * Grup detayları
+     * Grup detayları ve oyuncu listesi
      */
     public function details($id = null)
     {
@@ -202,12 +248,18 @@ class AdminYouthGroups extends Controller
             $this->redirect('admin/youth-groups');
         }
 
+        // Get players in this youth group
+        $playerModel = $this->model('Player');
+        $players = $playerModel->findBy('youth_group_id', $id);
+
         $data = [
             'title' => $group['name'],
-            'group' => $group
+            'group' => $group,
+            'players' => $players,
+            'csrf_token' => $this->generateCSRFToken()
         ];
 
-        $this->view('admin/youth-groups/view', $data);
+        $this->view('admin/youth-groups/detail', $data);
     }
 
     /**

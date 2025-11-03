@@ -1,6 +1,6 @@
 {
     "student": {
-        "name": "Fatih Çelebigil",
+        "name": "Necdet Karayağız",
         "birth_date": "2010-10-10",
         "birth_place": "Bursa",
         "tc_number": "12345678900",
@@ -13,22 +13,22 @@
         "name": "Fatih Çelebigil",
         "phone": "05305758377",
         "address": "Ataevler Mh. Ulaşım Sk. Dimora City Sitesi H Blok K:9 No:34",
-        "email": "fatihcelebigil@gmail.com",
         "father_job": "Yazılımcı",
-        "mother_job": "Finans"
+        "mother_job": "Finans",
+        "email": "fatihcelebigil@gmail.com"
     },
     "emergency": {
         "contact": "Fatih Çelebigil",
-        "relation": "dede",
+        "relation": "anne",
         "phone": "05305758377"
     },
     "youth_group_id": 3,
-    "photo_path": "\/uploads\/68fd2cfc585ef.jpg",
+    "photo_path": "\/uploads\/youth-photos\/6905f9863ffa9.jpg",
     "status": "approved",
-    "created_at": "2025-10-25 23:03:08",
-    "created_by": "admin",
-    "id": "reg_68fd2cfc59fea",
-    "file_path": "\/var\/www\/html\/data\/youth-registrations\/reg_68fd2cfc59fea.json",
-    "admin_notes": "",
-    "updated_at": "2025-11-01 15:28:30"
+    "created_at": "2025-11-01 15:13:58",
+    "created_by": "web_form",
+    "id": "reg_6905f986443e7",
+    "file_path": "\/var\/www\/html\/data\/youth-registrations\/reg_6905f986443e7.json",
+    "updated_at": "2025-11-01 15:19:51",
+    "admin_notes": ""
 }

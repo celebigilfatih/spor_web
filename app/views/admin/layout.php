@@ -57,21 +57,16 @@
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/players" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-users"></i>
-                            <span>Oyuncular</span>
+                            <span>A Takım Oyuncular</span>
                         </a>
                     </li>
                     
-                    <li class="sidebar-menu-item">
-                        <a href="<?php echo BASE_URL; ?>/admin/players/youth" class="sidebar-menu-link">
-                            <i class="sidebar-menu-icon fas fa-user-graduate"></i>
-                            <span>Gençlik Oyuncuları</span>
-                        </a>
-                    </li>
+
                     
                     <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/teams" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-shield-alt"></i>
-                            <span>Takımlar</span>
+                            <span>A Takım</span>
                         </a>
                     </li>
                     
@@ -93,6 +88,12 @@
                         <a href="<?php echo BASE_URL; ?>/admin/youth-groups" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-layer-group"></i>
                             <span>Alt Yapı Grupları</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/players/youth" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-user-graduate"></i>
+                            <span>Alt Yapı Oyuncuları</span>
                         </a>
                     </li>
                     

@@ -17,7 +17,7 @@ $content = '
         </div>
     </div>
 
-    <form method="POST" action="' . BASE_URL . '/admin/youth-groups/create" class="space-y-6">
+    <form method="POST" action="' . BASE_URL . '/admin/youth-groups/create" enctype="multipart/form-data" class="space-y-6">
         <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
         
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -346,6 +346,34 @@ $content = '
 
             <!-- Sidebar -->
             <div class="lg:col-span-1">
+                <!-- Photo Upload -->
+                <div class="shadcn-card" style="margin-bottom: 1.5rem;">
+                    <div class="shadcn-card-header">
+                        <h3 class="shadcn-card-title">Grup Fotoğrafı</h3>
+                        <p class="shadcn-card-description">Grup fotoğrafını yükleyin</p>
+                    </div>
+                    <div class="shadcn-card-content">
+                        <div class="shadcn-form-group">
+                            <label for="photo" class="shadcn-label">
+                                Fotoğraf Seçin
+                            </label>
+                            <input type="file" 
+                                   id="photo" 
+                                   name="photo" 
+                                   class="shadcn-input" 
+                                   accept="image/*"
+                                   onchange="previewImage(event)">
+                            <p class="text-xs text-zinc-500" style="margin-top: 0.5rem;">
+                                JPG, PNG, GIF veya WebP (Max 5MB)
+                            </p>
+                        </div>
+                        <div id="photo-preview" style="margin-top: 1rem; display: none;">
+                            <img id="preview-image" src="" alt="Preview" style="width: 100%; border-radius: 0.5rem; border: 1px solid #e4e4e7;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Helper Info -->
                 <div class="shadcn-card sticky top-6">
                     <div class="shadcn-card-header">
                         <h3 class="shadcn-card-title flex items-center">
@@ -420,6 +448,18 @@ function toggleTimeInputs(checkbox, timeInputId) {
         timeInput.style.display = 'none';
         timeInput.required = false;
         timeInput.value = '';
+    }
+}
+
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-image').src = e.target.result;
+            document.getElementById('photo-preview').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
     }
 }
 </script>

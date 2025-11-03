@@ -116,6 +116,7 @@ if (empty($registrations)) {
             <div class="stat-card-body">
                 <div class="stat-number">' . $approvedCount . '</div>
                 <div class="stat-label">Kabul Edilen</div>
+                <small class="text-muted" style="font-size: 0.75rem; margin-top: 0.25rem;">Alt yapı oyuncuları listesinde görünür</small>
             </div>
         </div>
         
@@ -214,7 +215,7 @@ if (empty($registrations)) {
         }
         
         $content .= '
-                <tr>
+                <tr' . ($status === 'approved' ? ' class="approved-row"' : '') . '>
                     <td>
                         <div class="student-info">
                             <strong>' . $studentName . '</strong>';
@@ -223,6 +224,12 @@ if (empty($registrations)) {
         if (!empty($tcNumber)) {
             $content .= '
                             <br><small class="text-muted">TC: ' . htmlspecialchars($tcNumber) . '</small>';
+        }
+        
+        // Add indicator for approved registrations
+        if ($status === 'approved') {
+            $content .= '
+                            <br><small class="text-success"><i class="fas fa-user-check"></i> Alt yapı oyuncularında görünür</small>';
         }
         
         $content .= '
@@ -245,10 +252,16 @@ if (empty($registrations)) {
                                 <i class="fas fa-eye"></i>
                             </a>
                             
-                            <button type="button" class="btn btn-sm btn-admin-warning" 
-                                    onclick="showStatusModal(\'' . $registration['id'] . '\', \'' . $status . '\')" 
-                                    title="Durumu Güncelle">
+                            <a href="' . BASE_URL . '/admin/youth-registrations/edit/' . $registration['id'] . '" 
+                               class="btn btn-sm btn-admin-warning" 
+                               title="Düzenle">
                                 <i class="fas fa-edit"></i>
+                            </a>
+                            
+                            <button type="button" class="btn btn-sm btn-admin-secondary" 
+                                    onclick="showStatusModal(\'' . $registration['id'] . '\', \'' . $status . '\')" 
+                                    title="Durum Değiştir">
+                                <i class="fas fa-toggle-on"></i>
                             </button>
                             
                             <button type="button" class="btn btn-sm btn-admin-danger" 
@@ -518,6 +531,20 @@ $content .= '
 
 .admin-table tbody tr:hover {
     background: #fafafa;
+}
+
+/* Approved row highlighting */
+.approved-row {
+    background: #f0fdf4 !important;
+}
+
+.approved-row:hover {
+    background: #dcfce7 !important;
+}
+
+.text-success {
+    color: #166534 !important;
+    font-weight: 600;
 }
 
 .student-info strong {
@@ -833,50 +860,93 @@ $content .= '
     transform: scale(1);
     opacity: 1;
 }
+
+/* Modal Form Focus States - Shadcn Style */
+#statusModal select:focus,
+#statusModal textarea:focus {
+    border-color: #18181b !important;
+    box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
+    outline: none !important;
+}
+
+#statusModal select:hover,
+#statusModal textarea:hover {
+    border-color: #a1a1aa;
+}
+
+#statusModal button[type="submit"]:hover {
+    background: #27272a !important;
+}
+
+#statusModal button[data-dismiss]:hover {
+    background: #f4f4f5 !important;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 </style>
 
-<!-- Durum Güncelleme Modal -->
+<!-- Durum Güncelleme Modal - Shadcn Style -->
 <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modern-modal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="statusModalLabel">
-                    <i class="fas fa-edit"></i> Kayıt Durumunu Güncelle
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px;">
+        <div class="modal-content" style="border: 1px solid #e4e4e7; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); background: white;">
             <form method="POST" action="' . BASE_URL . '/admin/youth-registrations/updateStatus">
-                <div class="modal-body">
+                <div style="padding: 1.5rem; border-bottom: 1px solid #e4e4e7;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; color: #09090b; margin: 0; letter-spacing: -0.025em;">Kayıt Durumunu Güncelle</h3>
+                    <p style="color: #71717a; font-size: 0.875rem; margin: 0.25rem 0 0 0;">Başvuru durumunu değiştirin</p>
+                </div>
+                
+                <div style="padding: 1.5rem;">
                     <input type="hidden" name="csrf_token" value="' . $csrf_token . '">
                     <input type="hidden" name="id" id="statusRegistrationId">
                     
-                    <div class="form-group">
-                        <label for="status" class="form-label-modern">
-                            <i class="fas fa-toggle-on"></i> Durum
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="status" style="display: block; font-size: 0.875rem; font-weight: 500; color: #09090b; margin-bottom: 0.5rem;">
+                            Durum <span style="color: #ef4444;">*</span>
                         </label>
-                        <select name="status" id="status" class="form-control form-control-modern" required>
+                        <select name="status" id="status" required
+                                class="shadcn-select"
+                                style="width: 100%; padding: 0.625rem 0.75rem; border: 1px solid #e4e4e7; border-radius: 0.375rem; font-size: 0.875rem; background: white; color: #09090b; transition: all 0.15s;">
                             <option value="pending">⏳ Beklemede</option>
                             <option value="approved">✅ Onaylandı</option>
                             <option value="rejected">❌ Reddedildi</option>
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="notes" class="form-label-modern">
-                            <i class="fas fa-sticky-note"></i> Notlar (Opsiyonel)
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="notes" style="display: block; font-size: 0.875rem; font-weight: 500; color: #09090b; margin-bottom: 0.5rem;">
+                            Notlar
                         </label>
-                        <textarea name="notes" id="notes" class="form-control form-control-modern" rows="4" 
+                        <textarea name="notes" id="notes" rows="4"
+                                  class="shadcn-textarea"
+                                  style="width: 100%; padding: 0.625rem 0.75rem; border: 1px solid #e4e4e7; border-radius: 0.375rem; font-size: 0.875rem; resize: vertical; transition: all 0.15s;"
                                   placeholder="Durum değişikliği ile ilgili notlarınızı buraya yazabilirsiniz..."></textarea>
                     </div>
+                    
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 0.375rem; padding: 1rem;">
+                        <div style="display: flex; gap: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <div style="flex: 1;">
+                                <p style="font-size: 0.875rem; font-weight: 500; color: #0c4a6e; margin: 0 0 0.25rem 0;">Bilgi</p>
+                                <p style="font-size: 0.875rem; color: #075985; margin: 0; line-height: 1.5;">Durumu "Onaylandı" olarak değiştirdiğinizde, öğrenci otomatik olarak alt yapı oyuncuları listesine eklenecektir.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <i class="fas fa-times"></i> İptal
+                
+                <div style="padding: 1.5rem; background: #fafafa; border-top: 1px solid #e4e4e7; display: flex; gap: 0.75rem; justify-content: flex-end;">
+                    <button type="button" class="btn" data-dismiss="modal"
+                            style="padding: 0.5rem 1rem; border: 1px solid #e4e4e7; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background: white; color: #18181b; transition: all 0.15s; cursor: pointer;">
+                        İptal
                     </button>
-                    <button type="submit" class="btn btn-admin-primary">
-                        <i class="fas fa-save"></i> Güncelle
+                    <button type="submit" class="btn"
+                            style="padding: 0.5rem 1rem; border: none; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background: #18181b; color: #fafafa; transition: all 0.15s; cursor: pointer;">
+                        Güncelle
                     </button>
                 </div>
             </form>

@@ -76,23 +76,45 @@ $content = '
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="admin-form-group">
-                <label for="competition" class="admin-form-label">
-                    <i class="fas fa-trophy"></i> Müsabaka
+                <label for="match_type" class="admin-form-label">
+                    <i class="fas fa-trophy"></i> Müsabaka Türü <span class="required">*</span>
                 </label>
-                <select id="competition" name="competition" class="admin-form-control">
-                    <option value="">Müsabaka Seçiniz</option>
+                <select id="match_type" name="match_type" class="admin-form-control" required>
+                    <option value="">Müsabaka Türü Seçiniz</option>
                     <option value="Hazırlık Maçı">Hazırlık Maçı</option>
-                    <option value="U16 Ligi">U16 Ligi</option>
-                    <option value="U15 Ligi">U15 Ligi</option>
-                    <option value="U14 Ligi">U14 Ligi</option>
-                    <option value="U13 Ligi">U13 Ligi</option>
-                    <option value="U12 Ligi">U12 Ligi</option>
-                    <option value="U11 Ligi">U11 Ligi</option>
+                    <option value="Lig Maçı">Lig Maçı</option>
+                    <option value="Özel Turnuva Maçı">Özel Turnuva Maçı</option>
                 </select>
                 <small class="admin-form-text">Maçın türünü seçiniz.</small>
             </div>
-
-            <div class="admin-form-group">
+            
+            <div class="admin-form-group" id="team-category-group" style="display:none;">
+                <label for="team_category" class="admin-form-label">
+                    <i class="fas fa-users"></i> Takım Kategorisi <span class="required">*</span>
+                </label>
+                <select id="team_category" name="team_category" class="admin-form-control">
+                    <option value="">Takım Kategorisi Seçiniz</option>
+                    <option value="U5">U5</option>
+                    <option value="U6">U6</option>
+                    <option value="U7">U7</option>
+                    <option value="U8">U8</option>
+                    <option value="U9">U9</option>
+                    <option value="U10">U10</option>
+                    <option value="U11">U11</option>
+                    <option value="U12">U12</option>
+                    <option value="U13">U13</option>
+                    <option value="U14">U14</option>
+                    <option value="U15">U15</option>
+                    <option value="U16">U16</option>
+                    <option value="U17">U17</option>
+                    <option value="U18">U18</option>
+                    <option value="A TAKIM">A TAKIM</option>
+                </select>
+                <small class="admin-form-text">Maçın hangi takım kategorisinde oynandığını seçiniz.</small>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label for="status" class="admin-form-label">
                     <i class="fas fa-toggle-on"></i> Durum <span class="required">*</span>
                 </label>
@@ -157,3 +179,21 @@ $content = '
 
 include BASE_PATH . '/app/views/admin/layout.php';
 ?>
+
+<script>
+// Müsabaka türüne göre takım kategorisi alanını göster/gizle
+document.getElementById('match_type').addEventListener('change', function() {
+    const teamCategoryGroup = document.getElementById('team-category-group');
+    const teamCategorySelect = document.getElementById('team_category');
+    
+    if (this.value) {
+        // Tüm müsabaka türleri için takım kategorisi göster
+        teamCategoryGroup.style.display = 'block';
+        teamCategorySelect.required = true;
+    } else {
+        teamCategoryGroup.style.display = 'none';
+        teamCategorySelect.required = false;
+        teamCategorySelect.value = '';
+    }
+});
+</script>

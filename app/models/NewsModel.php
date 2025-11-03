@@ -214,4 +214,14 @@ class NewsModel extends Model
         $result = $this->db->query($sql, $params);
         return $result[0]['total'] ?? 0;
     }
+    
+    /**
+     * Haberin galeri resimlerini getir
+     */
+    public function getGalleryImages($newsId)
+    {
+        $sql = "SELECT * FROM news_gallery WHERE news_id = ? ORDER BY sort_order ASC";
+        $result = $this->db->query($sql, [$newsId]);
+        return is_array($result) ? $result : [];
+    }
 }

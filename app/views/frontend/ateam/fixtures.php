@@ -45,6 +45,10 @@ $content = '
                                     <div class="time">' . date('H:i', strtotime($match['match_date'] ?? 'now')) . '</div>
                                 </div>
                                 <div class="match-info">
+                                    <div class="competition-type mb-2">
+                                        <i class="fas fa-trophy text-warning"></i>
+                                        <strong>' . htmlspecialchars($match['match_type'] ?? 'Müsabaka') . (!empty($match['team_category']) ? ' - ' . $match['team_category'] : '') . '</strong>
+                                    </div>
                                     <div class="teams">
                                         <div class="home-team">
                                             <span class="team-name">' . htmlspecialchars($match['home_team'] ?? 'Ev Sahibi') . '</span>
@@ -91,6 +95,10 @@ $content = '
                                     <div class="result">MS</div>
                                 </div>
                                 <div class="match-info">
+                                    <div class="competition-type mb-2">
+                                        <i class="fas fa-trophy text-primary"></i>
+                                        <strong>' . htmlspecialchars($result['match_type'] ?? 'Müsabaka') . (!empty($result['team_category']) ? ' - ' . $result['team_category'] : '') . '</strong>
+                                    </div>
                                     <div class="teams">
                                         <div class="home-team">
                                             <span class="team-name">' . htmlspecialchars($result['home_team'] ?? 'Ev') . '</span>

@@ -110,10 +110,15 @@ $content = '
                     
                     return '
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="group-card">
+                <a href="' . BASE_URL . '/gruplar/details/' . $group['id'] . '" class="text-decoration-none" style="color: inherit;">
+                    <div class="group-card" style="cursor: pointer;">
+                    ' . (!empty($group['photo']) ? '
+                    <div class="group-photo mb-3">
+                        <img src="' . BASE_URL . htmlspecialchars($group['photo']) . '" alt="' . htmlspecialchars($group['name']) . '" class="img-fluid rounded">
+                    </div>' : '
                     <div class="group-icon">
                         <i class="fas ' . $icon . '"></i>
-                    </div>
+                    </div>') . '
                     <h3 class="group-title">' . htmlspecialchars($group['age_group']) . '</h3>
                     <h5 class="group-name text-muted mb-3">' . htmlspecialchars($group['name']) . '</h5>
                     <div class="group-info">
@@ -124,9 +129,20 @@ $content = '
                     </div>
                     ' . (!empty($group['coach_name']) ? '<p class="coach-info"><i class="fas fa-user-tie me-2"></i><strong>Antrenör:</strong> ' . htmlspecialchars($group['coach_name']) . '</p>' : '') . '
                     ' . (!empty($group['assistant_coach']) ? '<p class="assistant-coach-info"><i class="fas fa-user-friends me-2"></i><strong>Yardımcı Antrenör:</strong> ' . htmlspecialchars($group['assistant_coach']) . '</p>' : '') . '
+                    
+                    <div class="capacity-info mt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small><strong>Doluluk:</strong></small>
+                            <small><strong>' . $group['current_count'] . ' / ' . $group['max_capacity'] . '</strong></small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-' . $capacityClass . '" role="progressbar" style="width: ' . $capacityPercent . '%" aria-valuenow="' . $capacityPercent . '" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
 
                     ' . (!empty($group['description']) ? '<p class="group-description mt-3">' . htmlspecialchars($group['description']) . '</p>' : '') . '
-                </div>
+                    </div>
+                </a>
             </div>';
                 }, $groups)) : 
                 '<div class="col-12"><div class="alert alert-info text-center">Henüz aktif grup bulunmamaktadır.</div></div>'
@@ -195,9 +211,33 @@ $content = '
     flex-direction: column;
 }
 
+a:has(.group-card) {
+    text-decoration: none;
+    color: inherit;
+}
+
 .group-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.group-photo {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 0 auto 1.5rem;
+}
+
+.group-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.group-card:hover .group-photo img {
+    transform: scale(1.1);
 }
 
 .group-icon {
