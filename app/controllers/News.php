@@ -55,9 +55,13 @@ class News extends Controller
         // Görüntülenme sayısını artır
         $this->newsModel->incrementViews($news['id']);
 
+        // Galeri resimlerini getir
+        $gallery = $this->newsModel->getGalleryImages($news['id']);
+
         $data = [
             'title' => $news['title'],
             'news' => $news,
+            'gallery' => $gallery,
             'related_news' => $this->newsModel->getRelated($news['category'], $news['id'], 4),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];

@@ -44,6 +44,11 @@ $content .= '
                 </label>
                 <select id="position" name="position" class="form-control" required>
                     <option value="">Pozisyon seçin</option>
+                    <option value="Başkan"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Başkan' ? ' selected' : '') . '>Başkan</option>
+                    <option value="Başkan Yardımcısı"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Başkan Yardımcısı' ? ' selected' : '') . '>Başkan Yardımcısı</option>
+                    <option value="Yönetici"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Yönetici' ? ' selected' : '') . '>Yönetici</option>
+                    <option value="Altyapı Sorumlusu"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Altyapı Sorumlusu' ? ' selected' : '') . '>Altyapı Sorumlusu</option>
+                    <option value="Scout"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Scout' ? ' selected' : '') . '>Scout</option>
                     <option value="Baş Antrenör"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Baş Antrenör' ? ' selected' : '') . '>Baş Antrenör</option>
                     <option value="Antrenör"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Antrenör' ? ' selected' : '') . '>Antrenör</option>
                     <option value="Antrenör Yardımcısı"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Antrenör Yardımcısı' ? ' selected' : '') . '>Antrenör Yardımcısı</option>

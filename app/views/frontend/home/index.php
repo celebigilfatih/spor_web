@@ -133,7 +133,7 @@ $content = '
                                     }
                                     
                                     return '
-                                    <a href="' . BASE_URL . '/news/' . $announcement['slug'] . '" class="text-decoration-none">
+                                    <a href="' . BASE_URL . '/news/detail/' . $announcement['slug'] . '" class="text-decoration-none">
                                         <div class="announcement-item mb-3 p-3 bg-light rounded" style="cursor: pointer; transition: all 0.3s;" onmouseover="this.style.backgroundColor=\'#e9ecef\'" onmouseout="this.style.backgroundColor=\'#f8f9fa\'">
                                             <div class="announcement-badge mb-2">
                                                 <span class="badge ' . $typeBadge . '">' . $typeLabel . '</span>

@@ -47,6 +47,11 @@ $content .= '
                     </label>
                     <select id="position" name="position" class="admin-form-control" required>
                         <option value="">Pozisyon seçin</option>
+                        <option value="Başkan"' . (($_POST['position'] ?? '') === 'Başkan' ? ' selected' : '') . '>Başkan</option>
+                        <option value="Başkan Yardımcısı"' . (($_POST['position'] ?? '') === 'Başkan Yardımcısı' ? ' selected' : '') . '>Başkan Yardımcısı</option>
+                        <option value="Yönetici"' . (($_POST['position'] ?? '') === 'Yönetici' ? ' selected' : '') . '>Yönetici</option>
+                        <option value="Altyapı Sorumlusu"' . (($_POST['position'] ?? '') === 'Altyapı Sorumlusu' ? ' selected' : '') . '>Altyapı Sorumlusu</option>
+                        <option value="Scout"' . (($_POST['position'] ?? '') === 'Scout' ? ' selected' : '') . '>Scout</option>
                         <option value="Baş Antrenör"' . (($_POST['position'] ?? '') === 'Baş Antrenör' ? ' selected' : '') . '>Baş Antrenör</option>
                         <option value="Antrenör"' . (($_POST['position'] ?? '') === 'Antrenör' ? ' selected' : '') . '>Antrenör</option>
                         <option value="Antrenör Yardımcısı"' . (($_POST['position'] ?? '') === 'Antrenör Yardımcısı' ? ' selected' : '') . '>Antrenör Yardımcısı</option>

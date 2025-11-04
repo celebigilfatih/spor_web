@@ -79,36 +79,6 @@ $content = '
                                        value="' . htmlspecialchars($_POST['season'] ?? $group['season'] ?? '2024-25') . '"
                                        required>
                             </div>
-
-                            <div class="shadcn-form-group">
-                                <label for="min_age" class="shadcn-label">
-                                    Minimum Yaş <span class="text-red-500">*</span>
-                                </label>
-                                <input type="number" 
-                                       id="min_age" 
-                                       name="min_age" 
-                                       class="shadcn-input" 
-                                       placeholder="13"
-                                       min="5"
-                                       max="21"
-                                       value="' . htmlspecialchars($_POST['min_age'] ?? $group['min_age'] ?? '') . '"
-                                       required>
-                            </div>
-
-                            <div class="shadcn-form-group">
-                                <label for="max_age" class="shadcn-label">
-                                    Maksimum Yaş <span class="text-red-500">*</span>
-                                </label>
-                                <input type="number" 
-                                       id="max_age" 
-                                       name="max_age" 
-                                       class="shadcn-input" 
-                                       placeholder="15"
-                                       min="6"
-                                       max="22"
-                                       value="' . htmlspecialchars($_POST['max_age'] ?? $group['max_age'] ?? '') . '"
-                                       required>
-                            </div>
                         </div>
                     </div>
                 </div>

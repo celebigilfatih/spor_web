@@ -92,6 +92,33 @@ $content = '
                         </div>
                     </div>
                     
+                    <!-- Gallery Images -->
+                    ' . (!empty($gallery) && count($gallery) > 0 ? '
+                    <div class="news-gallery mt-5 pt-4 border-top">
+                        <h4 class="mb-4"><i class="fas fa-images me-2"></i>Galeri</h4>
+                        <div class="row g-3">
+                            ' . implode('', array_map(function($image) {
+                                return '
+                                <div class="col-md-4 col-sm-6">
+                                    <a href="' . BASE_URL . '/uploads/' . $image['image_path'] . '" 
+                                       data-lightbox="news-gallery" 
+                                       data-title="' . htmlspecialchars($image['caption'] ?? '') . '">
+                                        <div class="gallery-item">
+                                            <img src="' . BASE_URL . '/uploads/' . $image['image_path'] . '" 
+                                                 alt="' . htmlspecialchars($image['caption'] ?? 'Galeri resmi') . '" 
+                                                 class="img-fluid rounded" 
+                                                 style="width:100%;height:250px;object-fit:cover;">
+                                            <div class="gallery-overlay">
+                                                <i class="fas fa-search-plus"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>';
+                            }, $gallery)) . '
+                        </div>
+                    </div>
+                    ' : '') . '
+                    
                     <!-- Article Tags -->
                     ' . (!empty($news['tags']) ? '
                     <div class="article-tags mt-4 pt-4 border-top">
@@ -247,8 +274,60 @@ $content = '
 .article-excerpt {
     border-left: 4px solid #1e3a8a;
 }
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(30, 58, 138, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay i {
+    color: white;
+    font-size: 2rem;
+}
 </style>
+
+<!-- Lightbox CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
 ';
 
 include BASE_PATH . '/app/views/frontend/layout.php';
 ?>
+
+<!-- Lightbox JS - jQuery gerekli -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<script>
+lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'albumLabel': 'Resim %1 / %2'
+});
+</script>

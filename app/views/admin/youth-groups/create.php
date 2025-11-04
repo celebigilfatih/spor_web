@@ -67,7 +67,7 @@ $content = '
                                 </select>
                             </div>
 
-                            <div class="shadcn-form-group">
+                            <div class="shadcn-form-group md:col-span-2">
                                 <label for="season" class="shadcn-label">
                                     Sezon <span class="text-red-500">*</span>
                                 </label>
@@ -77,36 +77,6 @@ $content = '
                                        class="shadcn-input" 
                                        placeholder="2024-25"
                                        value="' . htmlspecialchars($_POST['season'] ?? '2024-25') . '"
-                                       required>
-                            </div>
-
-                            <div class="shadcn-form-group">
-                                <label for="min_age" class="shadcn-label">
-                                    Minimum Yaş <span class="text-red-500">*</span>
-                                </label>
-                                <input type="number" 
-                                       id="min_age" 
-                                       name="min_age" 
-                                       class="shadcn-input" 
-                                       placeholder="13"
-                                       min="5"
-                                       max="21"
-                                       value="' . htmlspecialchars($_POST['min_age'] ?? '') . '"
-                                       required>
-                            </div>
-
-                            <div class="shadcn-form-group">
-                                <label for="max_age" class="shadcn-label">
-                                    Maksimum Yaş <span class="text-red-500">*</span>
-                                </label>
-                                <input type="number" 
-                                       id="max_age" 
-                                       name="max_age" 
-                                       class="shadcn-input" 
-                                       placeholder="15"
-                                       min="6"
-                                       max="22"
-                                       value="' . htmlspecialchars($_POST['max_age'] ?? '') . '"
                                        required>
                             </div>
                         </div>
@@ -299,19 +269,6 @@ $content = '
                                 <p class="shadcn-form-hint mt-2">Antrenman günlerini seçin ve her gün için saat belirleyin</p>
                             </div>
 
-                            <div class="shadcn-form-group md:col-span-2">
-                                <label for="max_capacity" class="shadcn-label">
-                                    Maksimum Kapasite
-                                </label>
-                                <input type="number" 
-                                       id="max_capacity" 
-                                       name="max_capacity" 
-                                       class="shadcn-input" 
-                                       placeholder="25"
-                                       min="10"
-                                       max="50"
-                                       value="' . htmlspecialchars($_POST['max_capacity'] ?? '25') . '">
-                            </div>
                             <div class="shadcn-form-group md:col-span-2">
                                 <label for="status" class="shadcn-label">
                                     Durum
