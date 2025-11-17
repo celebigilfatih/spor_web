@@ -272,6 +272,29 @@ $content .= '
                     </div>
                 </div>
             </div>
+            
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="admin-form-group">
+                        <label for="instagram_access_token" class="admin-form-label">
+                            <i class="fab fa-instagram"></i> Instagram Access Token
+                            <a href="https://developers.facebook.com/docs/instagram-basic-display-api/getting-started" target="_blank" class="text-info ms-2" title="Token nasıl alınır?">
+                                <i class="fas fa-question-circle"></i>
+                            </a>
+                        </label>
+                        <input type="text" 
+                               id="instagram_access_token" 
+                               name="instagram_access_token" 
+                               class="admin-form-control" 
+                               value="' . htmlspecialchars($settings['instagram_access_token'] ?? '') . '"
+                               placeholder="Instagram Basic Display API Access Token">
+                        <small class="form-text text-muted">
+                            Instagram postlarınızı sitenizde göstermek için Instagram Basic Display API token’ınızı girin.
+                            <a href="' . BASE_URL . '/instagram/clearCache" class="text-primary" onclick="clearInstagramCache(event)">Cache’ı Temizle</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="admin-form-actions">
@@ -308,7 +331,23 @@ $content .= '
     margin-right: 0.5rem;
     color: var(--primary-blue);
 }
-</style>';
+</style>
+
+<script>
+function clearInstagramCache(event) {
+    event.preventDefault();
+    if (confirm("Instagram cache temizlensin mi?")) {
+        fetch("' . BASE_URL . '/instagram/clearCache")
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || "Cache temizlendi!");
+            })
+            .catch(error => {
+                alert("Hata: " + error.message);
+            });
+    }
+}
+</script>';
 
 include BASE_PATH . '/app/views/admin/layout.php';
 ?>

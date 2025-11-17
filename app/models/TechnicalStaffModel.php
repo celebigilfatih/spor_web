@@ -349,6 +349,51 @@ class TechnicalStaffModel extends Model
                 AND position NOT LIKE '%Doktor%' 
                 AND position NOT LIKE '%Fizyoterapist%' 
                 AND position NOT LIKE '%Masör%' 
+                AND position NOT LIKE '%Başkan%' 
+                AND position NOT LIKE '%Yönetici%' 
+                AND status = 'active' 
+                ORDER BY id ASC";
+        
+        return $this->db->query($sql);
+    }
+
+    /**
+     * Başkanı getir
+     */
+    public function getPresident()
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE position LIKE '%Başkan%' 
+                AND position NOT LIKE '%Yardımcı%' 
+                AND position NOT LIKE '%Başkan Yardımcı%' 
+                AND status = 'active' 
+                ORDER BY id ASC 
+                LIMIT 1";
+        
+        $result = $this->db->query($sql);
+        return $result ? $result[0] : null;
+    }
+
+    /**
+     * Başkan yardımcılarını getir
+     */
+    public function getVicePresidents()
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE (position LIKE '%Başkan Yardımcı%' OR position LIKE '%Yardımcı%') 
+                AND status = 'active' 
+                ORDER BY id ASC";
+        
+        return $this->db->query($sql);
+    }
+
+    /**
+     * Yönetim kurulu üyelerini getir
+     */
+    public function getBoardMembers()
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE position LIKE '%Yönetici%' 
                 AND status = 'active' 
                 ORDER BY id ASC";
         

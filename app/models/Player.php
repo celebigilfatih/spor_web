@@ -247,6 +247,48 @@ class Player extends Model
     }
 
     /**
+     * A Takım oyuncularını pozisyonlara göre grupla
+     */
+    public function getATeamPlayersByPosition()
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE team_id = 1 AND status = 'active' 
+                ORDER BY 
+                    CASE position
+                        WHEN 'Kaleci' THEN 1
+                        WHEN 'Stoper' THEN 2
+                        WHEN 'Sol Bek' THEN 3
+                        WHEN 'Sağ Bek' THEN 3
+                        WHEN 'Defans' THEN 4
+                        WHEN 'Ön Libero' THEN 5
+                        WHEN 'Merkez Orta Saha' THEN 6
+                        WHEN 'Orta Saha' THEN 7
+                        WHEN 'Sol Kanat' THEN 8
+                        WHEN 'Sağ Kanat' THEN 8
+                        WHEN 'Santrafor' THEN 9
+                        WHEN 'Forvet' THEN 10
+                        ELSE 11
+                    END,
+                    jersey_number ASC";
+        
+        $players = $this->db->query($sql);
+        
+        // Group by position
+        $grouped = [];
+        if ($players && is_array($players)) {
+            foreach ($players as $player) {
+                $position = $player['position'] ?? 'Diğer';
+                if (!isset($grouped[$position])) {
+                    $grouped[$position] = [];
+                }
+                $grouped[$position][] = $player;
+            }
+        }
+        
+        return $grouped;
+    }
+
+    /**
      * Takım istatistiklerini getir
      */
     public function getTeamStats($teamType = 'A')

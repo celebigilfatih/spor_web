@@ -302,8 +302,8 @@ $content = '
 
 <!-- News Section -->
 <section class="news-section py-5">
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row px-5">
             <div class="col-12">
                 <div class="section-header mb-4">
                     <h2 class="section-title">SON HABERLER</h2>
@@ -312,7 +312,7 @@ $content = '
             </div>
         </div>
         
-        <div class="row">
+        <div class="row px-5">
             ' . (isset($latest_news) && !empty($latest_news) ? 
                 implode('', array_map(function($article) {
                     // Clean excerpt from HTML tags
@@ -320,7 +320,7 @@ $content = '
                     $excerpt = substr($excerpt, 0, 120);
                     
                     return '
-                    <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="col-lg-3 col-md-6 mb-4">
                         <div class="news-card h-100">
                             <div class="news-image">
                                 <img src="' . BASE_URL . '/uploads/' . ($article['image'] ?? 'default-news.jpg') . '" alt="' . htmlspecialchars($article['title'] ?? 'Haber') . '" class="img-fluid">
@@ -359,8 +359,8 @@ $content = '
 
 <!-- A Team Players Slider Section -->
 <section class="players-slider-section py-5 bg-light">
-    <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row px-5">
             <div class="col-12">
                 <div class="section-header mb-4">
                     <h2 class="section-title">A TAKIM KADROSU</h2>
@@ -369,7 +369,7 @@ $content = '
             </div>
         </div>
         
-        <div class="row">
+        <div class="row px-5">
             <div class="col-12">
                 <div class="players-slider-container position-relative">
                     <button class="slider-nav-btn prev-player">
@@ -504,9 +504,98 @@ $content = '
     </div>
 </section><!-- Youth Academy Registration Section -->
 
+<!-- Instagram Feed Section -->
+<section class="instagram-feed-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </h2>
+            <p class="section-subtitle text-muted">Bizi Instagram’da takip edin</p>
+        </div>
+        
+        <div id="instagram-feed" class="row px-5 g-3">
+            <!-- Instagram posts will be loaded here -->
+            <div class="col-12 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Yükleniyor...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="' . ($site_settings['instagram_url'] ?? 'https://instagram.com') . '" class="btn btn-primary btn-lg" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram’da Takip Et
+            </a>
+        </div>
+    </div>
+</section>
+
 
 <!-- Include Match Calendar JavaScript -->
 <script src="/js/match-calendar.js"></script>
+
+<!-- Instagram Feed Script -->
+<script>
+// Instagram Feed Integration using API
+const instagramFeed = document.getElementById("instagram-feed");
+
+// Function to render Instagram posts
+function renderInstagramPosts(posts) {
+    if (!posts || posts.length === 0) {
+        instagramFeed.innerHTML = "<div class=\"col-12 text-center\"><p class=\"text-muted\">Instagram postları yüklenemedi.</p></div>";
+        return;
+    }
+    
+    instagramFeed.innerHTML = posts.slice(0, 8).map(post => `
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <a href="${post.url}" target="_blank" class="instagram-post-link text-decoration-none">
+                <div class="instagram-post">
+                    <div class="instagram-image" style="background-image: url(${post.image}); padding-top: 100%; background-size: cover; background-position: center; border-radius: 8px; position: relative; overflow: hidden;">
+                        <div class="instagram-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; color: white;">
+                            <div class="text-center">
+                                <i class="fab fa-instagram fa-2x mb-2"></i>
+                                ${post.type === "VIDEO" ? "<p class=\"mb-0\"><i class=\"fas fa-play-circle\"></i> Video</p>" : ""}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="instagram-caption mt-2 small text-muted" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${post.caption || "Instagram Post"}</p>
+                </div>
+            </a>
+        </div>
+    `).join("");
+    
+    // Add hover effect
+    document.querySelectorAll(".instagram-post").forEach(post => {
+        const overlay = post.querySelector(".instagram-overlay");
+        post.addEventListener("mouseenter", () => overlay.style.opacity = "1");
+        post.addEventListener("mouseleave", () => overlay.style.opacity = "0");
+    });
+}
+
+// Load Instagram posts from API
+fetch("' . BASE_URL . '/instagram/feed")
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.posts) {
+            renderInstagramPosts(data.posts);
+        } else {
+            // Fallback to mock data if API fails
+            console.warn("Instagram API error:", data.error);
+            const mockPosts = [
+                { id: 1, image: "' . BASE_URL . '/uploads/ig-1.jpg", caption: "Maç hazırlıklarımız devam ediyor! #antrenman", type: "IMAGE", url: "' . ($site_settings['instagram_url'] ?? '#') . '" },
+                { id: 2, image: "' . BASE_URL . '/uploads/ig-2.jpg", caption: "Yeni sezon forması tanıtımı #yeniform", type: "IMAGE", url: "' . ($site_settings['instagram_url'] ?? '#') . '" },
+                { id: 3, image: "' . BASE_URL . '/uploads/ig-3.jpg", caption: "Galibiyet sevinci! #zafer", type: "IMAGE", url: "' . ($site_settings['instagram_url'] ?? '#') . '" },
+                { id: 4, image: "' . BASE_URL . '/uploads/ig-4.jpg", caption: "Alt yapı çalışmaları #gencyetenekler", type: "IMAGE", url: "' . ($site_settings['instagram_url'] ?? '#') . '" }
+            ];
+            renderInstagramPosts(mockPosts);
+        }
+    })
+    .catch(error => {
+        console.error("Instagram feed error:", error);
+        instagramFeed.innerHTML = "<div class=\"col-12 text-center\"><p class=\"text-muted\">Instagram postları yüklenemedi.</p></div>";
+    });
+</script>
 ';
 
 include BASE_PATH . '/app/views/frontend/layout.php';

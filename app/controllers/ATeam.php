@@ -9,6 +9,7 @@ class ATeam extends Controller
     private $teamModel;
     private $matchModel;
     private $settingsModel;
+    private $technicalStaffModel;
 
     public function __construct()
     {
@@ -16,6 +17,7 @@ class ATeam extends Controller
         $this->teamModel = $this->model('Team');
         $this->matchModel = $this->model('MatchModel');
         $this->settingsModel = $this->model('SiteSettings');
+        $this->technicalStaffModel = $this->model('TechnicalStaffModel');
     }
 
     /**
@@ -43,10 +45,16 @@ class ATeam extends Controller
     {
         $data = [
             'title' => 'A Takımı Kadrosu',
-            'goalkeepers' => $this->playerModel->getByPosition('Kaleci', 'A'),
-            'defenders' => $this->playerModel->getByPosition('Defans', 'A'),
-            'midfielders' => $this->playerModel->getByPosition('Orta Saha', 'A'),
-            'forwards' => $this->playerModel->getByPosition('Forvet', 'A'),
+            'players_by_position' => $this->playerModel->getATeamPlayersByPosition(),
+            'head_coach' => $this->technicalStaffModel->getHeadCoach(),
+            'assistant_coaches' => $this->technicalStaffModel->getAssistantCoaches(),
+            'goalkeeper_coaches' => $this->technicalStaffModel->getGoalkeepingCoaches(),
+            'fitness_coaches' => $this->technicalStaffModel->getFitnessCoaches(),
+            'medical_staff' => $this->technicalStaffModel->getMedicalStaff(),
+            'other_staff' => $this->technicalStaffModel->getOtherStaff(),
+            'president' => $this->technicalStaffModel->getPresident(),
+            'vice_presidents' => $this->technicalStaffModel->getVicePresidents(),
+            'board_members' => $this->technicalStaffModel->getBoardMembers(),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 

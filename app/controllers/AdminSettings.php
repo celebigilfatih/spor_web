@@ -42,6 +42,7 @@ class AdminSettings extends Controller
                     'facebook_url' => $this->sanitizeInput($_POST['facebook_url']),
                     'twitter_url' => $this->sanitizeInput($_POST['twitter_url']),
                     'instagram_url' => $this->sanitizeInput($_POST['instagram_url']),
+                    'instagram_access_token' => $this->sanitizeInput($_POST['instagram_access_token']),
                     'youtube_url' => $this->sanitizeInput($_POST['youtube_url']),
                     'club_founded' => $this->sanitizeInput($_POST['club_founded']),
                     'club_colors' => $this->sanitizeInput($_POST['club_colors']),

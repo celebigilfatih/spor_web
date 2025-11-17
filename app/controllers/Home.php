@@ -35,7 +35,7 @@ class Home extends Controller
         error_log("Recent results count: " . (is_array($results) ? count($results) : 0));
         
         // Get only news (exclude announcements/duyuru)
-        $latestNews = $this->newsModel->getPublished(10); // Get more to filter
+        $latestNews = $this->newsModel->getPublished(12); // Get more to filter
         $filteredNews = array_filter($latestNews, function($news) {
             return ($news['category'] ?? 'haber') !== 'duyuru';
         });
@@ -45,7 +45,7 @@ class Home extends Controller
             'title' => 'Ana Sayfa - ' . $this->settingsModel->getSetting('site_title', 'Spor Kulübü'),
             'sliders' => $this->sliderModel->getActiveSliders(),
             'featured_news' => $this->newsModel->getFeatured(3),
-            'latest_news' => array_slice($filteredNews, 0, 6), // Limit to 6
+            'latest_news' => array_slice($filteredNews, 0, 8), // Limit to 8
             'announcements' => $this->newsModel->getByCategory('duyuru', 3), // Get announcements from news with 'duyuru' category
             'upcoming_matches' => $upcoming,
             'recent_results' => $results,

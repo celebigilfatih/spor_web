@@ -1,8 +1,9 @@
 /* Fenerbahçe-inspired Spor Kulübü CSS - Live Development Test */
 
 :root {
-    --primary-color: #008040; /* Navy Blue */
-    --primary-dark-color: #00542a;
+
+    --primary-color: #002B78; /* Navy Blue */
+    --primary-dark-color: #0046C0;
     --secondary-color: #006997; /* Yellow/Gold */
     --accent-color: #dc2626; /* Red accent */
     --dark-color: #001B45;
@@ -62,7 +63,7 @@ body {
 .top-bar {
     padding: 8px 0;
     font-size: 14px;
-    background-color: var(--primary-dark-color);
+    background-color: var(--primary-color);
 }
 
 .contact-info span {
@@ -409,6 +410,106 @@ body {
 
 /* Enhanced Responsive Design for Modern Hero */
 @media (max-width: 991px) {
+    /* Hide top bar on mobile/tablet */
+    .top-bar {
+        display: none;
+    }
+    
+    /* Mobile Menu Styles */
+    .navbar-collapse {
+        background: var(--primary-navy);
+        padding: 15px 10px;
+        margin: 10px -12px -12px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .navbar-nav {
+        gap: 3px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 10px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        padding-left: 20px;
+    }
+    
+    .dropdown-menu {
+        background: rgba(0, 0, 0, 0.3);
+        border: none;
+        margin-top: 5px;
+        padding: 5px;
+        box-shadow: none;
+    }
+    
+    .dropdown-item {
+        padding: 8px 15px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 13px;
+    }
+    
+    .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        padding-left: 22px;
+    }
+    
+    .dropdown-divider {
+        border-color: rgba(255, 255, 255, 0.2);
+        margin: 5px 0;
+    }
+    
+    .navbar-toggler {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    }
+    
+    .navbar-toggler-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* Top Bar Mobile */
+    .top-bar {
+        padding: 10px 20px !important;
+    }
+    
+    .top-bar .contact-info {
+        font-size: 12px;
+    }
+    
+    .top-bar .contact-info span {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .social-links a {
+        font-size: 14px;
+        margin: 0 8px;
+    }
+    
+    /* Logo adjustments */
+    .navbar-brand img,
+    .navbar-brand .logo-placeholder {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .navbar-brand span {
+        font-size: 14px;
+    }
+    
     .modern-hero-section {
         min-height: auto;
     }
@@ -459,6 +560,54 @@ body {
 }
 
 @media (max-width: 768px) {
+    /* Mobile Navigation Refinements */
+    .top-bar {
+        display: none; /* Hide top bar on small mobile */
+    }
+    
+    .navbar {
+        padding: 8px 10px !important;
+    }
+    
+    .navbar-brand {
+        font-size: 11px;
+    }
+    
+    .navbar-brand img,
+    .navbar-brand .logo-placeholder {
+        height: 35px;
+        width: 35px;
+        margin-right: 6px;
+    }
+    
+    .navbar-collapse {
+        margin: 8px -10px -8px;
+        padding: 12px 8px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    .dropdown-menu {
+        padding: 3px;
+        margin-top: 3px;
+    }
+    
+    .dropdown-item {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .dropdown-item:hover {
+        padding-left: 18px;
+    }
+    
+    .dropdown-divider {
+        margin: 3px 0;
+    }
+    
     .slider-content {
         min-height: 400px;
         padding: 40px 0;
@@ -709,6 +858,186 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Squad Page Mobile Responsive */
+@media (max-width: 991px) {
+    .position-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        gap: 10px;
+    }
+    
+    .position-title i {
+        font-size: 1.1rem;
+    }
+    
+    .player-card {
+        margin-bottom: 20px;
+    }
+    
+    .player-image {
+        height: 220px;
+    }
+    
+    .player-info {
+        padding: 15px;
+    }
+    
+    .player-name {
+        font-size: 1rem;
+    }
+    
+    .player-position {
+        font-size: 0.8rem;
+    }
+    
+    .player-details {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .position-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        padding: 0 10px 8px;
+        gap: 8px;
+        letter-spacing: 0.3px;
+    }
+    
+    .position-title i {
+        font-size: 1rem;
+    }
+    
+    .position-group {
+        padding: 0 10px;
+        margin-bottom: 30px;
+    }
+    
+    .player-card {
+        margin-bottom: 15px;
+    }
+    
+    .player-image {
+        height: 200px;
+    }
+    
+    .player-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .player-info {
+        padding: 12px;
+    }
+    
+    .player-name {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+    
+    .player-position {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+    }
+    
+    .player-details {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .player-details span {
+        font-size: 0.75rem;
+    }
+    
+    /* Tabs mobile */
+    .nav-tabs .nav-link {
+        padding: 0.8rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .nav-tabs .nav-link i {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .position-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        padding: 0 5px 6px;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    
+    .position-title i {
+        font-size: 0.9rem;
+    }
+    
+    .position-group {
+        padding: 0 5px;
+        margin-bottom: 25px;
+    }
+    
+    .player-card {
+        margin-bottom: 12px;
+    }
+    
+    .player-image {
+        height: 180px;
+    }
+    
+    .player-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        top: 6px;
+        right: 6px;
+    }
+    
+    .player-info {
+        padding: 10px;
+    }
+    
+    .player-name {
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+    }
+    
+    .player-position {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+    
+    .player-details {
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+    }
+    
+    .player-details span {
+        font-size: 0.7rem;
+    }
+    
+    /* Button adjustments */
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+    /* Tabs very small mobile */
+    .nav-tabs .nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.3px;
+    }
 }
 
 /* Enhanced News Section Styles */
@@ -1532,30 +1861,45 @@ input[type="file"]:focus {
 }
 
 /* Squad Styles */
+.squad-section {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
 .position-title {
-    color: var(--primary-color);
-    font-weight: 800;
-    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 1.5rem;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 3px solid #e2e8f0;
+    border-bottom: 2px solid #e2e8f0;
     display: flex;
     align-items: center;
     gap: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.position-title i {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    opacity: 0.8;
 }
 
 .player-card {
     background: #ffffff;
     border-radius: 8px;
-    border: 2px solid #e2e8f0;
+    border: 1px solid #e2e8f0;
     overflow: hidden;
     transition: all 0.3s ease;
     height: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .player-card:hover {
-    border-color: var(--secondary-color);
-    transform: translateY(-5px);
+    border-color: #cbd5e1;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .player-image {
@@ -1574,7 +1918,7 @@ input[type="file"]:focus {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: var(--primary-color);
+    background: rgba(44, 62, 80, 0.9);
     color: white;
     width: 40px;
     height: 40px;
@@ -1584,6 +1928,7 @@ input[type="file"]:focus {
     justify-content: center;
     font-weight: bold;
     font-size: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 
 .player-info {
@@ -1592,15 +1937,19 @@ input[type="file"]:focus {
 }
 
 .player-name {
-    color: var(--primary-color);
-    font-weight: 800;
+    color: #2c3e50;
+    font-weight: 700;
     margin-bottom: 5px;
+    font-size: 1.1rem;
 }
 
 .player-position {
-    color: var(--secondary-color);
-    font-weight: 600;
+    color: #64748b;
+    font-weight: 500;
     margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
 .player-details {
@@ -1609,6 +1958,106 @@ input[type="file"]:focus {
     margin-bottom: 15px;
     font-size: 0.9rem;
     color: #64748b;
+}
+
+/* Staff Card Variations - Corporate */
+.staff-card .player-image {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%);
+}
+
+.staff-card .player-details {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.staff-card .player-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+}
+
+.staff-card .player-details i {
+    color: #94a3b8;
+    width: 16px;
+}
+
+/* Board Card Variations */
+.board-card .player-image {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.board-card .player-number {
+    display: none;
+}
+
+/* Instagram Feed Section */
+.instagram-feed-section {
+    background: #fafafa;
+}
+
+.instagram-post {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.instagram-post:hover {
+    transform: translateY(-5px);
+}
+
+.instagram-image {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.instagram-post:hover .instagram-image {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.instagram-caption {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.instagram-post-link:hover {
+    text-decoration: none;
+}
+
+/* Custom Tabs Styling - Corporate */
+.nav-tabs {
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 2.5rem;
+}
+
+.nav-tabs .nav-link {
+    color: #64748b;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #2c3e50;
+    color: #2c3e50;
+    background: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: #2c3e50;
+    border-bottom-color: #2c3e50;
+    background: transparent;
+}
+
+.nav-tabs .nav-link i {
+    margin-right: 0.5rem;
+    opacity: 0.7;
 }
 
 /* Fixtures Styles */
@@ -3883,7 +4332,7 @@ button:focus,
 
 /* Footer */
 .footer {
-    background: var(--primary-dark-color) !important;
+    background: var(--primary-color) !important;
     margin-top: 50px;
 }
 

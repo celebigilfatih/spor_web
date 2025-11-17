@@ -87,6 +87,8 @@
                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda">Kulüp Hakkında</a></li>
                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda/history">Tarihçe</a></li>
                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/hakkimizda/achievements">Başarılar</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/ateam/squad?tab=board"><i class="fas fa-users-cog me-2"></i>Yönetim Kurulu</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
