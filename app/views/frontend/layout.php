@@ -59,7 +59,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" href="<?= BASE_URL ?>">
                     <?php if (!empty($site_settings['site_logo']) && file_exists(BASE_PATH . '/public/uploads/' . $site_settings['site_logo'])): ?>
-                    <img src="<?= BASE_URL . '/uploads/' . $site_settings['site_logo'] ?>" alt="<?= $site_settings['site_title'] ?? 'Logo' ?>" height="50" class="me-2">
+                    <img src="<?= BASE_URL . '/uploads/' . $site_settings['site_logo'] ?>" alt="<?= $site_settings['site_title'] ?? 'Logo' ?>" height="75" class="me-2">
                     <?php elseif (file_exists(BASE_PATH . '/public/images/logo.png')): ?>
                     <img src="<?= BASE_URL ?>/images/logo.png" alt="Logo" height="50" class="me-2">
                     <?php else: ?>
@@ -91,6 +91,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/gruplar">GRUPLAR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL ?>/a-takimi">A TAKIM</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/teknik-kadro">TEKNİK KADRO</a>

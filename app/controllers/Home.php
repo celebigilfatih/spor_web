@@ -50,6 +50,7 @@ class Home extends Controller
             'upcoming_matches' => $upcoming,
             'recent_results' => $results,
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),
+            'a_team_players' => $this->playerModel->getATeamPlayers(), // A Takım oyuncuları
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 

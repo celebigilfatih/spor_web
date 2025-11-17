@@ -1,9 +1,9 @@
 /* Fenerbahçe-inspired Spor Kulübü CSS - Live Development Test */
 
 :root {
-    --primary-color: #1671fe; /* Navy Blue */
-    --primary-dark-color: #0052d0;
-    --secondary-color: #005be7; /* Yellow/Gold */
+    --primary-color: #008040; /* Navy Blue */
+    --primary-dark-color: #00542a;
+    --secondary-color: #006997; /* Yellow/Gold */
     --accent-color: #dc2626; /* Red accent */
     --dark-color: #001B45;
     --light-color: #f8fafc;
@@ -30,7 +30,7 @@ body {
 }
 
 .bg-primary {
-    background-color: var(--primary-color) !important;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark-color)) !important;
 }
 
 .btn-warning {
@@ -720,7 +720,7 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: rgba(0, 45, 114, 0.95);
+    background: var(--primary-color);
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
@@ -3883,16 +3883,16 @@ button:focus,
 
 /* Footer */
 .footer {
-    background: var(--dark-color) !important;
+    background: var(--primary-dark-color) !important;
     margin-top: 50px;
 }
 
 .footer h5, .footer h6 {
-    color: var(--secondary-color) !important;
+    color: var(--light-color) !important;
 }
 
 .footer-link {
-    color: #d1d5db;
+    color: var(--light-color);
     text-decoration: none;
     transition: color 0.3s ease;
     line-height: 2;
@@ -3909,7 +3909,7 @@ button:focus,
 }
 
 .contact-info i {
-    color: var(--secondary-color);
+    color: var(--light-color);
     width: 20px;
 }
 

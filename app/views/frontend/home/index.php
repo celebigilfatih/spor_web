@@ -357,6 +357,67 @@ $content = '
     </div>
 </section>
 
+<!-- A Team Players Slider Section -->
+<section class="players-slider-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header mb-4">
+                    <h2 class="section-title">A TAKIM KADROSU</h2>
+                    <a href="' . BASE_URL . '/ateam/squad" class="btn btn-outline-primary">Tüm Kadro</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="players-slider-container position-relative">
+                    <button class="slider-nav-btn prev-player">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="players-slider" id="playersSlider">
+                        ' . (isset($a_team_players) && !empty($a_team_players) ? 
+                            implode('', array_map(function($player) {
+                                $photoUrl = !empty($player['photo']) ? BASE_URL . '/uploads/' . $player['photo'] : BASE_URL . '/images/player-placeholder.svg';
+                                return '
+                                <div class="player-slider-card">
+                                    <div class="player-card-inner">
+                                        <div class="player-image-wrapper">
+                                            <img src="' . $photoUrl . '" alt="' . htmlspecialchars($player['name']) . '" class="player-image">
+                                            <div class="player-number-badge">' . ($player['jersey_number'] ?? '-') . '</div>
+                                        </div>
+                                        <div class="player-info">
+                                            <h4 class="player-name">' . htmlspecialchars($player['name']) . '</h4>
+                                            <p class="player-position">' . htmlspecialchars($player['position'] ?? 'Oyuncu') . '</p>
+                                        </div>
+                                    </div>
+                                </div>';
+                            }, $a_team_players)) : 
+                            '
+                            <div class="col-12">
+                                <div class="no-players text-center py-5">
+                                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                                    <h3>Henüz oyuncu bulunmamaktadır</h3>
+                                    <p class="text-muted">Yakında kadro bilgileri yayınlanacak.</p>
+                                </div>
+                            </div>
+                            '
+                        ) . '
+                    </div>
+                    
+                    <button class="slider-nav-btn next-player">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="' . BASE_URL . '/css/players-slider.css">
+<script src="' . BASE_URL . '/js/players-slider.js"></script>
+
 <!-- Youth Academy Registration Section -->
 <section class="youth-registration-section py-5">
     <div class="container-fluid px-5">
