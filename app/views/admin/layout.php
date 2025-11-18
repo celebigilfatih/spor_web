@@ -110,6 +110,12 @@
                     </li>
                     
                     <li class="sidebar-menu-item">
+                        <a href="<?php echo BASE_URL; ?>/admin/sponsors" class="sidebar-menu-link">
+                            <i class="sidebar-menu-icon fas fa-handshake"></i>
+                            <span>Sponsorlar</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
                         <a href="<?php echo BASE_URL; ?>/admin/users" class="sidebar-menu-link">
                             <i class="sidebar-menu-icon fas fa-users-cog"></i>
                             <span>Kullanıcı Yönetimi</span>

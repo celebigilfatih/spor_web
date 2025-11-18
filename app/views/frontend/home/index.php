@@ -531,6 +531,25 @@ $content = '
     </div>
 </section>
 
+<!-- Sponsors Section -->
+<section class="sponsors-section py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center mb-4">
+            <h2 class="section-title">SPONSORLARIMIZ</h2>
+        </div>
+        <div class="row justify-content-center align-items-center g-3">
+            ' . (isset($sponsors) && !empty($sponsors) ?
+                implode('', array_map(function($s) {
+                    return '
+                    <div class="col-auto mb-3">
+                        <img src="' . BASE_URL . '/uploads/' . htmlspecialchars($s['image']) . '" alt="Sponsor" style="max-height:60px; max-width:160px; object-fit:contain;">
+                    </div>';
+                }, $sponsors))
+                : '<div class="col-12 text-center text-muted">Henüz sponsor eklenmemiş.</div>'
+            ) . '
+        </div>
+    </div>
+</section>
 
 <!-- Include Match Calendar JavaScript -->
 <script src="/js/match-calendar.js"></script>

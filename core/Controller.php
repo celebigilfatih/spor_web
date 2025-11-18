@@ -294,7 +294,9 @@ class Controller
                 'image/jpg' => 'jpg',
                 'image/png' => 'png',
                 'image/gif' => 'gif',
-                'image/webp' => 'webp'
+                'image/webp' => 'webp',
+                'image/avif' => 'avif',
+                'image/svg+xml' => 'svg'
             ];
             $extension = $mimeToExt[$file['type']] ?? '';
         }

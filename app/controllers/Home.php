@@ -11,6 +11,7 @@ class Home extends Controller
     private $playerModel;
     private $settingsModel;
     private $announcementModel;
+    private $sponsorModel;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class Home extends Controller
         $this->playerModel = $this->model('Player');
         $this->settingsModel = $this->model('SiteSettings');
         $this->announcementModel = $this->model('Announcement');
+        $this->sponsorModel = $this->model('Sponsor');
     }
 
     /**
@@ -51,6 +53,7 @@ class Home extends Controller
             'recent_results' => $results,
             'top_scorers' => $this->playerModel->getTopScorers('2024-25', 5),
             'a_team_players' => $this->playerModel->getATeamPlayers(), // A Takım oyuncuları
+            'sponsors' => $this->sponsorModel->getActiveSponsors(),
             'site_settings' => $this->settingsModel->getAllSettings()
         ];
 
