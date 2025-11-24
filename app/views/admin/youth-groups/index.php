@@ -100,7 +100,6 @@ $content = '
                             <th>Fotoğraf</th>
                             <th>Grup Adı</th>
                             <th>Yaş Grubu</th>
-                            <th>Yaş Aralığı</th>
                             <th>Antrenör</th>
                             <th>Antrenman</th>
                             <th>Doluluk</th>
@@ -140,7 +139,6 @@ if (isset($groups) && !empty($groups)) {
                                     ' . htmlspecialchars($group['age_group']) . '
                                 </span>
                             </td>
-                            <td class="text-sm">' . $group['min_age'] . '-' . $group['max_age'] . ' yaş</td>
                             <td>
                                 <div class="text-sm font-medium">' . htmlspecialchars($group['coach_name'] ?? '-') . '</div>
                                 ' . (!empty($group['assistant_coach']) ? '<div class="text-xs text-zinc-500">' . htmlspecialchars($group['assistant_coach']) . '</div>' : '') . '
@@ -190,7 +188,7 @@ if (isset($groups) && !empty($groups)) {
 } else {
     $content .= '
                         <tr>
-                            <td colspan="9" class="text-center" style="padding: var(--spacing-8);">
+                            <td colspan="8" class="text-center" style="padding: var(--spacing-8);">
                                 <div class="text-zinc-500">
                                     <svg class="w-12 h-12 mx-auto mb-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>

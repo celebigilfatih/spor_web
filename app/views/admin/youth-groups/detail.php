@@ -59,11 +59,6 @@ $content = '
                         </div>
                         
                         <div>
-                            <div class="text-sm text-zinc-500 mb-1">Yaş Aralığı</div>
-                            <div class="font-semibold">' . $group['min_age'] . ' - ' . $group['max_age'] . ' yaş</div>
-                        </div>
-                        
-                        <div>
                             <div class="text-sm text-zinc-500 mb-1">Sezon</div>
                             <div class="font-semibold">' . htmlspecialchars($group['season'] ?? '2024-25') . '</div>
                         </div>

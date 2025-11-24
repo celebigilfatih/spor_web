@@ -13,7 +13,7 @@ class YouthGroup extends Model
     public function getAll()
     {
         $sql = "SELECT * FROM {$this->table} 
-                ORDER BY min_age ASC";
+                ORDER BY age_group ASC";
         
         return $this->db->query($sql);
     }
@@ -25,7 +25,7 @@ class YouthGroup extends Model
     {
         $sql = "SELECT * FROM {$this->table} 
                 WHERE status = 'active' 
-                ORDER BY min_age ASC";
+                ORDER BY age_group ASC";
         
         return $this->db->query($sql);
     }
@@ -37,7 +37,7 @@ class YouthGroup extends Model
     {
         $sql = "SELECT * FROM {$this->table} 
                 WHERE season = :season 
-                ORDER BY min_age ASC";
+                ORDER BY age_group ASC";
         
         return $this->db->query($sql, ['season' => $season]);
     }
@@ -111,19 +111,12 @@ class YouthGroup extends Model
     }
 
     /**
-     * Yaş grubuna göre uygun grubu bul
+     * Yaş grubuna göre uygun grubu bul (artık kullanılmıyor)
      */
     public function findByAge($age)
     {
-        $sql = "SELECT * FROM {$this->table} 
-                WHERE :age >= min_age 
-                AND :age <= max_age 
-                AND status = 'active' 
-                ORDER BY min_age ASC 
-                LIMIT 1";
-        
-        $result = $this->db->query($sql, ['age' => $age]);
-        return $result ? $result[0] : null;
+        // Age-based filtering removed, use age_group instead
+        return null;
     }
 
     /**
@@ -139,14 +132,6 @@ class YouthGroup extends Model
 
         if (empty($data['age_group'])) {
             $errors[] = 'Yaş grubu gereklidir.';
-        }
-
-        if (empty($data['min_age']) || empty($data['max_age'])) {
-            $errors[] = 'Minimum ve maksimum yaş gereklidir.';
-        }
-
-        if (!empty($data['min_age']) && !empty($data['max_age']) && $data['min_age'] >= $data['max_age']) {
-            $errors[] = 'Minimum yaş, maksimum yaştan küçük olmalıdır.';
         }
 
         return $errors;

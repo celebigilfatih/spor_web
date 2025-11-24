@@ -61,8 +61,6 @@ class AdminYouthGroups extends Controller
             $formData = [
                 'name' => $this->sanitizeInput($_POST['name'] ?? ''),
                 'age_group' => $this->sanitizeInput($_POST['age_group'] ?? ''),
-                'min_age' => !empty($_POST['min_age']) ? (int)$_POST['min_age'] : null,
-                'max_age' => !empty($_POST['max_age']) ? (int)$_POST['max_age'] : null,
                 'coach_name' => $this->sanitizeInput($_POST['coach_name'] ?? ''),
                 'assistant_coach' => $this->sanitizeInput($_POST['assistant_coach'] ?? ''),
                 'training_days' => $this->formatTrainingSchedule(
@@ -150,8 +148,6 @@ class AdminYouthGroups extends Controller
             $formData = [
                 'name' => $this->sanitizeInput($_POST['name'] ?? ''),
                 'age_group' => $this->sanitizeInput($_POST['age_group'] ?? ''),
-                'min_age' => !empty($_POST['min_age']) ? (int)$_POST['min_age'] : null,
-                'max_age' => !empty($_POST['max_age']) ? (int)$_POST['max_age'] : null,
                 'coach_name' => $this->sanitizeInput($_POST['coach_name'] ?? ''),
                 'assistant_coach' => $this->sanitizeInput($_POST['assistant_coach'] ?? ''),
                 'training_days' => $this->formatTrainingSchedule(
