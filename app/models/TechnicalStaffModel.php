@@ -276,8 +276,17 @@ class TechnicalStaffModel extends Model
     public function getHeadCoach()
     {
         $sql = "SELECT * FROM {$this->table} 
-                WHERE position LIKE '%Baş Antren%' AND status = 'active' 
-                ORDER BY id ASC 
+                WHERE status = 'active' 
+                AND (
+                    position = 'Baş Antrenör' 
+                    OR position LIKE '%Baş%Antren%'
+                    OR position = 'Teknik Yönetici'
+                )
+                ORDER BY CASE 
+                    WHEN position = 'Baş Antrenör' THEN 1
+                    WHEN position LIKE '%Baş%Antren%' THEN 2
+                    ELSE 3
+                END ASC, id ASC 
                 LIMIT 1";
         
         $result = $this->db->query($sql);

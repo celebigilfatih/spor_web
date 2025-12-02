@@ -72,7 +72,6 @@ $content = '
 </section>
 
 <!-- Head Coach Section -->
- <!--
 <section class="head-coach-section py-5">
     <div class="container">
         <h2 class="section-title text-center mb-5">BAŞ ANTRENÖR</h2>
@@ -135,7 +134,6 @@ $content = '
         ') . '
     </div>
 </section>
--->
 
 <!-- Coaching Staff -->
 <section class="coaching-staff py-5 bg-light">
