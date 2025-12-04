@@ -32,9 +32,9 @@ class TechnicalStaffModel extends Model
     public function create($data)
     {
         $sql = "INSERT INTO {$this->table} 
-                (name, position, experience_years, license_type, bio, photo, team_id, status, created_at) 
+                (name, position, experience_years, license_type, bio, photo, team_id, sort_order, status, created_at) 
                 VALUES 
-                (:name, :position, :experience_years, :license_type, :bio, :photo, :team_id, :status, NOW())";
+                (:name, :position, :experience_years, :license_type, :bio, :photo, :team_id, :sort_order, :status, NOW())";
         
         return $this->db->execute($sql, [
             'name' => $data['name'] ?? '',
@@ -44,6 +44,7 @@ class TechnicalStaffModel extends Model
             'bio' => $data['bio'] ?? '',
             'photo' => $data['photo'] ?? null,
             'team_id' => $data['team_id'] ?? null,
+            'sort_order' => $data['sort_order'] ?? 0,
             'status' => $data['status'] ?? 'active'
         ]);
     }
@@ -84,6 +85,11 @@ class TechnicalStaffModel extends Model
         if (isset($data['photo'])) {
             $fields[] = 'photo = :photo';
             $params['photo'] = $data['photo'];
+        }
+
+        if (isset($data['sort_order'])) {
+            $fields[] = 'sort_order = :sort_order';
+            $params['sort_order'] = $data['sort_order'];
         }
 
         if (isset($data['team_id'])) {
@@ -132,7 +138,7 @@ class TechnicalStaffModel extends Model
         $sql = "SELECT ts.*, t.name as team_name 
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
-                ORDER BY ts.position ASC, ts.name ASC";
+                ORDER BY ts.sort_order ASC, ts.position ASC, ts.name ASC";
         
         return $this->db->query($sql);
     }
@@ -146,7 +152,7 @@ class TechnicalStaffModel extends Model
                 FROM {$this->table} ts 
                 LEFT JOIN teams t ON ts.team_id = t.id 
                 WHERE ts.status = 'active' 
-                ORDER BY ts.id ASC, ts.position ASC";
+                ORDER BY ts.sort_order ASC, ts.id ASC, ts.position ASC";
         
         return $this->db->query($sql);
     }

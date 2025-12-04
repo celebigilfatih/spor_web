@@ -94,9 +94,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/gruplar">GRUPLAR</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL ?>/a-takimi">A TAKIM</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL ?>/teknik-kadro">TEKNİK KADRO</a>
                         </li>

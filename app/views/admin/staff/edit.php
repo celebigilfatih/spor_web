@@ -47,6 +47,8 @@ $content .= '
                     <option value="Başkan"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Başkan' ? ' selected' : '') . '>Başkan</option>
                     <option value="Başkan Yardımcısı"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Başkan Yardımcısı' ? ' selected' : '') . '>Başkan Yardımcısı</option>
                     <option value="Yönetici"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Yönetici' ? ' selected' : '') . '>Yönetici</option>
+                    <option value="Teknik Direktör"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Teknik Direktör' ? ' selected' : '') . '>Teknik Direktör</option>
+                    <option value="Teknik Sorumlu"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Teknik Sorumlu' ? ' selected' : '') . '>Teknik Sorumlu</option>
                     <option value="Altyapı Sorumlusu"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Altyapı Sorumlusu' ? ' selected' : '') . '>Altyapı Sorumlusu</option>
                     <option value="Scout"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Scout' ? ' selected' : '') . '>Scout</option>
                     <option value="Baş Antrenör"' . (($staff['position'] ?? $staff['role'] ?? '') === 'Baş Antrenör' ? ' selected' : '') . '>Baş Antrenör</option>
@@ -76,6 +78,23 @@ $content .= '
             </div>
             
             <div class="form-group">
+                <label for="sort_order" class="form-label">
+                    <i class="fas fa-sort-numeric-up"></i> Sıralama
+                </label>
+                <input type="number" 
+                       id="sort_order" 
+                       name="sort_order" 
+                       class="form-control" 
+                       value="' . htmlspecialchars($staff['sort_order'] ?? '0') . '"
+                       placeholder="0 (varsayılan)"
+                       min="0">
+                <small class="form-help">
+                    <i class="fas fa-info-circle"></i>
+                    Küçük sayılar önce, büyük sayılar sonra gösterilir. (0 = varsayılan)
+                </small>
+            </div>
+            
+            <div class="form-group">
                 <label for="license" class="form-label">
                     <i class="fas fa-certificate"></i> Lisans/Sertifika
                 </label>
@@ -87,8 +106,6 @@ $content .= '
                        placeholder="Örn: UEFA PRO Lisansı">
             </div>
         </div>
-        
-        <div class="form-group">
             <label for="status" class="form-label">
                 <i class="fas fa-toggle-on"></i> Durum
             </label>

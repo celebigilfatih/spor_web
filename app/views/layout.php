@@ -128,7 +128,6 @@
                         <li><a href="<?php echo BASE_URL; ?>">Ana Sayfa</a></li>
                         <li><a href="<?php echo BASE_URL; ?>/home/about">Hakkımızda</a></li>
                         <li><a href="<?php echo BASE_URL; ?>/teams">Takımlarımız</a></li>
-                        <li><a href="<?php echo BASE_URL; ?>/teams/first">A Takım</a></li>
                         <li><a href="<?php echo BASE_URL; ?>/news">Haberler</a></li>
                         <li><a href="<?php echo BASE_URL; ?>/home/contact">İletişim</a></li>
                     </ul>

@@ -56,6 +56,7 @@ class AdminStaff extends Controller
                     'role' => $this->sanitizeInput($_POST['position']), // Same as position for compatibility
                     'experience' => $this->sanitizeInput($_POST['experience']),
                     'license' => $this->sanitizeInput($_POST['license']),
+                    'sort_order' => !empty($_POST['sort_order']) ? (int)$_POST['sort_order'] : 0,
                     'bio' => $this->sanitizeInput($_POST['bio']),
                     'status' => 'active'
                 ];
@@ -121,6 +122,7 @@ class AdminStaff extends Controller
                     'role' => $this->sanitizeInput($_POST['position']), // Same as position for compatibility
                     'experience' => $this->sanitizeInput($_POST['experience']),
                     'license' => $this->sanitizeInput($_POST['license']),
+                    'sort_order' => !empty($_POST['sort_order']) ? (int)$_POST['sort_order'] : 0,
                     'bio' => $this->sanitizeInput($_POST['bio']),
                     'status' => $this->sanitizeInput($_POST['status'])
                 ];

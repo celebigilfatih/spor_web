@@ -50,6 +50,8 @@ $content .= '
                         <option value="Başkan"' . (($_POST['position'] ?? '') === 'Başkan' ? ' selected' : '') . '>Başkan</option>
                         <option value="Başkan Yardımcısı"' . (($_POST['position'] ?? '') === 'Başkan Yardımcısı' ? ' selected' : '') . '>Başkan Yardımcısı</option>
                         <option value="Yönetici"' . (($_POST['position'] ?? '') === 'Yönetici' ? ' selected' : '') . '>Yönetici</option>
+                        <option value="Teknik Direktör"' . (($_POST['position'] ?? '') === 'Teknik Direktör' ? ' selected' : '') . '>Teknik Direktör</option>
+                        <option value="Teknik Sorumlu"' . (($_POST['position'] ?? '') === 'Teknik Sorumlu' ? ' selected' : '') . '>Teknik Sorumlu</option>
                         <option value="Altyapı Sorumlusu"' . (($_POST['position'] ?? '') === 'Altyapı Sorumlusu' ? ' selected' : '') . '>Altyapı Sorumlusu</option>
                         <option value="Scout"' . (($_POST['position'] ?? '') === 'Scout' ? ' selected' : '') . '>Scout</option>
                         <option value="Baş Antrenör"' . (($_POST['position'] ?? '') === 'Baş Antrenör' ? ' selected' : '') . '>Baş Antrenör</option>
@@ -82,15 +84,20 @@ $content .= '
             
             <div class="col-md-6">
                 <div class="admin-form-group">
-                    <label for="license" class="admin-form-label">
-                        <i class="fas fa-certificate"></i> Lisans/Sertifika
+                    <label for="sort_order" class="admin-form-label">
+                        <i class="fas fa-sort-numeric-up"></i> Sıralama
                     </label>
-                    <input type="text" 
-                           id="license" 
-                           name="license" 
+                    <input type="number" 
+                           id="sort_order" 
+                           name="sort_order" 
                            class="admin-form-control" 
-                           value="' . htmlspecialchars($_POST['license'] ?? '') . '"
-                           placeholder="Örn: UEFA PRO Lisansı">
+                           value="' . htmlspecialchars($_POST['sort_order'] ?? '0') . '"
+                           placeholder="0 (varsayılan)"
+                           min="0">
+                    <small class="admin-form-help">
+                        <i class="fas fa-info-circle"></i>
+                        Küçük sayılar önce, büyük sayılar sonra gösterilir. (0 = varsayılan)
+                    </small>
                 </div>
             </div>
         </div>
